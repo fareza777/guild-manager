@@ -1,0 +1,446 @@
+{0} chapters completed|{0} bab selesai
+{0} events await you|{0} kejadian menantimu
+{0} expeditions returned|{0} ekspedisi telah kembali
+{0} free forge slot(s)|{0} slot tempa kosong
+{0} gold / hour|{0} emas / jam
+{0} Lv {1}|{0} Lv {1}
+{0} tasks finished|{0} tugas selesai
++{0} XP each|+{0} XP per hero
+A hero was hurt!|Seorang hero terluka!
+A Last Hope|Harapan Terakhir
+About|Tentang
+Actions|Aksi
+Active expeditions|Ekspedisi aktif
+All expedition parties are away|Semua tim ekspedisi sedang bertugas
+Already at the highest promotion.|Sudah di promosi tertinggi.
+Auto|Otomatis
+Auto-Equip|Pakai Otomatis
+Auto-equip best gear|Pakai gear terbaik otomatis
+AWESOME!|KEREN!
+Back|Kembali
+Back to menu?|Kembali ke menu?
+Bag|Tas
+Bag space|Ruang tas
+Banner colour|Warna panji
+Beast Den|Sarang Monster
+BEGIN THE LEGEND!|MULAI LEGENDA!
+Best gear equipped|Gear terbaik terpasang
+Best: floor {0}  -  Enemy level {1}|Terbaik: lantai {0}  -  Level musuh {1}
+Board|Papan
+BOSS|BOS
+BOSS: {0}|BOS: {0}
+Build|Bangun
+BUILD|BANGUN
+Build the Blacksmith to enhance gear.|Bangun Pandai Besi untuk menguatkan gear.
+Campaign|Kampanye
+Cancel|Batal
+Capacity: {0} gold ({1}h)|Kapasitas: {0} emas ({1}j)
+Choose a piece of gear to enhance. Higher enhancement raises its stats by {0}% per level.|Pilih gear untuk dikuatkan. Setiap level menambah statistik sebesar {0}%.
+Choose your first hero|Pilih hero pertamamu
+Choose Your Party|Pilih Timmu
+CLAIM|AMBIL
+CLAIM TODAY'S REWARD|AMBIL HADIAH HARI INI
+Claimed! Streak: {0} days|Diambil! Beruntun: {0} hari
+Clear {0}|Selesaikan {0}
+Cleared in {0} rounds|Selesai dalam {0} ronde
+CLIMB!|NAIK!
+COLLECT|KUMPULKAN
+Come back in {0} for the next reward.|Kembali {0} lagi untuk hadiah berikutnya.
+Complete quest: {0}|Selesaikan misi: {0}
+Consumables|Barang Habis Pakai
+Continue|Lanjut
+CONTINUE|LANJUTKAN
+Contract board|Papan kontrak
+Contracts|Kontrak
+Contracts are timed expeditions: send a party, close the app, and collect rewards later - even while offline.|Kontrak adalah ekspedisi berwaktu: kirim tim, tutup aplikasi, ambil hadiah nanti - bahkan saat offline.
+CRAFT|TEMPA
+Credits|Kredit
+Daily|Harian
+Daily Login Reward|Hadiah Login Harian
+Daily quests reset in {0}|Misi harian reset dalam {0}
+Daily quests will appear after your first day.|Misi harian muncul setelah hari pertamamu.
+Daily Reward|Hadiah Harian
+Day {0}|Hari {0}
+DEFEAT|KALAH
+Delete|Hapus
+Dismiss|Pecat
+Dismiss {0}?|Pecat {0}?
+Dismiss hero|Pecat hero
+Done|Selesai
+Duration|Durasi
+Each floor is harder than the last. Rewards include rare gear, Arcane Essence and lots of Fame.|Tiap lantai lebih sulit. Hadiah berupa gear langka, Esensi Arcane dan banyak Ketenaran.
+Each hero gained {0} XP.|Tiap hero mendapat {0} XP.
+Earn {0} more Fame to unlock the Rank {1} exam.|Raih {0} Ketenaran lagi untuk membuka ujian Rank {1}.
+Empty|Kosong
+Endless Spire|Menara Abadi
+Enemy level {0}|Level musuh {0}
+Enhance|Perkuat
+ENHANCE|PERKUAT
+Enhancement succeeded! +{0}|Penguatan berhasil! +{0}
+Enter name...|Masukkan nama...
+Equip|Pakai
+Equip on...|Pakai pada...
+Equipment|Perlengkapan
+Equipped|Terpasang
+Equipped by {0}|Dipakai {0}
+Erase & Start|Hapus & Mulai
+Everyone is in great shape!|Semua dalam kondisi prima!
+EXAM|UJIAN
+Expedition Failed|Ekspedisi Gagal
+Expedition parties|Tim ekspedisi
+FIGHT!|LAWAN!
+FIGHT|LAWAN
+START|MULAI
+Finish now|Selesaikan sekarang
+First clear!|Pertama kali tamat!
+Flawless - no heroes fell!|Sempurna - tak ada hero tumbang!
+FLOOR|LANTAI
+Forge|Tempa
+Forge slots|Slot tempa
+Found Your Guild|Dirikan Gildamu
+Free refresh|Segar ulang gratis
+FULL|PENUH
+GO|PERGI
+gold|emas
+Gold accumulates even while the game is closed, up to the vault's capacity. Visit often!|Emas terkumpul bahkan saat game ditutup, hingga kapasitas brankas. Sering-seringlah mampir!
+Great Success!|Sukses Besar!
+Guild capacity|Kapasitas guild
+Guild Master|Guild Master
+Guild name|Nama guild
+Guild Rank|Rank Guild
+Hall|Aula
+Heal|Sembuhkan
+Heroes|Hero
+Heroes at their level cap can be promoted for more power.|Hero di level maksimal bisa dipromosikan untuk lebih kuat.
+Hire|Rekrut
+How It Works|Cara Bermain
+Hurt|Terluka
+I'm building my guild in {0}! Recruit heroes, fight monsters and rise from Rank F to S. Join me: {1}|Aku sedang membangun guild di {0}! Rekrut hero, lawan monster dan naik dari Rank F ke S. Gabung: {1}
+In party|Dalam tim
+Includes {0} bonus affix(es)|Termasuk {0} afiks bonus
+Income|Pendapatan
+Injured heroes|Hero terluka
+KO|KO
+Level {0} reached - needs a higher Guild Rank to go further|Level {0} tercapai - butuh Rank Guild lebih tinggi untuk lanjut
+LEVEL UP!|NAIK LEVEL!
+Loading...|Memuat...
+Lock|Kunci
+Locked|Terkunci
+Log in every day for bigger rewards! Streak: {0}|Login tiap hari untuk hadiah lebih besar! Beruntun: {0}
+Loot|Jarahan
+Lv {0}|Lv {0}
+Made with Unity|Dibuat dengan Unity
+Market|Pasar
+Materials|Bahan
+Max enhancement for your Blacksmith level ({0}). Upgrade the Blacksmith!|Penguatan maksimal untuk level Pandai Besimu ({0}). Tingkatkan Pandai Besi!
+Maximum level reached|Level maksimal tercapai
+Maximum rank - a living legend!|Rank maksimal - legenda hidup!
+Maximum rank reached. You are a legend!|Rank maksimal tercapai. Kamu legenda!
+Menu|Menu
+MISS|MELESET
+Monster|Monster
+New contracts in {0}|Kontrak baru dalam {0}
+New faces in {0}|Wajah baru dalam {0}
+NEW GAME|GAME BARU
+New stock in {0}|Stok baru dalam {0}
+Next|Lanjut
+Next: Rank {0} - {1}|Berikut: Rank {0} - {1}
+No active expeditions. Pick a contract below!|Tak ada ekspedisi aktif. Pilih kontrak di bawah!
+No compatible items in your bag. Defeat monsters or visit the Blacksmith!|Tak ada item cocok di tas. Kalahkan monster atau kunjungi Pandai Besi!
+No free bed|Tak ada ranjang kosong
+No gear to enhance yet.|Belum ada gear untuk diperkuat.
+No heroes|Tak ada hero
+No materials or consumables yet.|Belum ada bahan atau barang habis pakai.
+No notices right now|Tak ada pengumuman saat ini
+No save found|Data simpanan tidak ditemukan
+No side quests available right now. Keep playing to unlock more!|Belum ada misi sampingan. Terus bermain untuk membuka lebih banyak!
+No special traits|Tanpa sifat khusus
+No synergy - mix classes for bonuses!|Tanpa sinergi - campur kelas untuk bonus!
+Not enough gems|Permata tidak cukup
+Not enough resources|Sumber daya tidak cukup
+Nothing to sell|Tak ada yang dijual
+Offline limit|Batas offline
+OK|OK
+On {0}|Pada {0}
+Optional goals with big rewards. Completed: {0}/{1}|Tujuan opsional dengan hadiah besar. Selesai: {0}/{1}
+Party is full|Tim sudah penuh
+Party sent!|Tim dikirim!
+Party size|Ukuran tim
+Party Synergies|Sinergi Tim
+Power|Kekuatan
+Power {0}|Kekuatan {0}
+presents|mempersembahkan
+Promote|Promosi
+PROMOTE|PROMOSI
+PROMOTE TO RANK {0}!|NAIK KE RANK {0}!
+Promoting {0} raises all stats by {1}% and the level cap by {2}.|Promosi {0} menaikkan semua statistik {1}% dan batas level {2}.
+Promotion|Promosi
+Quest Complete!|Misi Selesai!
+Quests|Misi
+Quit|Keluar
+Quit game?|Keluar dari game?
+Rank {0}|Rank {0}
+Rank {0} exam available!|Ujian Rank {0} tersedia!
+Rank exam unlocked! Open the Quest Board.|Ujian rank terbuka! Buka Papan Misi.
+Rank ladder|Tangga rank
+Rank Up!|Naik Rank!
+Rate|Nilai
+Rate us|Nilai kami
+Rate the game|Nilai game ini
+Reach Guild Rank {0}|Capai Rank Guild {0}
+Reach level {0} first.|Capai level {0} dulu.
+Reach Rank {0} to unlock|Capai Rank {0} untuk membuka
+Reach Rank D to unlock|Capai Rank D untuk membuka
+Reach Rank E to tame monsters|Capai Rank E untuk menjinakkan monster
+Ready|Siap
+Ready to promote to Rank {0}!|Siap naik ke Rank {0}!
+Recommended|Disarankan
+Recommended hero level: {0}+|Level hero disarankan: {0}+
+Recruit|Rekrut
+Recruit at Tavern|Rekrut di Kedai
+Recruit heroes, send them on quests and rebuild the hall. Rise from Rank F to the legendary Rank S!|Rekrut hero, kirim ke misi dan bangun kembali aula. Naik dari Rank F ke Rank S yang legendaris!
+Refresh|Segarkan
+Required: Rank {0}|Dibutuhkan: Rank {0}
+Research|Riset
+RESEARCH|RISET
+Reset all progress|Reset semua progres
+Reset everything?|Reset semuanya?
+Retry|Ulangi
+Returned!|Telah kembali!
+Rewards|Hadiah
+Roster|Daftar hero
+Salvage|Bongkar
+Salvage item?|Bongkar item?
+Sell|Jual
+Sell {0} Common & Uncommon items that nobody is wearing for {1} gold?|Jual {0} item Biasa & Tak Biasa yang tak dipakai seharga {1} emas?
+Sell 1|Jual 1
+Sell all|Jual semua
+Sell for {0}|Jual seharga {0}
+Sell junk|Jual sampah
+Sell junk?|Jual sampah?
+Sell value: {0} gold each|Harga jual: {0} emas per buah
+SEND|KIRIM
+Send Expedition|Kirim Ekspedisi
+Settings|Pengaturan
+Share|Bagikan
+Share with friends|Bagikan ke teman
+Skills|Skill
+Skip|Lewati
+SKIP|LEWATI
+SOLD|TERJUAL
+Sort: {0}|Urut: {0}
+Speed|Kecepatan
+Speed Up|Percepat
+Spend gems to finish this right away.|Gunakan permata untuk menyelesaikannya sekarang.
+Start a new game?|Mulai game baru?
+Stats|Statistik
+Stay|Tetap
+Stunned!|Pingsan!
+Success chance|Peluang sukses
+Success chance: {0}|Peluang sukses: {0}
+Success!|Sukses!
+TAKE THE RANK {0} EXAM|IKUTI UJIAN RANK {0}
+TAME|JINAKKAN
+Tame monsters with Soul Seals (dropped by bosses and contracts). Monsters are powerful and form a Beast Pack together!|Jinakkan monster dengan Segel Jiwa (dari bos dan kontrak). Monster itu kuat dan membentuk Kawanan Buas bersama!
+Tamed|Dijinakkan
+Tap SKIP to finish the battle|Ketuk LEWATI untuk mengakhiri pertarungan
+Tap to claim today's reward!|Ketuk untuk ambil hadiah hari ini!
+Thank you for playing!|Terima kasih sudah bermain!
+The enhancement failed...|Penguatan gagal...
+The item will be destroyed for materials.|Item akan dihancurkan menjadi bahan.
+The main story is complete. Keep climbing the Spire!|Cerita utama tamat. Terus panjat Menara!
+The merchant restocks every day. Gear quality is random!|Pedagang menambah stok tiap hari. Kualitas gear acak!
+The Road to Rank S|Jalan Menuju Rank S
+They will leave the guild forever. Equipped gear returns to your bag.|Mereka akan meninggalkan guild selamanya. Gear terpasang kembali ke tas.
+This deletes your guild, heroes and items. This cannot be undone.|Ini menghapus guild, hero dan itemmu. Tidak dapat dibatalkan.
+This will erase your current guild forever.|Ini akan menghapus gildamu saat ini selamanya.
+Time|Waktu
+Train|Latih
+Training grants a full level of XP and works while you are away.|Latihan memberi XP satu level penuh dan berjalan saat kamu pergi.
+Traits|Sifat
+Treasury collected {0} gold|Brankas mengumpulkan {0} emas
+Unequip {0}|Lepas {0}
+Unlock|Buka kunci
+Unlocks at level {0}|Terbuka di level {0}
+Upgrade|Tingkatkan
+UPGRADE|TINGKATKAN
+Upgrade to Lv {0}|Tingkatkan ke Lv {0}
+Upgrading to Lv {0}...|Meningkatkan ke Lv {0}...
+Use|Pakai
+Use {0} on...|Pakai {0} pada...
+Use items|Pakai item
+Vault|Brankas
+Version|Versi
+VICTORY!|MENANG!
+Wave {0}|Gelombang {0}
+Wave {0}/{1}|Gelombang {0}/{1}
+waves|gelombang
+Welcome Back!|Selamat Datang Kembali!
+Win {0} battles|Menangkan {0} pertarungan
+WOUNDED|TERLUKA
+Wounded|Terluka
+Needs rest|Butuh istirahat
+Training|Berlatih
+Healing|Menyembuhkan
+Expedition|Ekspedisi
+Busy|Sibuk
+Wounded heroes heal here much faster than resting. Potions work instantly.|Hero terluka sembuh jauh lebih cepat di sini. Ramuan bekerja seketika.
+You can be promoted! Tap your rank.|Kamu bisa naik rank! Ketuk rankmu.
+You completed the main story! Legend of Emberhall!|Kamu menamatkan cerita utama! Legenda Emberhall!
+You were away for {0}.|Kamu pergi selama {0}.
+Your bag is empty. Win battles to find gear!|Tasmu kosong. Menangkan pertarungan untuk dapat gear!
+Your heroes need rest or healing first|Heromu perlu istirahat atau disembuhkan dulu
+Your heroes were hurt. Visit the Infirmary!|Heromu terluka. Kunjungi Rumah Sakit!
+Your party was defeated. Train, upgrade gear, or bring a healer and try again!|Timmu kalah. Latih, tingkatkan gear, atau bawa penyembuh lalu coba lagi!
+Your progress is saved automatically.|Progresmu tersimpan otomatis.
+Save & exit to title|Simpan & keluar ke judul
+Music|Musik
+Sound effects|Efek suara
+Vibration|Getar
+Tutorial hints|Petunjuk tutorial
+Battle effects|Efek pertarungan
+Frame rate|Frame rate
+Language|Bahasa
+Gear|Gear
+Items|Item
+Main Story|Cerita Utama
+Side Quests|Misi Sampingan
+Daily Login Reward|Hadiah Login Harian
+Wave|Gelombang
+Warrior|Prajurit
+Knight|Ksatria
+Archer|Pemanah
+Mage|Penyihir
+Cleric|Pendeta
+Rogue|Pencuri
+Bruiser|Penghajar
+Tank|Penahan
+Ranged DPS|DPS Jarak Jauh
+Burst DPS|DPS Ledakan
+Healer|Penyembuh
+Assassin|Pembunuh
+Tavern|Kedai
+Blacksmith|Pandai Besi
+Training Hall|Aula Latihan
+Infirmary|Rumah Sakit
+Barracks|Barak
+Treasury|Brankas
+Library|Perpustakaan
+Rookie Guild|Guild Pemula
+Local Heroes|Pahlawan Lokal
+Regional Guild|Guild Regional
+Renowned Guild|Guild Terkenal
+Elite Guild|Guild Elit
+Legendary Guild|Guild Legendaris
+Mythic Guild|Guild Mistis
+Sunmeadow Plains|Dataran Sunmeadow
+Whisperwood|Hutan Bisikan
+Sunscorch Dunes|Gurun Sunscorch
+Gloomhold Crypt|Katakombe Gloomhold
+Cinder Citadel|Benteng Cinder
+Common|Biasa
+Uncommon|Tak Biasa
+Rare|Langka
+Epic|Epik
+Legendary|Legendaris
+Gold|Emas
+Gems|Permata
+A humble beginning|Awal yang Sederhana
+A Humble Beginning|Awal yang Sederhana
+Recruit your first hero|Rekrut hero pertamamu
+First Contract|Kontrak Pertama
+Gear Up|Pasang Gear
+Rookie's Triumph|Kemenangan Pemula
+Forge Ahead|Maju Menempa
+Strength Through Sweat|Kuat Lewat Keringat
+Train a Hero|Latih Seorang Hero
+The Slime Throne|Singgasana Slime
+Prove Your Worth|Buktikan Dirimu
+Rank E Trial|Ujian Rank E
+Into the Whisperwood|Masuk Hutan Bisikan
+Mend and Make Do|Rawat dan Bertahan
+Strength in Numbers|Kekuatan dalam Jumlah
+Queen of Coils|Ratu Ular
+Rank D Trial|Ujian Rank D
+The Beast Within|Monster di Dalam
+Tyrant of the Dunes|Tiran Gurun
+Rank C Trial|Ujian Rank C
+Into the Crypt|Masuk Katakombe
+The Endless Spire|Menara Abadi
+Rank B Trial|Ujian Rank B
+Cinders and Shadows|Bara dan Bayangan
+Rank A Trial|Ujian Rank A
+Master of the Spire|Penguasa Menara
+Legend of Emberhall|Legenda Emberhall
+Emberhall is nearly empty. Visit the Tavern and recruit a second hero.|Emberhall hampir kosong. Kunjungi Kedai dan rekrut hero kedua.
+Open the Quest Board, pick a mission and win your first battle.|Buka Papan Misi, pilih misi dan menangkan pertarungan pertamamu.
+Open your Bag and equip an item on a hero.|Buka Tas dan pasang item pada hero.
+Clear Mushroom Grove in Sunmeadow Plains.|Selesaikan Hutan Jamur di Dataran Sunmeadow.
+Build the Blacksmith in the Guild Hall.|Bangun Pandai Besi di Aula Guild.
+Build the Training Hall.|Bangun Aula Latihan.
+Send a hero to train in the Training Hall.|Kirim hero berlatih di Aula Latihan.
+Defeat the King Slime at the end of Sunmeadow Plains.|Kalahkan Raja Slime di ujung Dataran Sunmeadow.
+Earn 100 Fame to become eligible for the Rank E exam.|Raih 100 Ketenaran untuk ikut ujian Rank E.
+Pass the Rank E exam from the Quest Board.|Lulus ujian Rank E dari Papan Misi.
+Build the Infirmary so wounded heroes can recover.|Bangun Rumah Sakit agar hero terluka bisa pulih.
+Grow your guild to 5 heroes.|Kembangkan guild jadi 5 hero.
+Defeat the Lamia Queen in her lair.|Kalahkan Ratu Lamia di sarangnya.
+Reach Guild Rank D.|Capai Rank Guild D.
+Tame a monster at the Tavern's Beast Den.|Jinakkan monster di Sarang Monster Kedai.
+Defeat the Sand Tyrant.|Kalahkan Tiran Pasir.
+Reach Guild Rank C.|Capai Rank Guild C.
+Defeat the Minotaur Warlord in Gloomhold Crypt.|Kalahkan Panglima Minotaur di Katakombe Gloomhold.
+Climb to floor 10 of the Endless Spire.|Panjat sampai lantai 10 Menara Abadi.
+Reach Guild Rank B.|Capai Rank Guild B.
+Defeat the Black Magus in the Cinder Citadel.|Kalahkan Penyihir Hitam di Benteng Cinder.
+Reach Guild Rank A.|Capai Rank Guild A.
+Conquer floor 40 of the Endless Spire.|Taklukkan lantai 40 Menara Abadi.
+Pass the final trial and reach Guild Rank S.|Lulus ujian akhir dan capai Rank Guild S.
+Recruit new heroes and tame monsters. Higher levels improve candidate quality.|Rekrut hero baru dan jinakkan monster. Level lebih tinggi meningkatkan kualitas calon.
+Forge new gear, enhance items and salvage the rest.|Tempa gear baru, perkuat item dan bongkar sisanya.
+Train heroes over time and raise the hero level cap.|Latih hero seiring waktu dan naikkan batas level hero.
+Heal wounded heroes quickly.|Sembuhkan hero terluka dengan cepat.
+More beds for heroes, more room in your bag.|Lebih banyak ranjang hero, lebih banyak ruang tas.
+Generates gold over time, even while you are away.|Menghasilkan emas seiring waktu, bahkan saat kamu pergi.
+Unlocks research that permanently strengthens your guild.|Membuka riset yang memperkuat guildmu secara permanen.
+Wandering Merchant|Pedagang Keliling
+Tavern Brawl|Keributan di Kedai
+Lost Kitten|Anak Kucing Hilang
+Tattered Treasure Map|Peta Harta Lusuh
+Noble Patron|Bangsawan Dermawan
+Rat Infestation|Serangan Tikus
+Traveling Bard|Penyair Keliling
+Mysterious Stranger|Orang Asing Misterius
+Harvest Festival|Festival Panen
+Monster Hunter|Pemburu Monster
+Send a Party|Kirim Tim
+Fill the Coffers|Isi Brankas
+Hit the Yard|Ke Lapangan
+Big Spender|Boros
+Tinkering|Utak-atik
+Pest Control|Basmi Hama
+Bedside Manner|Merawat Pasien
+Magpie|Si Kolektor
+Open Doors|Buka Pintu
+Slime Squasher I|Penumpas Slime I
+Slime Squasher II|Penumpas Slime II
+Slime Squasher III|Penumpas Slime III
+Pocket Change|Uang Receh
+Gold Hoarder|Penimbun Emas
+Dragon's Wallet|Dompet Naga
+Growing Family|Keluarga Bertambah
+Veteran|Veteran
+Star Collector|Kolektor Bintang
+Treasure Hunter|Pemburu Harta
+Shiny Things|Barang Berkilau
+Caravan Master|Master Karavan
+Flawless Victory|Kemenangan Sempurna
+Guild Life|Kehidupan Guild
+Shopaholic|Gila Belanja
+Ascension|Kenaikan
+Beastmaster|Penguasa Monster
+Spire Climber|Pemanjat Menara
+Scholar|Cendekiawan
+Mission locked|Misi terkunci
+Select at least one hero|Pilih minimal satu hero
+Your party was defeated|Timmu kalah

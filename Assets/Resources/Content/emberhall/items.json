@@ -1,0 +1,3130 @@
+﻿{
+    "items":  [
+                  {
+                      "id":  "w_sword_1",
+                      "name":  "Rusty Sword",
+                      "type":  "weapon",
+                      "slot":  "weapon",
+                      "family":  "sword",
+                      "tier":  1,
+                      "price":  20,
+                      "icon":  "icon:sword",
+                      "tint":  "#B08060",
+                      "stats":  [
+                                    {
+                                        "id":  "atk",
+                                        "v":  6
+                                    },
+                                    {
+                                        "id":  "def",
+                                        "v":  2
+                                    }
+                                ],
+                      "desc":  "A tier 1 sword."
+                  },
+                  {
+                      "id":  "w_sword_2",
+                      "name":  "Iron Sword",
+                      "type":  "weapon",
+                      "slot":  "weapon",
+                      "family":  "sword",
+                      "tier":  2,
+                      "price":  60,
+                      "icon":  "icon:sword",
+                      "tint":  "#C8D0D8",
+                      "stats":  [
+                                    {
+                                        "id":  "atk",
+                                        "v":  14
+                                    },
+                                    {
+                                        "id":  "def",
+                                        "v":  3
+                                    }
+                                ],
+                      "desc":  "A tier 2 sword."
+                  },
+                  {
+                      "id":  "w_sword_3",
+                      "name":  "Steel Blade",
+                      "type":  "weapon",
+                      "slot":  "weapon",
+                      "family":  "sword",
+                      "tier":  3,
+                      "price":  160,
+                      "icon":  "icon:sword",
+                      "tint":  "#5EC8FF",
+                      "stats":  [
+                                    {
+                                        "id":  "atk",
+                                        "v":  26
+                                    },
+                                    {
+                                        "id":  "def",
+                                        "v":  4
+                                    }
+                                ],
+                      "desc":  "A tier 3 sword."
+                  },
+                  {
+                      "id":  "w_sword_4",
+                      "name":  "Ember Brand",
+                      "type":  "weapon",
+                      "slot":  "weapon",
+                      "family":  "sword",
+                      "tier":  4,
+                      "price":  420,
+                      "icon":  "icon:sword",
+                      "tint":  "#FF9A3C",
+                      "stats":  [
+                                    {
+                                        "id":  "atk",
+                                        "v":  44
+                                    },
+                                    {
+                                        "id":  "def",
+                                        "v":  6
+                                    }
+                                ],
+                      "desc":  "A tier 4 sword."
+                  },
+                  {
+                      "id":  "w_sword_5",
+                      "name":  "Dragonfang",
+                      "type":  "weapon",
+                      "slot":  "weapon",
+                      "family":  "sword",
+                      "tier":  5,
+                      "price":  1100,
+                      "icon":  "icon:sword",
+                      "tint":  "#E060FF",
+                      "stats":  [
+                                    {
+                                        "id":  "atk",
+                                        "v":  70
+                                    },
+                                    {
+                                        "id":  "def",
+                                        "v":  8
+                                    }
+                                ],
+                      "desc":  "A tier 5 sword."
+                  },
+                  {
+                      "id":  "w_spear_1",
+                      "name":  "Wooden Spear",
+                      "type":  "weapon",
+                      "slot":  "weapon",
+                      "family":  "spear",
+                      "tier":  1,
+                      "price":  20,
+                      "icon":  "icon:spear",
+                      "tint":  "#B08060",
+                      "stats":  [
+                                    {
+                                        "id":  "atk",
+                                        "v":  6
+                                    },
+                                    {
+                                        "id":  "def",
+                                        "v":  2
+                                    }
+                                ],
+                      "desc":  "A tier 1 spear."
+                  },
+                  {
+                      "id":  "w_spear_2",
+                      "name":  "Iron Spear",
+                      "type":  "weapon",
+                      "slot":  "weapon",
+                      "family":  "spear",
+                      "tier":  2,
+                      "price":  60,
+                      "icon":  "icon:spear",
+                      "tint":  "#C8D0D8",
+                      "stats":  [
+                                    {
+                                        "id":  "atk",
+                                        "v":  14
+                                    },
+                                    {
+                                        "id":  "def",
+                                        "v":  3
+                                    }
+                                ],
+                      "desc":  "A tier 2 spear."
+                  },
+                  {
+                      "id":  "w_spear_3",
+                      "name":  "Halberd",
+                      "type":  "weapon",
+                      "slot":  "weapon",
+                      "family":  "spear",
+                      "tier":  3,
+                      "price":  160,
+                      "icon":  "icon:spear",
+                      "tint":  "#5EC8FF",
+                      "stats":  [
+                                    {
+                                        "id":  "atk",
+                                        "v":  26
+                                    },
+                                    {
+                                        "id":  "def",
+                                        "v":  4
+                                    }
+                                ],
+                      "desc":  "A tier 3 spear."
+                  },
+                  {
+                      "id":  "w_spear_4",
+                      "name":  "Ember Pike",
+                      "type":  "weapon",
+                      "slot":  "weapon",
+                      "family":  "spear",
+                      "tier":  4,
+                      "price":  420,
+                      "icon":  "icon:spear",
+                      "tint":  "#FF9A3C",
+                      "stats":  [
+                                    {
+                                        "id":  "atk",
+                                        "v":  44
+                                    },
+                                    {
+                                        "id":  "def",
+                                        "v":  6
+                                    }
+                                ],
+                      "desc":  "A tier 4 spear."
+                  },
+                  {
+                      "id":  "w_spear_5",
+                      "name":  "Dragon Lance",
+                      "type":  "weapon",
+                      "slot":  "weapon",
+                      "family":  "spear",
+                      "tier":  5,
+                      "price":  1100,
+                      "icon":  "icon:spear",
+                      "tint":  "#E060FF",
+                      "stats":  [
+                                    {
+                                        "id":  "atk",
+                                        "v":  70
+                                    },
+                                    {
+                                        "id":  "def",
+                                        "v":  8
+                                    }
+                                ],
+                      "desc":  "A tier 5 spear."
+                  },
+                  {
+                      "id":  "w_bow_1",
+                      "name":  "Short Bow",
+                      "type":  "weapon",
+                      "slot":  "weapon",
+                      "family":  "bow",
+                      "tier":  1,
+                      "price":  20,
+                      "icon":  "icon:bow",
+                      "tint":  "#B08060",
+                      "stats":  [
+                                    {
+                                        "id":  "atk",
+                                        "v":  6
+                                    },
+                                    {
+                                        "id":  "crit",
+                                        "v":  2
+                                    }
+                                ],
+                      "desc":  "A tier 1 bow."
+                  },
+                  {
+                      "id":  "w_bow_2",
+                      "name":  "Hunter Bow",
+                      "type":  "weapon",
+                      "slot":  "weapon",
+                      "family":  "bow",
+                      "tier":  2,
+                      "price":  60,
+                      "icon":  "icon:bow",
+                      "tint":  "#C8D0D8",
+                      "stats":  [
+                                    {
+                                        "id":  "atk",
+                                        "v":  14
+                                    },
+                                    {
+                                        "id":  "crit",
+                                        "v":  3
+                                    }
+                                ],
+                      "desc":  "A tier 2 bow."
+                  },
+                  {
+                      "id":  "w_bow_3",
+                      "name":  "Longbow",
+                      "type":  "weapon",
+                      "slot":  "weapon",
+                      "family":  "bow",
+                      "tier":  3,
+                      "price":  160,
+                      "icon":  "icon:bow",
+                      "tint":  "#5EC8FF",
+                      "stats":  [
+                                    {
+                                        "id":  "atk",
+                                        "v":  26
+                                    },
+                                    {
+                                        "id":  "crit",
+                                        "v":  4
+                                    }
+                                ],
+                      "desc":  "A tier 3 bow."
+                  },
+                  {
+                      "id":  "w_bow_4",
+                      "name":  "Ember Recurve",
+                      "type":  "weapon",
+                      "slot":  "weapon",
+                      "family":  "bow",
+                      "tier":  4,
+                      "price":  420,
+                      "icon":  "icon:bow",
+                      "tint":  "#FF9A3C",
+                      "stats":  [
+                                    {
+                                        "id":  "atk",
+                                        "v":  44
+                                    },
+                                    {
+                                        "id":  "crit",
+                                        "v":  5
+                                    }
+                                ],
+                      "desc":  "A tier 4 bow."
+                  },
+                  {
+                      "id":  "w_bow_5",
+                      "name":  "Skyfall",
+                      "type":  "weapon",
+                      "slot":  "weapon",
+                      "family":  "bow",
+                      "tier":  5,
+                      "price":  1100,
+                      "icon":  "icon:bow",
+                      "tint":  "#E060FF",
+                      "stats":  [
+                                    {
+                                        "id":  "atk",
+                                        "v":  70
+                                    },
+                                    {
+                                        "id":  "crit",
+                                        "v":  6
+                                    }
+                                ],
+                      "desc":  "A tier 5 bow."
+                  },
+                  {
+                      "id":  "w_staff_1",
+                      "name":  "Oak Staff",
+                      "type":  "weapon",
+                      "slot":  "weapon",
+                      "family":  "staff",
+                      "tier":  1,
+                      "price":  20,
+                      "icon":  "icon:staff",
+                      "tint":  "#B08060",
+                      "stats":  [
+                                    {
+                                        "id":  "atk",
+                                        "v":  6
+                                    },
+                                    {
+                                        "id":  "spd",
+                                        "v":  1
+                                    }
+                                ],
+                      "desc":  "A tier 1 staff."
+                  },
+                  {
+                      "id":  "w_staff_2",
+                      "name":  "Mage Staff",
+                      "type":  "weapon",
+                      "slot":  "weapon",
+                      "family":  "staff",
+                      "tier":  2,
+                      "price":  60,
+                      "icon":  "icon:staff",
+                      "tint":  "#C8D0D8",
+                      "stats":  [
+                                    {
+                                        "id":  "atk",
+                                        "v":  14
+                                    },
+                                    {
+                                        "id":  "spd",
+                                        "v":  2
+                                    }
+                                ],
+                      "desc":  "A tier 2 staff."
+                  },
+                  {
+                      "id":  "w_staff_3",
+                      "name":  "Crystal Staff",
+                      "type":  "weapon",
+                      "slot":  "weapon",
+                      "family":  "staff",
+                      "tier":  3,
+                      "price":  160,
+                      "icon":  "icon:staff",
+                      "tint":  "#5EC8FF",
+                      "stats":  [
+                                    {
+                                        "id":  "atk",
+                                        "v":  26
+                                    },
+                                    {
+                                        "id":  "spd",
+                                        "v":  4
+                                    }
+                                ],
+                      "desc":  "A tier 3 staff."
+                  },
+                  {
+                      "id":  "w_staff_4",
+                      "name":  "Ember Scepter",
+                      "type":  "weapon",
+                      "slot":  "weapon",
+                      "family":  "staff",
+                      "tier":  4,
+                      "price":  420,
+                      "icon":  "icon:staff",
+                      "tint":  "#FF9A3C",
+                      "stats":  [
+                                    {
+                                        "id":  "atk",
+                                        "v":  44
+                                    },
+                                    {
+                                        "id":  "spd",
+                                        "v":  5
+                                    }
+                                ],
+                      "desc":  "A tier 4 staff."
+                  },
+                  {
+                      "id":  "w_staff_5",
+                      "name":  "Archmage Staff",
+                      "type":  "weapon",
+                      "slot":  "weapon",
+                      "family":  "staff",
+                      "tier":  5,
+                      "price":  1100,
+                      "icon":  "icon:staff",
+                      "tint":  "#E060FF",
+                      "stats":  [
+                                    {
+                                        "id":  "atk",
+                                        "v":  70
+                                    },
+                                    {
+                                        "id":  "spd",
+                                        "v":  6
+                                    }
+                                ],
+                      "desc":  "A tier 5 staff."
+                  },
+                  {
+                      "id":  "w_dagger_1",
+                      "name":  "Rusty Dagger",
+                      "type":  "weapon",
+                      "slot":  "weapon",
+                      "family":  "dagger",
+                      "tier":  1,
+                      "price":  20,
+                      "icon":  "icon:dagger",
+                      "tint":  "#B08060",
+                      "stats":  [
+                                    {
+                                        "id":  "atk",
+                                        "v":  6
+                                    },
+                                    {
+                                        "id":  "crit",
+                                        "v":  2
+                                    }
+                                ],
+                      "desc":  "A tier 1 dagger."
+                  },
+                  {
+                      "id":  "w_dagger_2",
+                      "name":  "Steel Dagger",
+                      "type":  "weapon",
+                      "slot":  "weapon",
+                      "family":  "dagger",
+                      "tier":  2,
+                      "price":  60,
+                      "icon":  "icon:dagger",
+                      "tint":  "#C8D0D8",
+                      "stats":  [
+                                    {
+                                        "id":  "atk",
+                                        "v":  14
+                                    },
+                                    {
+                                        "id":  "crit",
+                                        "v":  3
+                                    }
+                                ],
+                      "desc":  "A tier 2 dagger."
+                  },
+                  {
+                      "id":  "w_dagger_3",
+                      "name":  "Shadow Knife",
+                      "type":  "weapon",
+                      "slot":  "weapon",
+                      "family":  "dagger",
+                      "tier":  3,
+                      "price":  160,
+                      "icon":  "icon:dagger",
+                      "tint":  "#5EC8FF",
+                      "stats":  [
+                                    {
+                                        "id":  "atk",
+                                        "v":  26
+                                    },
+                                    {
+                                        "id":  "crit",
+                                        "v":  4
+                                    }
+                                ],
+                      "desc":  "A tier 3 dagger."
+                  },
+                  {
+                      "id":  "w_dagger_4",
+                      "name":  "Ember Fang",
+                      "type":  "weapon",
+                      "slot":  "weapon",
+                      "family":  "dagger",
+                      "tier":  4,
+                      "price":  420,
+                      "icon":  "icon:dagger",
+                      "tint":  "#FF9A3C",
+                      "stats":  [
+                                    {
+                                        "id":  "atk",
+                                        "v":  44
+                                    },
+                                    {
+                                        "id":  "crit",
+                                        "v":  5
+                                    }
+                                ],
+                      "desc":  "A tier 4 dagger."
+                  },
+                  {
+                      "id":  "w_dagger_5",
+                      "name":  "Nightblade",
+                      "type":  "weapon",
+                      "slot":  "weapon",
+                      "family":  "dagger",
+                      "tier":  5,
+                      "price":  1100,
+                      "icon":  "icon:dagger",
+                      "tint":  "#E060FF",
+                      "stats":  [
+                                    {
+                                        "id":  "atk",
+                                        "v":  70
+                                    },
+                                    {
+                                        "id":  "crit",
+                                        "v":  6
+                                    }
+                                ],
+                      "desc":  "A tier 5 dagger."
+                  },
+                  {
+                      "id":  "a_plate_1",
+                      "name":  "Padded Vest",
+                      "type":  "armor",
+                      "slot":  "armor",
+                      "family":  "heavy",
+                      "tier":  1,
+                      "price":  22,
+                      "icon":  "icon:plate",
+                      "tint":  "#B08060",
+                      "stats":  [
+                                    {
+                                        "id":  "hp",
+                                        "v":  30
+                                    },
+                                    {
+                                        "id":  "def",
+                                        "v":  3
+                                    }
+                                ],
+                      "desc":  "Tier 1 body armor."
+                  },
+                  {
+                      "id":  "a_plate_2",
+                      "name":  "Chain Mail",
+                      "type":  "armor",
+                      "slot":  "armor",
+                      "family":  "heavy",
+                      "tier":  2,
+                      "price":  66,
+                      "icon":  "icon:plate",
+                      "tint":  "#C8D0D8",
+                      "stats":  [
+                                    {
+                                        "id":  "hp",
+                                        "v":  70
+                                    },
+                                    {
+                                        "id":  "def",
+                                        "v":  7
+                                    }
+                                ],
+                      "desc":  "Tier 2 body armor."
+                  },
+                  {
+                      "id":  "a_plate_3",
+                      "name":  "Scale Armor",
+                      "type":  "armor",
+                      "slot":  "armor",
+                      "family":  "heavy",
+                      "tier":  3,
+                      "price":  176,
+                      "icon":  "icon:plate",
+                      "tint":  "#5EC8FF",
+                      "stats":  [
+                                    {
+                                        "id":  "hp",
+                                        "v":  130
+                                    },
+                                    {
+                                        "id":  "def",
+                                        "v":  13
+                                    }
+                                ],
+                      "desc":  "Tier 3 body armor."
+                  },
+                  {
+                      "id":  "a_plate_4",
+                      "name":  "Ember Plate",
+                      "type":  "armor",
+                      "slot":  "armor",
+                      "family":  "heavy",
+                      "tier":  4,
+                      "price":  462,
+                      "icon":  "icon:plate",
+                      "tint":  "#FF9A3C",
+                      "stats":  [
+                                    {
+                                        "id":  "hp",
+                                        "v":  220
+                                    },
+                                    {
+                                        "id":  "def",
+                                        "v":  22
+                                    }
+                                ],
+                      "desc":  "Tier 4 body armor."
+                  },
+                  {
+                      "id":  "a_plate_5",
+                      "name":  "Dragon Plate",
+                      "type":  "armor",
+                      "slot":  "armor",
+                      "family":  "heavy",
+                      "tier":  5,
+                      "price":  1210,
+                      "icon":  "icon:plate",
+                      "tint":  "#E060FF",
+                      "stats":  [
+                                    {
+                                        "id":  "hp",
+                                        "v":  350
+                                    },
+                                    {
+                                        "id":  "def",
+                                        "v":  35
+                                    }
+                                ],
+                      "desc":  "Tier 5 body armor."
+                  },
+                  {
+                      "id":  "a_robe_1",
+                      "name":  "Cloth Tunic",
+                      "type":  "armor",
+                      "slot":  "armor",
+                      "family":  "light",
+                      "tier":  1,
+                      "price":  22,
+                      "icon":  "icon:robe",
+                      "tint":  "#B08060",
+                      "stats":  [
+                                    {
+                                        "id":  "hp",
+                                        "v":  22
+                                    },
+                                    {
+                                        "id":  "def",
+                                        "v":  2
+                                    },
+                                    {
+                                        "id":  "spd",
+                                        "v":  2
+                                    }
+                                ],
+                      "desc":  "Tier 1 body armor."
+                  },
+                  {
+                      "id":  "a_robe_2",
+                      "name":  "Leather Armor",
+                      "type":  "armor",
+                      "slot":  "armor",
+                      "family":  "light",
+                      "tier":  2,
+                      "price":  66,
+                      "icon":  "icon:robe",
+                      "tint":  "#C8D0D8",
+                      "stats":  [
+                                    {
+                                        "id":  "hp",
+                                        "v":  52
+                                    },
+                                    {
+                                        "id":  "def",
+                                        "v":  4
+                                    },
+                                    {
+                                        "id":  "spd",
+                                        "v":  3
+                                    }
+                                ],
+                      "desc":  "Tier 2 body armor."
+                  },
+                  {
+                      "id":  "a_robe_3",
+                      "name":  "Ranger Cloak",
+                      "type":  "armor",
+                      "slot":  "armor",
+                      "family":  "light",
+                      "tier":  3,
+                      "price":  176,
+                      "icon":  "icon:robe",
+                      "tint":  "#5EC8FF",
+                      "stats":  [
+                                    {
+                                        "id":  "hp",
+                                        "v":  98
+                                    },
+                                    {
+                                        "id":  "def",
+                                        "v":  8
+                                    },
+                                    {
+                                        "id":  "spd",
+                                        "v":  4
+                                    }
+                                ],
+                      "desc":  "Tier 3 body armor."
+                  },
+                  {
+                      "id":  "a_robe_4",
+                      "name":  "Ember Robe",
+                      "type":  "armor",
+                      "slot":  "armor",
+                      "family":  "light",
+                      "tier":  4,
+                      "price":  462,
+                      "icon":  "icon:robe",
+                      "tint":  "#FF9A3C",
+                      "stats":  [
+                                    {
+                                        "id":  "hp",
+                                        "v":  165
+                                    },
+                                    {
+                                        "id":  "def",
+                                        "v":  13
+                                    },
+                                    {
+                                        "id":  "spd",
+                                        "v":  6
+                                    }
+                                ],
+                      "desc":  "Tier 4 body armor."
+                  },
+                  {
+                      "id":  "a_robe_5",
+                      "name":  "Archmage Robe",
+                      "type":  "armor",
+                      "slot":  "armor",
+                      "family":  "light",
+                      "tier":  5,
+                      "price":  1210,
+                      "icon":  "icon:robe",
+                      "tint":  "#E060FF",
+                      "stats":  [
+                                    {
+                                        "id":  "hp",
+                                        "v":  262
+                                    },
+                                    {
+                                        "id":  "def",
+                                        "v":  21
+                                    },
+                                    {
+                                        "id":  "spd",
+                                        "v":  8
+                                    }
+                                ],
+                      "desc":  "Tier 5 body armor."
+                  },
+                  {
+                      "id":  "x_ring_1",
+                      "name":  "Copper Ring",
+                      "type":  "accessory",
+                      "slot":  "accessory",
+                      "family":  "ring",
+                      "tier":  1,
+                      "price":  18,
+                      "icon":  "icon:ring",
+                      "tint":  "#B08060",
+                      "stats":  [
+                                    {
+                                        "id":  "atk",
+                                        "v":  3
+                                    },
+                                    {
+                                        "id":  "crit",
+                                        "v":  2
+                                    }
+                                ],
+                      "desc":  "Tier 1 ring."
+                  },
+                  {
+                      "id":  "x_amulet_1",
+                      "name":  "Wooden Charm",
+                      "type":  "accessory",
+                      "slot":  "accessory",
+                      "family":  "amulet",
+                      "tier":  1,
+                      "price":  18,
+                      "icon":  "icon:amulet",
+                      "tint":  "#B08060",
+                      "stats":  [
+                                    {
+                                        "id":  "hp",
+                                        "v":  20
+                                    },
+                                    {
+                                        "id":  "def",
+                                        "v":  2
+                                    },
+                                    {
+                                        "id":  "spd",
+                                        "v":  1
+                                    }
+                                ],
+                      "desc":  "Tier 1 amulet."
+                  },
+                  {
+                      "id":  "x_ring_2",
+                      "name":  "Silver Ring",
+                      "type":  "accessory",
+                      "slot":  "accessory",
+                      "family":  "ring",
+                      "tier":  2,
+                      "price":  54,
+                      "icon":  "icon:ring",
+                      "tint":  "#C8D0D8",
+                      "stats":  [
+                                    {
+                                        "id":  "atk",
+                                        "v":  7
+                                    },
+                                    {
+                                        "id":  "crit",
+                                        "v":  3
+                                    }
+                                ],
+                      "desc":  "Tier 2 ring."
+                  },
+                  {
+                      "id":  "x_amulet_2",
+                      "name":  "Bone Amulet",
+                      "type":  "accessory",
+                      "slot":  "accessory",
+                      "family":  "amulet",
+                      "tier":  2,
+                      "price":  54,
+                      "icon":  "icon:amulet",
+                      "tint":  "#C8D0D8",
+                      "stats":  [
+                                    {
+                                        "id":  "hp",
+                                        "v":  45
+                                    },
+                                    {
+                                        "id":  "def",
+                                        "v":  4
+                                    },
+                                    {
+                                        "id":  "spd",
+                                        "v":  2
+                                    }
+                                ],
+                      "desc":  "Tier 2 amulet."
+                  },
+                  {
+                      "id":  "x_ring_3",
+                      "name":  "Sapphire Ring",
+                      "type":  "accessory",
+                      "slot":  "accessory",
+                      "family":  "ring",
+                      "tier":  3,
+                      "price":  144,
+                      "icon":  "icon:ring",
+                      "tint":  "#5EC8FF",
+                      "stats":  [
+                                    {
+                                        "id":  "atk",
+                                        "v":  12
+                                    },
+                                    {
+                                        "id":  "crit",
+                                        "v":  4
+                                    }
+                                ],
+                      "desc":  "Tier 3 ring."
+                  },
+                  {
+                      "id":  "x_amulet_3",
+                      "name":  "Jade Pendant",
+                      "type":  "accessory",
+                      "slot":  "accessory",
+                      "family":  "amulet",
+                      "tier":  3,
+                      "price":  144,
+                      "icon":  "icon:amulet",
+                      "tint":  "#5EC8FF",
+                      "stats":  [
+                                    {
+                                        "id":  "hp",
+                                        "v":  85
+                                    },
+                                    {
+                                        "id":  "def",
+                                        "v":  5
+                                    },
+                                    {
+                                        "id":  "spd",
+                                        "v":  3
+                                    }
+                                ],
+                      "desc":  "Tier 3 amulet."
+                  },
+                  {
+                      "id":  "x_ring_4",
+                      "name":  "Ember Ring",
+                      "type":  "accessory",
+                      "slot":  "accessory",
+                      "family":  "ring",
+                      "tier":  4,
+                      "price":  378,
+                      "icon":  "icon:ring",
+                      "tint":  "#FF9A3C",
+                      "stats":  [
+                                    {
+                                        "id":  "atk",
+                                        "v":  20
+                                    },
+                                    {
+                                        "id":  "crit",
+                                        "v":  5
+                                    }
+                                ],
+                      "desc":  "Tier 4 ring."
+                  },
+                  {
+                      "id":  "x_amulet_4",
+                      "name":  "Ember Amulet",
+                      "type":  "accessory",
+                      "slot":  "accessory",
+                      "family":  "amulet",
+                      "tier":  4,
+                      "price":  378,
+                      "icon":  "icon:amulet",
+                      "tint":  "#FF9A3C",
+                      "stats":  [
+                                    {
+                                        "id":  "hp",
+                                        "v":  140
+                                    },
+                                    {
+                                        "id":  "def",
+                                        "v":  7
+                                    },
+                                    {
+                                        "id":  "spd",
+                                        "v":  4
+                                    }
+                                ],
+                      "desc":  "Tier 4 amulet."
+                  },
+                  {
+                      "id":  "x_ring_5",
+                      "name":  "Arcane Ring",
+                      "type":  "accessory",
+                      "slot":  "accessory",
+                      "family":  "ring",
+                      "tier":  5,
+                      "price":  990,
+                      "icon":  "icon:ring",
+                      "tint":  "#E060FF",
+                      "stats":  [
+                                    {
+                                        "id":  "atk",
+                                        "v":  32
+                                    },
+                                    {
+                                        "id":  "crit",
+                                        "v":  6
+                                    }
+                                ],
+                      "desc":  "Tier 5 ring."
+                  },
+                  {
+                      "id":  "x_amulet_5",
+                      "name":  "Dragon Heart",
+                      "type":  "accessory",
+                      "slot":  "accessory",
+                      "family":  "amulet",
+                      "tier":  5,
+                      "price":  990,
+                      "icon":  "icon:amulet",
+                      "tint":  "#E060FF",
+                      "stats":  [
+                                    {
+                                        "id":  "hp",
+                                        "v":  220
+                                    },
+                                    {
+                                        "id":  "def",
+                                        "v":  9
+                                    },
+                                    {
+                                        "id":  "spd",
+                                        "v":  5
+                                    }
+                                ],
+                      "desc":  "Tier 5 amulet."
+                  },
+                  {
+                      "id":  "iron_ore",
+                      "name":  "Iron Ore",
+                      "type":  "material",
+                      "price":  6,
+                      "icon":  "icon:ore",
+                      "desc":  "Used to forge and enhance gear.",
+                      "tier":  1
+                  },
+                  {
+                      "id":  "essence",
+                      "name":  "Arcane Essence",
+                      "type":  "material",
+                      "price":  40,
+                      "icon":  "icon:essence",
+                      "desc":  "Glowing dust used for promotions and powerful forging.",
+                      "tier":  1
+                  },
+                  {
+                      "id":  "soul_seal",
+                      "name":  "Soul Seal",
+                      "type":  "material",
+                      "price":  120,
+                      "icon":  "icon:seal",
+                      "desc":  "A binding sigil. Needed to tame monsters.",
+                      "tier":  1
+                  },
+                  {
+                      "id":  "potion_s",
+                      "name":  "Herbal Tonic",
+                      "type":  "consumable",
+                      "price":  20,
+                      "icon":  "prop:pot_16",
+                      "use":  "heal_pct",
+                      "useV":  0.35,
+                      "desc":  "Heals 35% HP of one hero.",
+                      "tier":  1
+                  },
+                  {
+                      "id":  "potion_m",
+                      "name":  "Healing Draught",
+                      "type":  "consumable",
+                      "price":  55,
+                      "icon":  "prop:pot_12",
+                      "use":  "heal_pct",
+                      "useV":  0.7,
+                      "desc":  "Heals 70% HP of one hero.",
+                      "tier":  1
+                  },
+                  {
+                      "id":  "potion_l",
+                      "name":  "Phoenix Elixir",
+                      "type":  "consumable",
+                      "price":  140,
+                      "icon":  "prop:pot_20",
+                      "use":  "heal_pct",
+                      "useV":  1,
+                      "desc":  "Fully heals one hero.",
+                      "tier":  1
+                  },
+                  {
+                      "id":  "tome_s",
+                      "name":  "Training Manual",
+                      "type":  "consumable",
+                      "price":  60,
+                      "icon":  "prop:book_01",
+                      "use":  "xp",
+                      "useV":  60,
+                      "desc":  "Grants 60 XP to one hero.",
+                      "tier":  1
+                  },
+                  {
+                      "id":  "tome_l",
+                      "name":  "Master\u0027s Tome",
+                      "type":  "consumable",
+                      "price":  220,
+                      "icon":  "prop:book_04",
+                      "use":  "xp",
+                      "useV":  260,
+                      "desc":  "Grants 260 XP to one hero.",
+                      "tier":  1
+                  },
+                  {
+                      "id":  "coin_bag",
+                      "name":  "Coin Pouch",
+                      "type":  "consumable",
+                      "price":  1,
+                      "icon":  "icon:coin",
+                      "use":  "gold",
+                      "useV":  250,
+                      "desc":  "Contains 250 gold.",
+                      "tier":  1
+                  },
+                  {
+                      "id":  "fame_scroll",
+                      "name":  "Fame Scroll",
+                      "type":  "consumable",
+                      "price":  1,
+                      "icon":  "prop:book_06",
+                      "use":  "fame",
+                      "useV":  25,
+                      "desc":  "Reading it spreads your guild\u0027s name. +25 Fame.",
+                      "tier":  1
+                  }
+              ],
+    "recipes":  [
+                    {
+                        "id":  "rc_w_sword_1",
+                        "result":  "w_sword_1",
+                        "name":  "Rusty Sword",
+                        "n":  1,
+                        "cost":  [
+                                     {
+                                         "id":  "gold",
+                                         "n":  26
+                                     },
+                                     {
+                                         "id":  "iron_ore",
+                                         "n":  6
+                                     }
+                                 ],
+                        "time":  12,
+                        "req":  [
+                                    {
+                                        "stat":  "facility.blacksmith",
+                                        "min":  1
+                                    }
+                                ]
+                    },
+                    {
+                        "id":  "rc_w_sword_2",
+                        "result":  "w_sword_2",
+                        "name":  "Iron Sword",
+                        "n":  1,
+                        "cost":  [
+                                     {
+                                         "id":  "gold",
+                                         "n":  78
+                                     },
+                                     {
+                                         "id":  "iron_ore",
+                                         "n":  10
+                                     }
+                                 ],
+                        "time":  45,
+                        "req":  [
+                                    {
+                                        "stat":  "facility.blacksmith",
+                                        "min":  3
+                                    }
+                                ]
+                    },
+                    {
+                        "id":  "rc_w_sword_3",
+                        "result":  "w_sword_3",
+                        "name":  "Steel Blade",
+                        "n":  1,
+                        "cost":  [
+                                     {
+                                         "id":  "gold",
+                                         "n":  208
+                                     },
+                                     {
+                                         "id":  "iron_ore",
+                                         "n":  14
+                                     }
+                                 ],
+                        "time":  97,
+                        "req":  [
+                                    {
+                                        "stat":  "facility.blacksmith",
+                                        "min":  5
+                                    }
+                                ]
+                    },
+                    {
+                        "id":  "rc_w_sword_4",
+                        "result":  "w_sword_4",
+                        "name":  "Ember Brand",
+                        "n":  1,
+                        "cost":  [
+                                     {
+                                         "id":  "gold",
+                                         "n":  546
+                                     },
+                                     {
+                                         "id":  "iron_ore",
+                                         "n":  18
+                                     },
+                                     {
+                                         "id":  "essence",
+                                         "n":  2
+                                     }
+                                 ],
+                        "time":  167,
+                        "req":  [
+                                    {
+                                        "stat":  "facility.blacksmith",
+                                        "min":  7
+                                    }
+                                ]
+                    },
+                    {
+                        "id":  "rc_w_sword_5",
+                        "result":  "w_sword_5",
+                        "name":  "Dragonfang",
+                        "n":  1,
+                        "cost":  [
+                                     {
+                                         "id":  "gold",
+                                         "n":  1430
+                                     },
+                                     {
+                                         "id":  "iron_ore",
+                                         "n":  22
+                                     },
+                                     {
+                                         "id":  "essence",
+                                         "n":  3
+                                     }
+                                 ],
+                        "time":  255,
+                        "req":  [
+                                    {
+                                        "stat":  "facility.blacksmith",
+                                        "min":  9
+                                    }
+                                ]
+                    },
+                    {
+                        "id":  "rc_w_spear_1",
+                        "result":  "w_spear_1",
+                        "name":  "Wooden Spear",
+                        "n":  1,
+                        "cost":  [
+                                     {
+                                         "id":  "gold",
+                                         "n":  26
+                                     },
+                                     {
+                                         "id":  "iron_ore",
+                                         "n":  6
+                                     }
+                                 ],
+                        "time":  12,
+                        "req":  [
+                                    {
+                                        "stat":  "facility.blacksmith",
+                                        "min":  1
+                                    }
+                                ]
+                    },
+                    {
+                        "id":  "rc_w_spear_2",
+                        "result":  "w_spear_2",
+                        "name":  "Iron Spear",
+                        "n":  1,
+                        "cost":  [
+                                     {
+                                         "id":  "gold",
+                                         "n":  78
+                                     },
+                                     {
+                                         "id":  "iron_ore",
+                                         "n":  10
+                                     }
+                                 ],
+                        "time":  45,
+                        "req":  [
+                                    {
+                                        "stat":  "facility.blacksmith",
+                                        "min":  3
+                                    }
+                                ]
+                    },
+                    {
+                        "id":  "rc_w_spear_3",
+                        "result":  "w_spear_3",
+                        "name":  "Halberd",
+                        "n":  1,
+                        "cost":  [
+                                     {
+                                         "id":  "gold",
+                                         "n":  208
+                                     },
+                                     {
+                                         "id":  "iron_ore",
+                                         "n":  14
+                                     }
+                                 ],
+                        "time":  97,
+                        "req":  [
+                                    {
+                                        "stat":  "facility.blacksmith",
+                                        "min":  5
+                                    }
+                                ]
+                    },
+                    {
+                        "id":  "rc_w_spear_4",
+                        "result":  "w_spear_4",
+                        "name":  "Ember Pike",
+                        "n":  1,
+                        "cost":  [
+                                     {
+                                         "id":  "gold",
+                                         "n":  546
+                                     },
+                                     {
+                                         "id":  "iron_ore",
+                                         "n":  18
+                                     },
+                                     {
+                                         "id":  "essence",
+                                         "n":  2
+                                     }
+                                 ],
+                        "time":  167,
+                        "req":  [
+                                    {
+                                        "stat":  "facility.blacksmith",
+                                        "min":  7
+                                    }
+                                ]
+                    },
+                    {
+                        "id":  "rc_w_spear_5",
+                        "result":  "w_spear_5",
+                        "name":  "Dragon Lance",
+                        "n":  1,
+                        "cost":  [
+                                     {
+                                         "id":  "gold",
+                                         "n":  1430
+                                     },
+                                     {
+                                         "id":  "iron_ore",
+                                         "n":  22
+                                     },
+                                     {
+                                         "id":  "essence",
+                                         "n":  3
+                                     }
+                                 ],
+                        "time":  255,
+                        "req":  [
+                                    {
+                                        "stat":  "facility.blacksmith",
+                                        "min":  9
+                                    }
+                                ]
+                    },
+                    {
+                        "id":  "rc_w_bow_1",
+                        "result":  "w_bow_1",
+                        "name":  "Short Bow",
+                        "n":  1,
+                        "cost":  [
+                                     {
+                                         "id":  "gold",
+                                         "n":  26
+                                     },
+                                     {
+                                         "id":  "iron_ore",
+                                         "n":  6
+                                     }
+                                 ],
+                        "time":  12,
+                        "req":  [
+                                    {
+                                        "stat":  "facility.blacksmith",
+                                        "min":  1
+                                    }
+                                ]
+                    },
+                    {
+                        "id":  "rc_w_bow_2",
+                        "result":  "w_bow_2",
+                        "name":  "Hunter Bow",
+                        "n":  1,
+                        "cost":  [
+                                     {
+                                         "id":  "gold",
+                                         "n":  78
+                                     },
+                                     {
+                                         "id":  "iron_ore",
+                                         "n":  10
+                                     }
+                                 ],
+                        "time":  45,
+                        "req":  [
+                                    {
+                                        "stat":  "facility.blacksmith",
+                                        "min":  3
+                                    }
+                                ]
+                    },
+                    {
+                        "id":  "rc_w_bow_3",
+                        "result":  "w_bow_3",
+                        "name":  "Longbow",
+                        "n":  1,
+                        "cost":  [
+                                     {
+                                         "id":  "gold",
+                                         "n":  208
+                                     },
+                                     {
+                                         "id":  "iron_ore",
+                                         "n":  14
+                                     }
+                                 ],
+                        "time":  97,
+                        "req":  [
+                                    {
+                                        "stat":  "facility.blacksmith",
+                                        "min":  5
+                                    }
+                                ]
+                    },
+                    {
+                        "id":  "rc_w_bow_4",
+                        "result":  "w_bow_4",
+                        "name":  "Ember Recurve",
+                        "n":  1,
+                        "cost":  [
+                                     {
+                                         "id":  "gold",
+                                         "n":  546
+                                     },
+                                     {
+                                         "id":  "iron_ore",
+                                         "n":  18
+                                     },
+                                     {
+                                         "id":  "essence",
+                                         "n":  2
+                                     }
+                                 ],
+                        "time":  167,
+                        "req":  [
+                                    {
+                                        "stat":  "facility.blacksmith",
+                                        "min":  7
+                                    }
+                                ]
+                    },
+                    {
+                        "id":  "rc_w_bow_5",
+                        "result":  "w_bow_5",
+                        "name":  "Skyfall",
+                        "n":  1,
+                        "cost":  [
+                                     {
+                                         "id":  "gold",
+                                         "n":  1430
+                                     },
+                                     {
+                                         "id":  "iron_ore",
+                                         "n":  22
+                                     },
+                                     {
+                                         "id":  "essence",
+                                         "n":  3
+                                     }
+                                 ],
+                        "time":  255,
+                        "req":  [
+                                    {
+                                        "stat":  "facility.blacksmith",
+                                        "min":  9
+                                    }
+                                ]
+                    },
+                    {
+                        "id":  "rc_w_staff_1",
+                        "result":  "w_staff_1",
+                        "name":  "Oak Staff",
+                        "n":  1,
+                        "cost":  [
+                                     {
+                                         "id":  "gold",
+                                         "n":  26
+                                     },
+                                     {
+                                         "id":  "iron_ore",
+                                         "n":  6
+                                     }
+                                 ],
+                        "time":  12,
+                        "req":  [
+                                    {
+                                        "stat":  "facility.blacksmith",
+                                        "min":  1
+                                    }
+                                ]
+                    },
+                    {
+                        "id":  "rc_w_staff_2",
+                        "result":  "w_staff_2",
+                        "name":  "Mage Staff",
+                        "n":  1,
+                        "cost":  [
+                                     {
+                                         "id":  "gold",
+                                         "n":  78
+                                     },
+                                     {
+                                         "id":  "iron_ore",
+                                         "n":  10
+                                     }
+                                 ],
+                        "time":  45,
+                        "req":  [
+                                    {
+                                        "stat":  "facility.blacksmith",
+                                        "min":  3
+                                    }
+                                ]
+                    },
+                    {
+                        "id":  "rc_w_staff_3",
+                        "result":  "w_staff_3",
+                        "name":  "Crystal Staff",
+                        "n":  1,
+                        "cost":  [
+                                     {
+                                         "id":  "gold",
+                                         "n":  208
+                                     },
+                                     {
+                                         "id":  "iron_ore",
+                                         "n":  14
+                                     }
+                                 ],
+                        "time":  97,
+                        "req":  [
+                                    {
+                                        "stat":  "facility.blacksmith",
+                                        "min":  5
+                                    }
+                                ]
+                    },
+                    {
+                        "id":  "rc_w_staff_4",
+                        "result":  "w_staff_4",
+                        "name":  "Ember Scepter",
+                        "n":  1,
+                        "cost":  [
+                                     {
+                                         "id":  "gold",
+                                         "n":  546
+                                     },
+                                     {
+                                         "id":  "iron_ore",
+                                         "n":  18
+                                     },
+                                     {
+                                         "id":  "essence",
+                                         "n":  2
+                                     }
+                                 ],
+                        "time":  167,
+                        "req":  [
+                                    {
+                                        "stat":  "facility.blacksmith",
+                                        "min":  7
+                                    }
+                                ]
+                    },
+                    {
+                        "id":  "rc_w_staff_5",
+                        "result":  "w_staff_5",
+                        "name":  "Archmage Staff",
+                        "n":  1,
+                        "cost":  [
+                                     {
+                                         "id":  "gold",
+                                         "n":  1430
+                                     },
+                                     {
+                                         "id":  "iron_ore",
+                                         "n":  22
+                                     },
+                                     {
+                                         "id":  "essence",
+                                         "n":  3
+                                     }
+                                 ],
+                        "time":  255,
+                        "req":  [
+                                    {
+                                        "stat":  "facility.blacksmith",
+                                        "min":  9
+                                    }
+                                ]
+                    },
+                    {
+                        "id":  "rc_w_dagger_1",
+                        "result":  "w_dagger_1",
+                        "name":  "Rusty Dagger",
+                        "n":  1,
+                        "cost":  [
+                                     {
+                                         "id":  "gold",
+                                         "n":  26
+                                     },
+                                     {
+                                         "id":  "iron_ore",
+                                         "n":  6
+                                     }
+                                 ],
+                        "time":  12,
+                        "req":  [
+                                    {
+                                        "stat":  "facility.blacksmith",
+                                        "min":  1
+                                    }
+                                ]
+                    },
+                    {
+                        "id":  "rc_w_dagger_2",
+                        "result":  "w_dagger_2",
+                        "name":  "Steel Dagger",
+                        "n":  1,
+                        "cost":  [
+                                     {
+                                         "id":  "gold",
+                                         "n":  78
+                                     },
+                                     {
+                                         "id":  "iron_ore",
+                                         "n":  10
+                                     }
+                                 ],
+                        "time":  45,
+                        "req":  [
+                                    {
+                                        "stat":  "facility.blacksmith",
+                                        "min":  3
+                                    }
+                                ]
+                    },
+                    {
+                        "id":  "rc_w_dagger_3",
+                        "result":  "w_dagger_3",
+                        "name":  "Shadow Knife",
+                        "n":  1,
+                        "cost":  [
+                                     {
+                                         "id":  "gold",
+                                         "n":  208
+                                     },
+                                     {
+                                         "id":  "iron_ore",
+                                         "n":  14
+                                     }
+                                 ],
+                        "time":  97,
+                        "req":  [
+                                    {
+                                        "stat":  "facility.blacksmith",
+                                        "min":  5
+                                    }
+                                ]
+                    },
+                    {
+                        "id":  "rc_w_dagger_4",
+                        "result":  "w_dagger_4",
+                        "name":  "Ember Fang",
+                        "n":  1,
+                        "cost":  [
+                                     {
+                                         "id":  "gold",
+                                         "n":  546
+                                     },
+                                     {
+                                         "id":  "iron_ore",
+                                         "n":  18
+                                     },
+                                     {
+                                         "id":  "essence",
+                                         "n":  2
+                                     }
+                                 ],
+                        "time":  167,
+                        "req":  [
+                                    {
+                                        "stat":  "facility.blacksmith",
+                                        "min":  7
+                                    }
+                                ]
+                    },
+                    {
+                        "id":  "rc_w_dagger_5",
+                        "result":  "w_dagger_5",
+                        "name":  "Nightblade",
+                        "n":  1,
+                        "cost":  [
+                                     {
+                                         "id":  "gold",
+                                         "n":  1430
+                                     },
+                                     {
+                                         "id":  "iron_ore",
+                                         "n":  22
+                                     },
+                                     {
+                                         "id":  "essence",
+                                         "n":  3
+                                     }
+                                 ],
+                        "time":  255,
+                        "req":  [
+                                    {
+                                        "stat":  "facility.blacksmith",
+                                        "min":  9
+                                    }
+                                ]
+                    },
+                    {
+                        "id":  "rc_a_plate_1",
+                        "result":  "a_plate_1",
+                        "name":  "Padded Vest",
+                        "n":  1,
+                        "cost":  [
+                                     {
+                                         "id":  "gold",
+                                         "n":  29
+                                     },
+                                     {
+                                         "id":  "iron_ore",
+                                         "n":  6
+                                     }
+                                 ],
+                        "time":  12,
+                        "req":  [
+                                    {
+                                        "stat":  "facility.blacksmith",
+                                        "min":  1
+                                    }
+                                ]
+                    },
+                    {
+                        "id":  "rc_a_plate_2",
+                        "result":  "a_plate_2",
+                        "name":  "Chain Mail",
+                        "n":  1,
+                        "cost":  [
+                                     {
+                                         "id":  "gold",
+                                         "n":  86
+                                     },
+                                     {
+                                         "id":  "iron_ore",
+                                         "n":  10
+                                     }
+                                 ],
+                        "time":  45,
+                        "req":  [
+                                    {
+                                        "stat":  "facility.blacksmith",
+                                        "min":  3
+                                    }
+                                ]
+                    },
+                    {
+                        "id":  "rc_a_plate_3",
+                        "result":  "a_plate_3",
+                        "name":  "Scale Armor",
+                        "n":  1,
+                        "cost":  [
+                                     {
+                                         "id":  "gold",
+                                         "n":  229
+                                     },
+                                     {
+                                         "id":  "iron_ore",
+                                         "n":  14
+                                     }
+                                 ],
+                        "time":  97,
+                        "req":  [
+                                    {
+                                        "stat":  "facility.blacksmith",
+                                        "min":  5
+                                    }
+                                ]
+                    },
+                    {
+                        "id":  "rc_a_plate_4",
+                        "result":  "a_plate_4",
+                        "name":  "Ember Plate",
+                        "n":  1,
+                        "cost":  [
+                                     {
+                                         "id":  "gold",
+                                         "n":  601
+                                     },
+                                     {
+                                         "id":  "iron_ore",
+                                         "n":  18
+                                     },
+                                     {
+                                         "id":  "essence",
+                                         "n":  2
+                                     }
+                                 ],
+                        "time":  167,
+                        "req":  [
+                                    {
+                                        "stat":  "facility.blacksmith",
+                                        "min":  7
+                                    }
+                                ]
+                    },
+                    {
+                        "id":  "rc_a_plate_5",
+                        "result":  "a_plate_5",
+                        "name":  "Dragon Plate",
+                        "n":  1,
+                        "cost":  [
+                                     {
+                                         "id":  "gold",
+                                         "n":  1573
+                                     },
+                                     {
+                                         "id":  "iron_ore",
+                                         "n":  22
+                                     },
+                                     {
+                                         "id":  "essence",
+                                         "n":  3
+                                     }
+                                 ],
+                        "time":  255,
+                        "req":  [
+                                    {
+                                        "stat":  "facility.blacksmith",
+                                        "min":  9
+                                    }
+                                ]
+                    },
+                    {
+                        "id":  "rc_a_robe_1",
+                        "result":  "a_robe_1",
+                        "name":  "Cloth Tunic",
+                        "n":  1,
+                        "cost":  [
+                                     {
+                                         "id":  "gold",
+                                         "n":  29
+                                     },
+                                     {
+                                         "id":  "iron_ore",
+                                         "n":  6
+                                     }
+                                 ],
+                        "time":  12,
+                        "req":  [
+                                    {
+                                        "stat":  "facility.blacksmith",
+                                        "min":  1
+                                    }
+                                ]
+                    },
+                    {
+                        "id":  "rc_a_robe_2",
+                        "result":  "a_robe_2",
+                        "name":  "Leather Armor",
+                        "n":  1,
+                        "cost":  [
+                                     {
+                                         "id":  "gold",
+                                         "n":  86
+                                     },
+                                     {
+                                         "id":  "iron_ore",
+                                         "n":  10
+                                     }
+                                 ],
+                        "time":  45,
+                        "req":  [
+                                    {
+                                        "stat":  "facility.blacksmith",
+                                        "min":  3
+                                    }
+                                ]
+                    },
+                    {
+                        "id":  "rc_a_robe_3",
+                        "result":  "a_robe_3",
+                        "name":  "Ranger Cloak",
+                        "n":  1,
+                        "cost":  [
+                                     {
+                                         "id":  "gold",
+                                         "n":  229
+                                     },
+                                     {
+                                         "id":  "iron_ore",
+                                         "n":  14
+                                     }
+                                 ],
+                        "time":  97,
+                        "req":  [
+                                    {
+                                        "stat":  "facility.blacksmith",
+                                        "min":  5
+                                    }
+                                ]
+                    },
+                    {
+                        "id":  "rc_a_robe_4",
+                        "result":  "a_robe_4",
+                        "name":  "Ember Robe",
+                        "n":  1,
+                        "cost":  [
+                                     {
+                                         "id":  "gold",
+                                         "n":  601
+                                     },
+                                     {
+                                         "id":  "iron_ore",
+                                         "n":  18
+                                     },
+                                     {
+                                         "id":  "essence",
+                                         "n":  2
+                                     }
+                                 ],
+                        "time":  167,
+                        "req":  [
+                                    {
+                                        "stat":  "facility.blacksmith",
+                                        "min":  7
+                                    }
+                                ]
+                    },
+                    {
+                        "id":  "rc_a_robe_5",
+                        "result":  "a_robe_5",
+                        "name":  "Archmage Robe",
+                        "n":  1,
+                        "cost":  [
+                                     {
+                                         "id":  "gold",
+                                         "n":  1573
+                                     },
+                                     {
+                                         "id":  "iron_ore",
+                                         "n":  22
+                                     },
+                                     {
+                                         "id":  "essence",
+                                         "n":  3
+                                     }
+                                 ],
+                        "time":  255,
+                        "req":  [
+                                    {
+                                        "stat":  "facility.blacksmith",
+                                        "min":  9
+                                    }
+                                ]
+                    },
+                    {
+                        "id":  "rc_x_ring_1",
+                        "result":  "x_ring_1",
+                        "name":  "Copper Ring",
+                        "n":  1,
+                        "cost":  [
+                                     {
+                                         "id":  "gold",
+                                         "n":  23
+                                     },
+                                     {
+                                         "id":  "iron_ore",
+                                         "n":  6
+                                     }
+                                 ],
+                        "time":  12,
+                        "req":  [
+                                    {
+                                        "stat":  "facility.blacksmith",
+                                        "min":  1
+                                    }
+                                ]
+                    },
+                    {
+                        "id":  "rc_x_amulet_1",
+                        "result":  "x_amulet_1",
+                        "name":  "Wooden Charm",
+                        "n":  1,
+                        "cost":  [
+                                     {
+                                         "id":  "gold",
+                                         "n":  23
+                                     },
+                                     {
+                                         "id":  "iron_ore",
+                                         "n":  6
+                                     }
+                                 ],
+                        "time":  12,
+                        "req":  [
+                                    {
+                                        "stat":  "facility.blacksmith",
+                                        "min":  1
+                                    }
+                                ]
+                    },
+                    {
+                        "id":  "rc_x_ring_2",
+                        "result":  "x_ring_2",
+                        "name":  "Silver Ring",
+                        "n":  1,
+                        "cost":  [
+                                     {
+                                         "id":  "gold",
+                                         "n":  70
+                                     },
+                                     {
+                                         "id":  "iron_ore",
+                                         "n":  10
+                                     }
+                                 ],
+                        "time":  45,
+                        "req":  [
+                                    {
+                                        "stat":  "facility.blacksmith",
+                                        "min":  3
+                                    }
+                                ]
+                    },
+                    {
+                        "id":  "rc_x_amulet_2",
+                        "result":  "x_amulet_2",
+                        "name":  "Bone Amulet",
+                        "n":  1,
+                        "cost":  [
+                                     {
+                                         "id":  "gold",
+                                         "n":  70
+                                     },
+                                     {
+                                         "id":  "iron_ore",
+                                         "n":  10
+                                     }
+                                 ],
+                        "time":  45,
+                        "req":  [
+                                    {
+                                        "stat":  "facility.blacksmith",
+                                        "min":  3
+                                    }
+                                ]
+                    },
+                    {
+                        "id":  "rc_x_ring_3",
+                        "result":  "x_ring_3",
+                        "name":  "Sapphire Ring",
+                        "n":  1,
+                        "cost":  [
+                                     {
+                                         "id":  "gold",
+                                         "n":  187
+                                     },
+                                     {
+                                         "id":  "iron_ore",
+                                         "n":  14
+                                     }
+                                 ],
+                        "time":  97,
+                        "req":  [
+                                    {
+                                        "stat":  "facility.blacksmith",
+                                        "min":  5
+                                    }
+                                ]
+                    },
+                    {
+                        "id":  "rc_x_amulet_3",
+                        "result":  "x_amulet_3",
+                        "name":  "Jade Pendant",
+                        "n":  1,
+                        "cost":  [
+                                     {
+                                         "id":  "gold",
+                                         "n":  187
+                                     },
+                                     {
+                                         "id":  "iron_ore",
+                                         "n":  14
+                                     }
+                                 ],
+                        "time":  97,
+                        "req":  [
+                                    {
+                                        "stat":  "facility.blacksmith",
+                                        "min":  5
+                                    }
+                                ]
+                    },
+                    {
+                        "id":  "rc_x_ring_4",
+                        "result":  "x_ring_4",
+                        "name":  "Ember Ring",
+                        "n":  1,
+                        "cost":  [
+                                     {
+                                         "id":  "gold",
+                                         "n":  491
+                                     },
+                                     {
+                                         "id":  "iron_ore",
+                                         "n":  18
+                                     },
+                                     {
+                                         "id":  "essence",
+                                         "n":  2
+                                     }
+                                 ],
+                        "time":  167,
+                        "req":  [
+                                    {
+                                        "stat":  "facility.blacksmith",
+                                        "min":  7
+                                    }
+                                ]
+                    },
+                    {
+                        "id":  "rc_x_amulet_4",
+                        "result":  "x_amulet_4",
+                        "name":  "Ember Amulet",
+                        "n":  1,
+                        "cost":  [
+                                     {
+                                         "id":  "gold",
+                                         "n":  491
+                                     },
+                                     {
+                                         "id":  "iron_ore",
+                                         "n":  18
+                                     },
+                                     {
+                                         "id":  "essence",
+                                         "n":  2
+                                     }
+                                 ],
+                        "time":  167,
+                        "req":  [
+                                    {
+                                        "stat":  "facility.blacksmith",
+                                        "min":  7
+                                    }
+                                ]
+                    },
+                    {
+                        "id":  "rc_x_ring_5",
+                        "result":  "x_ring_5",
+                        "name":  "Arcane Ring",
+                        "n":  1,
+                        "cost":  [
+                                     {
+                                         "id":  "gold",
+                                         "n":  1287
+                                     },
+                                     {
+                                         "id":  "iron_ore",
+                                         "n":  22
+                                     },
+                                     {
+                                         "id":  "essence",
+                                         "n":  3
+                                     }
+                                 ],
+                        "time":  255,
+                        "req":  [
+                                    {
+                                        "stat":  "facility.blacksmith",
+                                        "min":  9
+                                    }
+                                ]
+                    },
+                    {
+                        "id":  "rc_x_amulet_5",
+                        "result":  "x_amulet_5",
+                        "name":  "Dragon Heart",
+                        "n":  1,
+                        "cost":  [
+                                     {
+                                         "id":  "gold",
+                                         "n":  1287
+                                     },
+                                     {
+                                         "id":  "iron_ore",
+                                         "n":  22
+                                     },
+                                     {
+                                         "id":  "essence",
+                                         "n":  3
+                                     }
+                                 ],
+                        "time":  255,
+                        "req":  [
+                                    {
+                                        "stat":  "facility.blacksmith",
+                                        "min":  9
+                                    }
+                                ]
+                    },
+                    {
+                        "id":  "rc_potion_s",
+                        "result":  "potion_s",
+                        "name":  "Herbal Tonic",
+                        "n":  2,
+                        "cost":  [
+                                     {
+                                         "id":  "gold",
+                                         "n":  25
+                                     }
+                                 ],
+                        "time":  10,
+                        "req":  [
+                                    {
+                                        "stat":  "facility.blacksmith",
+                                        "min":  1
+                                    }
+                                ]
+                    },
+                    {
+                        "id":  "rc_potion_m",
+                        "result":  "potion_m",
+                        "name":  "Healing Draught",
+                        "n":  2,
+                        "cost":  [
+                                     {
+                                         "id":  "gold",
+                                         "n":  80
+                                     },
+                                     {
+                                         "id":  "iron_ore",
+                                         "n":  2
+                                     }
+                                 ],
+                        "time":  30,
+                        "req":  [
+                                    {
+                                        "stat":  "facility.blacksmith",
+                                        "min":  3
+                                    }
+                                ]
+                    },
+                    {
+                        "id":  "rc_potion_l",
+                        "result":  "potion_l",
+                        "name":  "Phoenix Elixir",
+                        "n":  1,
+                        "cost":  [
+                                     {
+                                         "id":  "gold",
+                                         "n":  220
+                                     },
+                                     {
+                                         "id":  "essence",
+                                         "n":  2
+                                     }
+                                 ],
+                        "time":  60,
+                        "req":  [
+                                    {
+                                        "stat":  "facility.blacksmith",
+                                        "min":  6
+                                    }
+                                ]
+                    }
+                ],
+    "loot":  [
+                 {
+                     "id":  "loot_r1",
+                     "rolls":  2,
+                     "entries":  [
+                                     {
+                                         "id":  "iron_ore",
+                                         "w":  4,
+                                         "min":  1,
+                                         "max":  3,
+                                         "tier":  1,
+                                         "chance":  1
+                                     },
+                                     {
+                                         "id":  "@gear",
+                                         "w":  3,
+                                         "min":  1,
+                                         "max":  1,
+                                         "tier":  1,
+                                         "chance":  1
+                                     },
+                                     {
+                                         "id":  "potion_s",
+                                         "w":  2,
+                                         "min":  1,
+                                         "max":  1,
+                                         "tier":  1,
+                                         "chance":  1
+                                     },
+                                     {
+                                         "id":  "coin_bag",
+                                         "w":  0.5,
+                                         "min":  1,
+                                         "max":  1,
+                                         "tier":  1,
+                                         "chance":  1
+                                     }
+                                 ]
+                 },
+                 {
+                     "id":  "loot_r2",
+                     "rolls":  2,
+                     "entries":  [
+                                     {
+                                         "id":  "iron_ore",
+                                         "w":  4,
+                                         "min":  2,
+                                         "max":  4,
+                                         "tier":  1,
+                                         "chance":  1
+                                     },
+                                     {
+                                         "id":  "@gear",
+                                         "w":  2.5,
+                                         "min":  1,
+                                         "max":  1,
+                                         "tier":  1,
+                                         "chance":  1
+                                     },
+                                     {
+                                         "id":  "@gear",
+                                         "w":  1.5,
+                                         "min":  1,
+                                         "max":  1,
+                                         "tier":  2,
+                                         "chance":  1
+                                     },
+                                     {
+                                         "id":  "potion_s",
+                                         "w":  2,
+                                         "min":  1,
+                                         "max":  2,
+                                         "tier":  1,
+                                         "chance":  1
+                                     },
+                                     {
+                                         "id":  "potion_m",
+                                         "w":  0.6,
+                                         "min":  1,
+                                         "max":  1,
+                                         "tier":  1,
+                                         "chance":  1
+                                     },
+                                     {
+                                         "id":  "tome_s",
+                                         "w":  0.5,
+                                         "min":  1,
+                                         "max":  1,
+                                         "tier":  1,
+                                         "chance":  1
+                                     }
+                                 ]
+                 },
+                 {
+                     "id":  "loot_r3",
+                     "rolls":  2,
+                     "entries":  [
+                                     {
+                                         "id":  "iron_ore",
+                                         "w":  4,
+                                         "min":  3,
+                                         "max":  5,
+                                         "tier":  1,
+                                         "chance":  1
+                                     },
+                                     {
+                                         "id":  "@gear",
+                                         "w":  2,
+                                         "min":  1,
+                                         "max":  1,
+                                         "tier":  2,
+                                         "chance":  1
+                                     },
+                                     {
+                                         "id":  "@gear",
+                                         "w":  1,
+                                         "min":  1,
+                                         "max":  1,
+                                         "tier":  3,
+                                         "chance":  1
+                                     },
+                                     {
+                                         "id":  "potion_m",
+                                         "w":  1.5,
+                                         "min":  1,
+                                         "max":  2,
+                                         "tier":  1,
+                                         "chance":  1
+                                     },
+                                     {
+                                         "id":  "tome_s",
+                                         "w":  1,
+                                         "min":  1,
+                                         "max":  1,
+                                         "tier":  1,
+                                         "chance":  1
+                                     },
+                                     {
+                                         "id":  "essence",
+                                         "w":  0.6,
+                                         "min":  1,
+                                         "max":  1,
+                                         "tier":  1,
+                                         "chance":  1
+                                     }
+                                 ]
+                 },
+                 {
+                     "id":  "loot_r4",
+                     "rolls":  3,
+                     "entries":  [
+                                     {
+                                         "id":  "iron_ore",
+                                         "w":  4,
+                                         "min":  4,
+                                         "max":  7,
+                                         "tier":  1,
+                                         "chance":  1
+                                     },
+                                     {
+                                         "id":  "@gear",
+                                         "w":  2.5,
+                                         "min":  1,
+                                         "max":  1,
+                                         "tier":  3,
+                                         "chance":  1
+                                     },
+                                     {
+                                         "id":  "@gear",
+                                         "w":  0.8,
+                                         "min":  1,
+                                         "max":  1,
+                                         "tier":  4,
+                                         "chance":  1
+                                     },
+                                     {
+                                         "id":  "potion_m",
+                                         "w":  1.5,
+                                         "min":  1,
+                                         "max":  2,
+                                         "tier":  1,
+                                         "chance":  1
+                                     },
+                                     {
+                                         "id":  "potion_l",
+                                         "w":  0.5,
+                                         "min":  1,
+                                         "max":  1,
+                                         "tier":  1,
+                                         "chance":  1
+                                     },
+                                     {
+                                         "id":  "tome_s",
+                                         "w":  1,
+                                         "min":  1,
+                                         "max":  2,
+                                         "tier":  1,
+                                         "chance":  1
+                                     },
+                                     {
+                                         "id":  "essence",
+                                         "w":  1,
+                                         "min":  1,
+                                         "max":  2,
+                                         "tier":  1,
+                                         "chance":  1
+                                     }
+                                 ]
+                 },
+                 {
+                     "id":  "loot_r5",
+                     "rolls":  3,
+                     "entries":  [
+                                     {
+                                         "id":  "iron_ore",
+                                         "w":  4,
+                                         "min":  5,
+                                         "max":  9,
+                                         "tier":  1,
+                                         "chance":  1
+                                     },
+                                     {
+                                         "id":  "@gear",
+                                         "w":  2.5,
+                                         "min":  1,
+                                         "max":  1,
+                                         "tier":  4,
+                                         "chance":  1
+                                     },
+                                     {
+                                         "id":  "@gear",
+                                         "w":  0.8,
+                                         "min":  1,
+                                         "max":  1,
+                                         "tier":  5,
+                                         "chance":  1
+                                     },
+                                     {
+                                         "id":  "potion_l",
+                                         "w":  1,
+                                         "min":  1,
+                                         "max":  1,
+                                         "tier":  1,
+                                         "chance":  1
+                                     },
+                                     {
+                                         "id":  "tome_l",
+                                         "w":  0.8,
+                                         "min":  1,
+                                         "max":  1,
+                                         "tier":  1,
+                                         "chance":  1
+                                     },
+                                     {
+                                         "id":  "essence",
+                                         "w":  1.2,
+                                         "min":  1,
+                                         "max":  3,
+                                         "tier":  1,
+                                         "chance":  1
+                                     }
+                                 ]
+                 },
+                 {
+                     "id":  "loot_boss_r1",
+                     "rolls":  3,
+                     "entries":  [
+                                     {
+                                         "id":  "iron_ore",
+                                         "w":  3,
+                                         "min":  3,
+                                         "max":  5,
+                                         "tier":  1,
+                                         "chance":  1
+                                     },
+                                     {
+                                         "id":  "@gear",
+                                         "w":  4,
+                                         "min":  1,
+                                         "max":  1,
+                                         "tier":  1,
+                                         "chance":  1
+                                     },
+                                     {
+                                         "id":  "@gear",
+                                         "w":  2,
+                                         "min":  1,
+                                         "max":  1,
+                                         "tier":  2,
+                                         "chance":  1
+                                     },
+                                     {
+                                         "id":  "soul_seal",
+                                         "w":  1.5,
+                                         "min":  1,
+                                         "max":  1,
+                                         "tier":  1,
+                                         "chance":  1
+                                     },
+                                     {
+                                         "id":  "tome_s",
+                                         "w":  1,
+                                         "min":  1,
+                                         "max":  1,
+                                         "tier":  1,
+                                         "chance":  1
+                                     }
+                                 ]
+                 },
+                 {
+                     "id":  "loot_boss_r2",
+                     "rolls":  3,
+                     "entries":  [
+                                     {
+                                         "id":  "iron_ore",
+                                         "w":  3,
+                                         "min":  4,
+                                         "max":  6,
+                                         "tier":  1,
+                                         "chance":  1
+                                     },
+                                     {
+                                         "id":  "@gear",
+                                         "w":  3,
+                                         "min":  1,
+                                         "max":  1,
+                                         "tier":  2,
+                                         "chance":  1
+                                     },
+                                     {
+                                         "id":  "@gear",
+                                         "w":  2,
+                                         "min":  1,
+                                         "max":  1,
+                                         "tier":  3,
+                                         "chance":  1
+                                     },
+                                     {
+                                         "id":  "soul_seal",
+                                         "w":  1.5,
+                                         "min":  1,
+                                         "max":  1,
+                                         "tier":  1,
+                                         "chance":  1
+                                     },
+                                     {
+                                         "id":  "essence",
+                                         "w":  1,
+                                         "min":  1,
+                                         "max":  2,
+                                         "tier":  1,
+                                         "chance":  1
+                                     }
+                                 ]
+                 },
+                 {
+                     "id":  "loot_boss_r3",
+                     "rolls":  3,
+                     "entries":  [
+                                     {
+                                         "id":  "iron_ore",
+                                         "w":  3,
+                                         "min":  5,
+                                         "max":  8,
+                                         "tier":  1,
+                                         "chance":  1
+                                     },
+                                     {
+                                         "id":  "@gear",
+                                         "w":  3,
+                                         "min":  1,
+                                         "max":  1,
+                                         "tier":  3,
+                                         "chance":  1
+                                     },
+                                     {
+                                         "id":  "@gear",
+                                         "w":  1,
+                                         "min":  1,
+                                         "max":  1,
+                                         "tier":  4,
+                                         "chance":  1
+                                     },
+                                     {
+                                         "id":  "soul_seal",
+                                         "w":  1.5,
+                                         "min":  1,
+                                         "max":  1,
+                                         "tier":  1,
+                                         "chance":  1
+                                     },
+                                     {
+                                         "id":  "essence",
+                                         "w":  1.5,
+                                         "min":  1,
+                                         "max":  3,
+                                         "tier":  1,
+                                         "chance":  1
+                                     }
+                                 ]
+                 },
+                 {
+                     "id":  "loot_boss_r4",
+                     "rolls":  4,
+                     "entries":  [
+                                     {
+                                         "id":  "iron_ore",
+                                         "w":  3,
+                                         "min":  6,
+                                         "max":  10,
+                                         "tier":  1,
+                                         "chance":  1
+                                     },
+                                     {
+                                         "id":  "@gear",
+                                         "w":  3,
+                                         "min":  1,
+                                         "max":  1,
+                                         "tier":  4,
+                                         "chance":  1
+                                     },
+                                     {
+                                         "id":  "@gear",
+                                         "w":  1,
+                                         "min":  1,
+                                         "max":  1,
+                                         "tier":  5,
+                                         "chance":  1
+                                     },
+                                     {
+                                         "id":  "soul_seal",
+                                         "w":  1.5,
+                                         "min":  1,
+                                         "max":  2,
+                                         "tier":  1,
+                                         "chance":  1
+                                     },
+                                     {
+                                         "id":  "essence",
+                                         "w":  2,
+                                         "min":  2,
+                                         "max":  4,
+                                         "tier":  1,
+                                         "chance":  1
+                                     },
+                                     {
+                                         "id":  "tome_l",
+                                         "w":  1,
+                                         "min":  1,
+                                         "max":  1,
+                                         "tier":  1,
+                                         "chance":  1
+                                     }
+                                 ]
+                 },
+                 {
+                     "id":  "loot_boss_r5",
+                     "rolls":  4,
+                     "entries":  [
+                                     {
+                                         "id":  "iron_ore",
+                                         "w":  3,
+                                         "min":  8,
+                                         "max":  12,
+                                         "tier":  1,
+                                         "chance":  1
+                                     },
+                                     {
+                                         "id":  "@gear",
+                                         "w":  3,
+                                         "min":  1,
+                                         "max":  1,
+                                         "tier":  4,
+                                         "chance":  1
+                                     },
+                                     {
+                                         "id":  "@gear",
+                                         "w":  2,
+                                         "min":  1,
+                                         "max":  1,
+                                         "tier":  5,
+                                         "chance":  1
+                                     },
+                                     {
+                                         "id":  "soul_seal",
+                                         "w":  2,
+                                         "min":  1,
+                                         "max":  2,
+                                         "tier":  1,
+                                         "chance":  1
+                                     },
+                                     {
+                                         "id":  "essence",
+                                         "w":  2,
+                                         "min":  3,
+                                         "max":  5,
+                                         "tier":  1,
+                                         "chance":  1
+                                     },
+                                     {
+                                         "id":  "tome_l",
+                                         "w":  1.5,
+                                         "min":  1,
+                                         "max":  2,
+                                         "tier":  1,
+                                         "chance":  1
+                                     }
+                                 ]
+                 },
+                 {
+                     "id":  "loot_tower",
+                     "rolls":  2,
+                     "entries":  [
+                                     {
+                                         "id":  "iron_ore",
+                                         "w":  4,
+                                         "min":  3,
+                                         "max":  8,
+                                         "tier":  1,
+                                         "chance":  1
+                                     },
+                                     {
+                                         "id":  "essence",
+                                         "w":  2,
+                                         "min":  1,
+                                         "max":  3,
+                                         "tier":  1,
+                                         "chance":  1
+                                     },
+                                     {
+                                         "id":  "@gear",
+                                         "w":  2,
+                                         "min":  1,
+                                         "max":  1,
+                                         "tier":  3,
+                                         "chance":  1
+                                     },
+                                     {
+                                         "id":  "@gear",
+                                         "w":  1.5,
+                                         "min":  1,
+                                         "max":  1,
+                                         "tier":  4,
+                                         "chance":  1
+                                     },
+                                     {
+                                         "id":  "@gear",
+                                         "w":  0.6,
+                                         "min":  1,
+                                         "max":  1,
+                                         "tier":  5,
+                                         "chance":  1
+                                     },
+                                     {
+                                         "id":  "potion_l",
+                                         "w":  1,
+                                         "min":  1,
+                                         "max":  1,
+                                         "tier":  1,
+                                         "chance":  1
+                                     },
+                                     {
+                                         "id":  "tome_l",
+                                         "w":  0.8,
+                                         "min":  1,
+                                         "max":  1,
+                                         "tier":  1,
+                                         "chance":  1
+                                     },
+                                     {
+                                         "id":  "soul_seal",
+                                         "w":  0.4,
+                                         "min":  1,
+                                         "max":  1,
+                                         "tier":  1,
+                                         "chance":  1
+                                     }
+                                 ]
+                 },
+                 {
+                     "id":  "loot_c1",
+                     "rolls":  1,
+                     "entries":  [
+                                     {
+                                         "id":  "iron_ore",
+                                         "w":  4,
+                                         "min":  1,
+                                         "max":  3,
+                                         "tier":  1,
+                                         "chance":  1
+                                     },
+                                     {
+                                         "id":  "potion_s",
+                                         "w":  2,
+                                         "min":  1,
+                                         "max":  2,
+                                         "tier":  1,
+                                         "chance":  1
+                                     },
+                                     {
+                                         "id":  "@gear",
+                                         "w":  1,
+                                         "min":  1,
+                                         "max":  1,
+                                         "tier":  1,
+                                         "chance":  1
+                                     },
+                                     {
+                                         "id":  "coin_bag",
+                                         "w":  1,
+                                         "min":  1,
+                                         "max":  1,
+                                         "tier":  1,
+                                         "chance":  1
+                                     }
+                                 ]
+                 },
+                 {
+                     "id":  "loot_c2",
+                     "rolls":  2,
+                     "entries":  [
+                                     {
+                                         "id":  "iron_ore",
+                                         "w":  4,
+                                         "min":  2,
+                                         "max":  5,
+                                         "tier":  1,
+                                         "chance":  1
+                                     },
+                                     {
+                                         "id":  "potion_s",
+                                         "w":  1,
+                                         "min":  1,
+                                         "max":  2,
+                                         "tier":  1,
+                                         "chance":  1
+                                     },
+                                     {
+                                         "id":  "potion_m",
+                                         "w":  1.5,
+                                         "min":  1,
+                                         "max":  1,
+                                         "tier":  1,
+                                         "chance":  1
+                                     },
+                                     {
+                                         "id":  "@gear",
+                                         "w":  1.5,
+                                         "min":  1,
+                                         "max":  1,
+                                         "tier":  2,
+                                         "chance":  1
+                                     },
+                                     {
+                                         "id":  "coin_bag",
+                                         "w":  1,
+                                         "min":  1,
+                                         "max":  1,
+                                         "tier":  1,
+                                         "chance":  1
+                                     },
+                                     {
+                                         "id":  "tome_s",
+                                         "w":  0.7,
+                                         "min":  1,
+                                         "max":  1,
+                                         "tier":  1,
+                                         "chance":  1
+                                     }
+                                 ]
+                 },
+                 {
+                     "id":  "loot_c3",
+                     "rolls":  2,
+                     "entries":  [
+                                     {
+                                         "id":  "iron_ore",
+                                         "w":  4,
+                                         "min":  3,
+                                         "max":  7,
+                                         "tier":  1,
+                                         "chance":  1
+                                     },
+                                     {
+                                         "id":  "potion_m",
+                                         "w":  1.5,
+                                         "min":  1,
+                                         "max":  2,
+                                         "tier":  1,
+                                         "chance":  1
+                                     },
+                                     {
+                                         "id":  "@gear",
+                                         "w":  1.5,
+                                         "min":  1,
+                                         "max":  1,
+                                         "tier":  3,
+                                         "chance":  1
+                                     },
+                                     {
+                                         "id":  "essence",
+                                         "w":  1,
+                                         "min":  1,
+                                         "max":  2,
+                                         "tier":  1,
+                                         "chance":  1
+                                     },
+                                     {
+                                         "id":  "tome_s",
+                                         "w":  1,
+                                         "min":  1,
+                                         "max":  2,
+                                         "tier":  1,
+                                         "chance":  1
+                                     }
+                                 ]
+                 },
+                 {
+                     "id":  "loot_c4",
+                     "rolls":  3,
+                     "entries":  [
+                                     {
+                                         "id":  "iron_ore",
+                                         "w":  4,
+                                         "min":  5,
+                                         "max":  9,
+                                         "tier":  1,
+                                         "chance":  1
+                                     },
+                                     {
+                                         "id":  "potion_l",
+                                         "w":  1,
+                                         "min":  1,
+                                         "max":  1,
+                                         "tier":  1,
+                                         "chance":  1
+                                     },
+                                     {
+                                         "id":  "@gear",
+                                         "w":  1.6,
+                                         "min":  1,
+                                         "max":  1,
+                                         "tier":  4,
+                                         "chance":  1
+                                     },
+                                     {
+                                         "id":  "essence",
+                                         "w":  1.4,
+                                         "min":  1,
+                                         "max":  3,
+                                         "tier":  1,
+                                         "chance":  1
+                                     },
+                                     {
+                                         "id":  "tome_l",
+                                         "w":  1,
+                                         "min":  1,
+                                         "max":  1,
+                                         "tier":  1,
+                                         "chance":  1
+                                     },
+                                     {
+                                         "id":  "soul_seal",
+                                         "w":  0.5,
+                                         "min":  1,
+                                         "max":  1,
+                                         "tier":  1,
+                                         "chance":  1
+                                     }
+                                 ]
+                 },
+                 {
+                     "id":  "loot_exam",
+                     "rolls":  3,
+                     "entries":  [
+                                     {
+                                         "id":  "essence",
+                                         "w":  2,
+                                         "min":  2,
+                                         "max":  4,
+                                         "tier":  1,
+                                         "chance":  1
+                                     },
+                                     {
+                                         "id":  "@gear",
+                                         "w":  3,
+                                         "min":  1,
+                                         "max":  1,
+                                         "tier":  3,
+                                         "chance":  1
+                                     },
+                                     {
+                                         "id":  "@gear",
+                                         "w":  1.5,
+                                         "min":  1,
+                                         "max":  1,
+                                         "tier":  4,
+                                         "chance":  1
+                                     },
+                                     {
+                                         "id":  "soul_seal",
+                                         "w":  1,
+                                         "min":  1,
+                                         "max":  1,
+                                         "tier":  1,
+                                         "chance":  1
+                                     },
+                                     {
+                                         "id":  "tome_l",
+                                         "w":  1,
+                                         "min":  1,
+                                         "max":  1,
+                                         "tier":  1,
+                                         "chance":  1
+                                     }
+                                 ]
+                 }
+             ]
+}
