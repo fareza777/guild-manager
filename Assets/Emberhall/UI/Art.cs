@@ -134,7 +134,7 @@ namespace Emberhall
     /// <summary>Plays a Sprite[] on an Image. Used for every animated pixel sprite in the UI. With scale>0 it also sizes/pivots the Image per frame (feet-anchored).</summary>
     public class SpriteAnim : MonoBehaviour
     {
-        public Image img; public Sprite[] frames; public float fps = 6; public bool loop = true, playing = true; public Action onEnd; public float scale;
+        public Image img; public Sprite[] frames; public float fps = 6; public bool loop = true, playing = true, battleTime; public Action onEnd; public float scale;
         float t; int idx;
         public static SpriteAnim On(Image i, Sprite[] f, float fps = 6, bool loop = true, float scale = 0) { var a = i.GetComponent<SpriteAnim>() ?? i.gameObject.AddComponent<SpriteAnim>(); a.img = i; a.scale = scale; a.Play(f, fps, loop); return a; }
         public void Play(Sprite[] f, float rate = 6, bool lp = true, Action end = null)
@@ -151,7 +151,7 @@ namespace Emberhall
         void Update()
         {
             if (!playing || frames == null || frames.Length <= 1 || img == null) return;
-            t += Time.unscaledDeltaTime * fps;
+            t += Time.unscaledDeltaTime * fps * (battleTime ? Tw.TimeScale : 1);
             if (float.IsNaN(t) || float.IsInfinity(t)) t = 0f;
             int len = frames.Length;
             if (loop) t %= len;

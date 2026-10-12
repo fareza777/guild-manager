@@ -14,7 +14,7 @@ namespace Emberhall
         public enum Tab { Hall, Heroes, Board, Bag, Quests }
         public static readonly Dictionary<string, RectTransform> Targets = new Dictionary<string, RectTransform>();
         public static void Reg(string key, Component c) { if (c != null) Targets[key] = (RectTransform)c.transform; }
-        const float TopH = 188, NavH = 168, CoachH = 218, CoachSpace = 246;
+        const float TopH = 224, NavH = 188, CoachH = 288, CoachSpace = 312;
 
         readonly App app; readonly GameContext C; readonly UiHost host;
         RectTransform topBar, navBar, pointer; Image pointerImg;
@@ -90,17 +90,17 @@ namespace Emberhall
             emblem = U.Img(topBar, Brand.Shield(Theme.Red), Color.white, "emblem", true); emblem.preserveAspect = true; emblem.At(0, 0.5f, 22, 0, 110, 128, 0, 0.5f);
             var eb = emblem.gameObject.AddComponent<UButton>(); eb.bg = emblem; eb.noTint = true; eb.onClick = () => Popups.Show(new RankPopup());
             nameT = U.Txt(topBar, "", 44, Theme.Text, TextAnchor.MiddleLeft, true); nameT.At(0, 1, 150, -16, 480, 52, 0, 1);
-            rankT = U.Txt(topBar, "", 32, Theme.Gold, TextAnchor.MiddleLeft, true); rankT.At(0, 1, 150, -66, 480, 40, 0, 1);
-            fameBar = U.ProgressBar(topBar, Theme.Accent, 440, 34, "", 24); fameBar.back.R().At(0, 0, 150, 26, 440, 34, 0, 0); fameT = fameBar.label;
+            rankT = U.Txt(topBar, "", 32, Theme.Gold, TextAnchor.MiddleLeft, true); rankT.At(0, 1, 150, -86, 480, 56, 0, 1);
+            fameBar = U.ProgressBar(topBar, Theme.Accent, 440, 52, "", 24); fameBar.back.R().At(0, 0, 150, 16, 440, 52, 0, 0); fameT = fameBar.label;
             var fi = U.Icon(topBar, Icons.Get("flame"), 40); fi.At(0, 0, 596, 24, 40, 40, 0, 0);
             var fb = U.Btn(topBar, "", new Color(0, 0, 0, 0), () => Popups.Show(new RankPopup()), 480, 120); fb.noTint = true; fb.bg.color = new Color(0, 0, 0, 0); fb.At(0, 0.5f, 140, 0, 520, 150, 0, 0.5f);
             Reg("hud_rank", fb);
 
             // currencies
-            var goldBox = U.Box(topBar, Theme.Inset, Theme.Black, "gold"); goldBox.At(1, 1, -126, -18, 280, 66, 1, 1);
+            var goldBox = U.Box(topBar, Theme.Inset, Theme.Black, "gold"); goldBox.At(1, 1, -126, -16, 280, 88, 1, 1);
             U.Icon(goldBox.transform, Art.ResIcon(C, "gold"), 50).At(0, 0.5f, 10, 0, 50, 50, 0, 0.5f);
             goldT = U.Txt(goldBox.transform, "0", 42, Theme.Gold, TextAnchor.MiddleCenter, true); goldT.Fill(72, 14, 4, 4);
-            var gemBox = U.Box(topBar, Theme.Inset, Theme.Black, "gems"); gemBox.At(1, 1, -126, -96, 280, 66, 1, 1);
+            var gemBox = U.Box(topBar, Theme.Inset, Theme.Black, "gems"); gemBox.At(1, 1, -126, -116, 280, 88, 1, 1);
             U.Icon(gemBox.transform, Art.ResIcon(C, "gems"), 50).At(0, 0.5f, 10, 0, 50, 50, 0, 0.5f);
             gemsT = U.Txt(gemBox.transform, "0", 42, Theme.BlueDark, TextAnchor.MiddleCenter, true); gemsT.Fill(72, 14, 4, 4);
             Reg("hud_gold", goldBox); Reg("hud_gems", gemBox);
@@ -123,7 +123,7 @@ namespace Emberhall
                 tabBg[i] = b;
                 tabIcon[i] = U.Icon(b.transform, Icons.Get(icons[i]), 76); tabIcon[i].At(0.5f, 1, 0, -12, 76, 76, 0.5f, 1);
                 tabLabel[i] = U.Txt(b.transform, L.T(names[i]), 30, Theme.Text, TextAnchor.MiddleCenter, true); tabLabel[i].StretchX(0, 10, 42, 8, 8);
-                tabBadge[i] = U.Box(b.transform, Theme.Red, Theme.Black, "badge"); tabBadge[i].At(1, 1, -6, -6, 44, 44, 1, 1);
+                tabBadge[i] = U.Box(b.transform, Theme.Red, Theme.Black, "badge"); tabBadge[i].At(1, 1, -6, -6, 64, 64, 1, 1);
                 tabBadgeT[i] = U.Txt(tabBadge[i].transform, "", 30, Color.white, TextAnchor.MiddleCenter, true); tabBadgeT[i].Fill();
                 tabBadge[i].gameObject.SetActive(false);
                 Reg("tab_" + names[i].ToLower(), b);
@@ -177,11 +177,11 @@ namespace Emberhall
             ring = new Image[4];
             var gold = new Color(1f, 0.86f, 0.35f, 1f);
             for (int i = 0; i < 4; i++) { ring[i] = U.Solid(coach, gold, "ring" + i); ring[i].raycastTarget = false; }
-            coachCard = U.Box(coach, Theme.Panel, Theme.Gold, "card", true, 0.12f).R();
-            coachStep = U.Txt(coachCard, "", 28, Theme.Gold, TextAnchor.MiddleCenter, true); coachStep.StretchX(1, -12, 34, 24, 24);
-            coachTitle = U.Txt(coachCard, "", 36, Theme.Text, TextAnchor.MiddleCenter, true); coachTitle.StretchX(1, -48, 44, 24, 24);
-            coachLine = U.Txt(coachCard, "", 30, Theme.Text, TextAnchor.MiddleCenter, false, true); coachLine.StretchX(1, -98, 108, 24, 284);
-            coachAction = U.Btn(coachCard, "", Theme.Accent, null, 244, 84, 36); coachAction.At(1, 0, -20, 24, 244, 84, 1, 0);
+            coachCard = U.Box(coach, Theme.Panel, Theme.Gold, "card", true, .06f).R();
+            coachStep = U.Txt(coachCard, "", 28, Theme.Gold, TextAnchor.MiddleCenter, true); coachStep.StretchX(1, -12, 44, 24, 350);
+            coachTitle = U.Txt(coachCard, "", 36, Theme.Text, TextAnchor.MiddleCenter, true); coachTitle.StretchX(1, -62, 96, 24, 350);
+            coachLine = U.Txt(coachCard, "", 30, Theme.Text, TextAnchor.MiddleCenter, false, true); coachLine.StretchX(1, -168, 112, 24, 24);
+            coachAction = U.Btn(coachCard, "", Theme.Accent, null, 304, 108, 28); coachAction.At(1, 1, -24, -38, 304, 108, 1, 1);
         }
 
         void HideCoach() { if (coach && coach.gameObject.activeSelf) coach.gameObject.SetActive(false); }
@@ -241,14 +241,14 @@ namespace Emberhall
             coachStep.text = L.T("FIRST STEPS · {0}/4", q.order);
             if (C.Quests.State(q.id) == QuestSystem.Ready)
             {
-                Coach(L.T("Step complete — claim your reward"), L.T("Claim this chapter's reward to unlock your next step."), L.T("CLAIM REWARD"), () => Popups.Show(new QuestRewardPopup(q)));
+                Coach(StoryScript.Pick("Reward ready", "Hadiah siap"), L.T("Claim this reward to unlock your next step."), L.T("CLAIM REWARD"), () => Popups.Show(new QuestRewardPopup(q)));
                 return;
             }
             if (q.order == 1)
             {
-                if (C.Roster.Full) { Coach(L.T("Make room for a new hero"), L.T("Your roster is full. Upgrade the Barracks, then return to recruit."), L.T("BARRACKS"), () => app.nav.Push(new FacilityScreen("barracks"))); return; }
+                if (C.Roster.Full) { Coach(L.T("Make room for a new hero"), L.T("Upgrade the Barracks to make room for another hero."), L.T("BARRACKS"), () => app.nav.Push(new FacilityScreen("barracks"))); return; }
                 bool inTavern = app.nav.Current is FacilityScreen fs && fs.FacilityId == "tavern";
-                Coach(L.T("Recruit your second hero"), inTavern ? L.T("Scroll to the candidates. Tap HIRE + the gold price on an affordable hero.") : L.T("You already have one hero and starting gold. Open the Tavern and hire one more."), L.T(inTavern ? "SHOW RECRUITS" : "OPEN TAVERN"), () =>
+                Coach(L.T("Recruit your second hero"), inTavern ? L.T("Tap HIRE on an affordable candidate, then claim your guide reward.") : L.T("Open the Tavern. Hire one companion using your starting gold."), L.T(inTavern ? "SHOW RECRUITS" : "OPEN TAVERN"), () =>
                 {
                     if (app.nav.Current is FacilityScreen tavern && tavern.FacilityId == "tavern") tavern.ShowRecruitment();
                     else app.nav.Push(new FacilityScreen("tavern"));
@@ -258,12 +258,12 @@ namespace Emberhall
             }
             if ((q.order == 2 || q.order == 4) && !C.Roster.All.Any(C.Roster.Ready))
             {
-                Coach(L.T("Recover your heroes first"), L.T("No heroes are ready. Open a hero and use a healing potion, or visit the Infirmary."), L.T("OPEN HEROES"), () => GoTab(Tab.Heroes)); return;
+                Coach(L.T("Recover your heroes first"), L.T("Use a healing potion, or recover at the Infirmary."), L.T("OPEN HEROES"), () => GoTab(Tab.Heroes)); return;
             }
             if (q.order == 2 || q.order == 4)
             {
                 bool onBoard = app.nav.Current is BoardScreen && BoardState.Tab == 0 && BoardState.Region == "r1";
-                Coach(q.order == 2 ? L.T("Win your first battle") : L.T("Clear Mushroom Grove"), q.order == 2 ? L.T("Open Campaign on the Board. Start Slime Meadow, keep the selected heroes, then tap FIGHT.") : L.T(q.desc), L.T(onBoard ? "NEXT BATTLE" : "OPEN BOARD"), () =>
+                Coach(q.order == 2 ? L.T("Win your first battle") : L.T("Clear Mushroom Grove"), q.order == 2 ? L.T("Open Campaign, start Slime Meadow, and tap FIGHT.") : L.T(q.desc), L.T(onBoard ? "NEXT BATTLE" : "OPEN BOARD"), () =>
                 {
                     BoardState.Tab = 0; BoardState.Region = "r1";
                     if (!(app.nav.Current is BoardScreen)) { GoTab(Tab.Board, true); return; }
@@ -274,7 +274,7 @@ namespace Emberhall
             if (q.order == 3)
             {
                 bool inBag = app.nav.Current is BagScreen && Bag.OpenTab == 0;
-                Coach(L.T("Equip your party"), L.T("Open Bag → Gear. Tap AUTO-EQUIP to give each hero their best compatible items."), L.T(inBag ? "AUTO-EQUIP" : "OPEN BAG"), () =>
+                Coach(L.T("Equip your party"), L.T("Open Bag → Gear and tap AUTO-EQUIP."), L.T(inBag ? "AUTO-EQUIP" : "OPEN BAG"), () =>
                 {
                     if (app.nav.Current is BagScreen && Bag.OpenTab == 0) { BagScreen.EquipBest(); return; }
                     Bag.OpenTab = 0; Bag.Filter = 0; GoTab(Tab.Bag, true);
@@ -358,7 +358,7 @@ namespace Emberhall
         void Refresh()
         {
             var meta = C.Meta; nameT.text = meta.GuildName;
-            var r = C.Ranks.Current; rankT.text = L.T("Rank {0}", r.id) + " - " + L.T(r.name);
+            var r = C.Ranks.Current; rankT.text = L.T("Rank {0}", r.id);
             emblem.sprite = Brand.Shield(Theme.Hex(GuildGame.Emblems[Mathf.Clamp(meta.Emblem, 0, GuildGame.Emblems.Length - 1)]));
             var nx = C.Ranks.Next;
             if (nx != null) { fameBar.Value = C.Ranks.Progress; fameT.text = $"{Util.Num(C.Ranks.Fame)}/{Util.Num(nx.fame)}"; }

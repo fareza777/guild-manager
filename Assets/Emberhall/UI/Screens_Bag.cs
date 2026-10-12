@@ -45,8 +45,8 @@ namespace Emberhall
             var inv = C.Inventory;
             var equip = U.Btn(p, L.T("Auto-equip best gear"), Theme.Green, EquipBest, 800, 94, 36, Icons.Get("sword")); equip.Le(-1, 94, 1);
             Hud.Reg("btn_main", equip);
-            var top = U.Rt(p, "top"); top.Le(-1, 92); U.HBox(top, 10, null, TextAnchor.MiddleCenter, true, true, false, true);
-            var cap = U.Box(top, Theme.Inset, inv.Full ? Theme.Red : Theme.Black, "cap"); cap.Le(220, 92);
+            var top = U.Rt(p, "top"); top.Le(-1, 132); U.HBox(top, 10, null, TextAnchor.MiddleCenter, true, true, false, true);
+            var cap = U.Box(top, Theme.Inset, inv.Full ? Theme.Red : Theme.Black, "cap"); cap.Le(260, 92);
             U.Icon(cap.transform, Icons.Get("bag"), 56).At(0, 0.5f, 12, 0, 56, 56, 0, 0.5f);
             U.Txt(cap.transform, $"{inv.Used}/{inv.Capacity}", 48, inv.Full ? Theme.Bad : Theme.Text, TextAnchor.MiddleCenter, true).Fill(70, 8, 0, 4);
             string[] fn = { "All", "Weapon", "Armor", "Accessory" };
@@ -64,8 +64,8 @@ namespace Emberhall
                 default: list = Enumerable.Reverse(list).ToList(); break;
             }
             if (list.Count == 0) { W.Info(p, L.T("Your bag is empty. Win battles to find gear!"), 38); return; }
-            var grid = U.Rt(p, "grid"); U.Grid(grid, new Vector2(182, 182), new Vector2(12, 12), 5, null, TextAnchor.UpperCenter); grid.Fit();
-            foreach (var g in list) { var gg = g; W.ItemCell(grid, gg, 182, () => { gg.isNew = false; Popups.Show(new ItemPopup(gg.uid)); }); }
+            var grid = U.Rt(p, "grid"); U.Grid(grid, new Vector2(230, 230), new Vector2(18, 18), 4, null, TextAnchor.UpperCenter); grid.Fit();
+            foreach (var g in list) { var gg = g; W.ItemCell(grid, gg, 230, () => { gg.isNew = false; Popups.Show(new ItemPopup(gg.uid)); }); }
             foreach (var g in inv.Gear) if (g.isNew) { }
         }
 
@@ -98,12 +98,12 @@ namespace Emberhall
             foreach (var o in C.Market.Offers)
             {
                 var oo = o; var def = C.Content.Item(o.itemId); var rc = o.rarity != null ? Art.RarityColor(C, o.rarity) : Theme.Black;
-                var card = U.Box(p, o.sold ? Theme.GreyDark : Theme.Panel, o.rarity != null ? rc : Theme.Black, "offer"); card.Le(-1, 150, 1);
+                var card = U.Box(p, o.sold ? Theme.GreyDark : Theme.Panel, o.rarity != null ? rc : Theme.Black, "offer"); card.Le(-1, 196, 1);
                 var ib = U.Box(card.transform, Theme.Inset, rc, "ib"); ib.At(0, 0.5f, 16, 0, 118, 118, 0, 0.5f);
                 U.Icon(ib.transform, Art.ItemIcon(def), 84).At(0.5f, 0.5f, 0, 0, 84, 84);
                 var nm = U.Txt(card.transform, L.T(def.name) + (o.qty > 1 ? " x" + o.qty : ""), 38, o.rarity != null ? rc : Theme.Text, TextAnchor.MiddleLeft, true); nm.StretchX(1, -14, 48, 150, 260);
                 string sub = def.IsGear ? $"{C.Content.Rarity(o.rarity).name}  T{def.tier}  " + string.Join(" ", def.stats.Select(s => $"{s.id.ToUpper()}+{Util.Num(s.v)}")) : L.T(def.desc);
-                var sd = U.Txt(card.transform, sub, 27, Theme.TextDim, TextAnchor.UpperLeft, false, true); sd.StretchX(1, -70, 64, 150, 260);
+                var sd = U.Txt(card.transform, sub, 27, Theme.TextDim, TextAnchor.UpperLeft, false, true); sd.StretchX(1, -84, 100, 150, 260);
                 if (o.sold) { var sold = U.Chip(card.transform, L.T("SOLD"), Theme.GreyDark, 34, Theme.TextDim, 20, 70); sold.At(1, 0.5f, -20, 0, 180, 70, 1, 0.5f); }
                 else
                 {
@@ -151,7 +151,7 @@ namespace Emberhall
                 var row = U.Rt(body, "st"); row.Le(-1, 70); U.HBox(row, 14, new RectOffset(16, 16, 0, 0), TextAnchor.MiddleCenter, true, true, false, false);
                 U.Icon(row, Art.Get(sd.icon), 46).Le(46, 46);
                 var n = U.Txt(row, sd.name, 38, Theme.TextDim, TextAnchor.MiddleCenter); n.Le(-1, 50, 1);
-                var value = U.Box(row, Theme.Inset, Theme.Black, "stat_value"); value.Le(168, 58);
+                var value = U.Box(row, Theme.Inset, Theme.Black, "stat_value"); value.Le(168, 76);
                 var t = U.Txt(value.transform, "+" + Util.Num(v) + (sd.pct ? "%" : ""), 42, Theme.Good, TextAnchor.MiddleCenter, true); t.Fill(8, 8, 4, 4);
             }
             if (g.affix.Count > 0) { var af = U.Txt(body, L.T("Includes {0} bonus affix(es)", g.affix.Count), 28, Theme.Purple, TextAnchor.MiddleCenter); af.Le(-1, 40); }

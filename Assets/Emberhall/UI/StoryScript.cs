@@ -31,20 +31,20 @@ namespace Emberhall
         public static readonly Beat[] Prologue =
         {
             new Beat("story_fall", 1, "A Spark at Sunrise", "Bara di Pagi Hari",
-                "A great storm left Emberhall in need of a little care. As sunlight warms its old stones, one small spark promises a fresh beginning.",
-                "Badai besar membuat Emberhall perlu dirawat kembali. Mentari menghangatkan batu tuanya. Sebuah bara kecil menjanjikan awal baru.",
-                "Every great adventure starts somewhere.",
-                "Setiap petualangan besar punya awal."),
+                "Five beacon lenses vanished in the storm. Emberhall's last keeper still tends the hearth, waiting for you.",
+                "Lima lensa suar hilang dalam badai. Penjaga terakhir Emberhall tetap merawat tungku, menunggumu.",
+                "One ember can light a thousand roads.",
+                "Satu bara dapat menerangi seribu jalan."),
             new Beat("story_oath", 2, "A Hearth for Everyone", "Tungku untuk Semua",
-                "Maren has kept the hearth glowing. Now, travelers gather around its warmth, ready to trade stories and build something wonderful together.",
-                "Maren menjaga tungku tetap menyala. Para pengelana datang untuk berbagi cerita dan membangun sesuatu yang indah bersama.",
-                "\"A warm fire, good friends. We have all we need to begin.\" — Maren",
-                "\"Api hangat dan teman baik. Bekal awal kita sudah lengkap.\" — Maren"),
-            new Beat("story_dawn", 3, "Adventure Awaits", "Petualangan Menanti",
-                "The morning road leads to green valleys and a mysterious shining Spire. Gather your heroes, raise your banner, and make the next story yours.",
-                "Jalan pagi menuju lembah hijau dan Menara berkilau yang penuh misteri. Himpun pahlawanmu, kibarkan panji, dan mulai kisahmu sendiri.",
-                "A new guild. A bright horizon. Your adventure.",
-                "Guild baru. Cakrawala cerah. Petualanganmu.")
+                "Maren's map marks five lost lights and one shining Spire. Rebuild the guild. Help the villages find their way home.",
+                "Peta Maren menandai lima cahaya hilang dan satu Menara. Bangun guild dan bantu penduduk menemukan jalan pulang.",
+                "\"We mend the road one kindness at a time.\" — Maren",
+                "\"Kita pulihkan jalan, satu kebaikan setiap saat.\" — Maren"),
+            new Beat("story_frontier", 3, "The Lantern Road", "Jalan Lentera",
+                "Recruit a companion in Sunmeadow. Reopen the meadow road, recover its beacon lens, and uncover the Spire's secret.",
+                "Rekrut sahabat di Sunmeadow. Buka jalan padang rumput, temukan lensa suar, dan ungkap rahasia Menara.",
+                "A brighter world begins with your guild.",
+                "Dunia yang lebih cerah bermula dari guildmu.")
         };
 
         public static string Tagline => Pick("EVERY LEGEND BEGINS WITH AN EMBER", "SETIAP LEGENDA BERMULA DARI BARA");

@@ -36,7 +36,7 @@ namespace Emberhall
 
         public override void Build(RectTransform root)
         {
-            walkers.Clear(); blds.Clear(); ground.Clear();
+            walkers.Clear(); blds.Clear(); ground.Clear(); trackTitle = null;
             Canvas.ForceUpdateCanvases();
             LayoutRebuilder.ForceRebuildLayoutImmediate(root);
             size = root.rect.size; if (size.y < 100) size = new Vector2(1080, 1560);
@@ -50,7 +50,7 @@ namespace Emberhall
             foreach (var u in C.Roster.All.Where(x => !x.monster).OrderByDescending(x => x.level).Take(9)) SpawnWalker(u);
 
             BuildNotices();
-            BuildTracker();
+            if (!Guided) BuildTracker();
             SortWorld();
         }
 
@@ -88,15 +88,17 @@ namespace Emberhall
         {
             float width = name.preferredWidth + 28f;
             if (status) width = Mathf.Max(width, status.preferredWidth + (locked ? 48f : 28f));
-            return Mathf.Clamp(width, 170f, 270f);
+            return Mathf.Clamp(width, 190f, 300f);
         }
 
         // --------------------------------------------------------------------------------
+        bool Guided => Prefs.Hints && C.Quests.CurrentMain != null && C.Quests.CurrentMain.order <= 4;
+
         void PlaceVillage()
         {
             // Three airy terraces adapt to the smaller first-steps viewport. A building's
             // art, plaque and action badge stay in the same row, rather than colliding.
-            yardBottom = 268f;
+            yardBottom = Guided ? 36f : 268f;
             rowSpan = Mathf.Max(220f, (size.y - yardBottom - 126f) / 3f);
             houseHeight = Mathf.Min(330f, rowSpan - 24f);
             float back = yardBottom + rowSpan * 2f, middle = yardBottom + rowSpan;
@@ -127,19 +129,19 @@ namespace Emberhall
             Hud.Reg("bld_" + id, b.root);
             // plate
             b.plaqueShadow = U.Img(b.root, Boxes.Glow, new Color(.23f, .20f, .12f, .17f), "plaque_shadow"); b.plaqueShadow.At(.5f, 0, 0, -6, 210, 26, .5f, 0);
-            var plate = U.Img(b.root, PlaqueArt, Color.white, "plate", true); b.plaque = plate; plate.At(.5f, 0, 0, 0, 200, 76, .5f, 0);
+            var plate = U.Img(b.root, PlaqueArt, Color.white, "plate", true); b.plaque = plate; plate.At(.5f, 0, 0, 0, 200, 112, .5f, 0);
             var plateBtn = plate.gameObject.AddComponent<UButton>(); plateBtn.bg = plate; plateBtn.noTint = true; plateBtn.sfx = "pop"; plateBtn.onClick = () => OnBuildingTap(id);
-            b.plate = U.Txt(plate.transform, "", 33, Theme.TextDark, TextAnchor.MiddleCenter); b.plate.FitText(32); b.plate.StretchX(1, -3, 38, 12, 12);
+            b.plate = U.Txt(plate.transform, "", 33, Theme.TextDark, TextAnchor.MiddleCenter); b.plate.FitText(36); b.plate.StretchX(1, -5, 56, 12, 12);
             b.status = U.Txt(plate.transform, "", 28, Theme.TextDim, TextAnchor.MiddleCenter); b.status.FitText(27); b.status.StretchX(0, 4, 31, 12, 12);
             // progress
             float progressY = h * .52f;
             b.bar = U.ProgressBar(b.root, Theme.Accent, w * .8f, 28); b.bar.back.R().At(.5f, 0, 0, progressY, w * .8f, 28, .5f, .5f);
-            var timePlate = U.Box(b.root, Theme.PanelLight, Theme.ParchmentDark, "timer_plate"); timePlate.At(.5f, 0, 0, progressY + 39f, 150, 42, .5f, .5f);
+            var timePlate = U.Box(b.root, Theme.PanelLight, Theme.ParchmentDark, "timer_plate"); timePlate.At(.5f, 0, 0, progressY + 39f, 180, 64, .5f, .5f);
             b.timer = U.Txt(timePlate.transform, "", 30, Theme.TextDark, TextAnchor.MiddleCenter); b.timer.FitText(28); b.timer.Fill(8, 8, 2, 2);
             b.hammer = U.Icon(b.root, Icons.Get("hammer"), 52); b.hammer.At(.5f, 0, 0, progressY + 81f, 52, 52, .5f, .5f);
             b.lockIcon = U.Icon(plate.transform, Icons.Get("lock"), 24);
             // bubble
-            var bub = U.Box(b.root, Theme.PanelLight, Theme.Gold, "bubble", true); bub.At(.5f, 1, 0, -2, Mathf.Min(202f, w - 8f), 56, .5f, 1); b.bubble = bub.R();
+            var bub = U.Box(b.root, Theme.PanelLight, Theme.Gold, "bubble", true); bub.At(.5f, 1, 0, -2, 264f, 76, .5f, 1); b.bubble = bub.R();
             var bbtn = bub.gameObject.AddComponent<UButton>(); bbtn.bg = bub; bbtn.noTint = true; bbtn.onClick = () => OnBubbleTap(id);
             b.bubbleIcon = U.Icon(bub.transform, Icons.Get("coin"), 34); b.bubbleIcon.At(0, .5f, 10, 0, 34, 34, 0, .5f);
             b.bubbleText = U.Txt(bub.transform, "", 29, Theme.TextDark, TextAnchor.MiddleCenter); b.bubbleText.FitText(27); b.bubbleText.Fill(46, 8, 6, 6);
@@ -158,7 +160,7 @@ namespace Emberhall
             var ub = hit.gameObject.AddComponent<UButton>(); ub.bg = hit; ub.noTint = true; ub.sfx = "pop"; ub.onClick = () => { Bag.OpenTab = 2; Hud.Targets.Remove("x"); App.I.hud.GoTab(Hud.Tab.Bag); };
             var plate = U.Img(root, PlaqueArt, Color.white, "plate"); plate.At(.5f, 0, 0, 5, 170, 58, .5f, 0);
             var t = U.Txt(plate.transform, L.T("Market"), 33, Theme.TextDark, TextAnchor.MiddleCenter); t.FitText(32); t.Fill(12, 12, 6, 6);
-            plate.Sz(PlaqueWidth(t), 58);
+            plate.Sz(PlaqueWidth(t), 76);
             tag(root, feet);
         }
 
@@ -207,7 +209,7 @@ namespace Emberhall
             }
             b.lockIcon.gameObject.SetActive(lv == 0 && !unlocked);
             float plaqueWidth = PlaqueWidth(b.plate, b.status, lv == 0 && !unlocked);
-            b.plaque.Sz(plaqueWidth, 76); b.plaqueShadow.Sz(plaqueWidth + 16, 26);
+            b.plaque.Sz(plaqueWidth, 112); b.plaqueShadow.Sz(plaqueWidth + 16, 26);
             if (lv == 0 && !unlocked)
             {
                 float statusWidth = Mathf.Min(b.status.preferredWidth + 4f, plaqueWidth - 48f);
@@ -232,7 +234,7 @@ namespace Emberhall
                 if (b.id == "treasury" && lv > 0 && C.Vault.Pending >= Math.Max(5, C.Vault.Capacity * 0.25)) { icon = "coin"; txt = Util.Num(C.Vault.Pending); show = true; }
                 else if (b.id == "tavern" && C.Recruiter.Pool.Any(p => C.Recruiter.CanHire(p)) && C.Roster.Count < 4) { icon = "heroes"; txt = L.T("Hire"); show = true; }
                 else if (b.id == "infirmary" && lv > 0 && C.Roster.All.Any(u => C.Roster.HpFrac(u) < 0.5 && !C.Roster.IsBusy(u))) { icon = "hp"; txt = L.T("Heal"); show = true; }
-                else if (lv > 0 && C.Upgrades.CanStart(def)) { icon = "arrow_u"; txt = L.T("Upgrade"); show = true; }
+                else if (lv > 0 && C.Quests.CurrentMain?.hint == "bld_" + b.id && C.Upgrades.CanStart(def)) { icon = "arrow_u"; txt = L.T("Upgrade"); show = true; }
                 else if (lv == 0 && unlocked && C.Upgrades.CanStart(def)) { icon = "hammer"; txt = L.T("Build"); show = true; }
             }
             if (show)
@@ -273,10 +275,10 @@ namespace Emberhall
 
         void BuildTracker()
         {
-            var p = U.Box(scene, Theme.PanelLight, Theme.ParchmentDark, "tracker", true); p.At(.5f, 0, 0, 16, size.x - 36, 220, .5f, 0);
+            var p = U.Box(scene, Theme.PanelLight, Theme.ParchmentDark, "tracker", true); p.At(.5f, 0, 0, 16, size.x - 36, 252, .5f, 0);
             float textWidth = size.x - 318f;
             trackTitle = U.Txt(p.transform, "", 38, Theme.TextDark, TextAnchor.MiddleCenter); trackTitle.FitText(34); trackTitle.At(0, 1, 20, -10, textWidth, 44, 0, 1);
-            trackDesc = U.Txt(p.transform, "", 32, Theme.Text, TextAnchor.MiddleCenter, false, true); trackDesc.At(0, 1, 20, -58, textWidth, 106, 0, 1);
+            trackDesc = U.Txt(p.transform, "", 32, Theme.Text, TextAnchor.MiddleCenter, false, true); trackDesc.At(0, 1, 20, -76, textWidth, 112, 0, 1);
             trackDesc.verticalOverflow = VerticalWrapMode.Truncate;
             trackBar = U.ProgressBar(p.transform, Theme.Green, textWidth, 36, "", 29); trackBar.label.FitText(27); trackBar.back.R().At(0, 0, 20, 12, textWidth, 36, 0, 0);
             trackBtn = U.Btn(p.transform, L.T("GO"), Theme.Green, OnTrack, 224, 104, 38); trackBtn.label.FitText(34); trackBtn.At(1, .5f, -20, 0, 224, 104, 1, .5f);
@@ -286,11 +288,12 @@ namespace Emberhall
 
         void RefreshTracker()
         {
-            var q = C.Quests.CurrentMain; var p = trackTitle.transform.parent;
+            if (!trackTitle) return;
+            var q = C.Quests.CurrentMain;
             if (q == null) { trackTitle.text = L.T("Guild Master"); trackDesc.text = L.T("The main story is complete. Keep climbing the Spire!"); trackBar.Value = 1; trackBtn.gameObject.SetActive(false); return; }
             bool ready = C.Quests.State(q.id) == QuestSystem.Ready;
             trackTitle.text = L.T(q.title);
-            trackDesc.text = L.T(q.order <= 4 || string.IsNullOrEmpty(q.story) ? q.desc : q.story);
+            trackDesc.text = L.T(q.desc);
             trackBar.Value = C.Quests.Fraction(q);
             var g = q.goals[0]; double cur = Math.Min(g.target, C.Quests.Progress(q, g)); trackBar.label.text = $"{Util.Num(cur)}/{Util.Num(g.target)}  {L.T(g.text ?? "")}";
             trackBtn.gameObject.SetActive(true);

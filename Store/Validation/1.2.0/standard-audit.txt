@@ -1,0 +1,403 @@
+Screenshots: 89; checked texts: 2990; layout issues: 0; flow checks: 312; failed flow checks: 0; comprehensive verification: True
+Fitted text uses its rendered font size. Fully clipped scroll content is excluded. A 2-unit tolerance avoids pixel-rounding noise.
+PASS v_default_english_entry | A verification install starts in English before the tour makes any language selection.
+PASS onboarding_continue_1 | Advance the onboarding through its actual footer button.
+PASS onboarding_continue_2 | Advance the onboarding through its actual footer button.
+PASS onboarding_continue_3 | Advance the onboarding through its actual footer button.
+PASS onboarding_continue_4 | Advance the onboarding through its actual footer button.
+PASS charter_name_input | The charter must contain an editable guild name.
+PASS starter_choice_click | Select Archer through the actual starter-card click handler.
+PASS charter_begin_click | Start through the actual charter footer button.
+PASS charter_values_applied | The game must create the named guild with exactly the selected Archer starter.
+PASS open_starting_tavern | Open the Tavern from the hall's real building button.
+PASS affordable_hire_click | Tap the game's enabled hire button, without adding gold or changing candidate prices.
+PASS starting_hire_spends_gold | Heroes 1 → 2; gold 600 → 570.
+PASS open_first_quest_reward | The first-steps guide opens the completed hire quest's reward.
+PASS claim_first_quest | Claim the earned reward through its button.
+PASS open_starting_board | Use the real Board navigation button.
+PASS open_first_party | The first campaign mission's button must open party preparation.
+PASS party_member_toggle | Tap a party hero row to remove its auto-selected member.
+PASS party_selection_updates | Visible 'In party' labels 2 → 1.
+PASS party_member_restore_click | Tap the actual hero row again to restore the first party.
+PASS party_selection_restores | Selecting the hero again restores the ready party and enables FIGHT.
+PASS first_fight_click | Start the first battle through the real FIGHT button, with the recruited party and original resources.
+PASS first_battle_screen | FIGHT must navigate to the live battle screen.
+PASS first_battle_finishes | The real starting battle must show its result within 60 seconds.
+PASS first_battle_victory | The recruited starting party must win Slime Meadow and record the first clear.
+PASS first_result_return_click | Use the actual result button that returns to the Board.
+PASS first_result_returns_board | Leaving the result must restore the Board and its next-step guidance.
+PASS q_m02_ready | The completed chapter must be current and ready before its reward can be claimed.
+PASS q_m02_coach_reward_click | Use the visible guidance card's CLAIM REWARD action.
+PASS q_m02_claim_click | Claim the earned chapter reward through the reward popup's actual button.
+PASS first_bag_tab_click | Navigate to the Bag through its actual bottom-tab button.
+PASS first_auto_equip_click | Use the Bag's actual auto-equip action to fit the best owned gear.
+PASS first_equip_quest_ready | The equipment chapter must recognize the owned and equipped starting gear.
+PASS q_m03_ready | The completed chapter must be current and ready before its reward can be claimed.
+PASS q_m03_coach_reward_click | Use the visible guidance card's CLAIM REWARD action.
+PASS q_m03_claim_click | Claim the earned chapter reward through the reward popup's actual button.
+PASS first_fourth_chapter_unlocks | Claiming the equipment reward must unlock the fourth chapter with an actionable next mission.
+PASS first_journal_open | The Journal tab opens from the quest page.
+PASS first_journal_history | The journal preserves the completed opening chapter's authored story.
+PASS first_journal_no_spoilers | Unreached story chapters remain hidden.
+PASS first_journal_return_story | The Story tab returns to the current actionable quest.
+PASS first_return_hall_tab | Return to the Hall using the actual navigation tab.
+PASS v_menu_open | The HUD menu must open its actual menu panel.
+PASS v_settings_open | Open Settings through the menu action.
+PASS v_audio_sliders_present | Both music and sound effect sliders must be available.
+PASS v_audio_sliders_apply | Slider value-change events must update both audio preferences.
+PASS v_toggle_0 | The Vibration switch must update its setting.
+PASS v_toggle_restore_0 | Restore the original switch setting through the same control.
+PASS v_toggle_1 | The Tutorial hints switch must update its setting.
+PASS v_toggle_restore_1 | Restore the original switch setting through the same control.
+PASS v_toggle_2 | The Battle effects switch must update its setting.
+PASS v_toggle_restore_2 | Restore the original switch setting through the same control.
+PASS v_frame_rate_click | The 30 FPS control must apply the running frame rate.
+PASS v_frame_rate_restore | Restore the original frame rate through its control.
+PASS v_language_indonesian_click | Manual Indonesian selection must update the language and its persisted preference.
+PASS v_language_keeps_screen | Changing language must preserve the open game page and translate the settings panel.
+PASS v_language_english_click | Manual English selection must restore English and save the preference.
+PASS v_hud_language_updates | Persistent navigation labels must follow the language change.
+PASS v_reset_confirmation_open | Reset opens an explicit confirmation before changing progress.
+PASS v_reset_cancel_preserves_guild | Cancel must preserve the test guild, roster, and current session.
+PASS v_settings_close | The popup's close control must dismiss its own panel.
+PASS v_about_menu_open | About must open through the actual menu action.
+PASS v_about_close | The popup's close control must dismiss its own panel.
+PASS v_later_game_fixture | After the real first loop, test-only Rank D and resources unlock later controls; the player's save and preferences use separate test slots.
+PASS v_hall_navigation_blacksmith | Use the Hall navigation tab before opening a facility.
+PASS v_facility_open_blacksmith | The hall building control must open the matching facility page.
+PASS v_build_blacksmith | BUILD must charge the facility cost and create its pending construction timer.
+PASS v_build_blacksmith_pending | The action must create a real pending timer before completion.
+PASS v_build_blacksmith_finish_click | Complete the timer through its visible gem speed-up button.
+PASS v_build_blacksmith_finished | The timer completed and gems were charged once (1, displayed cost 1).
+PASS v_build_level_blacksmith | Completing construction unlocks the facility's tools and clears the build timer.
+PASS v_facility_back_blacksmith | The facility's back arrow returns to the Hall.
+PASS v_hall_navigation_training | Use the Hall navigation tab before opening a facility.
+PASS v_facility_open_training | The hall building control must open the matching facility page.
+PASS v_build_training | BUILD must charge the facility cost and create its pending construction timer.
+PASS v_build_training_pending | The action must create a real pending timer before completion.
+PASS v_build_training_finish_click | Complete the timer through its visible gem speed-up button.
+PASS v_build_training_finished | The timer completed and gems were charged once (1, displayed cost 1).
+PASS v_build_level_training | Completing construction unlocks the facility's tools and clears the build timer.
+PASS v_facility_back_training | The facility's back arrow returns to the Hall.
+PASS v_hall_navigation_infirmary | Use the Hall navigation tab before opening a facility.
+PASS v_facility_open_infirmary | The hall building control must open the matching facility page.
+PASS v_build_infirmary | BUILD must charge the facility cost and create its pending construction timer.
+PASS v_build_infirmary_pending | The action must create a real pending timer before completion.
+PASS v_build_infirmary_finish_click | Complete the timer through its visible gem speed-up button.
+PASS v_build_infirmary_finished | The timer completed and gems were charged once (1, displayed cost 1).
+PASS v_build_level_infirmary | Completing construction unlocks the facility's tools and clears the build timer.
+PASS v_facility_back_infirmary | The facility's back arrow returns to the Hall.
+PASS v_hall_navigation_barracks | Use the Hall navigation tab before opening a facility.
+PASS v_facility_open_barracks | The hall building control must open the matching facility page.
+PASS v_build_barracks | BUILD must charge the facility cost and create its pending construction timer.
+PASS v_build_barracks_pending | The action must create a real pending timer before completion.
+PASS v_build_barracks_finish_click | Complete the timer through its visible gem speed-up button.
+PASS v_build_barracks_finished | The timer completed and gems were charged once (1, displayed cost 1).
+PASS v_build_level_barracks | Completing construction unlocks the facility's tools and clears the build timer.
+PASS v_facility_back_barracks | The facility's back arrow returns to the Hall.
+PASS v_hall_navigation_treasury | Use the Hall navigation tab before opening a facility.
+PASS v_facility_open_treasury | The hall building control must open the matching facility page.
+PASS v_build_treasury | BUILD must charge the facility cost and create its pending construction timer.
+PASS v_build_treasury_pending | The action must create a real pending timer before completion.
+PASS v_build_treasury_finish_click | Complete the timer through its visible gem speed-up button.
+PASS v_build_treasury_finished | The timer completed and gems were charged once (1, displayed cost 1).
+PASS v_build_level_treasury | Completing construction unlocks the facility's tools and clears the build timer.
+PASS v_facility_back_treasury | The facility's back arrow returns to the Hall.
+PASS v_hall_navigation_library | Use the Hall navigation tab before opening a facility.
+PASS v_facility_open_library | The hall building control must open the matching facility page.
+PASS v_build_library | BUILD must charge the facility cost and create its pending construction timer.
+PASS v_build_library_pending | The action must create a real pending timer before completion.
+PASS v_build_library_finish_click | Complete the timer through its visible gem speed-up button.
+PASS v_build_library_finished | The timer completed and gems were charged once (1, displayed cost 1).
+PASS v_build_level_library | Completing construction unlocks the facility's tools and clears the build timer.
+PASS v_facility_back_library | The facility's back arrow returns to the Hall.
+PASS v_hall_navigation_tavern | Use the Hall navigation tab before opening a facility.
+PASS v_facility_open_tavern | The hall building control must open the matching facility page.
+PASS v_tavern_upgrade | UPGRADE starts the next Tavern level rather than rebuilding the existing level.
+PASS v_tavern_upgrade_pending | The action must create a real pending timer before completion.
+PASS v_tavern_upgrade_finish_click | Complete the timer through its visible gem speed-up button.
+PASS v_tavern_upgrade_finished | The timer completed and gems were charged once (1, displayed cost 1).
+PASS v_tavern_upgraded_level | The Tavern's upgrade must increase its level exactly once.
+PASS v_tavern_refresh | The recruitment refresh control replaces the displayed candidate pool.
+PASS v_tavern_refresh_cards | Every new recruit has a corresponding visible card after refresh.
+PASS v_beast_den_tab | The unlocked Beast Den tab must respond.
+PASS v_monster_tame | Taming adds exactly one unlocked monster to the roster.
+PASS v_monster_tame_card | The tamed monster's card must show its completed state.
+PASS v_hall_navigation_blacksmith | Use the Hall navigation tab before opening a facility.
+PASS v_facility_open_blacksmith | The hall building control must open the matching facility page.
+PASS v_forge_start | CRAFT must spend recipe resources and occupy a real forge slot.
+PASS v_forge_pending | The action must create a real pending timer before completion.
+PASS v_forge_finish_click | Complete the timer through its visible gem speed-up button.
+PASS v_forge_finished | The timer completed and gems were charged once (1, displayed cost 1).
+PASS v_forge_result | Finishing the forge adds the chosen recipe's gear and frees its slot.
+PASS v_enhance_tab | The Blacksmith enhancement tab must respond.
+PASS v_enhance_grid | The enhancement tab must display clickable owned gear.
+PASS v_hall_navigation_training | Use the Hall navigation tab before opening a facility.
+PASS v_facility_open_training | The hall building control must open the matching facility page.
+PASS v_training_picker | An empty training slot opens the hero picker.
+PASS v_training_start | Selecting the eligible hero occupies a slot and charges the training fee.
+PASS v_training_busy_heroes | A training hero remains visible in the roster.
+PASS v_training_busy_details | The busy hero's card still opens its status details.
+PASS v_training_busy_dismiss_blocked | A hero with active training cannot be dismissed or orphan its timer.
+PASS v_training_busy_details_close | The popup's close control must dismiss its own panel.
+PASS v_hall_navigation_training | Use the Hall navigation tab before opening a facility.
+PASS v_facility_open_training | The hall building control must open the matching facility page.
+PASS v_training_pending | The action must create a real pending timer before completion.
+PASS v_training_finish_click | Complete the timer through its visible gem speed-up button.
+PASS v_training_finished | The timer completed and gems were charged once (1, displayed cost 1).
+PASS v_training_result | Training completion grants experience and releases the hero.
+PASS v_hall_navigation_infirmary | Use the Hall navigation tab before opening a facility.
+PASS v_facility_open_infirmary | The hall building control must open the matching facility page.
+PASS v_healing_picker | An empty Infirmary bed opens injured hero selection.
+PASS v_healing_start | Choosing an injured hero starts the healing timer.
+PASS v_healing_pending | The action must create a real pending timer before completion.
+PASS v_healing_finish_click | Complete the timer through its visible gem speed-up button.
+PASS v_healing_finished | The timer completed and gems were charged once (2, displayed cost 2).
+PASS v_healing_result | Completed healing restores full health and makes the hero available.
+PASS v_hall_navigation_library | Use the Hall navigation tab before opening a facility.
+PASS v_facility_open_library | The hall building control must open the matching facility page.
+PASS v_research_start | The Library's research action starts an unlocked research timer.
+PASS v_research_pending | The action must create a real pending timer before completion.
+PASS v_research_finish_click | Complete the timer through its visible gem speed-up button.
+PASS v_research_finished | The timer completed and gems were charged once (1, displayed cost 1).
+PASS v_research_result | Completing research applies its first level and clears the scholar slot.
+PASS v_hall_navigation_treasury | Use the Hall navigation tab before opening a facility.
+PASS v_facility_open_treasury | The hall building control must open the matching facility page.
+PASS v_treasury_collect | The visible COLLECT control credits accumulated gold and resets the vault balance.
+PASS v_gear_open_bag | Open Bag through the actual navigation tab.
+PASS v_gear_open_item | The inventory cell must open the matching item detail panel.
+PASS v_item_lock | Lock must protect the selected gear.
+PASS v_locked_sell_blocked | A locked item's sale control must be disabled and its guarded click must leave the item and gold intact.
+PASS v_item_unlock | Unlock must restore availability of the item actions.
+PASS v_item_equip_picker | The item's Equip action must open hero selection.
+PASS v_item_equip | Selecting the compatible Archer equips this exact item and updates both owner and weapon slot.
+PASS v_heroes_navigation | Open the Heroes tab.
+PASS v_hero_detail_open | The hero card must open its hero details.
+PASS v_weapon_picker_open | The hero's weapon slot opens the compatible equipment picker.
+PASS v_unequip_click | Unequip must clear the owner and hero weapon slot without destroying gear.
+PASS v_hero_detail_refresh | The still-open hero details must redraw the empty equipment slot after unequipping.
+PASS v_hero_close | The popup's close control must dismiss its own panel.
+PASS v_enhance_open_bag | Open Bag through the actual navigation tab.
+PASS v_enhance_open_item | The inventory cell must open the matching item detail panel.
+PASS v_enhance_click | The guaranteed first enhancement must improve gear and charge both gold and ore once.
+PASS v_salvage_confirmation | Salvage requires an explicit confirmation panel.
+PASS v_salvage_cancel | Cancel preserves the enhanced item.
+PASS v_salvage_confirm | Confirming salvage removes the item and adds the displayed salvage materials.
+PASS v_sell_open_bag | Open Bag through the actual navigation tab.
+PASS v_sell_open_item | The inventory cell must open the matching item detail panel.
+PASS v_sell_item | Selling free gear removes the exact item and pays its displayed gold value once.
+PASS v_sold_item_removed_from_bag | The redrawn Bag cell count must match the remaining inventory after the sale.
+PASS v_items_tab | The Bag Items tab must switch to material and consumable stacks.
+PASS v_potion_detail_open | The potion stack cell must open its stack details.
+PASS v_potion_use_picker | Use must ask which hero receives the potion.
+PASS v_potion_use | Using a potion must consume exactly one potion and heal the selected hero.
+PASS v_material_detail_open | The actual ore stack cell must open its material details.
+PASS v_stack_sell_one | Sell 1 must consume one material and credit its gold value.
+PASS v_stack_close | The popup's close control must dismiss its own panel.
+PASS v_market_tab | The Market tab must display merchant offers.
+PASS v_market_purchase | Buying an offer must consume the displayed currency, add its full quantity, and mark it sold.
+PASS v_contract_board_tab | Open Board from the actual navigation control.
+PASS v_contracts_tab | The Contracts tab must display expedition controls.
+PASS v_contract_refresh | Refresh spends the shown gems and replaces the contract board.
+PASS v_contract_1_party_open | The current contract's SEND action opens party preparation.
+PASS v_contract_1_auto | Auto must select an available party for the contract.
+PASS v_contract_1_send | The real SEND button starts exactly one expedition.
+PASS v_contract_1_heroes_busy | All departing party members are busy and their forecast is captured at departure.
+PASS v_contract_1_speedup_open | The expedition's gem control opens speed-up details.
+PASS v_contract_1_speedup_finish | Finishing an expedition charges gems and marks it returned without claiming its rewards.
+PASS v_contract_1_claim | The returned expedition's CLAIM button grants its result once and removes the claimed timer, including the second consecutive expedition.
+PASS v_contract_1_heroes_returned | Claiming releases every party member.
+PASS v_contract_1_result_continue | The expedition result's Continue action closes the result panel.
+PASS v_contract_2_party_open | The current contract's SEND action opens party preparation.
+PASS v_contract_2_auto | Auto must select an available party for the contract.
+PASS v_contract_2_send | The real SEND button starts exactly one expedition.
+PASS v_contract_2_heroes_busy | All departing party members are busy and their forecast is captured at departure.
+PASS v_contract_2_speedup_open | The expedition's gem control opens speed-up details.
+PASS v_contract_2_speedup_finish | Finishing an expedition charges gems and marks it returned without claiming its rewards.
+PASS v_contract_2_claim | The returned expedition's CLAIM button grants its result once and removes the claimed timer, including the second consecutive expedition.
+PASS v_contract_2_heroes_returned | Claiming releases every party member.
+PASS v_contract_2_result_continue | The expedition result's Continue action closes the result panel.
+PASS v_daily_menu_open | Daily Reward opens from the menu.
+PASS v_daily_claim | Claiming today's reward records the daily claim.
+PASS v_daily_rewards_paid | Each advertised daily reward is paid in full.
+PASS v_daily_duplicate_disabled | The claimed day must no longer offer a second claim button.
+PASS v_daily_close | The popup's close control must dismiss its own panel.
+PASS v_event_choice | The merchant choice charges 100 gold, grants two potions, and records the resolved event.
+PASS v_event_continue | A resolved story event closes through Continue.
+PASS v_promotion_heroes_tab | Open Heroes for promotion.
+PASS v_promotion_details | The promoted hero's details open from the real roster card.
+PASS v_promotion_panel | The eligible hero's Promote action opens its cost and effect panel.
+PASS v_promotion_confirm | Promotion raises this hero's promotion and power, pays its cost, and returns to hero details.
+PASS v_promotion_parent_refresh | The parent hero details must display its new promotion mark without reopening.
+PASS v_promotion_hero_close | The popup's close control must dismiss its own panel.
+PASS v_hall_navigation_infirmary | Use the Hall navigation tab before opening a facility.
+PASS v_facility_open_infirmary | The hall building control must open the matching facility page.
+PASS v_readiness_heal_picker | Prepare the live healing-readiness scenario through an actual Infirmary bed.
+PASS v_readiness_heal_start | The wounded hero begins healing through selection.
+PASS v_readiness_board | Navigate away while the healing timer runs.
+PASS v_readiness_campaign | Switch back to campaign missions.
+PASS v_readiness_party_open | Open an existing campaign mission while every hero is still unavailable.
+PASS v_readiness_recovery_prompt | With no ready heroes, party preparation must show its recovery action.
+PASS v_readiness_live_refresh | Natural healing completion must replace the recovery action with FIGHT while the same party dialog remains open.
+PASS v_party_auto_after_heal | Auto must select the newly healed hero.
+PASS v_party_assault_plan | The Assault battle plan is selectable.
+PASS v_party_assault_description | Selecting Assault must update the real plan description.
+PASS v_party_guard_plan | The Guard battle plan is selectable.
+PASS v_live_battle_start | FIGHT starts a live battle using the prepared party and selected Guard doctrine.
+PASS v_battle_hardware_back | The same hardware Back handler used by Escape/Android Back must keep the active battle and show the skip guidance.
+PASS v_battle_speed_2 | The battle speed control must update both preference and current animation timing.
+PASS v_battle_speed_3 | The battle speed control must update both preference and current animation timing.
+PASS v_battle_speed_1 | The battle speed control must update both preference and current animation timing.
+PASS v_battle_pause | Pause freezes battle playback and animation timing.
+PASS v_battle_paused_actions | No combat action advances while paused.
+PASS v_battle_paused_speed | Changing the selected speed must keep a paused battle paused.
+PASS v_battle_resume | Resume restores the selected battle speed.
+PASS v_battle_pause_before_skip | Pause again to verify Skip can finish a paused battle.
+PASS v_battle_skip | SKIP must finish the active battle through its actual button.
+PASS v_battle_skip_result | Skipping awards the real simulation's victory exactly once and restores normal interface timing.
+PASS v_result_retry | Retry returns to Board and opens a fresh preparation panel for the same mission.
+PASS v_retry_fight | The retry preparation can start its next live battle.
+PASS v_retry_skip | The retried battle retains its working skip control.
+PASS v_retry_result_once | The retry result adds one further clear, with no duplicate completion.
+PASS v_result_next | Next opens preparation for the unlocked next mission.
+PASS v_result_next_target | The Next panel must show the next mission's actual name.
+PASS v_next_party_close | The popup's close control must dismiss its own panel.
+PASS v_spire_tab | Rank D unlocks the Endless Spire tab.
+PASS v_spire_party | Climb opens the next floor's real party preparation.
+PASS v_spire_fight | The prepared Spire party can start and finish its floor.
+PASS v_spire_floor_recorded | Winning the first floor records the climb and offers the next floor.
+PASS v_spire_next | Spire Next opens preparation for floor two.
+PASS v_spire_next_close | The popup's close control must dismiss its own panel.
+PASS v_rank_panel | The rank indicator opens the guild promotion ladder.
+PASS v_rank_exam_party | An eligible guild can open its rank exam through the promotion panel.
+PASS v_rank_exam_fight | Rank exams use the same working party and battle controls.
+PASS v_rank_exam_passed | The won exam unlocks promotion and persists its clear.
+PASS v_rank_exam_back | Return from the exam result.
+PASS v_rank_promote_open | Reopen rank details after completing the exam.
+PASS v_rank_promote | Promotion raises the guild rank once and displays its celebration.
+PASS v_rank_celebration_close | The rank celebration closes through its actual action.
+PASS v_dismiss_heroes_tab | Open the roster after completed tasks and battles.
+PASS v_dismiss_auto_equip | Equip owned gear before checking its return on dismissal.
+PASS v_dismiss_3_details | Open an available spare hero's details from the actual roster card.
+PASS v_dismiss_3_confirmation | Dismiss hero must request confirmation before removing anyone.
+PASS v_dismiss_3_cancel | Cancel keeps the exact hero and its equipped items.
+PASS v_dismiss_3_confirm | Confirm removes exactly the selected available spare hero in the isolated test save.
+PASS v_dismiss_3_gear_returned | Every previously equipped item remains in the Bag with its owner cleared.
+PASS v_dismiss_3_roster_refresh | The roster removes the dismissed hero's card when the details close.
+PASS v_dismiss_2_details | Open an available spare hero's details from the actual roster card.
+PASS v_dismiss_2_confirmation | Dismiss hero must request confirmation before removing anyone.
+PASS v_dismiss_2_cancel | Cancel keeps the exact hero and its equipped items.
+PASS v_dismiss_2_confirm | Confirm removes exactly the selected available spare hero in the isolated test save.
+PASS v_dismiss_2_gear_returned | Every previously equipped item remains in the Bag with its owner cleared.
+PASS v_dismiss_2_roster_refresh | The roster removes the dismissed hero's card when the details close.
+PASS v_last_hero_details | The final hero's details remain accessible.
+PASS v_last_hero_dismiss_blocked | The final hero cannot be dismissed, so the guild always retains a playable hero.
+PASS v_last_hero_close | The popup's close control must dismiss its own panel.
+PASS v_save_menu_open | Open the save action through Hall and the real menu.
+PASS v_save_exit_click | Save & exit must write the isolated verification save and return to the title.
+PASS v_new_game_confirmation | NEW GAME must show a confirmation while a save exists.
+PASS v_new_game_cancel | Cancel keeps the existing save and title screen.
+PASS v_story_replay | The title's story action opens the cinematic replay.
+PASS v_story_auto_toggle | The story playback toggle changes and restores automatic advance without restarting the scene.
+PASS v_story_close | Closing the replay returns to title while preserving the guild save.
+PASS v_continue_saved_guild | The real CONTINUE control loads the saved guild and returns to Hall.
+PASS v_saved_wallet | Both gold and gems must restore exactly after save, title, and Continue.
+PASS v_saved_guild_roster | The named guild, rank, exact hero identities and promotions must survive loading.
+PASS v_saved_inventory_equipment | Owned gear, enhancement, locks, material stacks, and hero equipment must survive loading exactly.
+PASS v_saved_facilities_market_daily | All built facilities and research, sold market offers, claimed daily reward and completed opening quests must remain recorded.
+PASS v_saved_language_english | The explicitly selected English language must remain active after Continue.
+PASS v_external_actions_present | Share and Rate controls are present; native external share/rating actions are intentionally excluded from unattended verification.
+PASS v_external_panel_close | The popup's close control must dismiss its own panel.
+PASS id_onboarding_continue_1 | Advance the onboarding through its actual footer button.
+PASS id_onboarding_continue_2 | Advance the onboarding through its actual footer button.
+PASS id_onboarding_continue_3 | Advance the onboarding through its actual footer button.
+PASS id_onboarding_continue_4 | Advance the onboarding through its actual footer button.
+00_splash [en]: 0 issues
+01_title [en]: 0 issues
+02_onboard1 [en]: 0 issues
+03_onboard2 [en]: 0 issues
+04_onboard3 [en]: 0 issues
+05_onboard4 [en]: 0 issues
+06_onboard5 [en]: 0 issues
+06b_onboard_archer [en]: 0 issues
+07_hall [en]: 0 issues
+07b_first_tavern [en]: 0 issues
+07c_first_hire_ready [en]: 0 issues
+07d_first_hire_complete [en]: 0 issues
+07e_first_quest_reward [en]: 0 issues
+07f_first_board [en]: 0 issues
+07g_first_party [en]: 0 issues
+07h_first_party_changed [en]: 0 issues
+07i_first_party_restored [en]: 0 issues
+07j_first_battle [en]: 0 issues
+07k_first_victory [en]: 0 issues
+07l_first_win_quest_ready [en]: 0 issues
+07l_first_win_quest_reward [en]: 0 issues
+07m_first_bag [en]: 0 issues
+07n_first_equipped [en]: 0 issues
+07o_first_equip_quest_ready [en]: 0 issues
+07o_first_equip_quest_reward [en]: 0 issues
+07p_first_next_chapter [en]: 0 issues
+07q_story_journal [en]: 0 issues
+verify_01_settings_id [id]: 0 issues
+verify_02_built_blacksmith [en]: 0 issues
+verify_02_built_training [en]: 0 issues
+verify_02_built_infirmary [en]: 0 issues
+verify_02_built_barracks [en]: 0 issues
+verify_02_built_treasury [en]: 0 issues
+verify_02_built_library [en]: 0 issues
+verify_03_forge_active [en]: 0 issues
+verify_04_training_done [en]: 0 issues
+verify_05_research_done [en]: 0 issues
+verify_06_enhanced_item [en]: 0 issues
+verify_07_market_sold [en]: 0 issues
+verify_08_contract_result_1 [en]: 0 issues
+verify_08_contract_result_2 [en]: 0 issues
+verify_09_daily_claimed [en]: 0 issues
+verify_10_event_outcome [en]: 0 issues
+verify_11_live_battle [en]: 0 issues
+verify_11b_battle_paused [en]: 0 issues
+verify_12_skip_result [en]: 0 issues
+verify_15_spire [en]: 0 issues
+verify_16_spire_party [en]: 0 issues
+verify_17_spire_result [en]: 0 issues
+verify_18_rank_exam [en]: 0 issues
+verify_19_rank_up [en]: 0 issues
+verify_12a_dismiss_confirmation_3 [en]: 0 issues
+verify_12a_dismiss_confirmation_2 [en]: 0 issues
+verify_12b_last_hero [en]: 0 issues
+verify_13_saved_title [en]: 0 issues
+verify_14_restored_hall [en]: 0 issues
+08_hall_rich [en]: 0 issues
+09_heroes [en]: 0 issues
+10_hero_popup [en]: 0 issues
+11_board [en]: 0 issues
+12_party [en]: 0 issues
+13_contracts [en]: 0 issues
+14_bag [en]: 0 issues
+15_market [en]: 0 issues
+16_item [en]: 0 issues
+17_quests [en]: 0 issues
+18_tavern [en]: 0 issues
+19_blacksmith [en]: 0 issues
+20_training [en]: 0 issues
+21_battle_a [en]: 0 issues
+22_battle_b [en]: 0 issues
+23_battle_c [en]: 0 issues
+24_result [en]: 0 issues
+25_settings [en]: 0 issues
+26_about [en]: 0 issues
+27_rank [en]: 0 issues
+28_daily [en]: 0 issues
+29_event [en]: 0 issues
+id_09_heroes [id]: 0 issues
+id_11_board [id]: 0 issues
+id_12_party [id]: 0 issues
+id_16_item [id]: 0 issues
+id_25_settings [id]: 0 issues
+id_01_title [id]: 0 issues
+id_02_onboard1 [id]: 0 issues
+id_03_onboard2 [id]: 0 issues
+id_04_onboard3 [id]: 0 issues
+id_05_onboard4 [id]: 0 issues
+id_06_onboard5 [id]: 0 issues

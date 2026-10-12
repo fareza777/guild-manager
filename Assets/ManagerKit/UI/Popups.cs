@@ -10,7 +10,8 @@ namespace ManagerKit.UI
     {
         public RectTransform Root, Panel, Body, Footer; public Text TitleText; public CanvasGroup Group; public Image Dim;
         U.Scroll scroll;
-        float heightLimit, bodyChrome;
+        RectTransform header, bodyArea;
+        float heightLimit, bodyChrome, headerTop, headerHeight = 108;
         public virtual string Title => "";
         public virtual float Width => 1024;
         /// <summary>Maximum panel height in canvas px; &lt;=0 uses the safe screen height. Short scrolling bodies fit their content.</summary>
@@ -43,6 +44,7 @@ namespace ManagerKit.UI
             float edge = framed ? Mathf.Min(64f, LuxArt.PanelInset) : 0f;
             float side = framed ? edge * 0.72f : 0f;
             float headTop = framed ? edge * (ShowClose ? 0.8f : 0.55f) : 0f;
+            headerTop = headTop;
             Canvas.ForceUpdateCanvases();
             var available = h.safe.rect.size;
             if (available.x <= 0 || available.y <= 0) available = UiHost.CanvasSize;
@@ -52,6 +54,7 @@ namespace ManagerKit.UI
             Panel.At(0.5f, 0.5f, 0, 0, Mathf.Min(Width, available.x - 48f), hh);
             LuxArt.Raise(Panel.GetComponent<Graphic>(), 16f, 0.55f);
             var head = U.Box(Panel, Color.Lerp(Tint, Theme.Inset, 0.4f), Theme.Gold, "head", false, framed ? 0.05f : 0.18f).R();
+            header = head;
             head.anchorMin = new Vector2(0, 1); head.anchorMax = new Vector2(1, 1); head.pivot = new Vector2(0.5f, 1);
             head.offsetMin = new Vector2(side, -(headTop + 108)); head.offsetMax = new Vector2(-side, -headTop);
             float titleSide = ShowClose ? 120f : 28f;
@@ -73,8 +76,10 @@ namespace ManagerKit.UI
             float botPad = footBot + footH + (framed ? edge * 0.28f : 14f);
             bodyChrome = topPad + botPad;
             var area = U.Rt(Panel, "area"); area.Fill(Mathf.Max(24f, side * 0.65f), Mathf.Max(24f, side * 0.65f), topPad, botPad);
+            bodyArea = area;
             if (UseScroll) { scroll = U.ScrollV(area, 16, new RectOffset(20, 20, 16, 30)); Body = scroll.content; }
             else Body = U.Rt(area, "body").Fill();
+            FitHeader();
             BuildAll();
             FitBodyHeight();
             if (framed)
@@ -108,9 +113,22 @@ namespace ManagerKit.UI
         {
             Dirty = false; float pos = scroll != null ? scroll.Pos : 0;
             if (TitleText) TitleText.text = L.T(Title);
+            FitHeader();
             BuildAll();
             FitBodyHeight();
             if (scroll != null) { Canvas.ForceUpdateCanvases(); U.Rebuild(scroll.content); scroll.Pos = Mathf.Clamp(pos, 0, Mathf.Max(0, scroll.content.rect.height - scroll.view.rect.height)); }
+        }
+
+        void FitHeader()
+        {
+            if (!TitleText || !header || !bodyArea) return;
+            Canvas.ForceUpdateCanvases();
+            float needed = Mathf.Max(108, TitleText.preferredHeight + 16);
+            float change = needed - headerHeight;
+            if (Mathf.Abs(change) < .1f) return;
+            header.offsetMin = new Vector2(header.offsetMin.x, -(headerTop + needed));
+            bodyArea.offsetMax += new Vector2(0, -change);
+            bodyChrome += change; headerHeight = needed;
         }
     }
 

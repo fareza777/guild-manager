@@ -1,5 +1,24 @@
 # Emberhall polish — 7 October 2026
 
+## Version 1.2.0 — 12 October 2026
+
+- Replaced the thin pixel UI font with Lato; increased body, label, resource, badge and rich-text sizes. Raised the
+  fitting floor to 36 reference units and gave text enough height inside its controls.
+- Reworked the opening guide, charter, long-name party slots, roster, stat panels, contracts, chapter rewards and
+  result cards around readable centered text. Kept building name plaques compact.
+- Simplified heavy panel borders and ornate buttons, removed the duplicate first-steps Hall tracker and reduced
+  routine upgrade badges. Shortened prologue copy, enlarged its illustration area and used painted facility banners.
+- Added a bright painted Lantern Road panorama. Reused it in the prologue, Campaign, Spire, Journal and chapter rewards.
+- Wrote a connected 25-chapter journey about the five beacon lenses, Maren's family and the roads between villages.
+  Added a Journal that shows reached chapters and short actionable current-quest instructions in English and Indonesian.
+- Made Auto party selection encounter-aware with bounded deterministic simulation, healthy/busy hero checks,
+  doctrine and synergy comparisons. Forecasting does not consume the campaign random sequence.
+- Added battle Pause/Resume, speed changes while paused and Skip from pause. Enlarged battle characters and synchronized
+  their sprite playback with battle timing.
+- Added core regression cases for recommended battle/expedition parties. Extended the real interface tour to verify
+  Journal history/no spoilers, pause/resume, Spire progression, rank exams, promotion and the rank celebration.
+- Updated the source version to **1.2.0** and Android version code to **5**. English remains the default language.
+
 ## Version 1.1.2 — English default and functionality
 
 - Made English the startup language on fresh installs and migrated older installs to English once. Subsequent manual

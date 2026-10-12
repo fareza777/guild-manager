@@ -30,10 +30,10 @@ namespace Emberhall
         {
             U.Clear(UiHost.I.back); GeneratedArt.Cover(UiHost.I.back, "splash", true);
             Brand.Logo(root, .86f).StretchX(1, -34, 310, 42, 42);
-            U.Btn(root, L.Lang == "id" ? "ID / EN" : "EN / ID", Theme.PanelLight, () => { Prefs.Lang = L.Lang == "id" ? "en" : "id"; L.Load(Prefs.Lang); Redraw(); }, 170, 58, 28).At(1, 1, -24, -20, 170, 58, 1, 1);
-            var tag = U.Box(root, Theme.PanelLight, Theme.Gold, "tagline", false, .06f); tag.StretchX(1, -350, 60, 160, 160);
+            U.Btn(root, L.Lang == "id" ? "ID / EN" : "EN / ID", Theme.PanelLight, () => { Prefs.Lang = L.Lang == "id" ? "en" : "id"; L.Load(Prefs.Lang); Redraw(); }, 210, 80, 28).At(1, 1, -24, -20, 210, 80, 1, 1);
+            var tag = U.Box(root, Theme.PanelLight, Theme.Gold, "tagline", false, .06f); tag.StretchX(1, -350, 132, 100, 100);
             U.Txt(tag.transform, StoryScript.Tagline, 30, Theme.Text).Fill(18, 18, 8, 8);
-            var menu = U.Box(root, Theme.PanelLight, Theme.Gold, "menu_card", false, .08f); menu.StretchX(0, 56, App.I.HasSave ? 524 : 400, 150, 150);
+            var menu = U.Box(root, Theme.PanelLight, Theme.Gold, "menu_card", false, .08f); menu.StretchX(0, 56, App.I.HasSave ? 554 : 430, 120, 120);
             var col = U.Rt(menu.transform, "actions").Fill(28, 28, 28, 28); U.VBox(col, 14, null, TextAnchor.MiddleCenter, true, true, true, false);
             if (App.I.HasSave) U.Btn(col, L.T("CONTINUE"), Theme.Green, App.I.ContinueGame, 700, 100, 40, null, Color.white).Le(-1, 100);
             U.Btn(col, App.I.HasSave ? L.T("NEW GAME") : StoryScript.Pick("BEGIN YOUR ADVENTURE", "MULAI PETUALANGAN"), Theme.Accent, () =>
@@ -41,7 +41,7 @@ namespace Emberhall
                 if (App.I.HasSave) Popups.Confirm(L.T("Start a new game?"), L.T("This will erase your current guild forever."), L.T("Erase & Start"), App.I.StartOnboarding, L.T("Cancel"), true);
                 else App.I.StartOnboarding();
             }, 700, 108, 40, null, Theme.TextDark).Le(-1, 108);
-            U.Btn(col, StoryScript.Pick("THE STORY OF EMBERHALL", "KISAH EMBERHALL"), Theme.Panel, () => App.I.nav.Root(new OnboardingScreen(true)), 700, 70, 30, GeneratedArt.Item(5)).Le(-1, 70);
+            U.Btn(col, StoryScript.Pick("THE STORY OF EMBERHALL", "KISAH EMBERHALL"), Theme.Panel, () => App.I.nav.Root(new OnboardingScreen(true)), 700, 94, 30, GeneratedArt.Item(5)).Le(-1, 94);
             var row = U.Rt(col, "utility"); row.Le(-1, 78); U.HBox(row, 14, null, TextAnchor.MiddleCenter, true, true, true, false);
             U.Btn(row, L.T("Settings"), Theme.Panel, () => Popups.Show(new SettingsPopup()), 300, 78, 30, Icons.Get("gear")).Le(-1, 78, 1);
             U.Btn(row, L.T("About"), Theme.Panel, () => Popups.Show(new AboutPopup()), 300, 78, 30, Icons.Get("info")).Le(-1, 78, 1);
@@ -96,7 +96,7 @@ namespace Emberhall
             var top = U.Box(root, Theme.PanelLight, Theme.Gold, "chapter_header", false, .06f); top.StretchX(1, -18, 78, 28, 28);
             var title = page < 3 ? StoryScript.Pick("THE EMBERHALL STORY", "KISAH EMBERHALL") : StoryScript.Pick("YOUR FIRST CHAPTER", "BAB PERTAMAMU");
             U.Txt(top.transform, title, 30, Theme.Gold, TextAnchor.MiddleCenter).StretchX(.5f, 0, 52, 184, 184);
-            U.Btn(top.transform, storyOnly ? L.T("Close") : L.T("Skip"), Theme.Panel, () => { if (storyOnly) App.I.GoTitle(); else ChangePage(Pages - 1); }, 154, 58, 28).At(1, .5f, -14, 0, 154, 58, 1, .5f);
+            U.Btn(top.transform, storyOnly ? L.T("Close") : L.T("Skip"), Theme.Panel, () => { if (storyOnly) App.I.GoTitle(); else ChangePage(Pages - 1); }, 154, 70, 28).At(1, .5f, -14, 0, 154, 70, 1, .5f);
             var stage = U.Rt(root, "stage").Fill(28, 28, 116, Foot + 24); stage.gameObject.AddComponent<RectMask2D>();
             stageRt = stage;
             if (page < 3) StoryPage(stage); else if (page == 3) LoopPage(stage); else CreatePage(stage);
@@ -122,26 +122,26 @@ namespace Emberhall
         {
             var beat = StoryScript.Prologue[page]; Canvas.ForceUpdateCanvases();
             float h = stage.rect.height; if (h < 200) h = UiHost.CanvasSize.y - Foot - 140;
-            float artH = Mathf.Min(stage.rect.width * 9f / 16f + 20, h * .55f);
-            const float cardH = 444;
+            float artH = Mathf.Min(stage.rect.width * 2f / 3f + 20, h * .55f);
+            const float cardH = 560;
             float topSpace = Mathf.Max(16, (h - artH - cardH - 24) * .5f);
             var wash = GeneratedArt.Cover(UiHost.I.back, beat.ArtKey); wash.color = new Color(1, 1, 1, .18f);
             var art = U.Box(stage, Theme.PanelLight, Theme.Gold, "illustration_frame", false, .06f); art.StretchX(1, -topSpace, artH);
             GeneratedArt.Cover(U.Rt(art.transform, "illustration").Fill(10, 10, 10, 10), beat.ArtKey, true);
             UButton playback = null;
             playback = U.Btn(art.transform, auto ? StoryScript.Pick("AUTO ON", "OTOMATIS") : StoryScript.Pick("AUTO OFF", "MANUAL"), Theme.PanelLight, () => { auto = !auto; playback.label.text = auto ? StoryScript.Pick("AUTO ON", "OTOMATIS") : StoryScript.Pick("AUTO OFF", "MANUAL"); }, 190, 58, 24);
-            playback.At(1, 1, -24, -24, 190, 58, 1, 1);
+            playback.At(1, 1, -24, -24, 240, 84, 1, 1);
             var card = U.Box(stage, Theme.PanelLight, Theme.Gold, "narration_card", false, .08f); card.StretchX(1, -topSpace - artH - 24, Mathf.Min(cardH, h - artH - 40));
             var sc = MakeScroll(U.Rt(card.transform, "reading_area").Fill(24, 24, 20, 16), 14, new RectOffset(8, 8, 8, 14)); var col = sc.content;
             U.Txt(col, beat.Kicker, 30, Theme.Gold, TextAnchor.MiddleCenter).Le(-1, 40);
-            U.Txt(col, beat.Title, 58, Theme.TextDark, TextAnchor.MiddleCenter).Le(-1, 80);
-            narration = U.Txt(col, "", 36, Theme.Text, TextAnchor.MiddleCenter, false, true, "narration"); narration.Le(-1, 136); fullNarration = beat.Body;
-            U.Txt(col, beat.Quote, 32, Theme.Gold, TextAnchor.MiddleCenter, false, true).Le(-1, 80);
+            U.Txt(col, beat.Title, 58, Theme.TextDark, TextAnchor.MiddleCenter).Le(-1, 106);
+            narration = U.Txt(col, "", 36, Theme.Text, TextAnchor.MiddleCenter, false, true, "narration"); narration.Le(-1, 176); fullNarration = beat.Body;
+            U.Txt(col, beat.Quote, 32, Theme.Gold, TextAnchor.MiddleCenter, false, true).Le(-1, 116);
         }
         void Heading(RectTransform col, string title, string body)
         {
-            U.Txt(col, title, 58, Theme.TextDark, TextAnchor.MiddleCenter).Le(-1, 82);
-            U.Txt(col, body, 34, Theme.TextDim, TextAnchor.MiddleCenter, false, true).Le(-1, 96);
+            U.Txt(col, title, 58, Theme.TextDark, TextAnchor.MiddleCenter).Le(-1, 160);
+            U.Txt(col, body, 34, Theme.TextDim, TextAnchor.MiddleCenter, false, true).Le(-1, 160);
         }
         void LoopPage(RectTransform stage)
         {
@@ -155,18 +155,18 @@ namespace Emberhall
                 L.T("Bag") + " → " + L.T("Gear") + " → " + L.T("Auto equip") + ". " + StoryScript.Pick("Equip the mission rewards. Better gear raises your power. Maren's guide shows the next button.", "Pasang hadiah misi. Gear lebih baik meningkatkan kekuatan. Panduan Maren menunjukkan tombol berikutnya.") };
             for (int i = 0; i < 3; i++)
             {
-                var box = U.Box(col, Theme.PanelLight, Theme.Gold, "guide_step", false, .08f); box.Le(-1, 240);
+                var box = U.Box(col, Theme.PanelLight, Theme.Gold, "guide_step", false, .08f); box.Le(-1, 390);
                 U.Icon(box.transform, Icons.Get(icons[i]), 100).At(0, .5f, 22, 0, 100, 100, 0, .5f);
-                U.Txt(box.transform, (i + 1).ToString("00") + "  " + names[i], 42, Theme.TextDark, TextAnchor.MiddleCenter).StretchX(1, -20, 58, 146, 24);
-                U.Txt(box.transform, desc[i], 34, Theme.TextDim, TextAnchor.MiddleCenter, false, true).StretchX(1, -86, 132, 146, 24);
+                U.Txt(box.transform, (i + 1).ToString("00") + "  " + names[i], 42, Theme.TextDark, TextAnchor.MiddleCenter).StretchX(1, -20, 112, 146, 24);
+                U.Txt(box.transform, desc[i], 34, Theme.TextDim, TextAnchor.MiddleCenter, false, true).StretchX(1, -142, 228, 146, 24);
             }
-            var hint = U.Box(col, Theme.Inset, Theme.Green, "tactic_hint", false, .06f); hint.Le(-1, 120);
+            var hint = U.Box(col, Theme.Inset, Theme.Green, "tactic_hint", false, .06f); hint.Le(-1, 216);
             U.Txt(hint.transform, StoryScript.Pick("Choose a battle plan: Balanced, Assault, or Guard. Heroes use their skills automatically; your preparation makes the difference.", "Pilih strategi: Seimbang, Serbu, atau Bertahan. Pahlawan memakai skill otomatis; persiapanmu menentukan hasilnya."), 32, Theme.Text, TextAnchor.MiddleCenter, false, true).Fill(26, 26, 16, 16);
         }
         void CreatePage(RectTransform stage)
         {
             var sc = MakeScroll(stage, 16, new RectOffset(8, 8, 4, 30)); var col = sc.content; Heading(col, StoryScript.CharterTitle, StoryScript.CharterBody);
-            var supplies = U.Box(col, Theme.Inset, Theme.Green, "starting_supplies", false, .06f); supplies.Le(-1, 116);
+            var supplies = U.Box(col, Theme.Inset, Theme.Green, "starting_supplies", false, .06f); supplies.Le(-1, 216);
             U.Txt(supplies.transform, StoryScript.Pick("READY TO BEGIN: 600 gold · 1 equipped hero · 5 healing potions. Your first task is to hire a companion at the Tavern.", "BEKAL AWAL: 600 emas · 1 pahlawan bergear · 5 ramuan penyembuh. Tugas pertama: rekrut teman di Kedai."), 32, Theme.Text, TextAnchor.MiddleCenter, false, true).Fill(24, 24, 16, 16);
             U.Txt(col, L.T("Guild name"), 34, Theme.Gold, TextAnchor.MiddleCenter).Le(-1, 46);
             var field = U.Box(col, Theme.PanelLight, Theme.Gold, "guild_name", true, .08f); field.Le(-1, 92);
@@ -183,18 +183,18 @@ namespace Emberhall
                 Brand.ShieldImg(box.transform, Theme.Hex(GuildGame.Emblems[i]), 72).At(.5f, .5f, 0, 0, 62, 72);
             }
             U.Txt(col, L.T("Choose your first hero"), 34, Theme.Gold, TextAnchor.MiddleCenter).Le(-1, 46);
-            U.Txt(col, StoryScript.StarterHint, 32, Theme.TextDim, TextAnchor.MiddleCenter, false, true).Le(-1, 76);
+            U.Txt(col, StoryScript.StarterHint, 32, Theme.TextDim, TextAnchor.MiddleCenter, false, true).Le(-1, 128);
             foreach (var cid in new[] { "warrior", "archer", "mage" })
             {
                 string id = cid; var cls = App.Ctx.Content.Class(id); bool sel = starter == id;
-                var card = U.Box(col, sel ? Theme.Hex("#e4efd5") : Theme.PanelLight, sel ? Theme.GreenDark : Theme.Gold, "starter", true, .08f); card.Le(-1, 190);
+                var card = U.Box(col, sel ? Theme.Hex("#e4efd5") : Theme.PanelLight, sel ? Theme.GreenDark : Theme.Gold, "starter", true, .08f); card.Le(-1, 260);
                 var btn = card.gameObject.AddComponent<UButton>(); btn.bg = card; btn.noTint = true; btn.onClick = () => { starter = id; Audio.Play("equip"); Redraw(); };
                 int skin = id == "warrior" ? 0 : id == "archer" ? 6 : 2;
                 var portrait = U.Img(card.transform, Art.Chara(skin, 0, 1), Color.white).At(0, .5f, 30, 0, 96, 120, 0, .5f);
                 SpriteAnim.On(portrait, Art.FrontFrames("chara_" + skin), 4, true);
                 U.Txt(card.transform, L.T(cls.name), 44, Theme.TextDark, TextAnchor.MiddleCenter).StretchX(1, -18, 56, 150, 72);
-                U.Txt(card.transform, L.T(cls.role), 32, Theme.Gold, TextAnchor.MiddleCenter).StretchX(1, -78, 42, 150, 72);
-                U.Txt(card.transform, StoryScript.Pick(id == "warrior" ? "Hold the front. Protect the party." : id == "archer" ? "Swift shots. Pick off threats." : "Powerful spells. Strike whole groups.", id == "warrior" ? "Jaga garis depan. Lindungi tim." : id == "archer" ? "Panah cepat. Habisi ancaman." : "Sihir kuat. Serang kelompok musuh."), 32, Theme.TextDim, TextAnchor.MiddleCenter).StretchX(0, 14, 50, 150, 72);
+                U.Txt(card.transform, L.T(cls.role), 32, Theme.Gold, TextAnchor.MiddleCenter).StretchX(1, -96, 56, 150, 72);
+                U.Txt(card.transform, StoryScript.Pick(id == "warrior" ? "Hold the front. Protect the party." : id == "archer" ? "Swift shots. Pick off threats." : "Powerful spells. Strike whole groups.", id == "warrior" ? "Jaga garis depan. Lindungi tim." : id == "archer" ? "Panah cepat. Habisi ancaman." : "Sihir kuat. Serang kelompok musuh."), 32, Theme.TextDim, TextAnchor.MiddleCenter).StretchX(0, 18, 92, 150, 72);
                 if (sel) U.Icon(card.transform, Icons.Get("check"), 42).At(1, 1, -20, -24, 42, 42, 1, 1);
             }
         }

@@ -1,0 +1,494 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="72" result="Passed" total="72" passed="71" failed="0" inconclusive="0" skipped="1" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-12 04:12:56Z" end-time="2026-10-12 04:12:56Z" duration="0.6932397">
+  <test-suite type="TestSuite" id="1000" name="Emberhall_ Guild Legends" fullname="Emberhall_ Guild Legends" runstate="Runnable" testcasecount="72" result="Passed" start-time="2026-10-12 04:12:56Z" end-time="2026-10-12 04:12:56Z" duration="0.693240" total="72" passed="71" failed="0" inconclusive="0" skipped="1" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <test-suite type="Assembly" id="1080" name="Emberhall.Tests.dll" fullname="C:/Guild Manager Sonnet 55/Library/ScriptAssemblies/Emberhall.Tests.dll" runstate="Runnable" testcasecount="72" result="Passed" start-time="2026-10-12 04:12:56Z" end-time="2026-10-12 04:12:56Z" duration="0.685660" total="72" passed="71" failed="0" inconclusive="0" skipped="1" asserts="0">
+      <properties>
+        <property name="_PID" value="28060" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestSuite" id="1081" name="Emberhall" fullname="Emberhall" runstate="Runnable" testcasecount="72" result="Passed" start-time="2026-10-12 04:12:56Z" end-time="2026-10-12 04:12:56Z" duration="0.684809" total="72" passed="71" failed="0" inconclusive="0" skipped="1" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1082" name="Tests" fullname="Emberhall.Tests" runstate="Runnable" testcasecount="72" result="Passed" start-time="2026-10-12 04:12:56Z" end-time="2026-10-12 04:12:56Z" duration="0.683801" total="72" passed="71" failed="0" inconclusive="0" skipped="1" asserts="0">
+          <properties />
+          <test-suite type="TestFixture" id="1001" name="BalanceBot" fullname="Emberhall.Tests.BalanceBot" classname="Emberhall.Tests.BalanceBot" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-10-12 04:12:56Z" end-time="2026-10-12 04:12:56Z" duration="0.176642" total="2" passed="1" failed="0" inconclusive="0" skipped="1" asserts="0">
+            <properties />
+            <test-case id="1003" name="FirstSessionPacing" fullname="Emberhall.Tests.BalanceBot.FirstSessionPacing" methodname="FirstSessionPacing" classname="Emberhall.Tests.BalanceBot" runstate="Runnable" seed="2015225389" result="Passed" start-time="2026-10-12 04:12:56Z" end-time="2026-10-12 04:12:56Z" duration="0.164072" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[[GM] BOT LOG
+[0.0h] reached rank F  gold=742 heroes=2 maxLv=2 battles=1 losses=0
+  [0.0h] rank=F fame=3 gold=742 gems=15 heroes=2 lv=2,2 quests=0 why=ready=2/2 pSize=3 hp=[100,100] fac=1/0/0/0/0/0/0
+    exam exam_e wins 5/5 party=[knight4,cleric4,warrior4] power=385
+[0.2h] reached rank E  gold=1066 heroes=5 maxLv=4 battles=13 losses=0
+  [1.0h] rank=E fame=230 gold=301 gems=134 heroes=6 lv=8,8,7,5 quests=25 why=ready=2/6 pSize=3 hp=[100,71b,66,59b,71b,63b] fac=4/4/4/4/0/1/0
+  [2.1h] rank=E fame=494 gold=677 gems=162 heroes=6 lv=13,13,12,5 quests=31 why=ready=2/6 pSize=3 hp=[100,100b,100,46b,49b,39b] fac=4/4/4/4/2/3/0
+    exam exam_d wins 5/5 party=[knight13,warrior13,knight13] power=886
+[2.2h] reached rank D  gold=1171 heroes=6 maxLv=13 battles=31 losses=0
+  [3.2h] rank=D fame=565 gold=634 gems=225 heroes=8 lv=14,13,13,7 quests=35 why=ready=3/8 pSize=4 hp=[100,100,100,0b,0b,0,55b,55b] fac=5/4/4/4/2/3/0
+END [3.2h] rank=D fame=565 battles=33 losses=0
+
+]]></output>
+            </test-case>
+            <test-case id="1002" name="FullPlaythroughPacing" fullname="Emberhall.Tests.BalanceBot.FullPlaythroughPacing" methodname="FullPlaythroughPacing" classname="Emberhall.Tests.BalanceBot" runstate="Explicit" seed="899662317" result="Skipped" label="Explicit" start-time="2026-10-12 04:12:56Z" end-time="2026-10-12 04:12:56Z" duration="0.000136" asserts="0">
+              <properties>
+                <property name="_SKIPREASON" value="Long-running pacing simulation" />
+              </properties>
+              <reason>
+                <message><![CDATA[Long-running pacing simulation]]></message>
+              </reason>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1004" name="CoreTests" fullname="Emberhall.Tests.CoreTests" classname="Emberhall.Tests.CoreTests" runstate="Runnable" testcasecount="61" result="Passed" start-time="2026-10-12 04:12:56Z" end-time="2026-10-12 04:12:56Z" duration="0.490440" total="61" passed="61" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1014" name="BattleIsDeterministicAndStartersWinFirstStage" fullname="Emberhall.Tests.CoreTests.BattleIsDeterministicAndStartersWinFirstStage" methodname="BattleIsDeterministicAndStartersWinFirstStage" classname="Emberhall.Tests.CoreTests" runstate="Runnable" seed="1351603867" result="Passed" start-time="2026-10-12 04:12:56Z" end-time="2026-10-12 04:12:56Z" duration="0.012316" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1066" name="BusyHeroesCannotBeDismissedAndRemainAttachedToTheirTask" fullname="Emberhall.Tests.CoreTests.BusyHeroesCannotBeDismissedAndRemainAttachedToTheirTask" classname="Emberhall.Tests.CoreTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-10-12 04:12:56Z" end-time="2026-10-12 04:12:56Z" duration="0.018198" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1063" name="BusyHeroesCannotBeDismissedAndRemainAttachedToTheirTask(&quot;train&quot;)" fullname="Emberhall.Tests.CoreTests.BusyHeroesCannotBeDismissedAndRemainAttachedToTheirTask(&quot;train&quot;)" methodname="BusyHeroesCannotBeDismissedAndRemainAttachedToTheirTask" classname="Emberhall.Tests.CoreTests" runstate="Runnable" seed="663315781" result="Passed" start-time="2026-10-12 04:12:56Z" end-time="2026-10-12 04:12:56Z" duration="0.007851" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1064" name="BusyHeroesCannotBeDismissedAndRemainAttachedToTheirTask(&quot;heal&quot;)" fullname="Emberhall.Tests.CoreTests.BusyHeroesCannotBeDismissedAndRemainAttachedToTheirTask(&quot;heal&quot;)" methodname="BusyHeroesCannotBeDismissedAndRemainAttachedToTheirTask" classname="Emberhall.Tests.CoreTests" runstate="Runnable" seed="2139524535" result="Passed" start-time="2026-10-12 04:12:56Z" end-time="2026-10-12 04:12:56Z" duration="0.005709" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1065" name="BusyHeroesCannotBeDismissedAndRemainAttachedToTheirTask(&quot;expedition&quot;)" fullname="Emberhall.Tests.CoreTests.BusyHeroesCannotBeDismissedAndRemainAttachedToTheirTask(&quot;expedition&quot;)" methodname="BusyHeroesCannotBeDismissedAndRemainAttachedToTheirTask" classname="Emberhall.Tests.CoreTests" runstate="Runnable" seed="701385742" result="Passed" start-time="2026-10-12 04:12:56Z" end-time="2026-10-12 04:12:56Z" duration="0.003802" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1015" name="CompleteMissionGivesRewardsAndProgressesQuests" fullname="Emberhall.Tests.CoreTests.CompleteMissionGivesRewardsAndProgressesQuests" methodname="CompleteMissionGivesRewardsAndProgressesQuests" classname="Emberhall.Tests.CoreTests" runstate="Runnable" seed="1795963488" result="Passed" start-time="2026-10-12 04:12:56Z" end-time="2026-10-12 04:12:56Z" duration="0.007136" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1005" name="ContentIsValid" fullname="Emberhall.Tests.CoreTests.ContentIsValid" methodname="ContentIsValid" classname="Emberhall.Tests.CoreTests" runstate="Runnable" seed="1380103558" result="Passed" start-time="2026-10-12 04:12:56Z" end-time="2026-10-12 04:12:56Z" duration="0.007059" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1045" name="CraftingChargesOnceAndProducesItsQuantityOnceAfterOfflineReload" fullname="Emberhall.Tests.CoreTests.CraftingChargesOnceAndProducesItsQuantityOnceAfterOfflineReload" methodname="CraftingChargesOnceAndProducesItsQuantityOnceAfterOfflineReload" classname="Emberhall.Tests.CoreTests" runstate="Runnable" seed="1170773848" result="Passed" start-time="2026-10-12 04:12:56Z" end-time="2026-10-12 04:12:56Z" duration="0.018483" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1054" name="DailyLoginPaysOnceAcrossReloadAndResetsTheStreakAfterAMissedDay" fullname="Emberhall.Tests.CoreTests.DailyLoginPaysOnceAcrossReloadAndResetsTheStreakAfterAMissedDay" methodname="DailyLoginPaysOnceAcrossReloadAndResetsTheStreakAfterAMissedDay" classname="Emberhall.Tests.CoreTests" runstate="Runnable" seed="781696162" result="Passed" start-time="2026-10-12 04:12:56Z" end-time="2026-10-12 04:12:56Z" duration="0.011905" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1055" name="DailyQuestsRespectFacilityRequirementsAndResetTheirProgressBaselines" fullname="Emberhall.Tests.CoreTests.DailyQuestsRespectFacilityRequirementsAndResetTheirProgressBaselines" methodname="DailyQuestsRespectFacilityRequirementsAndResetTheirProgressBaselines" classname="Emberhall.Tests.CoreTests" runstate="Runnable" seed="666670121" result="Passed" start-time="2026-10-12 04:12:56Z" end-time="2026-10-12 04:12:56Z" duration="0.007278" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1011" name="DiskSaveSurvivesCorruptionViaBackup" fullname="Emberhall.Tests.CoreTests.DiskSaveSurvivesCorruptionViaBackup" methodname="DiskSaveSurvivesCorruptionViaBackup" classname="Emberhall.Tests.CoreTests" runstate="Runnable" seed="747242817" result="Passed" start-time="2026-10-12 04:12:56Z" end-time="2026-10-12 04:12:56Z" duration="0.041400" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[Load failed (C:/Users/ASUS/AppData/Local/Temp/Pixel Game Master/Emberhall_ Guild Legends\savetest_a84c7f548f7f48738993ea17cce65a29\slot.json): JSON parse error: Missing a name for object member.
+]]></output>
+            </test-case>
+            <test-case id="1062" name="DismissalRejectsLastNullAndForeignHeroesWithoutChangingTheRoster" fullname="Emberhall.Tests.CoreTests.DismissalRejectsLastNullAndForeignHeroesWithoutChangingTheRoster" methodname="DismissalRejectsLastNullAndForeignHeroesWithoutChangingTheRoster" classname="Emberhall.Tests.CoreTests" runstate="Runnable" seed="905741066" result="Passed" start-time="2026-10-12 04:12:56Z" end-time="2026-10-12 04:12:56Z" duration="0.003983" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1027" name="DoctrineTradeoffsChangeStatsAndActualTargetSelection" fullname="Emberhall.Tests.CoreTests.DoctrineTradeoffsChangeStatsAndActualTargetSelection" methodname="DoctrineTradeoffsChangeStatsAndActualTargetSelection" classname="Emberhall.Tests.CoreTests" runstate="Runnable" seed="1056258852" result="Passed" start-time="2026-10-12 04:12:56Z" end-time="2026-10-12 04:12:56Z" duration="0.006317" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1058" name="EarnedRankPromotionUpdatesCapacityOnceAndPersistsWithItsExam" fullname="Emberhall.Tests.CoreTests.EarnedRankPromotionUpdatesCapacityOnceAndPersistsWithItsExam" methodname="EarnedRankPromotionUpdatesCapacityOnceAndPersistsWithItsExam" classname="Emberhall.Tests.CoreTests" runstate="Runnable" seed="24773173" result="Passed" start-time="2026-10-12 04:12:56Z" end-time="2026-10-12 04:12:56Z" duration="0.008571" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1046" name="EnhancementChargesItsActualCostImprovesEquippedStatsAndStopsAtCap" fullname="Emberhall.Tests.CoreTests.EnhancementChargesItsActualCostImprovesEquippedStatsAndStopsAtCap" methodname="EnhancementChargesItsActualCostImprovesEquippedStatsAndStopsAtCap" classname="Emberhall.Tests.CoreTests" runstate="Runnable" seed="2026748792" result="Passed" start-time="2026-10-12 04:12:56Z" end-time="2026-10-12 04:12:56Z" duration="0.006825" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1016" name="EquipUnequipAndSell" fullname="Emberhall.Tests.CoreTests.EquipUnequipAndSell" methodname="EquipUnequipAndSell" classname="Emberhall.Tests.CoreTests" runstate="Runnable" seed="773828975" result="Passed" start-time="2026-10-12 04:12:56Z" end-time="2026-10-12 04:12:56Z" duration="0.004663" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1056" name="EventsKeepUnaffordableChoicesPendingAndResolvePaidRewardsOnlyOnce" fullname="Emberhall.Tests.CoreTests.EventsKeepUnaffordableChoicesPendingAndResolvePaidRewardsOnlyOnce" methodname="EventsKeepUnaffordableChoicesPendingAndResolvePaidRewardsOnlyOnce" classname="Emberhall.Tests.CoreTests" runstate="Runnable" seed="402597580" result="Passed" start-time="2026-10-12 04:12:56Z" end-time="2026-10-12 04:12:56Z" duration="0.012941" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1057" name="EveryEventHasAnAvailableFallbackChoiceSoItsPopupCannotStrandThePlayer" fullname="Emberhall.Tests.CoreTests.EveryEventHasAnAvailableFallbackChoiceSoItsPopupCannotStrandThePlayer" methodname="EveryEventHasAnAvailableFallbackChoiceSoItsPopupCannotStrandThePlayer" classname="Emberhall.Tests.CoreTests" runstate="Runnable" seed="684917824" result="Passed" start-time="2026-10-12 04:12:56Z" end-time="2026-10-12 04:12:56Z" duration="0.006070" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1024" name="EveryStarterHasAFairOpeningAndEarnsItsFirstSkill" fullname="Emberhall.Tests.CoreTests.EveryStarterHasAFairOpeningAndEarnsItsFirstSkill" methodname="EveryStarterHasAFairOpeningAndEarnsItsFirstSkill" classname="Emberhall.Tests.CoreTests" runstate="Runnable" seed="629818937" result="Passed" start-time="2026-10-12 04:12:56Z" end-time="2026-10-12 04:12:56Z" duration="0.014934" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1035" name="ExpeditionForecastIsLockedAtDepartureAndSurvivesSaving" fullname="Emberhall.Tests.CoreTests.ExpeditionForecastIsLockedAtDepartureAndSurvivesSaving" methodname="ExpeditionForecastIsLockedAtDepartureAndSurvivesSaving" classname="Emberhall.Tests.CoreTests" runstate="Runnable" seed="170653385" result="Passed" start-time="2026-10-12 04:12:56Z" end-time="2026-10-12 04:12:56Z" duration="0.009417" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1019" name="ExpeditionRoundTrip" fullname="Emberhall.Tests.CoreTests.ExpeditionRoundTrip" methodname="ExpeditionRoundTrip" classname="Emberhall.Tests.CoreTests" runstate="Runnable" seed="866867961" result="Passed" start-time="2026-10-12 04:12:56Z" end-time="2026-10-12 04:12:56Z" duration="0.004646" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1034" name="ExpeditionsCannotPayBeforeReturningOrPayTwice" fullname="Emberhall.Tests.CoreTests.ExpeditionsCannotPayBeforeReturningOrPayTwice" methodname="ExpeditionsCannotPayBeforeReturningOrPayTwice" classname="Emberhall.Tests.CoreTests" runstate="Runnable" seed="1232906439" result="Passed" start-time="2026-10-12 04:12:56Z" end-time="2026-10-12 04:12:56Z" duration="0.004711" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1032" name="FacilityAndResearchModifiersInvalidateCachedHeroStats" fullname="Emberhall.Tests.CoreTests.FacilityAndResearchModifiersInvalidateCachedHeroStats" methodname="FacilityAndResearchModifiersInvalidateCachedHeroStats" classname="Emberhall.Tests.CoreTests" runstate="Runnable" seed="866835076" result="Passed" start-time="2026-10-12 04:12:56Z" end-time="2026-10-12 04:12:56Z" duration="0.005998" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1038" name="FacilityUpgradeChargesOnceAndCompletesOnlyAtItsDeadline" fullname="Emberhall.Tests.CoreTests.FacilityUpgradeChargesOnceAndCompletesOnlyAtItsDeadline" methodname="FacilityUpgradeChargesOnceAndCompletesOnlyAtItsDeadline" classname="Emberhall.Tests.CoreTests" runstate="Runnable" seed="1455633819" result="Passed" start-time="2026-10-12 04:12:56Z" end-time="2026-10-12 04:12:56Z" duration="0.004230" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1060" name="FirstClearAndThreeStarBonusesDoNotPayAgainOnReplay" fullname="Emberhall.Tests.CoreTests.FirstClearAndThreeStarBonusesDoNotPayAgainOnReplay" methodname="FirstClearAndThreeStarBonusesDoNotPayAgainOnReplay" classname="Emberhall.Tests.CoreTests" runstate="Runnable" seed="1388000594" result="Passed" start-time="2026-10-12 04:12:56Z" end-time="2026-10-12 04:12:56Z" duration="0.005611" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1009" name="GuidedOpeningCreditsBattleAndGearCompletedBeforeTheirChapters" fullname="Emberhall.Tests.CoreTests.GuidedOpeningCreditsBattleAndGearCompletedBeforeTheirChapters" methodname="GuidedOpeningCreditsBattleAndGearCompletedBeforeTheirChapters" classname="Emberhall.Tests.CoreTests" runstate="Runnable" seed="1022694106" result="Passed" start-time="2026-10-12 04:12:56Z" end-time="2026-10-12 04:12:56Z" duration="0.004155" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1031" name="HealerPrioritizesAnEndangeredAllyOverBlessing" fullname="Emberhall.Tests.CoreTests.HealerPrioritizesAnEndangeredAllyOverBlessing" methodname="HealerPrioritizesAnEndangeredAllyOverBlessing" classname="Emberhall.Tests.CoreTests" runstate="Runnable" seed="412024365" result="Passed" start-time="2026-10-12 04:12:56Z" end-time="2026-10-12 04:12:56Z" duration="0.005629" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1044" name="HealthyHealingAndCappedTrainingDoNotCreateTasksOrChargeGold" fullname="Emberhall.Tests.CoreTests.HealthyHealingAndCappedTrainingDoNotCreateTasksOrChargeGold" methodname="HealthyHealingAndCappedTrainingDoNotCreateTasksOrChargeGold" classname="Emberhall.Tests.CoreTests" runstate="Runnable" seed="1441221616" result="Passed" start-time="2026-10-12 04:12:56Z" end-time="2026-10-12 04:12:56Z" duration="0.004497" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1037" name="HealthyHeroesDoNotWastePotionsAndGearCannotBeSoldAsAStack" fullname="Emberhall.Tests.CoreTests.HealthyHeroesDoNotWastePotionsAndGearCannotBeSoldAsAStack" methodname="HealthyHeroesDoNotWastePotionsAndGearCannotBeSoldAsAStack" classname="Emberhall.Tests.CoreTests" runstate="Runnable" seed="1848514431" result="Passed" start-time="2026-10-12 04:12:56Z" end-time="2026-10-12 04:12:56Z" duration="0.003707" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1068" name="HeroPromotionRejectsNullForeignAndBusyHeroesWithoutCharging" fullname="Emberhall.Tests.CoreTests.HeroPromotionRejectsNullForeignAndBusyHeroesWithoutCharging" methodname="HeroPromotionRejectsNullForeignAndBusyHeroesWithoutCharging" classname="Emberhall.Tests.CoreTests" runstate="Runnable" seed="691116871" result="Passed" start-time="2026-10-12 04:12:56Z" end-time="2026-10-12 04:12:56Z" duration="0.006210" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1006" name="JsonContentParsesEveryFile" fullname="Emberhall.Tests.CoreTests.JsonContentParsesEveryFile" methodname="JsonContentParsesEveryFile" classname="Emberhall.Tests.CoreTests" runstate="Runnable" seed="396225454" result="Passed" start-time="2026-10-12 04:12:56Z" end-time="2026-10-12 04:12:56Z" duration="0.007434" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1053" name="MarketFullBagRejectsGearWithoutChargingAndStillAllowsSupplies" fullname="Emberhall.Tests.CoreTests.MarketFullBagRejectsGearWithoutChargingAndStillAllowsSupplies" methodname="MarketFullBagRejectsGearWithoutChargingAndStillAllowsSupplies" classname="Emberhall.Tests.CoreTests" runstate="Runnable" seed="855495666" result="Passed" start-time="2026-10-12 04:12:56Z" end-time="2026-10-12 04:12:56Z" duration="0.007451" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1052" name="MarketPurchasesKeepSoldStateAcrossSaveAndRejectExpiredOffers" fullname="Emberhall.Tests.CoreTests.MarketPurchasesKeepSoldStateAcrossSaveAndRejectExpiredOffers" classname="Emberhall.Tests.CoreTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-10-12 04:12:56Z" end-time="2026-10-12 04:12:56Z" duration="0.021426" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1050" name="MarketPurchasesKeepSoldStateAcrossSaveAndRejectExpiredOffers(&quot;gold&quot;)" fullname="Emberhall.Tests.CoreTests.MarketPurchasesKeepSoldStateAcrossSaveAndRejectExpiredOffers(&quot;gold&quot;)" methodname="MarketPurchasesKeepSoldStateAcrossSaveAndRejectExpiredOffers" classname="Emberhall.Tests.CoreTests" runstate="Runnable" seed="1059224710" result="Passed" start-time="2026-10-12 04:12:56Z" end-time="2026-10-12 04:12:56Z" duration="0.011104" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1051" name="MarketPurchasesKeepSoldStateAcrossSaveAndRejectExpiredOffers(&quot;gems&quot;)" fullname="Emberhall.Tests.CoreTests.MarketPurchasesKeepSoldStateAcrossSaveAndRejectExpiredOffers(&quot;gems&quot;)" methodname="MarketPurchasesKeepSoldStateAcrossSaveAndRejectExpiredOffers" classname="Emberhall.Tests.CoreTests" runstate="Runnable" seed="1050482951" result="Passed" start-time="2026-10-12 04:12:56Z" end-time="2026-10-12 04:12:56Z" duration="0.009542" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1021" name="ModifiersStackFromUpgradesAndRanks" fullname="Emberhall.Tests.CoreTests.ModifiersStackFromUpgradesAndRanks" methodname="ModifiersStackFromUpgradesAndRanks" classname="Emberhall.Tests.CoreTests" runstate="Runnable" seed="266773917" result="Passed" start-time="2026-10-12 04:12:56Z" end-time="2026-10-12 04:12:56Z" duration="0.005476" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1007" name="NewGameState" fullname="Emberhall.Tests.CoreTests.NewGameState" methodname="NewGameState" classname="Emberhall.Tests.CoreTests" runstate="Runnable" seed="348363857" result="Passed" start-time="2026-10-12 04:12:56Z" end-time="2026-10-12 04:12:56Z" duration="0.003579" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1061" name="OfflineExpeditionDefersPayoutUntilClaimAndReleasesItsPartyOnlyOnce" fullname="Emberhall.Tests.CoreTests.OfflineExpeditionDefersPayoutUntilClaimAndReleasesItsPartyOnlyOnce" methodname="OfflineExpeditionDefersPayoutUntilClaimAndReleasesItsPartyOnlyOnce" classname="Emberhall.Tests.CoreTests" runstate="Runnable" seed="154036685" result="Passed" start-time="2026-10-12 04:12:56Z" end-time="2026-10-12 04:12:56Z" duration="0.014566" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1029" name="OneTurnAttackBuffAffectsTheActionBeforeExpiring" fullname="Emberhall.Tests.CoreTests.OneTurnAttackBuffAffectsTheActionBeforeExpiring" methodname="OneTurnAttackBuffAffectsTheActionBeforeExpiring" classname="Emberhall.Tests.CoreTests" runstate="Runnable" seed="96620880" result="Passed" start-time="2026-10-12 04:12:56Z" end-time="2026-10-12 04:12:56Z" duration="0.006335" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1033" name="PartiesRejectDuplicatesAndForeignHeroes" fullname="Emberhall.Tests.CoreTests.PartiesRejectDuplicatesAndForeignHeroes" methodname="PartiesRejectDuplicatesAndForeignHeroes" classname="Emberhall.Tests.CoreTests" runstate="Runnable" seed="579325140" result="Passed" start-time="2026-10-12 04:12:56Z" end-time="2026-10-12 04:12:56Z" duration="0.004625" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1020" name="RankPromotionRequiresFameAndExam" fullname="Emberhall.Tests.CoreTests.RankPromotionRequiresFameAndExam" methodname="RankPromotionRequiresFameAndExam" classname="Emberhall.Tests.CoreTests" runstate="Runnable" seed="1373675648" result="Passed" start-time="2026-10-12 04:12:56Z" end-time="2026-10-12 04:12:56Z" duration="0.004175" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1026" name="RecommendedExpeditionPartyBalancesSuccessWithoutSelectingUnavailableHeroes" fullname="Emberhall.Tests.CoreTests.RecommendedExpeditionPartyBalancesSuccessWithoutSelectingUnavailableHeroes" methodname="RecommendedExpeditionPartyBalancesSuccessWithoutSelectingUnavailableHeroes" classname="Emberhall.Tests.CoreTests" runstate="Runnable" seed="1804663183" result="Passed" start-time="2026-10-12 04:12:56Z" end-time="2026-10-12 04:12:56Z" duration="0.012988" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1025" name="RecommendedPartyUsesStrongReadyHeroesAndPreservesCampaignRng" fullname="Emberhall.Tests.CoreTests.RecommendedPartyUsesStrongReadyHeroesAndPreservesCampaignRng" methodname="RecommendedPartyUsesStrongReadyHeroesAndPreservesCampaignRng" classname="Emberhall.Tests.CoreTests" runstate="Runnable" seed="220131430" result="Passed" start-time="2026-10-12 04:12:56Z" end-time="2026-10-12 04:12:56Z" duration="0.011541" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1023" name="RecruitingChargesGoldAndRespectsRosterCap" fullname="Emberhall.Tests.CoreTests.RecruitingChargesGoldAndRespectsRosterCap" methodname="RecruitingChargesGoldAndRespectsRosterCap" classname="Emberhall.Tests.CoreTests" runstate="Runnable" seed="1161395449" result="Passed" start-time="2026-10-12 04:12:56Z" end-time="2026-10-12 04:12:56Z" duration="0.006265" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1039" name="RejectedFacilityUpgradeDoesNotConsumeAnAffordablePartOfItsCost" fullname="Emberhall.Tests.CoreTests.RejectedFacilityUpgradeDoesNotConsumeAnAffordablePartOfItsCost" methodname="RejectedFacilityUpgradeDoesNotConsumeAnAffordablePartOfItsCost" classname="Emberhall.Tests.CoreTests" runstate="Runnable" seed="1241130892" result="Passed" start-time="2026-10-12 04:12:56Z" end-time="2026-10-12 04:12:56Z" duration="0.003978" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1049" name="RemovedGearCannotPayTwiceOrConsumeEnhancementResources" fullname="Emberhall.Tests.CoreTests.RemovedGearCannotPayTwiceOrConsumeEnhancementResources" classname="Emberhall.Tests.CoreTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-10-12 04:12:56Z" end-time="2026-10-12 04:12:56Z" duration="0.010508" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1047" name="RemovedGearCannotPayTwiceOrConsumeEnhancementResources(&quot;sale&quot;)" fullname="Emberhall.Tests.CoreTests.RemovedGearCannotPayTwiceOrConsumeEnhancementResources(&quot;sale&quot;)" methodname="RemovedGearCannotPayTwiceOrConsumeEnhancementResources" classname="Emberhall.Tests.CoreTests" runstate="Runnable" seed="962507297" result="Passed" start-time="2026-10-12 04:12:56Z" end-time="2026-10-12 04:12:56Z" duration="0.005836" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1048" name="RemovedGearCannotPayTwiceOrConsumeEnhancementResources(&quot;salvage&quot;)" fullname="Emberhall.Tests.CoreTests.RemovedGearCannotPayTwiceOrConsumeEnhancementResources(&quot;salvage&quot;)" methodname="RemovedGearCannotPayTwiceOrConsumeEnhancementResources" classname="Emberhall.Tests.CoreTests" runstate="Runnable" seed="851025736" result="Passed" start-time="2026-10-12 04:12:56Z" end-time="2026-10-12 04:12:56Z" duration="0.004080" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1040" name="ResearchUsesItsOwnSlotAndUpdatesCachedHeroStatsOnCompletion" fullname="Emberhall.Tests.CoreTests.ResearchUsesItsOwnSlotAndUpdatesCachedHeroStatsOnCompletion" methodname="ResearchUsesItsOwnSlotAndUpdatesCachedHeroStatsOnCompletion" classname="Emberhall.Tests.CoreTests" runstate="Runnable" seed="2038178301" result="Passed" start-time="2026-10-12 04:12:56Z" end-time="2026-10-12 04:12:56Z" duration="0.005856" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1010" name="SaveRoundTripKeepsEverything" fullname="Emberhall.Tests.CoreTests.SaveRoundTripKeepsEverything" methodname="SaveRoundTripKeepsEverything" classname="Emberhall.Tests.CoreTests" runstate="Runnable" seed="800404351" result="Passed" start-time="2026-10-12 04:12:56Z" end-time="2026-10-12 04:12:56Z" duration="0.007577" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1008" name="SelectableStartersMatchTheCharterAndHaveNoOpeningBlocker" fullname="Emberhall.Tests.CoreTests.SelectableStartersMatchTheCharterAndHaveNoOpeningBlocker" methodname="SelectableStartersMatchTheCharterAndHaveNoOpeningBlocker" classname="Emberhall.Tests.CoreTests" runstate="Runnable" seed="985224843" result="Passed" start-time="2026-10-12 04:12:56Z" end-time="2026-10-12 04:12:56Z" duration="0.009007" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1028" name="ShieldBuffIsAppliedOnceAndKeepsItsDuration" fullname="Emberhall.Tests.CoreTests.ShieldBuffIsAppliedOnceAndKeepsItsDuration" methodname="ShieldBuffIsAppliedOnceAndKeepsItsDuration" classname="Emberhall.Tests.CoreTests" runstate="Runnable" seed="845512718" result="Passed" start-time="2026-10-12 04:12:56Z" end-time="2026-10-12 04:12:56Z" duration="0.004199" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1030" name="StunAndPoisonRespectTheirSpecifiedTurns" fullname="Emberhall.Tests.CoreTests.StunAndPoisonRespectTheirSpecifiedTurns" methodname="StunAndPoisonRespectTheirSpecifiedTurns" classname="Emberhall.Tests.CoreTests" runstate="Runnable" seed="1334521008" result="Passed" start-time="2026-10-12 04:12:56Z" end-time="2026-10-12 04:12:56Z" duration="0.006429" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1067" name="SuccessfulDismissalReturnsEquipmentToTheBagAndCannotRepeat" fullname="Emberhall.Tests.CoreTests.SuccessfulDismissalReturnsEquipmentToTheBagAndCannotRepeat" methodname="SuccessfulDismissalReturnsEquipmentToTheBagAndCannotRepeat" classname="Emberhall.Tests.CoreTests" runstate="Runnable" seed="1601162380" result="Passed" start-time="2026-10-12 04:12:56Z" end-time="2026-10-12 04:12:56Z" duration="0.008079" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1036" name="TavernRotatesExpiredCandidatesAndRejectsAlreadyHiredCandidates" fullname="Emberhall.Tests.CoreTests.TavernRotatesExpiredCandidatesAndRejectsAlreadyHiredCandidates" methodname="TavernRotatesExpiredCandidatesAndRejectsAlreadyHiredCandidates" classname="Emberhall.Tests.CoreTests" runstate="Runnable" seed="1424335006" result="Passed" start-time="2026-10-12 04:12:56Z" end-time="2026-10-12 04:12:56Z" duration="0.008196" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1012" name="TimersCompleteOfflineAndReportIsBuilt" fullname="Emberhall.Tests.CoreTests.TimersCompleteOfflineAndReportIsBuilt" methodname="TimersCompleteOfflineAndReportIsBuilt" classname="Emberhall.Tests.CoreTests" runstate="Runnable" seed="811142094" result="Passed" start-time="2026-10-12 04:12:56Z" end-time="2026-10-12 04:12:56Z" duration="0.009452" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1041" name="TimerSpeedupChargesOnceAndFinishesTheFacilityImmediately" fullname="Emberhall.Tests.CoreTests.TimerSpeedupChargesOnceAndFinishesTheFacilityImmediately" methodname="TimerSpeedupChargesOnceAndFinishesTheFacilityImmediately" classname="Emberhall.Tests.CoreTests" runstate="Runnable" seed="657806288" result="Passed" start-time="2026-10-12 04:12:56Z" end-time="2026-10-12 04:12:56Z" duration="0.006443" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1059" name="TowerBestCannotRegressAndSurvivesSaving" fullname="Emberhall.Tests.CoreTests.TowerBestCannotRegressAndSurvivesSaving" methodname="TowerBestCannotRegressAndSurvivesSaving" classname="Emberhall.Tests.CoreTests" runstate="Runnable" seed="367612864" result="Passed" start-time="2026-10-12 04:12:56Z" end-time="2026-10-12 04:12:56Z" duration="0.010568" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1022" name="TowerMissionsScale" fullname="Emberhall.Tests.CoreTests.TowerMissionsScale" methodname="TowerMissionsScale" classname="Emberhall.Tests.CoreTests" runstate="Runnable" seed="279859846" result="Passed" start-time="2026-10-12 04:12:56Z" end-time="2026-10-12 04:12:56Z" duration="0.004822" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1043" name="TrainingAndHealingFinishExactlyOnceAfterAnOfflineReload" fullname="Emberhall.Tests.CoreTests.TrainingAndHealingFinishExactlyOnceAfterAnOfflineReload" methodname="TrainingAndHealingFinishExactlyOnceAfterAnOfflineReload" classname="Emberhall.Tests.CoreTests" runstate="Runnable" seed="235003555" result="Passed" start-time="2026-10-12 04:12:56Z" end-time="2026-10-12 04:12:56Z" duration="0.012012" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1018" name="TrainingGrantsXp" fullname="Emberhall.Tests.CoreTests.TrainingGrantsXp" methodname="TrainingGrantsXp" classname="Emberhall.Tests.CoreTests" runstate="Runnable" seed="677598238" result="Passed" start-time="2026-10-12 04:12:56Z" end-time="2026-10-12 04:12:56Z" duration="0.005017" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1042" name="TrainingReservesASlotAndRejectsRepeatedOrOverCapacityPayments" fullname="Emberhall.Tests.CoreTests.TrainingReservesASlotAndRejectsRepeatedOrOverCapacityPayments" methodname="TrainingReservesASlotAndRejectsRepeatedOrOverCapacityPayments" classname="Emberhall.Tests.CoreTests" runstate="Runnable" seed="510285294" result="Passed" start-time="2026-10-12 04:12:56Z" end-time="2026-10-12 04:12:56Z" duration="0.006160" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1013" name="VaultAccruesAndCaps" fullname="Emberhall.Tests.CoreTests.VaultAccruesAndCaps" methodname="VaultAccruesAndCaps" classname="Emberhall.Tests.CoreTests" runstate="Runnable" seed="1799223984" result="Passed" start-time="2026-10-12 04:12:56Z" end-time="2026-10-12 04:12:56Z" duration="0.003896" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1017" name="WrongWeaponFamilyCannotBeEquipped" fullname="Emberhall.Tests.CoreTests.WrongWeaponFamilyCannotBeEquipped" methodname="WrongWeaponFamilyCannotBeEquipped" classname="Emberhall.Tests.CoreTests" runstate="Runnable" seed="732087263" result="Passed" start-time="2026-10-12 04:12:56Z" end-time="2026-10-12 04:12:56Z" duration="0.004797" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1069" name="LanguageTests" fullname="Emberhall.Tests.LanguageTests" classname="Emberhall.Tests.LanguageTests" runstate="Runnable" testcasecount="9" result="Passed" start-time="2026-10-12 04:12:56Z" end-time="2026-10-12 04:12:56Z" duration="0.014502" total="9" passed="9" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1072" name="ExplicitLanguageSelectionIsPreservedBeforeInitialization" fullname="Emberhall.Tests.LanguageTests.ExplicitLanguageSelectionIsPreservedBeforeInitialization" methodname="ExplicitLanguageSelectionIsPreservedBeforeInitialization" classname="Emberhall.Tests.LanguageTests" runstate="Runnable" seed="1831854104" result="Passed" start-time="2026-10-12 04:12:56Z" end-time="2026-10-12 04:12:56Z" duration="0.005846" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1070" name="FreshInstallStartsInEnglish" fullname="Emberhall.Tests.LanguageTests.FreshInstallStartsInEnglish" methodname="FreshInstallStartsInEnglish" classname="Emberhall.Tests.LanguageTests" runstate="Runnable" seed="1861731198" result="Passed" start-time="2026-10-12 04:12:56Z" end-time="2026-10-12 04:12:56Z" duration="0.000376" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1071" name="OlderInstallMovesToEnglishOnceAndKeepsLaterManualChoice" fullname="Emberhall.Tests.LanguageTests.OlderInstallMovesToEnglishOnceAndKeepsLaterManualChoice" methodname="OlderInstallMovesToEnglishOnceAndKeepsLaterManualChoice" classname="Emberhall.Tests.LanguageTests" runstate="Runnable" seed="1006868724" result="Passed" start-time="2026-10-12 04:12:56Z" end-time="2026-10-12 04:12:56Z" duration="0.000377" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1079" name="UnsupportedOrBlankLanguageAlwaysFallsBackToEnglish" fullname="Emberhall.Tests.LanguageTests.UnsupportedOrBlankLanguageAlwaysFallsBackToEnglish" classname="Emberhall.Tests.LanguageTests" runstate="Runnable" testcasecount="6" result="Passed" start-time="2026-10-12 04:12:56Z" end-time="2026-10-12 04:12:56Z" duration="0.006759" total="6" passed="6" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1073" name="UnsupportedOrBlankLanguageAlwaysFallsBackToEnglish(null,&quot;en&quot;)" fullname="Emberhall.Tests.LanguageTests.UnsupportedOrBlankLanguageAlwaysFallsBackToEnglish(null,&quot;en&quot;)" methodname="UnsupportedOrBlankLanguageAlwaysFallsBackToEnglish" classname="Emberhall.Tests.LanguageTests" runstate="Runnable" seed="1738137620" result="Passed" start-time="2026-10-12 04:12:56Z" end-time="2026-10-12 04:12:56Z" duration="0.000449" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1074" name="UnsupportedOrBlankLanguageAlwaysFallsBackToEnglish(&quot;&quot;,&quot;en&quot;)" fullname="Emberhall.Tests.LanguageTests.UnsupportedOrBlankLanguageAlwaysFallsBackToEnglish(&quot;&quot;,&quot;en&quot;)" methodname="UnsupportedOrBlankLanguageAlwaysFallsBackToEnglish" classname="Emberhall.Tests.LanguageTests" runstate="Runnable" seed="879355933" result="Passed" start-time="2026-10-12 04:12:56Z" end-time="2026-10-12 04:12:56Z" duration="0.000546" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1075" name="UnsupportedOrBlankLanguageAlwaysFallsBackToEnglish(&quot;en&quot;,&quot;en&quot;)" fullname="Emberhall.Tests.LanguageTests.UnsupportedOrBlankLanguageAlwaysFallsBackToEnglish(&quot;en&quot;,&quot;en&quot;)" methodname="UnsupportedOrBlankLanguageAlwaysFallsBackToEnglish" classname="Emberhall.Tests.LanguageTests" runstate="Runnable" seed="339198065" result="Passed" start-time="2026-10-12 04:12:56Z" end-time="2026-10-12 04:12:56Z" duration="0.000223" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1076" name="UnsupportedOrBlankLanguageAlwaysFallsBackToEnglish(&quot;ID&quot;,&quot;id&quot;)" fullname="Emberhall.Tests.LanguageTests.UnsupportedOrBlankLanguageAlwaysFallsBackToEnglish(&quot;ID&quot;,&quot;id&quot;)" methodname="UnsupportedOrBlankLanguageAlwaysFallsBackToEnglish" classname="Emberhall.Tests.LanguageTests" runstate="Runnable" seed="84788040" result="Passed" start-time="2026-10-12 04:12:56Z" end-time="2026-10-12 04:12:56Z" duration="0.000383" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1077" name="UnsupportedOrBlankLanguageAlwaysFallsBackToEnglish(&quot; id &quot;,&quot;id&quot;)" fullname="Emberhall.Tests.LanguageTests.UnsupportedOrBlankLanguageAlwaysFallsBackToEnglish(&quot; id &quot;,&quot;id&quot;)" methodname="UnsupportedOrBlankLanguageAlwaysFallsBackToEnglish" classname="Emberhall.Tests.LanguageTests" runstate="Runnable" seed="1067824857" result="Passed" start-time="2026-10-12 04:12:56Z" end-time="2026-10-12 04:12:56Z" duration="0.000467" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1078" name="UnsupportedOrBlankLanguageAlwaysFallsBackToEnglish(&quot;fr&quot;,&quot;en&quot;)" fullname="Emberhall.Tests.LanguageTests.UnsupportedOrBlankLanguageAlwaysFallsBackToEnglish(&quot;fr&quot;,&quot;en&quot;)" methodname="UnsupportedOrBlankLanguageAlwaysFallsBackToEnglish" classname="Emberhall.Tests.LanguageTests" runstate="Runnable" seed="522690209" result="Passed" start-time="2026-10-12 04:12:56Z" end-time="2026-10-12 04:12:56Z" duration="0.000474" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[Saving results to: C:\Guild Manager Sonnet 55\Logs\results_EditMode.xml
+]]></output>
+              </test-case>
+            </test-suite>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

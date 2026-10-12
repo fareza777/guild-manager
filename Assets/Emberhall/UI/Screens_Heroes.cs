@@ -35,8 +35,8 @@ namespace Emberhall
                 case 2: list = list.OrderByDescending(u => C.Content.Rarities.FindIndex(r => r.id == u.rarity)).ThenByDescending(u => u.level).ToList(); break;
                 default: list = list.OrderBy(u => u.classId).ThenByDescending(u => u.level).ToList(); break;
             }
-            var grid = U.Rt(sc.content, "grid"); U.Grid(grid, new Vector2(500, 230), new Vector2(14, 14), 2, null, TextAnchor.UpperCenter); grid.Fit();
-            foreach (var u in list) { var uu = u; var card = W.HeroCard(grid, uu, 500, 230, () => Popups.Show(new HeroPopup(uu.uid))); }
+            var grid = U.Rt(sc.content, "grid"); U.Grid(grid, new Vector2(1000, 250), new Vector2(14, 14), 1, null, TextAnchor.UpperCenter); grid.Fit();
+            foreach (var u in list) { var uu = u; var card = W.HeroCard(grid, uu, 1000, 250, () => Popups.Show(new HeroPopup(uu.uid))); }
             if (!C.Roster.Full)
             {
                 var add = U.Box(grid, Theme.PanelDark, Theme.Grey, "add", true); var ab = add.gameObject.AddComponent<UButton>(); ab.bg = add; ab.noTint = true; ab.onClick = () => App.I.nav.Push(new FacilityScreen("tavern"));
@@ -71,11 +71,11 @@ namespace Emberhall
             var cls = C.Content.Class(u.classId); var rar = C.Content.Rarity(u.rarity); var rc = Theme.Hex(rar.color);
             var st = C.Roster.Stats(u);
             // --- banner ---
-            var banner = U.Box(body, Color.Lerp(Theme.Inset, rc, 0.25f), rc, "banner"); banner.Le(-1, 360, 1);
+            var banner = U.Box(body, Color.Lerp(Theme.Inset, rc, 0.25f), rc, "banner"); banner.Le(-1, 460, 1);
             var sky = U.Img(banner.transform, Art.Bg(u.monster ? "DungeonA" : "PlainA"), new Color(1, 1, 1, 0.5f), "bgart"); sky.Fill(6, 6, 6, 6);
             var pic = W.Portrait(banner.transform, u.sprite, u.monster ? 300 : 280); pic.transform.parent.GetComponent<RectTransform>().At(0.28f, 0, 0, 24, 300, 300, 0.5f, 0); Tw.Bob(pic.transform.parent.GetComponent<RectTransform>(), 5, 1.3f);
-            var info = U.Rt(banner.transform, "info"); info.At(1, 0.5f, -20, 0, 470, 330, 1, 0.5f); U.VBox(info, 8, null, TextAnchor.MiddleLeft, true, true, true, false);
-            var nm = U.Txt(info, u.name, 48, Theme.Text, TextAnchor.MiddleCenter, true); nm.Le(-1, 56);
+            var info = U.Rt(banner.transform, "info"); info.At(1, 0.5f, -20, 0, 470, 440, 1, 0.5f); U.VBox(info, 8, null, TextAnchor.MiddleLeft, true, true, true, false);
+            var nm = U.Txt(info, u.name, 48, Theme.Text, TextAnchor.MiddleCenter, true); nm.Le(-1, 144);
             var row1 = U.Rt(info, "r1"); row1.Le(-1, 52); U.HBox(row1, 10, null, TextAnchor.MiddleCenter, false, false); W.ClassBadge(row1, u.classId, 48); var cl = U.Txt(row1, L.T(cls.name), 38, Theme.Text, TextAnchor.MiddleCenter, true); cl.Le(cl.preferredWidth + 6, 48);
             var row2 = U.Rt(info, "r2"); row2.Le(-1, 48); U.HBox(row2, 10, null, TextAnchor.MiddleCenter, false, false);
             var rch = U.Chip(row2, L.T(rar.name), Color.Lerp(Theme.Inset, rc, 0.55f), 28, Color.white, 14, 42);
@@ -91,7 +91,7 @@ namespace Emberhall
 
             // --- stats ---
             W.Header(body, L.T("Stats"), Icons.Get("atk"));
-            var sg = U.Rt(body, "stats"); U.Grid(sg, new Vector2(286, 120), new Vector2(12, 12), 3, null, TextAnchor.UpperCenter); sg.Fit();
+            var sg = U.Rt(body, "stats"); U.Grid(sg, new Vector2(440, 148), new Vector2(12, 12), 2, null, TextAnchor.UpperCenter); sg.Fit();
             foreach (var sd in C.Content.Stats)
             {
                 var cell = U.Box(sg, Theme.PanelDark, Theme.Black, "s");
@@ -144,7 +144,7 @@ namespace Emberhall
                 if (!C.Content.SkillMap.TryGetValue(sid, out var sk)) continue;
                 bool open = sk.unlockLevel <= u.level + u.promo * 5;
                 var row = U.Box(body, open ? Theme.PanelDark : Theme.GreyDark, Theme.Black, "skill"); row.Le(-1, 166, 1);
-                var nm2 = U.Txt(row.transform, L.T(sk.name) + (sk.cd > 0 ? $"  <size=28><color=#75614a>CD {sk.cd}</color></size>" : ""), 36, open ? Theme.Gold : Theme.TextDim, TextAnchor.MiddleCenter, true); nm2.StretchX(1, -12, 46, 22, 22);
+                var nm2 = U.Txt(row.transform, L.T(sk.name) + (sk.cd > 0 ? $"  <size=36><color=#75614a>CD {sk.cd}</color></size>" : ""), 36, open ? Theme.Gold : Theme.TextDim, TextAnchor.MiddleCenter, true); nm2.StretchX(1, -12, 46, 22, 22);
                 var ds = U.Txt(row.transform, open ? L.T(sk.desc ?? "") : L.T("Unlocks at level {0}", sk.unlockLevel), 32, Theme.TextDim, TextAnchor.MiddleCenter, false, true); ds.StretchX(1, -66, 80, 22, 22);
             }
             // --- consumables ---

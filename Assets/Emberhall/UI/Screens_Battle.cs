@@ -48,7 +48,10 @@ namespace Emberhall
         readonly List<UButton> speedBtns = new List<UButton>(); readonly List<Text> heroRoleT = new List<Text>(); int displayedWave;
         readonly List<Image> heroCards = new List<Image>(); int heroActions;
         static readonly Dictionary<Sprite, float> visibleSpriteTops = new Dictionary<Sprite, float>();
-        U.Bar[] heroBars; Text[] heroHpT; Coroutine co; bool skip, finished; int speed;
+        U.Bar[] heroBars; Text[] heroHpT; Coroutine co; bool skip, finished, paused; int speed;
+        UButton pauseButton;
+        public bool IsPaused => paused;
+        public int DisplayedActions => heroActions;
         GameContext C => App.Ctx;
         public override string Id => "Battle";
 
@@ -69,10 +72,11 @@ namespace Emberhall
             if (roundT) roundT.text = L.T("Round {0}", Mathf.Max(1, Mathf.CeilToInt(heroActions / (float)Mathf.Max(1, party.Count))));
             if (speedLabel) speedLabel.text = L.T("Speed");
             if (skipButton && skipButton.label) skipButton.label.text = L.T("SKIP");
+            if (pauseButton && pauseButton.label) pauseButton.label.text = L.T(paused ? "Resume" : "Pause");
             for (int i = 0; i < heroRoleT.Count && i < party.Count; i++)
             {
                 var u = party[i]; var cls = C.Content.Class(u.classId);
-                if (heroRoleT[i]) heroRoleT[i].text = $"{L.T(cls?.name ?? u.classId)} · Lv {u.level}";
+                if (heroRoleT[i]) heroRoleT[i].text = L.T(cls?.name ?? u.classId);
             }
             foreach (var unit in units.Values) if (unit.label) FitUnitName(unit);
         }
@@ -95,7 +99,7 @@ namespace Emberhall
             Canvas.ForceUpdateCanvases(); LayoutRebuilder.ForceRebuildLayoutImmediate(root);
             var size = root.rect.size; if (size.y < 100) size = new Vector2(1080, 1920);
             var back = UiHost.I.back; U.Clear(back); U.Solid(back, Theme.Bg0, "bg").Fill();
-            float topH = 112, botH = 292;
+            float topH = 146, botH = 424;
             asz = new Vector2(size.x, size.y - topH - botH);
             // A compact mission header leaves the painted arena as the main stage.
             var top = U.Solid(root, Theme.PanelLight, "top"); top.At(0.5f, 1, 0, 0, size.x, topH, 0.5f, 1);
@@ -103,7 +107,7 @@ namespace Emberhall
             var nm = U.Txt(top.transform, W.MissionName(m.name), 40, Theme.TextDark, TextAnchor.MiddleLeft); nm.StretchX(1, -12, 48, 28, 284);
             missionT = nm;
             var waveChip = U.Box(top.transform, Color.Lerp(Theme.PanelLight, Theme.Blue, .12f), null, "wave_chip", false, .04f);
-            waveChip.At(1, 1, -24, -12, 232, 48, 1, 1);
+            waveChip.At(1, 1, -24, -12, 232, 64, 1, 1);
             waveT = U.Txt(waveChip.transform, "", 30, Theme.BlueDark, TextAnchor.MiddleCenter); waveT.Fill(12, 12, 4, 4);
             planT = U.Txt(top.transform, L.T("Battle plan") + ": " + L.T(doctrine.ToString()), 28, Theme.TextDim, TextAnchor.MiddleLeft); planT.StretchX(0, 12, 38, 28, 284);
             roundT = U.Txt(top.transform, L.T("Round {0}", 1), 28, Theme.TextDim, TextAnchor.MiddleRight); roundT.At(1, 0, -28, 12, 232, 38, 1, 0);
@@ -125,19 +129,19 @@ namespace Emberhall
             skillT = U.Txt(arena, "", 46, Theme.TextDark, TextAnchor.MiddleCenter); skillT.StretchX(1, -34, 72, 36, 36); skillT.gameObject.SetActive(false);
             var skillOutline = skillT.gameObject.AddComponent<Outline>(); skillOutline.effectColor = new Color(1f, .98f, .88f, .9f); skillOutline.effectDistance = new Vector2(2, -2);
             var logPlate = U.Box(arena, Theme.PanelLight, Color.Lerp(Theme.PanelLight, Theme.Gold, .25f), "combat_log", false, .04f);
-            logPlate.At(.5f, 0, 0, 16, Mathf.Min(920, asz.x - 72), 56, .5f, 0);
+            logPlate.At(.5f, 0, 0, 16, Mathf.Min(920, asz.x - 72), 80, .5f, 0);
             logT = U.Txt(logPlate.transform, "", 30, Theme.TextDark, TextAnchor.MiddleCenter); logT.Fill(20, 20, 7, 7);
         }
 
         void BuildBottom(float w, float h)
         {
             speedBtns.Clear(); heroCards.Clear(); heroRoleT.Clear();
-            var ctl = U.Rt(bottom, "ctl"); ctl.At(0.5f, 0, 0, 16, w - 48, 76, 0.5f, 0); U.HBox(ctl, 12, null, TextAnchor.MiddleCenter, true, true, false, true);
-            var lab = U.Txt(ctl, L.T("Speed"), 28, Theme.TextDim); lab.Le(152, 64);
-            speedLabel = lab;
-            for (int i = 1; i <= 3; i++) { int sp = i; var b = U.Btn(ctl, "x" + i, sp == speed ? Theme.Accent : Theme.Inset, () => SetSpeed(sp), 108, 72, 32); b.Le(108, 72); speedBtns.Add(b); }
+            var ctl = U.Rt(bottom, "ctl"); ctl.At(0.5f, 0, 0, 16, w - 48, 100, 0.5f, 0); U.HBox(ctl, 12, null, TextAnchor.MiddleCenter, true, true, false, true);
+            for (int i = 1; i <= 3; i++) { int sp = i; var b = U.Btn(ctl, "x" + i, sp == speed ? Theme.Accent : Theme.Inset, () => SetSpeed(sp), 108, 96, 32); b.Le(108, 96); speedBtns.Add(b); }
             var spacer = U.Rt(ctl, "sp"); spacer.Le(-1, 10, 1);
-            var sk = U.Btn(ctl, L.T("SKIP"), Theme.BlueDark, () => { skip = true; }, 220, 72, 32, Icons.Get("arrow_r")); sk.Le(220, 72);
+            pauseButton = U.Btn(ctl, L.T("Pause"), Theme.Panel, TogglePause, 220, 96, 32); pauseButton.Le(220, 96);
+            Hud.Reg("btn_pause", pauseButton);
+            var sk = U.Btn(ctl, L.T("SKIP"), Theme.BlueDark, () => { skip = true; paused = false; Tw.TimeScale = speed; }, 220, 96, 32, Icons.Get("arrow_r")); sk.Le(220, 96);
             skipButton = sk;
             Hud.Reg("btn_skip", sk);
             // Sideways scrolling keeps longer names and roles readable in larger parties.
@@ -145,26 +149,27 @@ namespace Emberhall
             float cardW = Mathf.Min(440, (w - 48 - 12 * Mathf.Max(0, party.Count - 1)) / Mathf.Max(1, party.Count));
             if (party.Count <= 3)
             {
-                row = U.Rt(bottom, "party"); row.At(.5f, 1, 0, -14, w - 48, 168, .5f, 1);
+                row = U.Rt(bottom, "party"); row.At(.5f, 1, 0, -14, w - 48, 280, .5f, 1);
                 U.HBox(row, 12, null, TextAnchor.MiddleCenter, true, true, false, true);
             }
             else
             {
                 var roster = U.ScrollH(bottom, 12, new RectOffset(0, 0, 0, 0), "party_strip");
-                roster.sr.R().At(.5f, 1, 0, -14, w - 48, 168, .5f, 1); row = roster.content; cardW = 344;
+                roster.sr.R().At(.5f, 1, 0, -14, w - 48, 280, .5f, 1); row = roster.content; cardW = 344;
                 roster.sr.movementType = ScrollRect.MovementType.Clamped;
             }
             heroBars = new U.Bar[party.Count]; heroHpT = new Text[party.Count];
             for (int i = 0; i < party.Count; i++)
             {
-                var u = party[i]; var card = U.Img(row, HeroPlate(i, false), Color.white, "hero_status"); card.Le(cardW, 168); heroCards.Add(card);
-                var pic = W.Portrait(card.transform, u.sprite, 74); pic.transform.parent.GetComponent<RectTransform>().At(0, .5f, 10, 0, 66, 74, 0, .5f);
-                var n = U.Txt(card.transform, u.name, 32, Theme.TextDark, TextAnchor.MiddleCenter); n.StretchX(1, -10, 44, 82, 12);
+                var u = party[i]; var card = U.Img(row, HeroPlate(i, false), Color.white, "hero_status"); card.Le(cardW, 280); heroCards.Add(card);
+                var pic = W.Portrait(card.transform, u.sprite, 70); pic.transform.parent.GetComponent<RectTransform>().At(0, 0, 10, 36, 66, 70, 0, 0);
+                U.Txt(card.transform, $"Lv{u.level}", 28, Theme.Gold, TextAnchor.MiddleCenter).At(0, 0, 8, 112, 82, 46, 0, 0);
+                var n = U.Txt(card.transform, u.name, 32, Theme.TextDark, TextAnchor.MiddleCenter); n.StretchX(1, -10, 112, 12, 12);
                 var cls = C.Content.Class(u.classId);
-                var role = U.Txt(card.transform, $"{L.T(cls?.name ?? u.classId)} · Lv {u.level}", 28, Theme.TextDim, TextAnchor.MiddleCenter); role.StretchX(1, -56, 38, 82, 12);
+                var role = U.Txt(card.transform, L.T(cls?.name ?? u.classId), 28, Theme.TextDim, TextAnchor.MiddleCenter); role.StretchX(1, -136, 48, 98, 12);
                 heroRoleT.Add(role);
                 var hb = U.ProgressBar(card.transform, Theme.Green, 200, 16); hb.back.R().StretchX(0, 16, 16, 18, 18); heroBars[i] = hb;
-                var ht = U.Txt(card.transform, "", 28, Theme.TextDim, TextAnchor.MiddleCenter); ht.StretchX(0, 40, 34, 82, 12); heroHpT[i] = ht;
+                var ht = U.Txt(card.transform, "", 28, Theme.TextDim, TextAnchor.MiddleCenter); ht.StretchX(0, 48, 46, 98, 12); heroHpT[i] = ht;
                 SetHeroBar(i, startHp[i], setup.heroes[i].maxHp);
             }
         }
@@ -176,7 +181,13 @@ namespace Emberhall
             return Boxes.Get(fill, Color.Lerp(fill, tint, .35f), .04f);
         }
 
-        void SetSpeed(int s) { speed = s; Prefs.BattleSpeed = s; Tw.TimeScale = s; for (int i = 0; i < speedBtns.Count; i++) { speedBtns[i].SetColor(i + 1 == s ? Theme.Accent : Theme.PanelLight); } }
+        void SetSpeed(int s) { speed = s; Prefs.BattleSpeed = s; Tw.TimeScale = paused ? 0 : s; for (int i = 0; i < speedBtns.Count; i++) { speedBtns[i].SetColor(i + 1 == s ? Theme.Accent : Theme.PanelLight); } }
+        void TogglePause()
+        {
+            if (finished || skip) return;
+            paused = !paused; Tw.TimeScale = paused ? 0 : speed;
+            if (pauseButton && pauseButton.label) pauseButton.label.text = L.T(paused ? "Resume" : "Pause");
+        }
         void SetHeroBar(int i, double hp, double max)
         {
             if (i < 0 || i >= heroBars.Length || heroBars[i] == null) return;
@@ -219,7 +230,7 @@ namespace Emberhall
                 int skin = Art.SkinIndex(key);
                 u.idle = new[] { Art.Chara(skin, 2, 0), Art.Chara(skin, 2, 1), Art.Chara(skin, 2, 2), Art.Chara(skin, 2, 1) };
                 u.atk = new[] { Art.Arpg(c.anim, skin, 2, 0), Art.Arpg(c.anim, skin, 2, 1), Art.Arpg(c.anim, skin, 2, 2), Art.Arpg(c.anim, skin, 2, 1) };
-                u.anim = SpriteAnim.On(u.body, u.idle, 3, true, 5.6f); u.height = 124;
+                u.anim = SpriteAnim.On(u.body, u.idle, 3, true, 6.5f); u.height = 144;
             }
             else if (key.StartsWith("bat:"))
             {
@@ -234,12 +245,13 @@ namespace Emberhall
                 float sc = 4.4f * c.scale * (c.boss ? 1.1f : 1f);
                 u.anim = SpriteAnim.On(u.body, u.idle, 4.5f, true, sc); u.height = 48 * sc * 0.68f;
             }
+            u.anim.battleTime = true;
             u.anim.Show(u.idle[0]);
             u.height = VisibleHeight(u.idle, u.anim.scale, u.height);
             // Leave space above large bosses for their labels and rising combat feedback.
             pos.y = Mathf.Clamp(pos.y, 140, Mathf.Max(140, asz.y - u.height - 310));
             u.home = pos; u.root.anchoredPosition = pos;
-            u.root.sizeDelta = new Vector2(312f, u.height + 94f);
+            u.root.sizeDelta = new Vector2(312f, u.height + 120f);
             if (u.flip) u.body.rectTransform.localScale = new Vector3(-1, 1, 1);
             float sw = Mathf.Max(100, u.height * 0.8f);
             u.shadow.R().sizeDelta = new Vector2(Mathf.Clamp(sw, 100, 220), 40);
@@ -249,10 +261,10 @@ namespace Emberhall
             var nameTint = hero ? Theme.GreenDark : Theme.RedDark;
             var nameFill = Color.Lerp(Theme.PanelLight, hero ? Theme.Green : Theme.Red, .09f);
             var nameplate = U.Box(u.root, nameFill, Color.Lerp(nameFill, nameTint, .24f), "nameplate", false, .04f);
-            nameplate.At(.5f, 0, 0, u.height + 26f, 220f, 46f, .5f, 0);
+            nameplate.At(.5f, 0, 0, u.height + 26f, 220f, 64f, .5f, 0);
             nameplate.gameObject.AddComponent<RectMask2D>();
             U.Solid(nameplate.transform, nameTint, "team_mark").At(0, .5f, 0, 0, 3, 28, 0, .5f);
-            u.label = U.Txt(nameplate.transform, c.name, 30, Theme.TextDark, TextAnchor.MiddleCenter); u.label.Fill(12, 12, 4, 4);
+            u.label = U.Txt(nameplate.transform, c.name, hero ? 30 : 28, Theme.TextDark, TextAnchor.MiddleCenter); u.label.Fill(12, 12, 4, 4);
             FitUnitName(u);
             units[c.id] = u; return u;
         }
@@ -282,13 +294,13 @@ namespace Emberhall
 
         void FitUnitName(BUnit u)
         {
-            u.label.text = u.hero ? u.c.name : L.T(u.c.name);
-            float width = Mathf.Clamp(u.label.preferredWidth + 28, 124, 300);
-            u.label.transform.parent.R().sizeDelta = new Vector2(width, 46);
+            u.label.text = u.hero ? u.c.name.Split(' ')[0] : L.T(u.c.name);
+            float width = Mathf.Clamp(u.label.preferredWidth + 28, 124, 360);
+            u.label.transform.parent.R().sizeDelta = new Vector2(width, 64);
         }
 
         // =============================== playback ===============================
-        IEnumerator Wait(float s) { float t = 0; while (t < s) { if (skip) yield break; t += Time.unscaledDeltaTime * speed; yield return null; } }
+        IEnumerator Wait(float s) { float t = 0; while (t < s || paused) { if (skip) yield break; if (!paused) t += Time.unscaledDeltaTime * speed; yield return null; } }
 
         IEnumerator Play()
         {
@@ -574,13 +586,13 @@ namespace Emberhall
             W.Info(body, L.T("+{0} XP each", Util.Num(o.xp)), 32, Theme.Blue);
             foreach (var u in party)
             {
-                var row = U.Box(body, Theme.PanelDark, Theme.Black, "h"); row.Le(-1, 116, 1);
+                var row = U.Box(body, Theme.PanelDark, Theme.Black, "h"); row.Le(-1, 158, 1);
                 var pic = W.Portrait(row.transform, u.sprite, 88); pic.transform.parent.GetComponent<RectTransform>().At(0, 0.5f, 16, -2, 80, 88, 0, 0.5f);
-                var n = U.Txt(row.transform, u.name, 34, Theme.Text, TextAnchor.MiddleLeft, true); n.At(0, 1, 110, -10, 400, 42, 0, 1);
+                var n = U.Txt(row.transform, u.name, 34, Theme.Text, TextAnchor.MiddleLeft, true); n.At(0, 1, 110, -10, 560, 56, 0, 1);
                 var hb = U.ProgressBar(row.transform, C.Roster.HpFrac(u) < 0.3 ? Theme.Red : Theme.Green, 360, 22, "", 18); hb.Value = (float)C.Roster.HpFrac(u); hb.back.R().At(0, 0, 110, 16, 360, 22, 0, 0);
-                var l = U.Txt(row.transform, $"Lv {u.level}", 36, Theme.Gold, TextAnchor.MiddleRight, true); l.At(1, 0.5f, -20, 10, 160, 44, 1, 0.5f);
-                if (o.levelUps.TryGetValue(u.uid, out var up)) { var lu = U.Chip(row.transform, L.T("LEVEL UP!"), Theme.GreenDark, 26, Color.white, 14, 40); lu.At(1, 0.5f, -20, -26, 190, 40, 1, 0.5f); Tw.Pulse(lu.transform, 0.1f, 0.5f); }
-                else if (o.fallen.Contains(u.name)) { var ko = U.Chip(row.transform, L.T("WOUNDED"), Theme.RedDark, 26, Color.white, 14, 40); ko.At(1, 0.5f, -20, -26, 190, 40, 1, 0.5f); }
+                var l = U.Txt(row.transform, $"Lv {u.level}", 36, Theme.Gold, TextAnchor.MiddleRight, true); l.At(1, 1, -20, -14, 190, 56, 1, 1);
+                if (o.levelUps.TryGetValue(u.uid, out var up)) { var lu = U.Chip(row.transform, L.T("LEVEL UP!"), Theme.GreenDark, 26, Color.white, 14, 40); lu.At(1, 0, -20, 14, 210, 60, 1, 0); Tw.Pulse(lu.transform, 0.1f, 0.5f); }
+                else if (o.fallen.Contains(u.name)) { var ko = U.Chip(row.transform, L.T("WOUNDED"), Theme.RedDark, 26, Color.white, 14, 40); ko.At(1, 0, -20, 14, 210, 60, 1, 0); }
             }
             if (o.win && C.Ranks.FameReached && !C.Ranks.ExamDone) { var tip = U.Chip(body, L.T("Rank exam unlocked! Open the Quest Board."), Theme.AccentDark, 30, Color.white, 24, 60); }
             if (o.win && C.Ranks.CanPromote) { var tip = U.Chip(body, L.T("You can be promoted! Tap your rank."), Theme.AccentDark, 30, Color.white, 24, 60); }

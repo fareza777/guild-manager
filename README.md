@@ -1,7 +1,7 @@
 # Emberhall: Guild Legends
 
 A portrait 2D **guild manager** for Android, built in Unity 6 (6000.6.1f1) on top of the reusable
-**Manager Simulator Template** (`ManagerKit`). Version 1.1.2 combines bright painted fantasy illustrations with animated
+**Manager Simulator Template** (`ManagerKit`). Version 1.2.0 combines bright painted fantasy illustrations with animated
 pixel characters, cream and sage panels, and sky-blue accents. Large illustrations use hooded or helmeted heroes and
 views from behind; front-facing pixel characters remain part of gameplay. Music and sound effects remain procedural.
 
@@ -11,18 +11,50 @@ Recruit heroes → form a party → pick a quest → auto-battle → earn loot &
 
 ## Features
 
-- Twelve generated art assets: splash, phoenix branding, three prologue scenes, three atlases with 18 painted item icons, a Hall courtyard/building atlas, and two battle arenas
+- Thirteen generated art assets: splash, phoenix branding, four story illustrations, three atlases with 18 painted item icons, a Hall courtyard/building atlas, and two battle arenas
 - Five-page onboarding: three animated story scenes, a practical guild guide, then guild name, banner and starter selection
 - Authored English and Bahasa Indonesia story narration shown as paced text, with manual/auto controls and story replay
-- Contained labels, scrollable story cards and synergy strips, adaptive grids, and a smaller, more readable HUD
+- Larger Lato typography, contained centered labels, scrollable story and party strips, and spacious hero/stat lists
 - Guild Hall with living buildings: **Tavern, Blacksmith, Training Hall, Infirmary, Barracks, Treasury, Library**
 - 6 classes + 7 tameable **monster recruits**, traits, rarities, promotions, party **synergies**
-- Auto-battle (ATB sim with skills, statuses, bosses), three battle doctrines, animated replay, x1/x2/x3 speed, and skip
+- Auto-battle (ATB sim with skills, statuses, bosses), encounter-aware Auto party selection, three battle doctrines, animated replay, x1/x2/x3 speed, pause/resume, and skip
 - Campaign (5 regions, 25 stages, 3 stars), **timed Contracts/expeditions**, **Endless Spire**, **Rank exams** F→S
 - Gear with 5 rarities, affixes, enhancement, crafting, salvage; daily Market; Soul Seals; consumables
-- Main story (25 chapters), 33 side quests, daily quests, daily login calendar, random guild events
+- The Lantern Road: 25 connected story chapters, a spoiler-free Journal, 33 side quests, daily quests, a login calendar, and guild events
 - Offline progress: absolute-time timers, idle Treasury vault, expedition returns, "Welcome back" report
 - Atomic save with backup, autosave, EN + Bahasa Indonesia, settings, about, share, rate, onboarding, tutorial pointer
+
+## Version 1.2.0 — The Lantern Road
+
+The interface now uses Lato with a 36-unit minimum and a 44-unit body size on the 1080-unit reference canvas.
+Previously small labels, resource numbers, status badges and rich-text annotations are larger. Buttons use their
+available height, and descriptions, portraits, reward cells and long names have dedicated room. The Hall retains
+compact building plaques; hero cards and stat panels use wider rows, and larger parties scroll horizontally.
+
+Thin ivory frames and simple rounded buttons keep the painted environments visible. The first-steps guide replaces
+the duplicate Hall quest card, and routine upgrade badges no longer crowd every building. Prologue scenes use brief
+story beats with more room for the illustration; the Journal holds the longer narrative. Facility banners now reuse
+the painted buildings and courtyard rather than enlarging the old pixel backdrops.
+
+The prologue and all 25 main chapters follow one journey: recover five beacon lenses, reopen the village roads,
+and discover the Spire's purpose with Maren. Current quests give short, explicit instructions. The Journal preserves
+completed and current chapters without exposing locked stories. A new bright frontier illustration appears in the
+opening, Campaign/Spire banners and chapter rewards. This remains an illustrated cinematic with written narration.
+The illustration's built-in generation mode and full prompt are documented in [Frontier art notes](Store/Frontier-art-notes.md).
+
+Auto party selection compares available heroes in the real encounter simulator, including doctrine, health and
+synergies; its deterministic previews preserve the campaign's random sequence. Contracts consider departure success.
+Battle now supports Pause/Resume, retains the chosen speed while paused, and can Skip from a paused state. Battle
+characters are larger, and their animation follows playback speed and pause. English remains the installation default.
+
+Android version code: **5**. The signed installable APK is delivered in [Releases](Releases/README.md).
+
+Validation: **71 core tests passed**, no failures; the final narrow-screen run passed **312 interface flow checks**
+and checked **3182 visible texts across 89 screenshots** with no reported overflow or containment issues.
+The full evidence and device-test limits are in [Validation](Store/Validation/1.2.0/README.md).
+
+<img src="Store/Validation/1.2.0/hall.png" width="240" alt="Painted guild hall with readable ivory UI"> <img src="Store/Validation/1.2.0/story.png" width="240" alt="The Lantern Road cinematic prologue">
+
 
 ## Version 1.1.2 English default and functionality
 
@@ -48,7 +80,7 @@ crafting quantities, enhancement caps, inventory disposal, daily Market purchase
 quests, guild events, rank exams/promotions, tower progression and expedition save/offline payouts. Every guild event
 has a free fallback choice, so its mandatory choice flow can always proceed.
 
-The release version is **1.1.2**, with Android version code **4**. EditMode, comprehensive interface checks at two
+This earlier release was **1.1.2**, with Android version code **4**. EditMode, comprehensive interface checks at two
 portrait resolutions, and final Windows/Android builds have passed. Earlier release validation is retained below.
 
 ## Version 1.1.1 Hall, battle and label refinement

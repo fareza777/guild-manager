@@ -22,7 +22,7 @@ namespace ManagerKit.UI
             var go = new GameObject("UiHost"); DontDestroyOnLoad(go);
             var h = go.AddComponent<UiHost>(); I = h;
             var camGo = new GameObject("UiCamera"); camGo.transform.SetParent(go.transform, false);
-            h.cam = camGo.AddComponent<Camera>(); h.cam.orthographic = true; h.cam.clearFlags = CameraClearFlags.SolidColor; h.cam.backgroundColor = new Color(0.55f, 0.82f, 0.98f, 1f); h.cam.cullingMask = 1 << 5; h.cam.depth = -10; h.cam.allowHDR = false; h.cam.allowMSAA = false;
+            h.cam = camGo.AddComponent<Camera>(); h.cam.orthographic = true; h.cam.clearFlags = CameraClearFlags.SolidColor; h.cam.backgroundColor = Theme.Bg1; h.cam.cullingMask = 1 << 5; h.cam.depth = -10; h.cam.allowHDR = false; h.cam.allowMSAA = false;
             camGo.AddComponent<AudioListener>();
 
             var cgo = new GameObject("Canvas", typeof(RectTransform)); cgo.layer = 5; cgo.transform.SetParent(go.transform, false);

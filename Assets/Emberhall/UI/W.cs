@@ -39,7 +39,7 @@ namespace Emberhall
             var row = U.Rt(parent, "res"); U.HBox(row, 6, null, TextAnchor.MiddleCenter, true, true, false, false);
             U.Icon(row, Art.ResIcon(C, id), icon).Le(icon, icon);
             var t = U.Txt(row, Util.Num(n), fs, red ? Theme.Bad : Theme.Text, TextAnchor.MiddleCenter, true); t.Le(t.preferredWidth + 8, fs + 10);
-            row.Le(icon + 6 + t.preferredWidth + 6, icon);
+            row.Le(icon + 6 + t.preferredWidth + 6, Mathf.Max(icon, t.fontSize * 1.26f));
             return row;
         }
 
@@ -49,7 +49,7 @@ namespace Emberhall
             var row = U.Rt(parent, "cost"); U.HBox(row, 18, null, align, true, true, false, false);
             float w = 0; int n = 0;
             foreach (var r in cost) { var chip = ResChip(row, r.id, r.n, fs, !C.Has(r), icon); w += chip.GetComponent<LayoutElement>().preferredWidth + 18; n++; }
-            row.Le(w, icon + 4); return row;
+            row.Le(w, Mathf.Max(icon + 4, Theme.ReadingSize(fs) * 1.26f)); return row;
         }
 
         public static RectTransform RewardRow(Transform parent, IEnumerable<Res> rewards, float size = 78, int fs = 28)
@@ -59,17 +59,20 @@ namespace Emberhall
             float w = 0;
             foreach (var r in rewards)
             {
-                var cell = RewardCell(row, r.id, r.n, size, fs); w += size + 14;
+                var cell = RewardCell(row, r.id, r.n, size, fs); w += cell.GetComponent<LayoutElement>().preferredWidth + 14;
             }
-            row.Le(Mathf.Max(0f, w - 14f), size + Mathf.Max(36f, fs + 10f) + 8f); return row;
+            row.Le(Mathf.Max(0f, w - 14f), size + Theme.ReadingSize(fs) * 1.26f + 8f); return row;
         }
         public static RectTransform RewardCell(Transform parent, string id, double n, float size = 78, int fs = 28)
         {
-            fs = Mathf.Max(28, fs); float labelH = Mathf.Max(36f, fs + 10f);
-            var box = U.Rt(parent, "rw"); box.Le(size, size + labelH + 8f);
+            fs = Mathf.Max(28, fs); float labelH = Theme.ReadingSize(fs) * 1.26f;
+            var label = U.Txt(parent, (id == "fame" ? "+" : "x") + Util.Num(n), fs, Theme.Text, TextAnchor.MiddleCenter, true);
+            float cellW = Mathf.Max(size, label.preferredWidth + 12);
+            var box = U.Rt(parent, "rw"); box.Le(cellW, size + labelH + 8f);
+            label.transform.SetParent(box, false);
             var bg = U.Box(box, Theme.Inset, Theme.Black, "bg"); bg.At(0.5f, 1, 0, 0, size, size);
             var ic = U.Icon(bg.transform, Art.ResIcon(C, id), size - 16); ic.At(0.5f, 0.5f, 0, 0, size - 16, size - 16);
-            var t = U.Txt(box, (id == "fame" ? "+" : "x") + Util.Num(n), fs, Theme.Text, TextAnchor.MiddleCenter, true); t.StretchX(0, 0, labelH, 0, 0);
+            label.StretchX(0, 0, labelH, 0, 0);
             return box;
         }
 
@@ -157,6 +160,7 @@ namespace Emberhall
 
         public static UButton HeroCard(Transform parent, UnitInstance u, float w, float h, Action onClick, bool compact = false)
         {
+            h = Mathf.Max(h, 250);
             var rc = Art.RarityColor(C, u.rarity);
             Color body = Color.Lerp(Theme.PanelDark, rc, 0.4f);
             var plate = LuxArt.Button(body);
@@ -168,8 +172,8 @@ namespace Emberhall
             var pic = Portrait(back.transform, u.sprite, (h - 20) * 0.7f); pic.transform.parent.GetComponent<RectTransform>().At(0.5f, 0, 0, 8, (h - 20) * 0.63f, (h - 20) * 0.7f, 0.5f, 0);
             float x0 = h - 6;
             var name = U.Txt(box.transform, u.name, compact ? 32 : 36, Theme.Text, TextAnchor.MiddleCenter, true); name.StretchX(1, -14, 48, x0 + 6, 18);
-            var cls = ClassBadge(box.transform, u.classId, 44); cls.At(0, 1, x0 + 6, -58, 44, 44, 0, 1);
-            var lv = U.Txt(box.transform, $"Lv {u.level}" + (u.promo > 0 ? " " + W.Col(Theme.Gold, new string('*', u.promo)) : ""), 30, Theme.Gold, TextAnchor.MiddleLeft, true); lv.StretchX(1, -66, 42, x0 + 58, 18);
+            var cls = ClassBadge(box.transform, u.classId, 44); cls.At(0, 1, x0 + 6, -86, 44, 44, 0, 1);
+            var lv = U.Txt(box.transform, $"Lv {u.level}" + (u.promo > 0 ? " " + W.Col(Theme.Gold, new string('*', u.promo)) : ""), 30, Theme.Gold, TextAnchor.MiddleLeft, true); lv.StretchX(1, -86, 52, x0 + 58, 18);
             var bar = U.ProgressBar(box.transform, Theme.Green, w - x0 - 24, 26);
             bar.Value = (float)C.Roster.HpFrac(u); bar.fill.sprite = Boxes.Get(bar.Value < 0.3f ? Theme.Red : bar.Value < 0.65f ? Theme.Warn : Theme.Green, null, 0.35f);
             bar.back.R().At(0, 0, x0 + 6, 54, w - x0 - 24, 26, 0, 0);

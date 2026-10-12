@@ -29,9 +29,9 @@ namespace Emberhall
             W.PageBackdrop(root);
             var col = U.Rt(root, "col"); col.Fill(); U.VBox(col, 0, null, TextAnchor.UpperCenter, true, true, true, false);
             // tabs
-            var tabs = U.Rt(col, "tabs"); tabs.Le(-1, 110); U.HBox(tabs, 8, new RectOffset(14, 14, 12, 4), TextAnchor.MiddleCenter, true, true, true, true);
+            var tabs = U.Rt(col, "tabs"); tabs.Le(-1, 148); U.HBox(tabs, 8, new RectOffset(14, 14, 12, 4), TextAnchor.MiddleCenter, true, true, true, true);
             string[] names = { "Campaign", "Contracts", "Endless Spire" }; bool[] lockd = { false, false, C.Ranks.Index < 2 };
-            for (int i = 0; i < 3; i++) { int k = i; var b = U.Btn(tabs, L.T(names[i]) , BoardState.Tab == i ? Theme.Accent : Theme.PanelLight, () => { if (lockd[k]) { Toasts.Show(L.T("Reach Rank D to unlock")); return; } BoardState.Tab = k; Redraw(); }, 300, 94, 34, lockd[i] ? Icons.Get("lock") : null); b.Le(-1, 94, 1); }
+            for (int i = 0; i < 3; i++) { int k = i; var b = U.Btn(tabs, L.T(names[i]) , BoardState.Tab == i ? Theme.Accent : Theme.PanelLight, () => { if (lockd[k]) { Toasts.Show(L.T("Reach Rank D to unlock")); return; } BoardState.Tab = k; Redraw(); }, 300, 132, 34, lockd[i] ? Icons.Get("lock") : null); b.Le(-1, 132, 1); }
             var content = U.Rt(col, "content"); content.Le(-1, -1, 1, 1);
             var sc = MakeScroll(content, 14, new RectOffset(18, 18, 14, 40));
             BuildRankCard(sc.content);
@@ -64,24 +64,24 @@ namespace Emberhall
             var regions = C.Missions.CampaignRegions.ToList();
             if (!regions.Any(r => r.id == BoardState.Region)) BoardState.Region = regions[0].id;
             // region chips
-            var hs = U.ScrollH(parent, 10, new RectOffset(4, 4, 4, 4)); hs.view.parent.GetComponent<RectTransform>().Le(-1, 108, 1);
+            var hs = U.ScrollH(parent, 10, new RectOffset(4, 4, 4, 4)); hs.view.parent.GetComponent<RectTransform>().Le(-1, 148, 1);
             foreach (var r in regions)
             {
                 var rr = r; bool open = C.MeetsAll(r.req); bool sel = BoardState.Region == r.id;
                 var b = U.Btn(hs.content, L.T(r.name), sel ? Theme.Hex(r.color) * 0.8f : Theme.PanelLight, () => { if (!open) { Toasts.Show(L.T("Reach Rank {0} to unlock", C.Content.Rank(r.req.Count > 0 ? (int)r.req[0].min : 0).id)); return; } BoardState.Region = rr.id; Redraw(); }, 320, 92, 32, open ? null : Icons.Get("lock"));
-                b.Le(320, 92);
+                b.Le(420, 132);
             }
             var reg = C.Content.RegionMap[BoardState.Region];
             // banner
-            var banner = U.Box(parent, Theme.Inset, Theme.Hex(reg.color), "banner"); banner.Le(-1, 220, 1);
-            var art = U.Img(banner.transform, Art.Bg(reg.bg), Color.white, "art"); art.Fill(6, 6, 6, 6); art.preserveAspect = false;
+            var banner = U.Box(parent, Theme.Inset, Theme.Hex(reg.color), "banner"); banner.Le(-1, 400, 1);
             var mask = banner.gameObject.AddComponent<RectMask2D>();
-            var sh = U.Img(banner.transform, Boxes.Gradient(new Color(0, 0, 0, 0), new Color(0, 0, 0, 0.8f)), Color.white, "sh"); sh.Fill(6, 6, 6, 6);
-            var nm = U.Txt(banner.transform, L.T(reg.name), 56, Color.white, TextAnchor.MiddleLeft, true); nm.At(0, 0, 26, 56, 900, 66, 0, 0);
-            var ds = U.Txt(banner.transform, L.T(reg.desc), 30, new Color(1f, 0.98f, 0.9f), TextAnchor.MiddleLeft, true); ds.At(0, 0, 26, 14, 900, 40, 0, 0);
+            GeneratedArt.Cover(banner.R(), "story_frontier");
+            var caption = U.Solid(banner.transform, Theme.PanelLight, "caption"); caption.StretchX(0, 0, 166);
+            var nm = U.Txt(caption.transform, L.T(reg.name), 44, Theme.TextDark, TextAnchor.MiddleCenter, true); nm.StretchX(1, -12, 66, 24, 220);
+            var ds = U.Txt(caption.transform, L.T(reg.desc), 30, Theme.TextDim, TextAnchor.MiddleCenter); ds.StretchX(0, 12, 64, 24, 24);
             var stars = C.Missions.InRegion(reg.id).Sum(m => C.Missions.Stars(m.id)); int maxStars = C.Missions.InRegion(reg.id).Count() * 3;
-            var sc = U.Txt(banner.transform, $"{stars}/{maxStars}", 40, Theme.Gold, TextAnchor.MiddleRight, true); sc.At(1, 1, -50, -14, 160, 50, 1, 1);
-            U.Icon(banner.transform, Icons.Get("star"), 46).At(1, 1, -12, -14, 46, 46, 1, 1);
+            var sc = U.Txt(caption.transform, $"{stars}/{maxStars}", 36, Theme.BlueDark, TextAnchor.MiddleRight, true); sc.At(1, 1, -70, -20, 140, 54, 1, 1);
+            U.Icon(caption.transform, Icons.Get("star"), 46).At(1, 1, -18, -24, 46, 46, 1, 1);
 
             bool pointerSet = false;
             foreach (var m in C.Missions.InRegion(reg.id).OrderBy(x => x.order))
@@ -163,10 +163,10 @@ namespace Emberhall
             foreach (var m in C.Missions.Board)
             {
                 var mm = m; double ch = top.Count > 0 ? C.Missions.SuccessChance(m, top) : 0;
-                var card = U.Box(parent, Theme.Panel, m.boss ? Theme.Red : Theme.Black, "ct"); card.Le(-1, 250, 1);
-                var nm = U.Txt(card.transform, W.MissionName(m.name), 40, Theme.Text, TextAnchor.MiddleLeft, true); nm.At(0, 1, 24, -12, 700, 50, 0, 1);
-                var ds = U.Txt(card.transform, L.T(m.desc), 28, Theme.TextDim, TextAnchor.UpperLeft); ds.At(0, 1, 24, -62, 640, 36, 0, 1);
-                var chips = U.Rt(card.transform, "chips"); chips.At(0, 1, 24, -104, 650, 46, 0, 1); U.HBox(chips, 10, null, TextAnchor.MiddleLeft, false, false);
+                var card = U.Box(parent, Theme.Panel, m.boss ? Theme.Red : Theme.Black, "ct"); card.Le(-1, 400, 1);
+                var nm = U.Txt(card.transform, W.MissionName(m.name), 40, Theme.Text, TextAnchor.MiddleLeft, true); nm.At(0, 1, 24, -12, 700, 124, 0, 1);
+                var ds = U.Txt(card.transform, L.T(m.desc), 28, Theme.TextDim, TextAnchor.UpperLeft); ds.At(0, 1, 24, -146, 640, 96, 0, 1);
+                var chips = U.Rt(card.transform, "chips"); chips.At(0, 1, 24, -252, 650, 56, 0, 1); U.HBox(chips, 10, null, TextAnchor.MiddleLeft, false, false);
                 U.Chip(chips, Util.Dur(m.duration), Theme.BlueDark, 26, Color.white, 14, 42);
                 U.Chip(chips, L.T("Power {0}", Util.Num(m.power)), Theme.GreyDark, 26, Color.white, 14, 42);
                 var cc = ch >= 0.75 ? Theme.GreenDark : ch >= 0.4 ? Theme.AccentDark : Theme.RedDark;
@@ -190,11 +190,13 @@ namespace Emberhall
         void BuildTower(RectTransform parent)
         {
             int best = C.Missions.TowerBest; int next = best + 1; var m = C.Missions.TowerMission(next);
-            var head = U.Box(parent, Theme.PanelDark, Theme.Hex("#6FE3FF"), "tower"); head.Le(-1, 330, 1);
-            var bgi = U.Img(head.transform, Art.Bg("DungeonC"), new Color(1, 1, 1, 0.5f), "bg"); bgi.Fill(6, 6, 6, 6);
-            var big = U.Txt(head.transform, next.ToString(), 190, Theme.Hex("#6FE3FF"), TextAnchor.MiddleCenter, true); big.At(0.5f, 0.55f, 0, 20, 500, 200);
-            var fl = U.Txt(head.transform, L.T("FLOOR"), 50, Color.white, TextAnchor.MiddleCenter, true); fl.At(0.5f, 1, 0, -18, 400, 60, 0.5f, 1);
-            var rec = U.Txt(head.transform, L.T("Best: floor {0}  -  Enemy level {1}", best, m.level) + (m.boss ? "  -  " + W.Col(Theme.Red, L.T("BOSS")) : ""), 32, Theme.Text, TextAnchor.MiddleCenter, true); rec.At(0.5f, 0, 0, 16, 1000, 44, 0.5f, 0);
+            var head = U.Box(parent, Theme.PanelLight, Theme.Gold, "tower"); head.Le(-1, 460, 1);
+            head.gameObject.AddComponent<RectMask2D>(); GeneratedArt.Cover(head.R(), "story_frontier");
+            var badge = U.Box(head.transform, Theme.PanelLight, Theme.Gold, "floor_badge"); badge.At(.5f, 1, 0, -24, 300, 292, .5f, 1);
+            var fl = U.Txt(badge.transform, L.T("FLOOR"), 38, Theme.BlueDark, TextAnchor.MiddleCenter, true); fl.StretchX(1, -16, 60, 12, 12);
+            var big = U.Txt(badge.transform, next.ToString(), 126, Theme.Gold, TextAnchor.MiddleCenter, true); big.StretchX(0, 24, 188, 12, 12);
+            var caption = U.Solid(head.transform, Theme.PanelLight, "caption"); caption.StretchX(0, 0, 112);
+            var rec = U.Txt(caption.transform, L.T("Best: floor {0}  -  Enemy level {1}", best, m.level) + (m.boss ? "  -  " + W.Col(Theme.Red, L.T("BOSS")) : ""), 32, Theme.Text, TextAnchor.MiddleCenter, true); rec.Fill(24, 24, 12, 12);
             W.Info(parent, L.T("Each floor is harder than the last. Rewards include rare gear, Arcane Essence and lots of Fame."), 30, Theme.TextDim);
             var er = U.Rt(parent, "enemies"); er.Le(-1, 130); U.HBox(er, 18, null, TextAnchor.LowerCenter, false, false);
             foreach (var eid in m.waves.SelectMany(w => w.enemies).Select(e => e.id).Distinct().Take(6))

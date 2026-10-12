@@ -344,7 +344,7 @@ namespace Emberhall
                 $"Heroes {rosterBefore} → {C.Roster.Count}; gold {goldBefore:0} → {C.Wallet.Get("gold"):0}.");
             app.hud.GoTab(Hud.Tab.Hall, true);
             yield return null;
-            if (!Check("open_first_quest_reward", Click(TargetButton("hall_tracker")) && Popups.Top is QuestRewardPopup, "The hall tracker opens the completed hire quest's reward.")) yield break;
+            if (!Check("open_first_quest_reward", Click(LabeledButton(UiHost.I.top, "CLAIM REWARD")) && Popups.Top is QuestRewardPopup, "The first-steps guide opens the completed hire quest's reward.")) yield break;
             yield return Shot(dir, "07e_first_quest_reward");
             var claim = Popups.Top.Root.GetComponentsInChildren<UButton>(false).FirstOrDefault(b => b.label != null && b.label.text == L.T("CLAIM"));
             if (!Check("claim_first_quest", Click(claim) && C.Quests.State("q_m01") == QuestSystem.Done, "Claim the earned reward through its button.")) yield break;
@@ -396,6 +396,14 @@ namespace Emberhall
             if (!Check("first_fourth_chapter_unlocks", C.Quests.State("q_m03") == QuestSystem.Done && C.Quests.CurrentMain?.id == "q_m04",
                 "Claiming the equipment reward must unlock the fourth chapter with an actionable next mission.")) yield break;
             yield return Shot(dir, "07p_first_next_chapter");
+            if (!Check("first_journal_open", Click(TargetButton("tab_quests")) && Click(LabeledButton(app.nav.Current.Root, "Journal")),
+                "The Journal tab opens from the quest page.")) yield break;
+            yield return Shot(dir, "07q_story_journal");
+            Check("first_journal_history", app.nav.Current.Root.GetComponentsInChildren<Text>(false).Any(t => t.text == L.T(C.Content.Quests.First(q => q.id == "q_m01").story)),
+                "The journal preserves the completed opening chapter's authored story.");
+            Check("first_journal_no_spoilers", !app.nav.Current.Root.GetComponentsInChildren<Text>(false).Any(t => t.text == L.T(C.Content.Quests.First(q => q.id == "q_m25").story)),
+                "Unreached story chapters remain hidden.");
+            Check("first_journal_return_story", Click(LabeledButton(app.nav.Current.Root, "Story")), "The Story tab returns to the current actionable quest.");
             if (!Check("first_return_hall_tab", Click(TargetButton("tab_hall")), "Return to the Hall using the actual navigation tab.")) yield break;
             yield return null;
         }
@@ -644,6 +652,9 @@ namespace Emberhall
             foreach (var def in C.Content.Items.Where(i => i.type == "material")) C.Inventory.AddItem(def.id, 100, C.Rng);
             C.Counters.Set("missions.won", Math.Max(6, C.Counters.Get("missions.won")));
             C.Ranks.Load("{\"i\":2}"); C.Mods.Dirty(); C.Roster.Dirty();
+            // Exercise the widest authored name through every later hero, item and battle flow.
+            C.Roster.All[0].name = "Garrick Moonwhisper";
+            if (C.Roster.Count > 1) C.Roster.All[1].name = "Brenna Moonwhisper";
             foreach (var hero in C.Roster.All) C.Roster.SetHp(hero, C.Roster.MaxHp(hero));
             C.Changed();
             Check("v_later_game_fixture", C.Ranks.Index == 2 && C.Wallet.Get("gold") >= 20000,
@@ -889,6 +900,17 @@ namespace Emberhall
                 if (!Check("v_battle_speed_" + n, Click(LabeledButton(battle.Root, "x" + n)) && Prefs.BattleSpeed == n && Math.Abs(Tw.TimeScale - n) < .001,
                     "The battle speed control must update both preference and current animation timing.")) yield break;
             yield return Shot(dir, "verify_11_live_battle", .35f);
+            var liveBattle = (BattleScreen)battle;
+            Check("v_battle_pause", Click(TargetButton("btn_pause")) && liveBattle.IsPaused && Tw.TimeScale == 0, "Pause freezes battle playback and animation timing.");
+            int pausedActions = liveBattle.DisplayedActions;
+            yield return new WaitForSecondsRealtime(.8f);
+            Check("v_battle_paused_actions", liveBattle.DisplayedActions == pausedActions, "No combat action advances while paused.");
+            Check("v_battle_paused_speed", Click(LabeledButton(battle.Root, "x3")) && Tw.TimeScale == 0 && Prefs.BattleSpeed == 3,
+                "Changing the selected speed must keep a paused battle paused.");
+            yield return Shot(dir, "verify_11b_battle_paused");
+            Check("v_battle_resume", Click(TargetButton("btn_pause")) && !liveBattle.IsPaused && Tw.TimeScale == 3, "Resume restores the selected battle speed.");
+            yield return new WaitForSecondsRealtime(.2f);
+            Check("v_battle_pause_before_skip", Click(TargetButton("btn_pause")) && liveBattle.IsPaused, "Pause again to verify Skip can finish a paused battle.");
             int clears = C.Missions.Clears("m_r1_1");
             if (!Check("v_battle_skip", Click(TargetButton("btn_skip")), "SKIP must finish the active battle through its actual button.")) yield break;
             float guard = 0;
@@ -976,6 +998,7 @@ namespace Emberhall
                     "Open an available spare hero's details from the actual roster card.")) yield break;
                 if (!Check(key + "_confirmation", Click(LabeledButton(Popups.Top.Root, "Dismiss hero")) && Popups.Top is MsgPopup,
                     "Dismiss hero must request confirmation before removing anyone.")) yield break;
+                yield return Shot(dir, "verify_12a_dismiss_confirmation_" + count);
                 if (!Check(key + "_cancel", Click(LabeledButton(Popups.Top.Root, "Cancel")) && C.Roster.Count == count && C.Roster.Get(spare.uid) != null,
                     "Cancel keeps the exact hero and its equipped items.")) yield break;
                 yield return null;
@@ -998,6 +1021,54 @@ namespace Emberhall
             yield return Shot(dir, "verify_12b_last_hero"); CloseTop("v_last_hero_close");
         }
 
+        static IEnumerator VerifyRankAndSpire(App app, string dir)
+        {
+            var C = App.Ctx; Popups.CloseAll();
+            var hero = C.Roster.All[0]; hero.level = 50; hero.rarity = "legendary"; hero.traits.Clear();
+            C.Roster.Dirty(); C.Roster.SetHp(hero, C.Roster.MaxHp(hero));
+            BoardState.LastParty = new List<string> { hero.uid };
+            BoardState.Tab = 0; app.hud.GoTab(Hud.Tab.Board, true);
+            if (!Check("v_spire_tab", Click(LabeledButton(app.nav.Current.Root, "Endless Spire")) && BoardState.Tab == 2,
+                "Rank D unlocks the Endless Spire tab.")) yield break;
+            yield return Shot(dir, "verify_15_spire");
+            if (!Check("v_spire_party", Click(LabeledButton(app.nav.Current.Root, "CLIMB!")) && Popups.Top is PartyPopup,
+                "Climb opens the next floor's real party preparation.")) yield break;
+            yield return Shot(dir, "verify_16_spire_party");
+            if (!Check("v_spire_fight", Click(TargetButton("btn_party_go")) && app.nav.Current is BattleScreen && Click(TargetButton("btn_skip")),
+                "The prepared Spire party can start and finish its floor.")) yield break;
+            float elapsed = 0;
+            while (!(Popups.Top is ResultPopup) && elapsed < 8) { elapsed += Time.unscaledDeltaTime; yield return null; }
+            if (!Check("v_spire_floor_recorded", Popups.Top is ResultPopup && C.Missions.TowerBest == 1,
+                "Winning the first floor records the climb and offers the next floor.")) yield break;
+            yield return Shot(dir, "verify_17_spire_result");
+            if (!Check("v_spire_next", Click(LabeledButton(Popups.Top.Root, "Next")) && Popups.Top is PartyPopup,
+                "Spire Next opens preparation for floor two.")) yield break;
+            CloseTop("v_spire_next_close");
+            C.Counters.Max("fame", C.Ranks.Next.fame); C.Changed();
+            int oldRank = C.Ranks.Index; string nextRank = C.Ranks.Next.id;
+            if (!Check("v_rank_panel", Click(TargetButton("hud_rank")) && Popups.Top is RankPopup,
+                "The rank indicator opens the guild promotion ladder.")) yield break;
+            yield return Shot(dir, "verify_18_rank_exam");
+            if (!Check("v_rank_exam_party", Click(LabeledButton(Popups.Top.Root, L.T("TAKE THE RANK {0} EXAM", nextRank))) && Popups.Top is PartyPopup,
+                "An eligible guild can open its rank exam through the promotion panel.")) yield break;
+            if (!Check("v_rank_exam_fight", Click(TargetButton("btn_party_go")) && app.nav.Current is BattleScreen && Click(TargetButton("btn_skip")),
+                "Rank exams use the same working party and battle controls.")) yield break;
+            elapsed = 0;
+            while (!(Popups.Top is ResultPopup) && elapsed < 8) { elapsed += Time.unscaledDeltaTime; yield return null; }
+            if (!Check("v_rank_exam_passed", Popups.Top is ResultPopup && C.Ranks.CanPromote,
+                "The won exam unlocks promotion and persists its clear.")) yield break;
+            if (!Check("v_rank_exam_back", Click(LabeledButton(Popups.Top.Root, "Back")), "Return from the exam result.")) yield break;
+            if (!Check("v_rank_promote_open", Click(TargetButton("hud_rank")) && Popups.Top is RankPopup,
+                "Reopen rank details after completing the exam.")) yield break;
+            if (!Check("v_rank_promote", Click(LabeledButton(Popups.Top.Root, L.T("PROMOTE TO RANK {0}!", nextRank))) &&
+                C.Ranks.Index == oldRank + 1 && Popups.Top is RankUpPopup,
+                "Promotion raises the guild rank once and displays its celebration.")) yield break;
+            yield return Shot(dir, "verify_19_rank_up");
+            if (!Check("v_rank_celebration_close", Click(LabeledButton(Popups.Top.Root, "AWESOME!")) && !(Popups.Top is RankUpPopup),
+                "The rank celebration closes through its actual action.")) yield break;
+            BoardState.Tab = 0;
+        }
+
         static IEnumerator FunctionalVerification(App app, string dir)
         {
             Debug.Log("[GM] Comprehensive UI verification started.");
@@ -1007,6 +1078,7 @@ namespace Emberhall
             yield return VerifyInventory(app, dir); if (audit.failedFlowChecks > failures) yield break;
             yield return VerifyContractsAndRewards(app, dir); if (audit.failedFlowChecks > failures) yield break;
             yield return VerifyHeroAndBattle(app, dir); if (audit.failedFlowChecks > failures) yield break;
+            yield return VerifyRankAndSpire(app, dir); if (audit.failedFlowChecks > failures) yield break;
             yield return VerifyDismissal(app, dir); if (audit.failedFlowChecks > failures) yield break;
             yield return VerifyPersistence(app, dir);
             Popups.Show(new AboutPopup());

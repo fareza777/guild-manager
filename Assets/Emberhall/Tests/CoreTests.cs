@@ -346,6 +346,52 @@ namespace Emberhall.Tests
         }
 
         [Test]
+        public void RecommendedPartyUsesStrongReadyHeroesAndPreservesCampaignRng()
+        {
+            c.Roster.Reset();
+            foreach (var cls in new[] { "knight", "cleric", "warrior", "mage", "archer", "rogue" })
+            {
+                var hero = c.Recruiter.Generate(new Rng(42), preferredClass: cls);
+                hero.level = cls == "mage" || cls == "archer" || cls == "rogue" ? 30 : 1;
+                hero.hp = -1; hero.traits.Clear(); c.Roster.Add(hero);
+            }
+            var mission = c.Content.Mission("m_r1_1");
+            c.Rng = new Rng(8128); var untouched = new Rng(8128);
+            var party = c.Missions.RecommendedParty(mission);
+            Assert.AreEqual(c.Missions.PartySize, party.Count);
+            Assert.AreEqual(party.Count, party.Select(u => u.uid).Distinct().Count());
+            Assert.IsTrue(party.All(c.Roster.Ready));
+            Assert.IsTrue(party.Any(u => u.level == 30), "Auto should not blindly prefer three weak front-line classes.");
+            Assert.IsTrue(BattleSim.Run(c.Missions.BuildSetup(mission, party, 42)).win);
+            Assert.AreEqual(untouched.Next(), c.Rng.Next(), "Forecasting must not change future loot or recruitment rolls.");
+            var chosen = party.First();
+            c.Timers.Start("expedition", "test", 600, new[] { chosen.uid });
+            var replacement = c.Missions.RecommendedParty(mission, BattleDoctrine.Guard);
+            Assert.IsFalse(replacement.Contains(chosen), "Busy heroes cannot enter a recommended party.");
+            Assert.AreEqual(c.Missions.PartySize, replacement.Count);
+            foreach (var hero in c.Roster.All) c.Roster.SetHp(hero, 0);
+            Assert.IsEmpty(c.Missions.RecommendedParty(mission));
+        }
+
+        [Test]
+        public void RecommendedExpeditionPartyBalancesSuccessWithoutSelectingUnavailableHeroes()
+        {
+            c.Roster.Reset();
+            for (int index = 0; index < 5; index++)
+            {
+                var hero = c.Recruiter.Generate(new Rng(30 + index), preferredClass: "warrior");
+                hero.level = 2 + index * 3; hero.hp = -1; c.Roster.Add(hero);
+            }
+            c.Roster.SetHp(c.Roster.All.Last(), 0);
+            var mission = new MissionDef { kind = "expedition", power = 10000 };
+            var party = c.Missions.RecommendedParty(mission);
+            var strongestReady = c.Roster.All.Where(c.Roster.Ready).OrderByDescending(c.Roster.Power).Take(c.Missions.PartySize).ToList();
+            Assert.AreEqual(c.Missions.PartySize, party.Count);
+            Assert.GreaterOrEqual(c.Missions.SuccessChance(mission, party), c.Missions.SuccessChance(mission, strongestReady));
+            CollectionAssert.DoesNotContain(party, c.Roster.All.Last());
+        }
+
+        [Test]
         public void DoctrineTradeoffsChangeStatsAndActualTargetSelection()
         {
             var party = c.Roster.All.ToList(); var mission = c.Content.Mission("m_r1_1");

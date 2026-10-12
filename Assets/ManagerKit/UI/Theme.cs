@@ -11,11 +11,13 @@ namespace ManagerKit.UI
         {
             get
             {
-                if (font == null) font = Resources.Load<Font>("Fonts/Jersey10");
+                if (font == null) font = Resources.Load<Font>("Fonts/Lato-Regular");
                 if (font == null) font = Font.CreateDynamicFontFromOSFont("Arial", 24);
                 return font;
             }
         }
+
+        public static int ReadingSize(int size) => size <= 28 ? 36 : size <= 36 ? 44 : Mathf.RoundToInt(size * (size <= 48 ? 1.2f : 1.12f));
 
         public static Color Hex(string h) { ColorUtility.TryParseHtmlString(h, out var c); return c; }
 
@@ -78,7 +80,14 @@ namespace ManagerKit.UI
                     if (cov <= 0f) continue;
                     float inset = -sd;
                     Color c = fill;
-                    if (kind == 3)
+                    if (paper && kind != 2)
+                    {
+                        float t = Mathf.InverseLerp(-hh, hh, pyc);
+                        c = Color.Lerp(Color.Lerp(fill, new Color(.62f, .48f, .28f), .025f), Color.Lerp(fill, Color.white, .035f), t);
+                        if (inset < 1.1f) c = Color.Lerp(trim, fill, .48f);
+                        else if (inset < 2.2f) c = Color.Lerp(c, Color.white, .3f);
+                    }
+                    else if (kind == 3)
                     {
                         float t = Mathf.InverseLerp(-hh, hh, pyc);
                         c = Color.Lerp(Color.Lerp(fill, paper ? new Color(0.62f, 0.48f, 0.28f) : Color.black, paper ? 0.045f : 0.22f), Color.Lerp(fill, Color.white, paper ? 0.035f : 0.08f), t);

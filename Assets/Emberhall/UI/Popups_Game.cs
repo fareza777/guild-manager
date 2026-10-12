@@ -33,7 +33,7 @@ namespace Emberhall
                     Popups.RedrawAll();
                     if (App.I.nav.Current is BattleScreen battle) battle.RefreshLanguage();
                     else App.I.nav.Current?.Redraw();
-                }, 250, 80, 30); b.Le(250, 80); }
+                }, 250, 132, 30); b.Le(250, 132); }
             });
             U.Spacer(body, 6);
             if (App.I.HasSave || App.I.InGame)
@@ -50,7 +50,9 @@ namespace Emberhall
             U.Icon(r, icon, 56).Le(56, 56);
             var t = U.Txt(r, L.T(label), 40, Theme.Text, TextAnchor.MiddleCenter, true); t.Le(-1, 60, 1);
             var holder = U.Rt(r, "ctl"); U.HBox(holder, 14, null, TextAnchor.MiddleRight, true, true, false, false);
-            content(holder); holder.Le(-1, 90);
+            content(holder);
+            float controlHeight = Mathf.Max(90, holder.GetComponentsInChildren<LayoutElement>().Select(e => e.preferredHeight).DefaultIfEmpty(90).Max());
+            holder.Le(-1, controlHeight); card.Le(-1, controlHeight + 24);
             holder.gameObject.AddComponent<ContentSizeFitter>().horizontalFit = ContentSizeFitter.FitMode.PreferredSize;
         }
     }
@@ -69,7 +71,7 @@ namespace Emberhall
             W.Header(body, L.T("Credits"));
             Line(body, "Game design & code", Brand.Studio);
             Line(body, "Pixel art", "Super Retro Collection + painted story and relic art");
-            Line(body, "Font", "Jersey 10 by Sarah Cadigan-Fried (SIL OFL 1.1)");
+            Line(body, "Font", "Lato by Lukasz Dziedzic (SIL OFL 1.1)");
             Line(body, "Music & SFX", "Synthesised in-game (chiptune)");
             Line(body, "Engine", "Unity");
             W.Header(body, L.T("Thank you for playing!"));
@@ -79,9 +81,9 @@ namespace Emberhall
         }
         void Line(RectTransform body, string k, string v)
         {
-            var r = U.Rt(body, "line"); r.Le(-1, 84); U.VBox(r, 0, null, TextAnchor.MiddleCenter, true, true, true, false);
-            var a = U.Txt(r, L.T(k), 30, Theme.TextDim); a.Le(-1, 36);
-            var b = U.Txt(r, L.T(v), 34, Theme.Text, TextAnchor.MiddleCenter, false, true); b.Le(-1, 44);
+            var r = U.Rt(body, "line"); r.Le(-1, 180); U.VBox(r, 8, null, TextAnchor.MiddleCenter, true, true, true, false);
+            var a = U.Txt(r, L.T(k), 30, Theme.TextDim); a.Le(-1, 56);
+            var b = U.Txt(r, L.T(v), 34, Theme.Text, TextAnchor.MiddleCenter, false, true); b.Le(-1, 112);
         }
     }
 
@@ -195,7 +197,7 @@ namespace Emberhall
         readonly OfflineReport r;
         public OfflinePopup(OfflineReport rep) { r = rep; }
         public override string Title => L.T("Welcome Back!");
-        public override float Height => 1000;
+        public override float Height => 1200;
         public override bool CloseOnDim => false;
         public override void Build(RectTransform body)
         {
@@ -224,11 +226,11 @@ namespace Emberhall
         public override void Build(RectTransform body)
         {
             var C = App.Ctx; var cur = C.Ranks.Current; var nx = C.Ranks.Next;
-            var head = U.Box(body, Theme.PanelDark, Theme.Gold, "head"); head.Le(-1, 260, 1);
+            var head = U.Box(body, Theme.PanelDark, Theme.Gold, "head"); head.Le(-1, 300, 1);
             var sh = Brand.ShieldImg(head.transform, Theme.Hex(GuildGame.Emblems[Mathf.Clamp(C.Meta.Emblem, 0, 5)]), 180); sh.At(0, 0.5f, 30, 0, 156, 180, 0, 0.5f);
             var big = U.Txt(head.transform, cur.id, 120, Theme.Hex(cur.color), TextAnchor.MiddleCenter, true); big.At(0, 0.5f, 210, 20, 150, 150, 0, 0.5f);
             var nm = U.Txt(head.transform, L.T(cur.name), 44, Theme.Gold, TextAnchor.MiddleCenter, true); nm.StretchX(1, -26, 56, 370, 24);
-            var pk = U.Txt(head.transform, L.T(cur.perk), 32, Theme.Text, TextAnchor.MiddleCenter, false, true); pk.StretchX(1, -92, 120, 370, 24);
+            var pk = U.Txt(head.transform, L.T(cur.perk), 32, Theme.Text, TextAnchor.MiddleCenter, false, true); pk.StretchX(1, -108, 176, 370, 24);
             if (nx != null)
             {
                 var bar = U.ProgressBar(body, Theme.Accent, 900, 54, $"{Util.Num(C.Ranks.Fame)} / {Util.Num(nx.fame)} Fame", 32); bar.Value = C.Ranks.Progress; bar.back.Le(-1, 54, 1);
@@ -249,11 +251,11 @@ namespace Emberhall
             for (int i = 0; i < C.Content.Ranks.Count; i++)
             {
                 var r = C.Content.Ranks[i]; bool done = i <= C.Ranks.Index, now = i == C.Ranks.Index;
-                var row = U.Box(body, now ? Theme.PanelLight : Theme.PanelDark, now ? Theme.Gold : Theme.Black, "r"); row.Le(-1, 128, 1);
+                var row = U.Box(body, now ? Theme.PanelLight : Theme.PanelDark, now ? Theme.Gold : Theme.Black, "r"); row.Le(-1, 200, 1);
                 var badge = U.Box(row.transform, done ? Theme.Hex(r.color) * 0.55f : Theme.GreyDark, Theme.Black, "b"); badge.At(0, 0.5f, 16, 0, 96, 96, 0, 0.5f);
                 var l = U.Txt(badge.transform, r.id, 64, done ? Theme.Hex(r.color) : Theme.TextDim, TextAnchor.MiddleCenter, true); l.Fill();
-                var n = U.Txt(row.transform, $"{L.T(r.name)}  <size=28><color=#75614a>({Util.Num(r.fame)} Fame)</color></size>", 36, done ? Theme.Text : Theme.TextDim, TextAnchor.MiddleLeft, true); n.StretchX(1, -10, 46, 130, 94);
-                var d = U.Txt(row.transform, L.T(r.perk), 28, Theme.TextDim, TextAnchor.UpperLeft, false, true); d.StretchX(1, -60, 58, 130, 94);
+                var n = U.Txt(row.transform, $"{L.T(r.name)}  <size=36><color=#75614a>({Util.Num(r.fame)} Fame)</color></size>", 36, done ? Theme.Text : Theme.TextDim, TextAnchor.MiddleLeft, true); n.StretchX(1, -10, 46, 130, 94);
+                var d = U.Txt(row.transform, L.T(r.perk), 28, Theme.TextDim, TextAnchor.UpperLeft, false, true); d.StretchX(1, -78, 108, 130, 94);
                 if (done) U.Icon(row.transform, Icons.Get("check"), 56).At(1, 0.5f, -16, 0, 56, 56, 1, 0.5f);
             }
         }
@@ -264,7 +266,7 @@ namespace Emberhall
         readonly RankDef rank;
         public RankUpPopup(RankDef r) { rank = r; }
         public override string Title => L.T("Rank Up!");
-        public override float Height => 1000;
+        public override float Height => 1400;
         public override bool CloseOnDim => false;
         public override bool UseScroll => false;
         public override bool ShowClose => false;
@@ -276,7 +278,7 @@ namespace Emberhall
             Tw.Pop(big.transform, 0.8f);
             var glow = U.Img(body, Boxes.Glow, new Color(1, 0.75f, 0.2f, 0.6f), "glow"); glow.At(0.5f, 0.62f, 0, 0, 900, 900); glow.transform.SetAsFirstSibling(); Tw.Spin(glow.transform, 12);
             var nm = U.Txt(body, L.T(rank.name), 62, Theme.Gold, TextAnchor.MiddleCenter, true); nm.At(0.5f, 0.28f, 0, 20, 900, 80);
-            var pk = U.Txt(body, L.T(rank.perk), 38, Theme.Text, TextAnchor.UpperCenter, false, true); pk.At(0.5f, 0.28f, 0, -40, 800, 120, 0.5f, 1);
+            var pk = U.Txt(body, L.T(rank.perk), 38, Theme.Text, TextAnchor.UpperCenter, false, true); pk.At(0.5f, 0.28f, 0, -72, 800, 196, 0.5f, 1);
             Tw.After(0.3f, () => { if (Panel) { Fx.Burst(Panel, new Vector2(0, 100), Icons.Get("star"), 30, 900, null, 44); } });
         }
         public override void BuildFooter(RectTransform f) { U.Btn(f, L.T("AWESOME!"), Theme.Green, Close, 600, 100, 48).Le(-1, 100, 1); }
@@ -288,7 +290,7 @@ namespace Emberhall
         readonly QuestDef q; bool claimed;
         public QuestRewardPopup(QuestDef quest) { q = quest; }
         public override string Title => L.T("Quest Complete!");
-        public override float Height => 1150;
+        public override float Height => 1380;
         public override bool CloseOnDim => false;
         public override void Build(RectTransform body)
         {
@@ -296,10 +298,10 @@ namespace Emberhall
             var t = U.Txt(body, L.T(q.title), 56, Theme.Gold, TextAnchor.MiddleCenter, true); t.Le(-1, 80);
             if (!string.IsNullOrEmpty(q.story))
             {
-                var card = U.Box(body, Theme.Parchment, Theme.ParchmentDark, "story"); card.Le(-1, -1, 1);
-                U.HBox(card.R(), 18, new RectOffset(18, 24, 18, 18), TextAnchor.MiddleLeft, true, true, false, true);
-                var pic = W.Portrait(card.transform, "chara_3", 180);
-                var tx = U.Txt(card.transform, L.T(q.story), 34, Theme.TextDark, TextAnchor.MiddleCenter, false, true); tx.Le(-1, -1, 1);
+                var scene = U.Box(body, Theme.PanelLight, Theme.Gold, "chapter_scene"); scene.Le(-1, 300, 1);
+                scene.gameObject.AddComponent<RectMask2D>(); GeneratedArt.Cover(scene.R(), "story_frontier");
+                var card = U.Box(body, Theme.Parchment, Theme.ParchmentDark, "story"); card.Le(-1, 300, 1);
+                var tx = U.Txt(card.transform, L.T(q.story), 36, Theme.TextDark, TextAnchor.MiddleCenter, false, true); tx.Fill(28, 28, 24, 24);
             }
             W.Header(body, L.T("Rewards"));
             var rr = W.RewardRow(body, q.rewards, 100, 32);

@@ -23,8 +23,8 @@ namespace Emberhall
             W.PageBackdrop(root);
             var col = U.Rt(root, "col"); col.Fill(); U.VBox(col, 0, null, TextAnchor.UpperCenter, true, true, true, false);
             var tabs = U.Rt(col, "tabs"); tabs.Le(-1, 110); U.HBox(tabs, 8, new RectOffset(14, 14, 12, 4), TextAnchor.MiddleCenter, true, true, true, true);
-            string[] names = { "Main Story", "Side Quests", "Daily" }; string[] types = { "main", "side", "daily" };
-            for (int i = 0; i < 3; i++)
+            string[] names = { "Story", "Side", "Daily", "Journal" }; string[] types = { "main", "side", "daily", "journal" };
+            for (int i = 0; i < names.Length; i++)
             {
                 int k = i; int rdy = C.Content.Quests.Count(q => q.type == types[i] && C.Quests.State(q.id) == QuestSystem.Ready);
                 var b = U.Btn(tabs, L.T(names[i]), tab == i ? Theme.Accent : Theme.PanelLight, () => { tab = k; Redraw(); }, 300, 94, 34); b.Le(-1, 94, 1);
@@ -32,7 +32,29 @@ namespace Emberhall
             }
             var content = U.Rt(col, "content"); content.Le(-1, -1, 1, 1);
             var sc = MakeScroll(content, 14, new RectOffset(18, 18, 14, 40));
-            if (tab == 0) BuildMain(sc.content); else if (tab == 1) BuildSide(sc.content); else BuildDaily(sc.content);
+            if (tab == 0) BuildMain(sc.content); else if (tab == 1) BuildSide(sc.content); else if (tab == 2) BuildDaily(sc.content); else BuildJournal(sc.content);
+        }
+
+        void BuildJournal(RectTransform p)
+        {
+            var art = U.Box(p, Theme.PanelLight, Theme.Gold, "journal_art"); art.Le(-1, 370, 1);
+            art.gameObject.AddComponent<RectMask2D>(); GeneratedArt.Cover(art.R(), "story_frontier");
+            W.Header(p, StoryScript.Pick("The Lantern Road", "Jalan Lentera"), Icons.Get("quest"));
+            W.Info(p, StoryScript.Pick("A storm scattered five beacon lenses. Every road you reopen brings their light closer to home.",
+                "Badai memencarkan lima lensa suar. Setiap jalan yang dibuka membawa cahayanya lebih dekat ke rumah."), 36);
+            foreach (var q in C.Content.Quests.Where(q => q.type == "main").OrderBy(q => q.order))
+            {
+                int state = C.Quests.State(q.id);
+                if (state == QuestSystem.Locked) continue;
+                var card = U.Box(p, Theme.Parchment, Theme.ParchmentDark, "journal_entry");
+                U.VBox(card.R(), 18, new RectOffset(28, 28, 24, 28), TextAnchor.UpperCenter, true, true, true, false);
+                card.Le(-1, -1, 1);
+                var chapter = U.Txt(card.transform, L.T(q.title), 42, Theme.TextDark, TextAnchor.MiddleCenter, true, true); chapter.Le(-1, -1, 1);
+                chapter.gameObject.AddComponent<ContentSizeFitter>().verticalFit = ContentSizeFitter.FitMode.PreferredSize;
+                var status = U.Txt(card.transform, L.T(state == QuestSystem.Done ? "Completed" : "Current chapter"), 28, Theme.BlueDark, TextAnchor.MiddleCenter); status.Le(-1, 52);
+                var story = U.Txt(card.transform, L.T(q.story), 36, Theme.TextDark, TextAnchor.MiddleCenter, false, true); story.Le(-1, -1, 1);
+                story.gameObject.AddComponent<ContentSizeFitter>().verticalFit = ContentSizeFitter.FitMode.PreferredSize;
+            }
         }
 
         void BuildMain(RectTransform p)
@@ -83,12 +105,12 @@ namespace Emberhall
         void QuestRow(RectTransform p, QuestDef q, bool big)
         {
             int st = C.Quests.State(q.id); bool ready = st == QuestSystem.Ready, done = st == QuestSystem.Done;
-            var card = U.Box(p, done ? Theme.GreyDark : ready ? Color.Lerp(Theme.Panel, Theme.Green, 0.25f) : Theme.Panel, ready ? Theme.Gold : Theme.Black, "q"); card.Le(-1, big ? 340 : 292, 1);
-            var tt = U.Txt(card.transform, L.T(q.title), 40, done ? Theme.TextDim : Theme.Gold, TextAnchor.MiddleCenter, true); tt.StretchX(1, -16, 56, 20, 360);
-            var rw = U.Rt(card.transform, "rw"); rw.At(1, 1, -14, -10, 280, 50, 1, 1); U.HBox(rw, 8, null, TextAnchor.MiddleRight, false, false);
+            var card = U.Box(p, done ? Theme.GreyDark : ready ? Color.Lerp(Theme.Panel, Theme.Green, 0.25f) : Theme.Panel, ready ? Theme.Gold : Theme.Black, "q"); card.Le(-1, big ? 390 : 370, 1);
+            var tt = U.Txt(card.transform, L.T(q.title), 40, done ? Theme.TextDim : Theme.Gold, TextAnchor.MiddleCenter, true); tt.StretchX(1, -16, 72, 24, 24);
+            var rw = U.Rt(card.transform, "rw"); rw.StretchX(1, -92, 56, 24, 24); U.HBox(rw, 18, null, TextAnchor.MiddleCenter, false, false);
             foreach (var r in q.rewards.Take(3)) W.ResChip(rw, r.id, r.n, 26, false, 34);
-            string blurb = big && !string.IsNullOrEmpty(q.story) ? q.story : q.desc;
-            var ds = U.Txt(card.transform, L.T(blurb), 32, Theme.Text, TextAnchor.MiddleCenter, false, true); ds.StretchX(1, -84, big ? 148 : 112, 24, 24);
+            string blurb = q.desc;
+            var ds = U.Txt(card.transform, L.T(blurb), 32, Theme.Text, TextAnchor.MiddleCenter, false, true); ds.StretchX(1, -166, big ? 136 : 116, 28, 28);
             ds.verticalOverflow = VerticalWrapMode.Truncate;
             var g = q.goals[0]; double cur = Math.Min(g.target, C.Quests.Progress(q, g));
             var bar = U.ProgressBar(card.transform, ready ? Theme.Green : Theme.Blue, 520, 30, $"{Util.Num(cur)}/{Util.Num(g.target)}", 22); bar.Value = (float)(cur / g.target); bar.back.R().At(0, 0, 20, 16, 520, 30, 0, 0);

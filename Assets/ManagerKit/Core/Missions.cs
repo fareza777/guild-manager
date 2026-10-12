@@ -199,6 +199,47 @@ namespace ManagerKit
 
         public int PartySize => Math.Max(1, (int)(c.Content.Bal("party.size", 3) + c.Mods.Add("party.size")));
 
+        /// <summary>Compare ready heroes against this encounter, without consuming the campaign RNG.</summary>
+        public List<UnitInstance> RecommendedParty(MissionDef mission, BattleDoctrine doctrine = BattleDoctrine.Balanced)
+        {
+            var ready = c.Roster.All.Where(c.Roster.Ready).OrderByDescending(c.Roster.Power).ThenBy(u => u.uid).ToList();
+            var party = ready.Take(PartySize).ToList();
+            if (mission == null || party.Count == 0) return party;
+            // Keep the search bounded while retaining the strongest candidate of every class.
+            var candidates = ready.Take(12).Concat(ready.GroupBy(u => u.classId).Select(g => g.First())).Distinct().ToList();
+            bool expedition = mission.kind == "expedition" || mission.kind == "contract";
+            double Score(List<UnitInstance> team)
+            {
+                if (expedition) return SuccessChance(mission, team) * 10000 + Math.Log(1 + c.Roster.PartyPower(team));
+                double score = 0;
+                for (int sample = 0; sample < 3; sample++)
+                {
+                    var setup = BuildSetup(mission, team, 700 + sample * 31, doctrine);
+                    var result = BattleSim.Run(setup);
+                    double health = setup.heroes.Sum(h => Math.Max(0, h.hp) / Math.Max(1, h.maxHp));
+                    double enemyDamage = setup.waves.SelectMany(w => w).Sum(e => 1 - Math.Max(0, e.hp) / Math.Max(1, e.maxHp));
+                    score += (result.win ? 100000 : 0) + result.wavesCleared * 10000 + enemyDamage * 1000 + health * 100 - result.heroActions * .1;
+                }
+                return score + Math.Log(1 + c.Roster.PartyPower(team)) * .01;
+            }
+            double best = Score(party);
+            for (int pass = 0; pass < 2; pass++)
+            {
+                bool improved = false;
+                for (int slot = 0; slot < party.Count; slot++)
+                    foreach (var candidate in candidates)
+                    {
+                        if (party.Contains(candidate)) continue;
+                        var trial = new List<UnitInstance>(party); trial[slot] = candidate;
+                        double score = Score(trial);
+                        if (score <= best + .001) continue;
+                        party = trial; best = score; improved = true;
+                    }
+                if (!improved) break;
+            }
+            return party.OrderBy(u => c.Content.Class(u.classId)?.ranged ?? false).ThenByDescending(c.Roster.Power).ToList();
+        }
+
         bool ValidParty(IList<UnitInstance> party, out string why)
         {
             why = null;

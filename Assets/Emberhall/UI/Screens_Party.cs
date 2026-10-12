@@ -34,13 +34,7 @@ namespace Emberhall
         void Auto()
         {
             sel.Clear();
-            var ready = C.Roster.All.Where(C.Roster.Ready).OrderByDescending(u => C.Roster.Power(u)).ToList();
-            foreach (var role in new[] { "knight", "cleric", "warrior", "mage", "archer", "rogue" })
-            {
-                var u = ready.FirstOrDefault(x => x.classId == role && !sel.Contains(x.uid));
-                if (u != null && sel.Count < MaxSize) sel.Add(u.uid);
-            }
-            foreach (var u in ready) if (sel.Count < MaxSize && !sel.Contains(u.uid)) sel.Add(u.uid);
+            sel.AddRange(C.Missions.RecommendedParty(m, doctrine).Select(u => u.uid));
         }
         List<UnitInstance> Party => sel.Select(C.Roster.Get).Where(u => u != null).ToList();
 
@@ -74,7 +68,7 @@ namespace Emberhall
             foreach (var r in m.rewards.Take(3)) W.ResChip(rr, r.id, r.n, 30, false, 38);
             var rec = U.Rt(head.transform, "rec"); rec.At(1, 1, -22, -132, 230, 50, 1, 1); U.HBox(rec, 6, null, TextAnchor.MiddleRight, false, false);
             foreach (var cid in m.recommend.Take(4)) W.ClassBadge(rec, cid, 46);
-            if (m.recommend.Count > 0) { var rl = U.Txt(head.transform, L.T("Recommended"), 22, Theme.TextDim, TextAnchor.MiddleRight); rl.At(1, 1, -22, -186, 230, 28, 1, 1); }
+            if (m.recommend.Count > 0) { var rl = U.Txt(head.transform, L.T("Recommended"), 22, Theme.TextDim, TextAnchor.MiddleRight); rl.At(1, 1, -22, -192, 300, 48, 1, 1); }
 
             if (!expedition)
             {
@@ -88,22 +82,23 @@ namespace Emberhall
                     option.Le(-1, 78, 1);
                 }
                 var description = U.Txt(body, L.T(MissionSystem.DoctrineDescription(doctrine)), 32, Theme.Text, TextAnchor.MiddleCenter, false, true);
-                description.Le(-1, 92, 1);
+                description.Le(-1, 128, 1);
             }
 
             // --- party slots ---
             int max = MaxSize;
-            var slots = U.Rt(body, "slots"); slots.Le(-1, 280); U.HBox(slots, 10, null, TextAnchor.MiddleCenter, true, true, true, true);
+            var partyStrip = U.ScrollH(body, 12, new RectOffset(0, 0, 0, 0), "party_slots"); partyStrip.sr.R().Le(-1, 354, 1);
+            var slots = partyStrip.content;
             for (int i = 0; i < max; i++)
             {
                 var u = i < party.Count ? party[i] : null;
-                var cell = U.Box(slots, u != null ? Theme.Panel : Theme.Inset, u != null ? Art.RarityColor(C, u.rarity) : Theme.Grey, "slot", true); cell.Le(-1, 280, 1);
+                var cell = U.Box(slots, u != null ? Theme.Panel : Theme.Inset, u != null ? Art.RarityColor(C, u.rarity) : Theme.Grey, "slot", true); cell.Le(300, 340);
                 var cb = cell.gameObject.AddComponent<UButton>(); cb.bg = cell; cb.noTint = true;
                 if (u != null)
                 {
                     var uid = u.uid; cb.onClick = () => { sel.Remove(uid); Redraw(); };
                     var pic = W.Portrait(cell.transform, u.sprite, 140); pic.transform.parent.GetComponent<RectTransform>().At(0.5f, 1, 0, -14, 126, 140, 0.5f, 1);
-                    var n = U.Txt(cell.transform, u.name, 30, Theme.Text, TextAnchor.MiddleCenter, true); n.StretchX(0, 66, 58, 8, 8);
+                    var n = U.Txt(cell.transform, u.name, 30, Theme.Text, TextAnchor.MiddleCenter, true); n.StretchX(0, 66, 112, 8, 8);
                     var l = U.Txt(cell.transform, $"Lv {u.level}", 28, Theme.Gold, TextAnchor.MiddleCenter, true); l.StretchX(0, 32, 32, 8, 8);
                     var hb = U.ProgressBar(cell.transform, Theme.Green, 140, 14); hb.Value = (float)C.Roster.HpFrac(u); hb.back.R().StretchX(0, 12, 14, 24, 24);
                     var cls = W.ClassBadge(cell.transform, u.classId, 40); cls.At(0, 1, 6, -6, 40, 40, 0, 1);
@@ -112,16 +107,16 @@ namespace Emberhall
             }
             // --- synergy + chance ---
             var syn = C.Roster.ActiveSynergies(party);
-            var strip = U.ScrollH(body, 10, new RectOffset(0, 0, 2, 2), "synergies"); strip.view.parent.GetComponent<RectTransform>().Le(-1, 58, 1);
+            var strip = U.ScrollH(body, 10, new RectOffset(0, 0, 2, 2), "synergies"); strip.view.parent.GetComponent<RectTransform>().Le(-1, 76, 1);
             var sr = strip.content;
             foreach (var s in syn) U.Chip(sr, L.T(s.name), Theme.GreenDark, 28, Color.white, 16, 48);
-            if (syn.Count == 0) { var t = U.Txt(sr, L.T("No synergy - mix classes for bonuses!"), 30, Theme.TextDim, TextAnchor.MiddleCenter); t.Le(760, 48); }
+            if (syn.Count == 0) { var t = U.Txt(sr, L.T("No synergy - mix classes for bonuses!"), 30, Theme.TextDim, TextAnchor.MiddleCenter); t.Le(900, 64); }
             string key = string.Join(",", sel) + ":" + doctrine + ":" + shownRosterState; if (key != chanceKey) { chanceKey = key; chance = WinChance(); }
-            var box = U.Box(body, Theme.Inset, chance >= 0.75 ? Theme.GreenDark : chance >= 0.4 ? Theme.AccentDark : Theme.RedDark, "chance"); box.Le(-1, 92, 1);
-            var ct = U.Txt(box.transform, $"{L.T(expedition ? "Success chance" : "Estimated win chance")}: {W.Col(chance >= 0.75 ? Theme.Good : chance >= 0.4 ? Theme.Warn : Theme.Bad, (int)(chance * 100) + "%")}   <size=28>({L.T("Power")} {Util.Num(C.Roster.PartyPower(party))})</size>", 36, Theme.Text, TextAnchor.MiddleCenter, true); ct.Fill(20, 20, 10, 10);
+            var box = U.Box(body, Theme.Inset, chance >= 0.75 ? Theme.GreenDark : chance >= 0.4 ? Theme.AccentDark : Theme.RedDark, "chance"); box.Le(-1, 144, 1);
+            var ct = U.Txt(box.transform, $"{L.T(expedition ? "Success chance" : "Estimated win chance")}: {W.Col(chance >= 0.75 ? Theme.Good : chance >= 0.4 ? Theme.Warn : Theme.Bad, (int)(chance * 100) + "%")}   <size=36>({L.T("Power")} {Util.Num(C.Roster.PartyPower(party))})</size>", 36, Theme.Text, TextAnchor.MiddleCenter, true); ct.Fill(20, 20, 10, 10);
 
             // --- hero list ---
-            if (!C.Roster.All.Any(C.Roster.Ready)) W.Info(body, L.T("No heroes are ready. Open a hero and use a healing potion, or visit the Infirmary."), 30, Theme.Bad);
+            if (!C.Roster.All.Any(C.Roster.Ready)) W.Info(body, L.T("Use a healing potion, or recover at the Infirmary."), 30, Theme.Bad);
             else if (party.Count == 0) W.Info(body, L.T("Choose at least one healthy hero from the list below."), 30, Theme.Warn);
             W.Header(body, L.T("Heroes"), Icons.Get("heroes"));
             foreach (var u in C.Roster.All.OrderByDescending(x => C.Roster.Ready(x)).ThenByDescending(x => C.Roster.Power(x)))
@@ -136,7 +131,7 @@ namespace Emberhall
                     Redraw();
                 };
                 var pic = W.Portrait(row.transform, u.sprite, 100); pic.transform.parent.GetComponent<RectTransform>().At(0, 0.5f, 16, -2, 90, 100, 0, 0.5f);
-                var n = U.Txt(row.transform, u.name, 36, Theme.Text, TextAnchor.MiddleLeft, true); n.At(0, 1, 120, -10, 420, 44, 0, 1);
+                var n = U.Txt(row.transform, u.name, 36, Theme.Text, TextAnchor.MiddleLeft, true); n.At(0, 1, 120, -10, 560, 56, 0, 1);
                 var cls = W.ClassBadge(row.transform, u.classId, 42); cls.At(0, 0, 120, 14, 42, 42, 0, 0);
                 var l = U.Txt(row.transform, $"Lv {u.level}", 30, Theme.Gold, TextAnchor.MiddleLeft, true); l.At(0, 0, 172, 14, 150, 42, 0, 0);
                 var hb = U.ProgressBar(row.transform, C.Roster.HpFrac(u) < 0.3 ? Theme.Red : Theme.Green, 220, 20); hb.Value = (float)C.Roster.HpFrac(u); hb.back.R().At(0, 0, 330, 22, 220, 20, 0, 0);

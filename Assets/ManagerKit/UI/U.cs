@@ -26,12 +26,14 @@ namespace ManagerKit.UI
         /// <summary>Anchor at (ax,ay) in the parent, pivot = anchor, offset (x,y), fixed size.</summary>
         public static T At<T>(this T c, float ax, float ay, float x, float y, float w, float h, float px = -1, float py = -1) where T : Component
         {
+            h = ReadingHeight(c, h);
             var rt = (RectTransform)c.transform; rt.anchorMin = rt.anchorMax = new Vector2(ax, ay); rt.pivot = new Vector2(px < 0 ? ax : px, py < 0 ? ay : py);
             rt.anchoredPosition = new Vector2(x, y); rt.sizeDelta = new Vector2(w, h); return c;
         }
         /// <summary>Stretch horizontally at vertical anchor ay with fixed height.</summary>
         public static T StretchX<T>(this T c, float ay, float y, float h, float padL = 0, float padR = 0) where T : Component
         {
+            h = ReadingHeight(c, h);
             var rt = (RectTransform)c.transform; rt.anchorMin = new Vector2(0, ay); rt.anchorMax = new Vector2(1, ay); rt.pivot = new Vector2(0.5f, ay);
             rt.offsetMin = new Vector2(padL, y - h * ay); rt.offsetMax = new Vector2(-padR, y + h * (1 - ay)); return c;
         }
@@ -42,6 +44,17 @@ namespace ManagerKit.UI
         }
         public static T Sz<T>(this T c, float w, float h) where T : Component { ((RectTransform)c.transform).sizeDelta = new Vector2(w, h); return c; }
         public static RectTransform R(this Component c) => (RectTransform)c.transform;
+        static float ReadingHeight(Component c, float height)
+        {
+            var text = c.GetComponent<Text>();
+            if (text != null) return Mathf.Max(height, text.fontSize * 1.24f);
+            if (c.name == "bar" || c.name == "chip" || c.name == "badge")
+            {
+                text = c.GetComponentInChildren<Text>();
+                if (text != null) return Mathf.Max(height, text.fontSize * 1.24f + 8);
+            }
+            return height;
+        }
 
         // ---------------- images ----------------
         public static Image Img(Transform parent, Sprite s, Color? c = null, string name = "img", bool raycast = false)
@@ -61,16 +74,10 @@ namespace ManagerKit.UI
         public static Text Txt(Transform parent, string s, int size = 36, Color? c = null, TextAnchor a = TextAnchor.MiddleCenter, bool outline = false, bool wrap = false, string name = "txt")
         {
             var r = Rt(parent, name); var t = r.gameObject.AddComponent<Text>();
-            t.font = Theme.Font; t.text = s ?? ""; t.fontSize = Mathf.Max(18, size); t.color = c ?? Theme.Text; t.alignment = a; t.raycastTarget = false; t.supportRichText = true;
-            // The requested size is the actual size. Inflating fonts globally made labels
-            // escape their cards, especially in the Indonesian translation.
+            t.font = Theme.Font; t.text = s ?? ""; t.fontSize = Theme.ReadingSize(size); t.fontStyle = outline ? FontStyle.Bold : FontStyle.Normal; t.color = c ?? Theme.Text; t.alignment = a; t.raycastTarget = false; t.supportRichText = true;
             t.horizontalOverflow = HorizontalWrapMode.Wrap; t.verticalOverflow = VerticalWrapMode.Truncate;
-            t.lineSpacing = 1.08f;
+            t.lineSpacing = 1.04f;
             if (!wrap) t.FitText();
-            if (outline && t.color.grayscale > 0.58f)
-            {
-                var o = r.gameObject.AddComponent<Outline>(); o.effectColor = new Color(0.06f, 0.025f, 0.05f, 0.8f); o.effectDistance = new Vector2(1.2f, -1.2f);
-            }
             return t;
         }
         /// <summary>Gentle fitting for short labels in fixed boxes; paragraphs keep their reading size.</summary>
@@ -78,8 +85,7 @@ namespace ManagerKit.UI
         {
             t.resizeTextForBestFit = true;
             t.resizeTextMaxSize = t.fontSize;
-            int readableFloor = t.fontSize >= 28 ? 28 : t.fontSize >= 24 ? 24 : 18;
-            t.resizeTextMinSize = Mathf.Min(t.fontSize, minimum > 0 ? minimum : Mathf.Max(readableFloor, Mathf.RoundToInt(t.fontSize * 0.76f)));
+            t.resizeTextMinSize = Mathf.Min(t.fontSize, Mathf.Max(36, minimum > 0 ? minimum : Mathf.RoundToInt(t.fontSize * 0.82f)));
             return t;
         }
         /// <summary>Text that stretches to its parent, wraps and clips to the box.</summary>
@@ -109,6 +115,7 @@ namespace ManagerKit.UI
         }
         public static LayoutElement Le(this Component c, float w = -1, float h = -1, float flexW = -1, float flexH = -1, float minW = -1, float minH = -1)
         {
+            if (h > 0) h = ReadingHeight(c, h);
             var l = c.GetComponent<LayoutElement>() ?? c.gameObject.AddComponent<LayoutElement>();
             if ((w > 0 || h > 0) && c.transform is RectTransform rr) rr.sizeDelta = new Vector2(w > 0 ? w : rr.sizeDelta.x, h > 0 ? h : rr.sizeDelta.y);
             if (w >= 0) l.preferredWidth = w; if (h >= 0) l.preferredHeight = h; if (flexW >= 0) l.flexibleWidth = flexW; if (flexH >= 0) l.flexibleHeight = flexH;
@@ -150,15 +157,16 @@ namespace ManagerKit.UI
         }
 
         // ---------------- button ----------------
-        public static UButton Btn(Transform parent, string text, Color fill, Action click, float w = 300, float h = 100, int fs = 40, Sprite icon = null, Color? textColor = null, string name = "btn")
+        public static UButton Btn(Transform parent, string text, Color fill, Action click, float w = 300, float h = 100, int fs = 40, Sprite icon = null, Color? textColor = null, string name = "btn", bool ornate = false)
         {
-            bool ornate = fill.a > 0.5f && w >= 200f && h >= 86f;
-            var img = ornate ? Img(parent, LuxArt.Plate(fill, w, h), Color.white, name, true) : Box(parent, fill, null, name, true);
-            var b = img.gameObject.AddComponent<UButton>(); b.bg = img; b.baseColor = fill; b.onClick = click; b.ornate = ornate; b.plateW = w; b.plateH = h; img.Sz(w, h);
+            if (w < 360 && !string.IsNullOrEmpty(text) && !char.IsDigit(text[0])) icon = null;
+            ornate = ornate && fill.a > 0.5f;
+            var img = ornate ? Img(parent, LuxArt.Plate(fill, w, h), Color.white, name, true) : Box(parent, fill, null, name, true, .06f);
+            var b = img.gameObject.AddComponent<UButton>(); b.bg = img; b.soft = !ornate; b.baseColor = fill; b.onClick = click; b.ornate = ornate; b.plateW = w; b.plateH = h; img.Sz(w, h);
             b.Le(w, h);
-            if (fill.a > 0.5f) LuxArt.Raise(img, h >= 100f ? 10f : 6f, 0.48f);
+            if (ornate) LuxArt.Raise(img, 6f, .24f);
             if (ornate) img.gameObject.AddComponent<Gleam>();
-            var content = Rt(img.transform, "button_content"); content.Fill(ornate ? 28 : 18, ornate ? 28 : 18, 12, 12);
+            var content = Rt(img.transform, "button_content"); content.Fill(ornate ? 24 : 14, ornate ? 24 : 14, 8, 8);
             HBox(content, 12, null, TextAnchor.MiddleCenter, true, true, false, false);
             if (icon != null)
             {
@@ -169,15 +177,14 @@ namespace ManagerKit.UI
             {
                 b.labelTint = textColor ?? (fill.grayscale > 0.64f ? Theme.TextDark : new Color(1f, 0.98f, 0.9f));
                 b.label = Txt(content, text, fs, b.labelTint, TextAnchor.MiddleCenter, true);
-                b.label.Le(-1, Mathf.Max(20f, h - 24f), 0, 0, 0, 0);
+                b.label.Le(-1, -1, 0, 1, 0, 0);
             }
             img.gameObject.AddComponent<RectMask2D>();
             return b;
         }
         public static UButton IconBtn(Transform parent, Sprite icon, Color fill, Action click, float size = 90, string name = "iconbtn")
         {
-            var img = Box(parent, fill, null, name, true); var b = img.gameObject.AddComponent<UButton>(); b.bg = img; b.baseColor = fill; b.onClick = click; img.Sz(size, size); b.Le(size, size);
-            if (fill.a > 0.5f) LuxArt.Raise(img, 6f, 0.45f);
+            var img = Box(parent, fill, null, name, true, .06f); var b = img.gameObject.AddComponent<UButton>(); b.bg = img; b.soft = true; b.baseColor = fill; b.onClick = click; img.Sz(size, size); b.Le(size, size);
             b.icon = Icon(img.transform, icon, size - 28); b.icon.At(0.5f, 0.5f, 0, 0, size - 28, size - 28); return b;
         }
 
@@ -185,6 +192,7 @@ namespace ManagerKit.UI
         public class Bar { public Image back, fill; public Text label; float v; public float Value { get => v; set { v = Mathf.Clamp01(value); var f = (RectTransform)fill.transform; f.anchorMax = new Vector2(v, 1); fill.enabled = v > 0.001f; } } }
         public static Bar ProgressBar(Transform parent, Color fillColor, float w, float h, string label = null, int fs = 26)
         {
+            if (label != null) h = Mathf.Max(h, Theme.ReadingSize(fs) * 1.24f + 8);
             var back = Box(parent, Theme.Inset, Theme.Black, "bar", false, 0.1f); back.Sz(w, h); back.Le(w, h);
             float inset = Mathf.Min(5f, h * 0.18f);
             var inner = Rt(back.transform, "inner"); inner.Fill(inset, inset, inset, inset);
@@ -198,11 +206,13 @@ namespace ManagerKit.UI
 
         public static Image Badge(Transform parent, string text, float size = 44)
         {
+            size = Mathf.Max(size, 64);
             var b = Box(parent, Theme.Red, Theme.Black, "badge"); b.Sz(Mathf.Max(size, 20 + text.Length * 14), size);
-            var t = Txt(b.transform, text, (int)(size * 0.72f), Color.white, TextAnchor.MiddleCenter, false); t.Fill(4, 4, 4, 4); return b;
+            var t = Txt(b.transform, text, 28, Color.white, TextAnchor.MiddleCenter, false); t.Fill(4, 4, 4, 4); return b;
         }
         public static Image Chip(Transform parent, string text, Color fill, int fs = 26, Color? tc = null, float padX = 18, float h = 40)
         {
+            h = Mathf.Max(h, Theme.ReadingSize(fs) * 1.24f + 8);
             var c = Box(parent, fill, null, "chip");
             Color ink = tc ?? Color.white;
             if (ink == Color.white && fill.grayscale > 0.56f) ink = Theme.TextDark;
@@ -263,7 +273,7 @@ namespace ManagerKit.UI
     public class UButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPointerClickHandler, IPointerExitHandler
     {
         public Image bg, icon; public Text label; public Action onClick; public Color baseColor = Color.white, labelTint = Color.white;
-        public string sfx = "click"; public bool noTint; public bool interactable = true; public bool ornate; public float plateW, plateH; public Action<UButton> onSound;
+        public string sfx = "click"; public bool noTint; public bool interactable = true; public bool ornate, soft; public float plateW, plateH; public Action<UButton> onSound;
         public static Action<string> PlaySound;
         Tw.H press; bool down; Vector3 baseScale = Vector3.one;
         public bool Interactable { get => interactable; set { interactable = value; Apply(); } }
@@ -272,7 +282,7 @@ namespace ManagerKit.UI
         {
             if (bg == null || noTint) return;
             var c = interactable ? baseColor : Theme.GreyDark;
-            bg.sprite = ornate ? LuxArt.Plate(c, plateW, plateH) : Boxes.Get(c);
+            bg.sprite = ornate ? LuxArt.Plate(c, plateW, plateH) : Boxes.Get(c, bevel: soft ? .06f : .22f);
             if (bg.sprite != null && bg.sprite.border != Vector4.zero) { bg.type = Image.Type.Sliced; bg.pixelsPerUnitMultiplier = 1f; }
             if (label) label.color = interactable ? labelTint : Theme.TextDim;
             if (icon) icon.color = interactable ? Color.white : new Color(1, 1, 1, 0.5f);

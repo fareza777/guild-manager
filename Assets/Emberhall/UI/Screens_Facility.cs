@@ -53,10 +53,14 @@ namespace Emberhall
             if (lv > 0) { var lc = U.Chip(head, $"Lv {lv}", Theme.AccentDark, 40, Color.white, 24, 66); }
 
             // banner
-            var ban = U.Box(p, Theme.Inset, Theme.Black, "banner"); ban.Le(-1, 330, 1);
-            var sky = U.Img(ban.transform, Art.Bg("PlainA"), Color.white, "sky"); sky.Fill(6, 6, 6, 6); sky.preserveAspect = false;
-            var sp = Art.Prop(def.sprite != null ? def.sprite : "house_20"); if (sp != null)
-            { var h = U.Img(ban.transform, sp, lv > 0 ? Color.white : new Color(0.4f, 0.38f, 0.5f), "house"); float s = 300f / sp.rect.height; h.At(0.5f, 0, 0, 20, sp.rect.width * s, sp.rect.height * s, 0.5f, 0); }
+            var ban = U.Box(p, Theme.Inset, Theme.Black, "banner"); ban.Le(-1, 280, 1);
+            ban.gameObject.AddComponent<RectMask2D>();
+            GeneratedArt.Cover(U.Rt(ban.transform, "courtyard").Fill(4, 4, 4, 4), "hall_ground");
+            U.Solid(ban.transform, new Color(1f, .98f, .88f, .32f), "daylight").Fill();
+            int paintedIndex = Array.IndexOf(new[] { "tavern", "blacksmith", "training", "infirmary", "barracks", "treasury", "library" }, FacilityId);
+            var sp = GeneratedArt.HallBuilding(paintedIndex) ?? Art.Prop(def.sprite ?? "house_20");
+            if (sp != null)
+            { var h = U.Img(ban.transform, sp, lv > 0 ? Color.white : new Color(.72f, .73f, .66f), "house"); h.preserveAspect = true; h.At(.5f, .5f, 0, 0, 340, 264); }
             if (lv == 0) U.Icon(ban.transform, Icons.Get("hammer"), 100).At(0.5f, 0.5f, 0, 30, 100, 100);
             W.Info(p, L.T(def.desc), 34, Theme.Text);
 
@@ -144,28 +148,29 @@ namespace Emberhall
         {
             C.Recruiter.EnsureAffordableRecruit();
             Hud.Targets.Remove("btn_hire");
-            var hdr = U.Rt(p, "hdr"); hdr.Le(-1, 92); U.HBox(hdr, 10, null, TextAnchor.MiddleCenter, true, true, false, true);
+            var hdr = U.Rt(p, "hdr"); hdr.Le(-1, 132); U.HBox(hdr, 10, null, TextAnchor.MiddleCenter, true, true, false, true);
             var cap = U.Box(hdr, Theme.Inset, C.Roster.Full ? Theme.Red : Theme.Black, "cap"); cap.Le(250, 92);
             U.Icon(cap.transform, Icons.Get("heroes"), 56).At(0, 0.5f, 12, 0, 56, 56, 0, 0.5f); U.Txt(cap.transform, $"{C.Roster.Count}/{C.Roster.Capacity}", 48, C.Roster.Full ? Theme.Bad : Theme.Text, TextAnchor.MiddleCenter, true).Fill(70, 8, 0, 4);
             var rt = U.Txt(hdr, "", 30, Theme.TextDim, TextAnchor.MiddleLeft); rt.Le(-1, 80, 1); live.Add((rt, () => L.T("New faces in {0}", Util.Dur(C.Recruiter.RefreshAt - Util.Now))));
             bool free = C.Recruiter.FreeRefreshReady;
-            var rb = U.Btn(hdr, free ? L.T("Free refresh") : L.T("Refresh"), free ? Theme.Green : Theme.PurpleDark, () => { if (C.Recruiter.ManualRefresh(!free)) { Audio.Play("swoosh"); Redraw(); } else Toasts.Show(L.T("Not enough gems")); }, 270, 92, 30, free ? null : Icons.Get("gem")); rb.Le(270, 92);
+            var rb = U.Btn(hdr, free ? L.T("Free refresh") : L.T("Refresh"), free ? Theme.Green : Theme.PurpleDark, () => { if (C.Recruiter.ManualRefresh(!free)) { Audio.Play("swoosh"); Redraw(); } else Toasts.Show(L.T("Not enough gems")); }, 340, 92, 30, free ? null : Icons.Get("gem")); rb.Le(340, 92);
             if (!free) rb.label.text = C.Recruiter.RefreshGemCost.ToString();
             foreach (var cand in C.Recruiter.Pool.ToList())
             {
                 var u = cand; var rc = Art.RarityColor(C, u.rarity); var st = C.Roster.Stats(u);
-                var card = U.Box(p, Theme.Panel, Color.Lerp(Theme.Black, rc, 0.7f), "cand"); card.Le(-1, 330, 1);
+                float traitsHeight = u.traits.Count == 0 ? 56 : Math.Min(2, u.traits.Count) * 100 + 4;
+                var card = U.Box(p, Theme.Panel, Color.Lerp(Theme.Black, rc, 0.7f), "cand"); card.Le(-1, Mathf.Max(350, 260 + traitsHeight), 1);
                 var pb = U.Box(card.transform, Color.Lerp(Theme.Inset, rc, 0.2f), rc, "pb"); pb.At(0, 0.5f, 16, 0, 200, 290, 0, 0.5f);
                 var pic = W.Portrait(pb.transform, u.sprite, 190); pic.transform.parent.GetComponent<RectTransform>().At(0.5f, 0, 0, 24, 170, 190, 0.5f, 0);
                 W.ClassBadge(pb.transform, u.classId, 52).At(0, 1, 6, -6, 52, 52, 0, 1);
                 var nm = U.Txt(card.transform, u.name, 44, Theme.Text, TextAnchor.MiddleLeft, true); nm.At(0, 1, 236, -14, 520, 54, 0, 1);
-                var meta = U.Rt(card.transform, "meta"); meta.At(0, 1, 236, -72, 600, 44, 0, 1); U.HBox(meta, 8, null, TextAnchor.MiddleLeft, false, false);
+                var meta = U.Rt(card.transform, "meta"); meta.At(0, 1, 236, -90, 600, 56, 0, 1); U.HBox(meta, 8, null, TextAnchor.MiddleLeft, false, false);
                 U.Chip(meta, L.T(C.Content.Rarity(u.rarity).name), Color.Lerp(Theme.Inset, rc, 0.6f), 26, Color.white, 14, 42); U.Chip(meta, L.T(C.Roster.ClassName(u)), Theme.GreyDark, 26, Color.white, 14, 42); U.Chip(meta, "Lv " + u.level, Theme.AccentDark, 26, Color.white, 14, 42);
-                var stats = U.Rt(card.transform, "stats"); stats.At(0, 1, 236, -124, 600, 40, 0, 1); U.HBox(stats, 16, null, TextAnchor.MiddleLeft, false, false);
-                foreach (var sd in C.Content.Stats.Take(4)) { var cc = U.Rt(stats, "s"); U.HBox(cc, 4, null, TextAnchor.MiddleLeft, false, false); U.Icon(cc, Art.Get(sd.icon), 34).Le(34, 34); var tx = U.Txt(cc, Util.Num(st[sd.id]), 30, Theme.Text, TextAnchor.MiddleLeft, true); tx.Le(tx.preferredWidth + 4, 36); cc.Le(34 + 4 + tx.preferredWidth + 8, 38); }
-                var tr = U.Rt(card.transform, "traits"); tr.StretchX(0, 20, 104, 236, 288); U.VBox(tr, 4, null, TextAnchor.LowerLeft, true, true, true, false);
+                var stats = U.Rt(card.transform, "stats"); stats.At(0, 1, 236, -158, 600, 64, 0, 1); U.HBox(stats, 16, null, TextAnchor.MiddleLeft, false, false);
+                foreach (var sd in C.Content.Stats.Take(4)) { var cc = U.Rt(stats, "s"); U.HBox(cc, 4, null, TextAnchor.MiddleLeft, false, false); U.Icon(cc, Art.Get(sd.icon), 34).Le(34, 34); var tx = U.Txt(cc, Util.Num(st[sd.id]), 30, Theme.Text, TextAnchor.MiddleLeft, true); tx.Le(tx.preferredWidth + 4, 56); cc.Le(34 + 4 + tx.preferredWidth + 8, 64); }
+                var tr = U.Rt(card.transform, "traits"); tr.StretchX(0, 20, traitsHeight, 236, 288); U.VBox(tr, 4, null, TextAnchor.LowerLeft, true, true, true, false);
                 if (u.traits.Count == 0) { var nt = U.Txt(tr, L.T("No special traits"), 26, Theme.TextDim, TextAnchor.MiddleLeft); nt.Le(-1, 32); }
-                foreach (var tid in u.traits.Take(2)) { var t = C.Content.TraitMap[tid]; var tl = U.Txt(tr, $"<color=#{ColorUtility.ToHtmlStringRGB(t.good ? Theme.Good : Theme.Warn)}>{L.T(t.name)}</color>  <size=24>{L.T(t.desc)}</size>", 28, Theme.Text, TextAnchor.MiddleLeft); tl.Le(-1, 48); }
+                foreach (var tid in u.traits.Take(2)) { var t = C.Content.TraitMap[tid]; var tl = U.Txt(tr, $"<color=#{ColorUtility.ToHtmlStringRGB(t.good ? Theme.Good : Theme.Warn)}>{L.T(t.name)}</color>  <size=36>{L.T(t.desc)}</size>", 28, Theme.Text, TextAnchor.MiddleLeft); tl.Le(-1, 100); }
                 var hb = U.Btn(card.transform, L.T("Hire") + " " + Util.Num(u.price), Theme.Green, () => { if (C.Recruiter.Hire(u)) { Audio.Play("hire"); Fx.Burst(Root, Vector2.zero, Icons.Get("star"), 14, 600, null, 34); Redraw(); } }, 250, 100, 34, Art.ResIcon(C, "gold")); hb.At(1, 0, -16, 16, 250, 100, 1, 0);
                 hb.Interactable = C.Wallet.Has("gold", u.price) && !C.Roster.Full;
                 if (C.Roster.Full) { hb.label.text = L.T("FULL"); }
@@ -334,7 +339,7 @@ namespace Emberhall
                 var d = def; int lv = C.Upgrades.Level(d.id); bool unlocked = C.Upgrades.Unlocked(d); var task = C.Upgrades.Pending(d.id);
                 var row = U.Box(p, unlocked ? Theme.Panel : Theme.GreyDark, task != null ? Theme.Accent : Theme.Black, "res"); row.Le(-1, 250, 1);
                 var ib = U.Box(row.transform, Theme.Inset, Theme.Black, "ib"); ib.At(0, 1, 16, -16, 100, 100, 0, 1); U.Icon(ib.transform, Art.Get(d.icon), 70).At(0.5f, 0.5f, 0, 0, 70, 70);
-                var nm = U.Txt(row.transform, L.T(d.name) + $"  <size=30><color=#ffd34e>{lv}/{d.max}</color></size>", 40, unlocked ? Theme.Text : Theme.TextDim, TextAnchor.MiddleLeft, true); nm.At(0, 1, 132, -12, 640, 50, 0, 1);
+                var nm = U.Txt(row.transform, L.T(d.name) + $"  <size=36><color=#ffd34e>{lv}/{d.max}</color></size>", 40, unlocked ? Theme.Text : Theme.TextDim, TextAnchor.MiddleLeft, true); nm.At(0, 1, 132, -12, 640, 50, 0, 1);
                 var ds = U.Txt(row.transform, L.T(d.desc), 28, Theme.TextDim, TextAnchor.UpperLeft, false, true); ds.At(0, 1, 132, -62, 640, 70, 0, 1);
                 if (task != null)
                 {
@@ -346,7 +351,7 @@ namespace Emberhall
                 else if (lv >= d.max) { var mx = U.Chip(row.transform, "MAX", Theme.GreenDark, 34, Color.white, 24, 66); mx.At(1, 0, -20, 24, 140, 66, 1, 0); }
                 else
                 {
-                    var cost = C.Upgrades.Cost(d, lv + 1); var cr = W.CostRow(row.transform, cost, 28, 36, TextAnchor.MiddleLeft); cr.R().At(0, 0, 24, 54, 480, 40, 0, 0);
+                    var cost = C.Upgrades.Cost(d, lv + 1); var cr = W.CostRow(row.transform, cost, 28, 36, TextAnchor.MiddleLeft); cr.R().At(0, 0, 24, 64, 480, 48, 0, 0);
                     var tm = U.Txt(row.transform, Util.Dur(C.Upgrades.Time(d, lv + 1)), 28, Theme.TextDim, TextAnchor.MiddleLeft); tm.At(0, 0, 24, 14, 300, 36, 0, 0);
                     var b = U.Btn(row.transform, L.T("RESEARCH"), Theme.Green, () => { if (C.Upgrades.Start(d)) { Audio.Play("magic"); Redraw(); } }, 250, 96, 34); b.At(1, 0, -14, 14, 250, 96, 1, 0);
                     b.Interactable = C.Upgrades.CanStart(d);
