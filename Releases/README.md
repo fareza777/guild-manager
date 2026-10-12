@@ -1,23 +1,24 @@
-# Emberhall 1.2.0
+# Emberhall 1.2.1
 
-[Download the signed Android APK](https://github.com/fareza777/guild-manager/raw/refs/tags/v1.2.0/Releases/Emberhall-1.2.0.apk)
+[Download the signed Android APK](https://github.com/fareza777/guild-manager/raw/refs/tags/v1.2.1/Releases/Emberhall-1.2.1.apk)
+
+Building names and Market now appear directly over the Hall art, with no white plaques. Locks and level information
+remain visible. Hire, Heal, Build, Upgrade, Treasury collection and construction timers also use unframed labels.
+A fine ivory edge keeps the text readable, and transparent tap areas preserve interaction with names and actions.
 
 | Field | Value |
 | --- | --- |
-| Version / Android code | 1.2.0 / 5 |
+| Version / Android code | 1.2.1 / 6 |
 | Package | com.pixelgamemaster.emberhall |
 | Platform | Android 8.0+ (API 26), ARM64, OpenGL ES 3 |
 | Target API | 36 |
-| Size | 69,787,701 bytes |
-| Default language | English; Bahasa Indonesia available in Settings |
+| Size | 69,786,669 bytes |
+| Default language | English; Bahasa Indonesia in Settings |
 | Build | Unity 6000.6.1f1, IL2CPP Release, signed APK |
 
-SHA-256: `f8c1d76d0b4dc98dbe93c8ec7ba651de222bd52838254abdceebf958cc93755d`
+SHA-256: `5293db91924cc0bfdb4ae081ab91b688b7131ca3da2a981c0b4ccf5ce9f829e0`
 
-This version enlarges the typography, simplifies panels and buttons, gives illustrations more room, and replaces the
-blue area behind the first-steps card with warm ivory. It adds a Lantern Road panorama, 25 connected story chapters,
-a reached-chapter Journal, encounter-aware Auto party selection, and battle Pause/Resume.
+[Validation evidence](../Store/Validation/1.2.1/README.md) · [Previous 1.2.0 release](1.2.0.md)
 
-See [validation evidence](../Store/Validation/1.2.0/README.md) and [art generation prompt and mode](../Store/Frontier-art-notes.md).
-The APK signature and manifest were verified. No physical Android device was connected; Android installation,
-performance and native Share/Rate interactions still need a device check.
+The package signature and manifest were verified. No physical Android device was connected; device installation,
+performance and native Share/Rate interactions remain outside this unattended check.

@@ -13,7 +13,7 @@ namespace Emberhall
     {
         class Bld
         {
-            public string id; public RectTransform root; public Image house, plaque, plaqueShadow; public Text plate, status; public RectTransform bubble; public Image bubbleIcon; public Text bubbleText;
+            public string id; public RectTransform root; public Image house; public RectTransform label; public Text plate, status; public RectTransform bubble; public Image bubbleIcon; public Text bubbleText;
             public U.Bar bar; public Text timer; public Image lockIcon; public Image hammer; public float ground; public UButton btn; public Tw.H bounce, bubbleBob;
         }
         class Walker { public RectTransform rt; public Image img; public SpriteAnim anim; public Vector2 target; public float speed, wait; public int dir = 0; public UnitInstance u; public int skin; public Tw.H bob; }
@@ -57,34 +57,16 @@ namespace Emberhall
         readonly Dictionary<RectTransform, float> ground = new Dictionary<RectTransform, float>();
         void tag(RectTransform r, float y) { ground[r] = y; }
 
-        static Sprite plaqueArt;
-        static Sprite PlaqueArt
+        static Text WorldLabel(Transform parent, string text, int size, Color color, bool bold = false)
         {
-            get
-            {
-                if (plaqueArt) return plaqueArt;
-                const int w = 128, h = 80;
-                var pixels = new Color32[w * h];
-                var cream = Theme.Hex("#f6e7c8"); var ivory = Theme.Hex("#fffaf0"); var gold = Theme.Hex("#b99854");
-                for (int y = 0; y < h; y++) for (int x = 0; x < w; x++)
-                {
-                    float dx = Mathf.Abs(x + .5f - w * .5f) - (w * .5f - 15f);
-                    float dy = Mathf.Abs(y + .5f - h * .5f) - (h * .5f - 15f);
-                    float edge = new Vector2(Mathf.Max(dx, 0), Mathf.Max(dy, 0)).magnitude + Mathf.Min(Mathf.Max(dx, dy), 0) - 14f;
-                    float alpha = Mathf.Clamp01(.6f - edge); if (alpha <= 0) continue;
-                    var color = Color.Lerp(cream, ivory, y / (h - 1f));
-                    if (edge > -1.7f) color = gold;
-                    else if (edge > -2.8f) color = Color.Lerp(color, Color.white, .7f);
-                    color.a = alpha; pixels[y * w + x] = color;
-                }
-                var texture = new Texture2D(w, h, TextureFormat.RGBA32, false) { name = "Hall ivory plaque", filterMode = FilterMode.Bilinear, wrapMode = TextureWrapMode.Clamp };
-                texture.SetPixels32(pixels); texture.Apply(false, true);
-                plaqueArt = Sprite.Create(texture, new Rect(0, 0, w, h), new Vector2(.5f, .5f), 100, 0, SpriteMeshType.FullRect, new Vector4(16, 16, 16, 16));
-                return plaqueArt;
-            }
+            var label = U.Txt(parent, text, size, color, TextAnchor.MiddleCenter, bold);
+            var edge = label.gameObject.AddComponent<Outline>();
+            edge.effectColor = new Color(1f, .98f, .9f, .95f);
+            edge.effectDistance = new Vector2(1.5f, -1.5f);
+            return label;
         }
 
-        static float PlaqueWidth(Text name, Text status = null, bool locked = false)
+        static float LabelWidth(Text name, Text status = null, bool locked = false)
         {
             float width = name.preferredWidth + 28f;
             if (status) width = Mathf.Max(width, status.preferredWidth + (locked ? 48f : 28f));
@@ -97,7 +79,7 @@ namespace Emberhall
         void PlaceVillage()
         {
             // Three airy terraces adapt to the smaller first-steps viewport. A building's
-            // art, plaque and action badge stay in the same row, rather than colliding.
+            // art, name and action label stay in the same row, rather than colliding.
             yardBottom = Guided ? 36f : 268f;
             rowSpan = Mathf.Max(220f, (size.y - yardBottom - 126f) / 3f);
             houseHeight = Mathf.Min(330f, rowSpan - 24f);
@@ -127,24 +109,23 @@ namespace Emberhall
             b.house = U.Img(b.root, sp, Color.white, "house", true); b.house.preserveAspect = true; b.house.At(0.5f, 0, 0, 30f, w, h - 26f, 0.5f, 0);
             b.btn = b.house.gameObject.AddComponent<UButton>(); b.btn.bg = b.house; b.btn.noTint = true; b.btn.sfx = "pop"; b.btn.onClick = () => OnBuildingTap(id);
             Hud.Reg("bld_" + id, b.root);
-            // plate
-            b.plaqueShadow = U.Img(b.root, Boxes.Glow, new Color(.23f, .20f, .12f, .17f), "plaque_shadow"); b.plaqueShadow.At(.5f, 0, 0, -6, 210, 26, .5f, 0);
-            var plate = U.Img(b.root, PlaqueArt, Color.white, "plate", true); b.plaque = plate; plate.At(.5f, 0, 0, 0, 200, 112, .5f, 0);
+            // Unframed labels retain their full tap area over the painted courtyard.
+            var plate = U.Solid(b.root, new Color(0, 0, 0, .001f), "label", true); b.label = plate.R(); plate.At(.5f, 0, 0, 0, 200, 112, .5f, 0);
             var plateBtn = plate.gameObject.AddComponent<UButton>(); plateBtn.bg = plate; plateBtn.noTint = true; plateBtn.sfx = "pop"; plateBtn.onClick = () => OnBuildingTap(id);
-            b.plate = U.Txt(plate.transform, "", 33, Theme.TextDark, TextAnchor.MiddleCenter); b.plate.FitText(36); b.plate.StretchX(1, -5, 56, 12, 12);
-            b.status = U.Txt(plate.transform, "", 28, Theme.TextDim, TextAnchor.MiddleCenter); b.status.FitText(27); b.status.StretchX(0, 4, 31, 12, 12);
+            b.plate = WorldLabel(plate.transform, "", 33, Theme.TextDark, true); b.plate.FitText(36); b.plate.StretchX(1, -5, 56, 12, 12);
+            b.status = WorldLabel(plate.transform, "", 28, Theme.TextDark); b.status.FitText(27); b.status.StretchX(0, 4, 31, 12, 12);
             // progress
             float progressY = h * .52f;
             b.bar = U.ProgressBar(b.root, Theme.Accent, w * .8f, 28); b.bar.back.R().At(.5f, 0, 0, progressY, w * .8f, 28, .5f, .5f);
-            var timePlate = U.Box(b.root, Theme.PanelLight, Theme.ParchmentDark, "timer_plate"); timePlate.At(.5f, 0, 0, progressY + 39f, 180, 64, .5f, .5f);
-            b.timer = U.Txt(timePlate.transform, "", 30, Theme.TextDark, TextAnchor.MiddleCenter); b.timer.FitText(28); b.timer.Fill(8, 8, 2, 2);
+            var timePlate = U.Rt(b.root, "timer_label"); timePlate.At(.5f, 0, 0, progressY + 39f, 180, 64, .5f, .5f);
+            b.timer = WorldLabel(timePlate.transform, "", 30, Theme.TextDark, true); b.timer.FitText(28); b.timer.Fill(8, 8, 2, 2);
             b.hammer = U.Icon(b.root, Icons.Get("hammer"), 52); b.hammer.At(.5f, 0, 0, progressY + 81f, 52, 52, .5f, .5f);
             b.lockIcon = U.Icon(plate.transform, Icons.Get("lock"), 24);
             // bubble
-            var bub = U.Box(b.root, Theme.PanelLight, Theme.Gold, "bubble", true); bub.At(.5f, 1, 0, -2, 264f, 76, .5f, 1); b.bubble = bub.R();
+            var bub = U.Solid(b.root, new Color(0, 0, 0, .001f), "action_label", true); bub.At(.5f, 1, 0, -2, 264f, 76, .5f, 1); b.bubble = bub.R();
             var bbtn = bub.gameObject.AddComponent<UButton>(); bbtn.bg = bub; bbtn.noTint = true; bbtn.onClick = () => OnBubbleTap(id);
             b.bubbleIcon = U.Icon(bub.transform, Icons.Get("coin"), 34); b.bubbleIcon.At(0, .5f, 10, 0, 34, 34, 0, .5f);
-            b.bubbleText = U.Txt(bub.transform, "", 29, Theme.TextDark, TextAnchor.MiddleCenter); b.bubbleText.FitText(27); b.bubbleText.Fill(46, 8, 6, 6);
+            b.bubbleText = WorldLabel(bub.transform, "", 29, Theme.GreenDark, true); b.bubbleText.FitText(27); b.bubbleText.Fill(46, 8, 6, 6);
             b.bubble.gameObject.SetActive(false);
             blds[id] = b; tag(b.root, feet);
             UpdateBuilding(b, true);
@@ -158,9 +139,9 @@ namespace Emberhall
             var market = U.Img(root, GeneratedArt.HallBuilding(7) ?? Art.Prop("crate_08"), Color.white, "market_stall"); market.preserveAspect = true; market.At(.5f, 0, 0, 30f, w, houseHeight - 26f, .5f, 0);
             var hit = U.Solid(root, new Color(0, 0, 0, .001f), "hit", true); hit.Fill();
             var ub = hit.gameObject.AddComponent<UButton>(); ub.bg = hit; ub.noTint = true; ub.sfx = "pop"; ub.onClick = () => { Bag.OpenTab = 2; Hud.Targets.Remove("x"); App.I.hud.GoTab(Hud.Tab.Bag); };
-            var plate = U.Img(root, PlaqueArt, Color.white, "plate"); plate.At(.5f, 0, 0, 5, 170, 58, .5f, 0);
-            var t = U.Txt(plate.transform, L.T("Market"), 33, Theme.TextDark, TextAnchor.MiddleCenter); t.FitText(32); t.Fill(12, 12, 6, 6);
-            plate.Sz(PlaqueWidth(t), 76);
+            var plate = U.Rt(root, "label"); plate.At(.5f, 0, 0, 5, 170, 58, .5f, 0);
+            var t = WorldLabel(plate.transform, L.T("Market"), 33, Theme.TextDark, true); t.FitText(32); t.Fill(12, 12, 6, 6);
+            plate.Sz(LabelWidth(t), 76);
             tag(root, feet);
         }
 
@@ -199,7 +180,7 @@ namespace Emberhall
             {
                 b.house.color = !unlocked ? new Color(.86f, .88f, .86f, .8f) : building ? new Color(.94f, .94f, .88f) : Color.white;
                 b.status.text = L.T(!unlocked ? "Locked" : building ? "Upgrade" : "Build");
-                b.status.color = !unlocked ? Theme.TextDim : Theme.GreenDark;
+                b.status.color = !unlocked ? Theme.TextDark : Theme.GreenDark;
             }
             else
             {
@@ -208,11 +189,11 @@ namespace Emberhall
                 b.status.color = Theme.Gold;
             }
             b.lockIcon.gameObject.SetActive(lv == 0 && !unlocked);
-            float plaqueWidth = PlaqueWidth(b.plate, b.status, lv == 0 && !unlocked);
-            b.plaque.Sz(plaqueWidth, 112); b.plaqueShadow.Sz(plaqueWidth + 16, 26);
+            float labelWidth = LabelWidth(b.plate, b.status, lv == 0 && !unlocked);
+            b.label.Sz(labelWidth, 112);
             if (lv == 0 && !unlocked)
             {
-                float statusWidth = Mathf.Min(b.status.preferredWidth + 4f, plaqueWidth - 48f);
+                float statusWidth = Mathf.Min(b.status.preferredWidth + 4f, labelWidth - 48f);
                 b.status.At(.5f, 0, 16, 4, statusWidth, 31, .5f, 0);
                 b.lockIcon.At(.5f, 0, -statusWidth * .5f - 2, 7, 24, 24, .5f, 0);
             }
@@ -241,6 +222,9 @@ namespace Emberhall
             {
                 if (!b.bubble.gameObject.activeSelf) { b.bubble.anchoredPosition = new Vector2(0, -2); b.bubble.gameObject.SetActive(true); Tw.Pop(b.bubble, .3f); b.bubbleBob = Tw.Bob(b.bubble, 5, .8f); }
                 b.bubbleIcon.sprite = Icons.Get(icon); b.bubbleText.text = txt;
+                float textWidth = Mathf.Clamp(b.bubbleText.preferredWidth, 90, 214);
+                b.bubbleText.At(.5f, .5f, 21, 0, textWidth, 56, .5f, .5f);
+                b.bubbleIcon.At(.5f, .5f, -(textWidth + 8) * .5f, 0, 34, 34, .5f, .5f);
             }
             else if (b.bubble.gameObject.activeSelf) { b.bubbleBob?.Kill(); b.bubbleBob = null; b.bubble.gameObject.SetActive(false); }
         }

@@ -44,7 +44,7 @@ namespace Emberhall
     /// <summary>Game entry point. Creates the UI host, owns the GameContext and drives the whole flow.</summary>
     public class App : MonoBehaviour
     {
-        public const string Version = "1.2.0";
+        public const string Version = "1.2.1";
         public static App I;
         public static GameContext Ctx => I != null ? I.ctx : null;
         public static bool Suppress;                      // tests can set before boot to take over

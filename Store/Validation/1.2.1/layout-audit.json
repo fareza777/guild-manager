@@ -1,0 +1,2463 @@
+{
+    "outputDirectory": "C:\\Guild Manager Sonnet 55\\Builds\\Win\\verify-121-hall",
+    "requestedLanguage": "en",
+    "verificationMode": true,
+    "screenshots": 89,
+    "checkedTexts": 3166,
+    "layoutIssues": 0,
+    "failedFlowChecks": 0,
+    "shots": [
+        {
+            "shot": "00_splash",
+            "language": "en",
+            "screen": "SplashScreen",
+            "screenWidth": 432,
+            "screenHeight": 864,
+            "checkedTexts": 4,
+            "skippedTexts": 0,
+            "issues": []
+        },
+        {
+            "shot": "01_title",
+            "language": "en",
+            "screen": "TitleScreen",
+            "screenWidth": 432,
+            "screenHeight": 864,
+            "checkedTexts": 10,
+            "skippedTexts": 0,
+            "issues": []
+        },
+        {
+            "shot": "02_onboard1",
+            "language": "en",
+            "screen": "OnboardingScreen",
+            "screenWidth": 432,
+            "screenHeight": 864,
+            "checkedTexts": 8,
+            "skippedTexts": 0,
+            "issues": []
+        },
+        {
+            "shot": "03_onboard2",
+            "language": "en",
+            "screen": "OnboardingScreen",
+            "screenWidth": 432,
+            "screenHeight": 864,
+            "checkedTexts": 8,
+            "skippedTexts": 0,
+            "issues": []
+        },
+        {
+            "shot": "04_onboard3",
+            "language": "en",
+            "screen": "OnboardingScreen",
+            "screenWidth": 432,
+            "screenHeight": 864,
+            "checkedTexts": 8,
+            "skippedTexts": 0,
+            "issues": []
+        },
+        {
+            "shot": "05_onboard4",
+            "language": "en",
+            "screen": "OnboardingScreen",
+            "screenWidth": 432,
+            "screenHeight": 864,
+            "checkedTexts": 12,
+            "skippedTexts": 0,
+            "issues": []
+        },
+        {
+            "shot": "06_onboard5",
+            "language": "en",
+            "screen": "OnboardingScreen",
+            "screenWidth": 432,
+            "screenHeight": 864,
+            "checkedTexts": 19,
+            "skippedTexts": 2,
+            "issues": []
+        },
+        {
+            "shot": "06b_onboard_archer",
+            "language": "en",
+            "screen": "OnboardingScreen",
+            "screenWidth": 432,
+            "screenHeight": 864,
+            "checkedTexts": 20,
+            "skippedTexts": 1,
+            "issues": []
+        },
+        {
+            "shot": "07_hall",
+            "language": "en",
+            "screen": "Hall",
+            "screenWidth": 432,
+            "screenHeight": 864,
+            "checkedTexts": 31,
+            "skippedTexts": 1,
+            "issues": []
+        },
+        {
+            "shot": "07b_first_tavern",
+            "language": "en",
+            "screen": "Facility_tavern",
+            "screenWidth": 432,
+            "screenHeight": 864,
+            "checkedTexts": 31,
+            "skippedTexts": 31,
+            "issues": []
+        },
+        {
+            "shot": "07c_first_hire_ready",
+            "language": "en",
+            "screen": "Facility_tavern",
+            "screenWidth": 432,
+            "screenHeight": 864,
+            "checkedTexts": 52,
+            "skippedTexts": 10,
+            "issues": []
+        },
+        {
+            "shot": "07d_first_hire_complete",
+            "language": "en",
+            "screen": "Facility_tavern",
+            "screenWidth": 432,
+            "screenHeight": 864,
+            "checkedTexts": 53,
+            "skippedTexts": 11,
+            "issues": []
+        },
+        {
+            "shot": "07e_first_quest_reward",
+            "language": "en",
+            "screen": "Hall",
+            "screenWidth": 432,
+            "screenHeight": 864,
+            "checkedTexts": 35,
+            "skippedTexts": 1,
+            "issues": []
+        },
+        {
+            "shot": "07f_first_board",
+            "language": "en",
+            "screen": "Board",
+            "screenWidth": 432,
+            "screenHeight": 864,
+            "checkedTexts": 41,
+            "skippedTexts": 25,
+            "issues": []
+        },
+        {
+            "shot": "07g_first_party",
+            "language": "en",
+            "screen": "Board",
+            "screenWidth": 432,
+            "screenHeight": 864,
+            "checkedTexts": 63,
+            "skippedTexts": 27,
+            "issues": []
+        },
+        {
+            "shot": "07h_first_party_changed",
+            "language": "en",
+            "screen": "Board",
+            "screenWidth": 432,
+            "screenHeight": 864,
+            "checkedTexts": 61,
+            "skippedTexts": 27,
+            "issues": []
+        },
+        {
+            "shot": "07i_first_party_restored",
+            "language": "en",
+            "screen": "Board",
+            "screenWidth": 432,
+            "screenHeight": 864,
+            "checkedTexts": 63,
+            "skippedTexts": 27,
+            "issues": []
+        },
+        {
+            "shot": "07j_first_battle",
+            "language": "en",
+            "screen": "Battle",
+            "screenWidth": 432,
+            "screenHeight": 864,
+            "checkedTexts": 23,
+            "skippedTexts": 1,
+            "issues": []
+        },
+        {
+            "shot": "07k_first_victory",
+            "language": "en",
+            "screen": "Battle",
+            "screenWidth": 432,
+            "screenHeight": 864,
+            "checkedTexts": 42,
+            "skippedTexts": 2,
+            "issues": []
+        },
+        {
+            "shot": "07l_first_win_quest_ready",
+            "language": "en",
+            "screen": "Board",
+            "screenWidth": 432,
+            "screenHeight": 864,
+            "checkedTexts": 41,
+            "skippedTexts": 25,
+            "issues": []
+        },
+        {
+            "shot": "07l_first_win_quest_reward",
+            "language": "en",
+            "screen": "Board",
+            "screenWidth": 432,
+            "screenHeight": 864,
+            "checkedTexts": 44,
+            "skippedTexts": 25,
+            "issues": []
+        },
+        {
+            "shot": "07m_first_bag",
+            "language": "en",
+            "screen": "Bag",
+            "screenWidth": 432,
+            "screenHeight": 864,
+            "checkedTexts": 32,
+            "skippedTexts": 1,
+            "issues": []
+        },
+        {
+            "shot": "07n_first_equipped",
+            "language": "en",
+            "screen": "Bag",
+            "screenWidth": 432,
+            "screenHeight": 864,
+            "checkedTexts": 34,
+            "skippedTexts": 1,
+            "issues": []
+        },
+        {
+            "shot": "07o_first_equip_quest_ready",
+            "language": "en",
+            "screen": "Bag",
+            "screenWidth": 432,
+            "screenHeight": 864,
+            "checkedTexts": 34,
+            "skippedTexts": 1,
+            "issues": []
+        },
+        {
+            "shot": "07o_first_equip_quest_reward",
+            "language": "en",
+            "screen": "Bag",
+            "screenWidth": 432,
+            "screenHeight": 864,
+            "checkedTexts": 37,
+            "skippedTexts": 1,
+            "issues": []
+        },
+        {
+            "shot": "07p_first_next_chapter",
+            "language": "en",
+            "screen": "Bag",
+            "screenWidth": 432,
+            "screenHeight": 864,
+            "checkedTexts": 33,
+            "skippedTexts": 1,
+            "issues": []
+        },
+        {
+            "shot": "07q_story_journal",
+            "language": "en",
+            "screen": "Quests",
+            "screenWidth": 432,
+            "screenHeight": 864,
+            "checkedTexts": 28,
+            "skippedTexts": 7,
+            "issues": []
+        },
+        {
+            "shot": "verify_01_settings_id",
+            "language": "id",
+            "screen": "Hall",
+            "screenWidth": 432,
+            "screenHeight": 864,
+            "checkedTexts": 42,
+            "skippedTexts": 1,
+            "issues": []
+        },
+        {
+            "shot": "verify_02_built_blacksmith",
+            "language": "en",
+            "screen": "Facility_blacksmith",
+            "screenWidth": 432,
+            "screenHeight": 864,
+            "checkedTexts": 34,
+            "skippedTexts": 135,
+            "issues": []
+        },
+        {
+            "shot": "verify_02_built_training",
+            "language": "en",
+            "screen": "Facility_training",
+            "screenWidth": 432,
+            "screenHeight": 864,
+            "checkedTexts": 31,
+            "skippedTexts": 2,
+            "issues": []
+        },
+        {
+            "shot": "verify_02_built_infirmary",
+            "language": "en",
+            "screen": "Facility_infirmary",
+            "screenWidth": 432,
+            "screenHeight": 864,
+            "checkedTexts": 30,
+            "skippedTexts": 3,
+            "issues": []
+        },
+        {
+            "shot": "verify_02_built_barracks",
+            "language": "en",
+            "screen": "Facility_barracks",
+            "screenWidth": 432,
+            "screenHeight": 864,
+            "checkedTexts": 34,
+            "skippedTexts": 5,
+            "issues": []
+        },
+        {
+            "shot": "verify_02_built_treasury",
+            "language": "en",
+            "screen": "Facility_treasury",
+            "screenWidth": 432,
+            "screenHeight": 864,
+            "checkedTexts": 31,
+            "skippedTexts": 7,
+            "issues": []
+        },
+        {
+            "shot": "verify_02_built_library",
+            "language": "en",
+            "screen": "Facility_library",
+            "screenWidth": 432,
+            "screenHeight": 864,
+            "checkedTexts": 35,
+            "skippedTexts": 32,
+            "issues": []
+        },
+        {
+            "shot": "verify_03_forge_active",
+            "language": "en",
+            "screen": "Facility_blacksmith",
+            "screenWidth": 432,
+            "screenHeight": 864,
+            "checkedTexts": 35,
+            "skippedTexts": 137,
+            "issues": []
+        },
+        {
+            "shot": "verify_04_training_done",
+            "language": "en",
+            "screen": "Facility_training",
+            "screenWidth": 432,
+            "screenHeight": 864,
+            "checkedTexts": 31,
+            "skippedTexts": 2,
+            "issues": []
+        },
+        {
+            "shot": "verify_05_research_done",
+            "language": "en",
+            "screen": "Facility_library",
+            "screenWidth": 432,
+            "screenHeight": 864,
+            "checkedTexts": 35,
+            "skippedTexts": 32,
+            "issues": []
+        },
+        {
+            "shot": "verify_06_enhanced_item",
+            "language": "en",
+            "screen": "Bag",
+            "screenWidth": 432,
+            "screenHeight": 864,
+            "checkedTexts": 55,
+            "skippedTexts": 1,
+            "issues": []
+        },
+        {
+            "shot": "verify_07_market_sold",
+            "language": "en",
+            "screen": "Bag",
+            "screenWidth": 432,
+            "screenHeight": 864,
+            "checkedTexts": 39,
+            "skippedTexts": 5,
+            "issues": []
+        },
+        {
+            "shot": "verify_08_contract_result_1",
+            "language": "en",
+            "screen": "Board",
+            "screenWidth": 432,
+            "screenHeight": 864,
+            "checkedTexts": 50,
+            "skippedTexts": 4,
+            "issues": []
+        },
+        {
+            "shot": "verify_08_contract_result_2",
+            "language": "en",
+            "screen": "Board",
+            "screenWidth": 432,
+            "screenHeight": 864,
+            "checkedTexts": 42,
+            "skippedTexts": 1,
+            "issues": []
+        },
+        {
+            "shot": "verify_09_daily_claimed",
+            "language": "en",
+            "screen": "Board",
+            "screenWidth": 432,
+            "screenHeight": 864,
+            "checkedTexts": 53,
+            "skippedTexts": 1,
+            "issues": []
+        },
+        {
+            "shot": "verify_10_event_outcome",
+            "language": "en",
+            "screen": "Board",
+            "screenWidth": 432,
+            "screenHeight": 864,
+            "checkedTexts": 39,
+            "skippedTexts": 1,
+            "issues": []
+        },
+        {
+            "shot": "verify_11_live_battle",
+            "language": "en",
+            "screen": "Battle",
+            "screenWidth": 432,
+            "screenHeight": 864,
+            "checkedTexts": 14,
+            "skippedTexts": 2,
+            "issues": []
+        },
+        {
+            "shot": "verify_11b_battle_paused",
+            "language": "en",
+            "screen": "Battle",
+            "screenWidth": 432,
+            "screenHeight": 864,
+            "checkedTexts": 14,
+            "skippedTexts": 2,
+            "issues": []
+        },
+        {
+            "shot": "verify_12_skip_result",
+            "language": "en",
+            "screen": "Battle",
+            "screenWidth": 432,
+            "screenHeight": 864,
+            "checkedTexts": 33,
+            "skippedTexts": 2,
+            "issues": []
+        },
+        {
+            "shot": "verify_15_spire",
+            "language": "en",
+            "screen": "Board",
+            "screenWidth": 432,
+            "screenHeight": 864,
+            "checkedTexts": 30,
+            "skippedTexts": 1,
+            "issues": []
+        },
+        {
+            "shot": "verify_16_spire_party",
+            "language": "en",
+            "screen": "Board",
+            "screenWidth": 432,
+            "screenHeight": 864,
+            "checkedTexts": 49,
+            "skippedTexts": 7,
+            "issues": []
+        },
+        {
+            "shot": "verify_17_spire_result",
+            "language": "en",
+            "screen": "Battle",
+            "screenWidth": 432,
+            "screenHeight": 864,
+            "checkedTexts": 28,
+            "skippedTexts": 3,
+            "issues": []
+        },
+        {
+            "shot": "verify_18_rank_exam",
+            "language": "en",
+            "screen": "Board",
+            "screenWidth": 432,
+            "screenHeight": 864,
+            "checkedTexts": 45,
+            "skippedTexts": 13,
+            "issues": []
+        },
+        {
+            "shot": "verify_19_rank_up",
+            "language": "en",
+            "screen": "Board",
+            "screenWidth": 432,
+            "screenHeight": 864,
+            "checkedTexts": 31,
+            "skippedTexts": 1,
+            "issues": []
+        },
+        {
+            "shot": "verify_12a_dismiss_confirmation_3",
+            "language": "en",
+            "screen": "Heroes",
+            "screenWidth": 432,
+            "screenHeight": 864,
+            "checkedTexts": 69,
+            "skippedTexts": 20,
+            "issues": []
+        },
+        {
+            "shot": "verify_12a_dismiss_confirmation_2",
+            "language": "en",
+            "screen": "Heroes",
+            "screenWidth": 432,
+            "screenHeight": 864,
+            "checkedTexts": 70,
+            "skippedTexts": 15,
+            "issues": []
+        },
+        {
+            "shot": "verify_12b_last_hero",
+            "language": "en",
+            "screen": "Heroes",
+            "screenWidth": 432,
+            "screenHeight": 864,
+            "checkedTexts": 65,
+            "skippedTexts": 16,
+            "issues": []
+        },
+        {
+            "shot": "verify_13_saved_title",
+            "language": "en",
+            "screen": "TitleScreen",
+            "screenWidth": 432,
+            "screenHeight": 864,
+            "checkedTexts": 11,
+            "skippedTexts": 0,
+            "issues": []
+        },
+        {
+            "shot": "verify_14_restored_hall",
+            "language": "en",
+            "screen": "Hall",
+            "screenWidth": 432,
+            "screenHeight": 864,
+            "checkedTexts": 33,
+            "skippedTexts": 1,
+            "issues": []
+        },
+        {
+            "shot": "08_hall_rich",
+            "language": "en",
+            "screen": "Hall",
+            "screenWidth": 432,
+            "screenHeight": 864,
+            "checkedTexts": 32,
+            "skippedTexts": 1,
+            "issues": []
+        },
+        {
+            "shot": "09_heroes",
+            "language": "en",
+            "screen": "Heroes",
+            "screenWidth": 432,
+            "screenHeight": 864,
+            "checkedTexts": 33,
+            "skippedTexts": 8,
+            "issues": []
+        },
+        {
+            "shot": "10_hero_popup",
+            "language": "en",
+            "screen": "Heroes",
+            "screenWidth": 432,
+            "screenHeight": 864,
+            "checkedTexts": 67,
+            "skippedTexts": 22,
+            "issues": []
+        },
+        {
+            "shot": "11_board",
+            "language": "en",
+            "screen": "Board",
+            "screenWidth": 432,
+            "screenHeight": 864,
+            "checkedTexts": 41,
+            "skippedTexts": 25,
+            "issues": []
+        },
+        {
+            "shot": "12_party",
+            "language": "en",
+            "screen": "Board",
+            "screenWidth": 432,
+            "screenHeight": 864,
+            "checkedTexts": 61,
+            "skippedTexts": 35,
+            "issues": []
+        },
+        {
+            "shot": "13_contracts",
+            "language": "en",
+            "screen": "Board",
+            "screenWidth": 432,
+            "screenHeight": 864,
+            "checkedTexts": 37,
+            "skippedTexts": 1,
+            "issues": []
+        },
+        {
+            "shot": "14_bag",
+            "language": "en",
+            "screen": "Bag",
+            "screenWidth": 432,
+            "screenHeight": 864,
+            "checkedTexts": 39,
+            "skippedTexts": 5,
+            "issues": []
+        },
+        {
+            "shot": "15_market",
+            "language": "en",
+            "screen": "Bag",
+            "screenWidth": 432,
+            "screenHeight": 864,
+            "checkedTexts": 39,
+            "skippedTexts": 5,
+            "issues": []
+        },
+        {
+            "shot": "16_item",
+            "language": "en",
+            "screen": "Bag",
+            "screenWidth": 432,
+            "screenHeight": 864,
+            "checkedTexts": 56,
+            "skippedTexts": 5,
+            "issues": []
+        },
+        {
+            "shot": "17_quests",
+            "language": "en",
+            "screen": "Quests",
+            "screenWidth": 432,
+            "screenHeight": 864,
+            "checkedTexts": 35,
+            "skippedTexts": 1,
+            "issues": []
+        },
+        {
+            "shot": "18_tavern",
+            "language": "en",
+            "screen": "Facility_tavern",
+            "screenWidth": 432,
+            "screenHeight": 864,
+            "checkedTexts": 33,
+            "skippedTexts": 31,
+            "issues": []
+        },
+        {
+            "shot": "19_blacksmith",
+            "language": "en",
+            "screen": "Facility_blacksmith",
+            "screenWidth": 432,
+            "screenHeight": 864,
+            "checkedTexts": 34,
+            "skippedTexts": 135,
+            "issues": []
+        },
+        {
+            "shot": "20_training",
+            "language": "en",
+            "screen": "Facility_training",
+            "screenWidth": 432,
+            "screenHeight": 864,
+            "checkedTexts": 31,
+            "skippedTexts": 2,
+            "issues": []
+        },
+        {
+            "shot": "21_battle_a",
+            "language": "en",
+            "screen": "Battle",
+            "screenWidth": 432,
+            "screenHeight": 864,
+            "checkedTexts": 31,
+            "skippedTexts": 0,
+            "issues": []
+        },
+        {
+            "shot": "22_battle_b",
+            "language": "en",
+            "screen": "Battle",
+            "screenWidth": 432,
+            "screenHeight": 864,
+            "checkedTexts": 30,
+            "skippedTexts": 0,
+            "issues": []
+        },
+        {
+            "shot": "23_battle_c",
+            "language": "en",
+            "screen": "Battle",
+            "screenWidth": 432,
+            "screenHeight": 864,
+            "checkedTexts": 27,
+            "skippedTexts": 0,
+            "issues": []
+        },
+        {
+            "shot": "24_result",
+            "language": "en",
+            "screen": "Battle",
+            "screenWidth": 432,
+            "screenHeight": 864,
+            "checkedTexts": 46,
+            "skippedTexts": 3,
+            "issues": []
+        },
+        {
+            "shot": "25_settings",
+            "language": "en",
+            "screen": "Battle",
+            "screenWidth": 432,
+            "screenHeight": 864,
+            "checkedTexts": 39,
+            "skippedTexts": 0,
+            "issues": []
+        },
+        {
+            "shot": "26_about",
+            "language": "en",
+            "screen": "Battle",
+            "screenWidth": 432,
+            "screenHeight": 864,
+            "checkedTexts": 36,
+            "skippedTexts": 8,
+            "issues": []
+        },
+        {
+            "shot": "27_rank",
+            "language": "en",
+            "screen": "Battle",
+            "screenWidth": 432,
+            "screenHeight": 864,
+            "checkedTexts": 43,
+            "skippedTexts": 10,
+            "issues": []
+        },
+        {
+            "shot": "28_daily",
+            "language": "en",
+            "screen": "Battle",
+            "screenWidth": 432,
+            "screenHeight": 864,
+            "checkedTexts": 45,
+            "skippedTexts": 0,
+            "issues": []
+        },
+        {
+            "shot": "29_event",
+            "language": "en",
+            "screen": "Battle",
+            "screenWidth": 432,
+            "screenHeight": 864,
+            "checkedTexts": 30,
+            "skippedTexts": 0,
+            "issues": []
+        },
+        {
+            "shot": "id_09_heroes",
+            "language": "id",
+            "screen": "Heroes",
+            "screenWidth": 432,
+            "screenHeight": 864,
+            "checkedTexts": 32,
+            "skippedTexts": 8,
+            "issues": []
+        },
+        {
+            "shot": "id_11_board",
+            "language": "id",
+            "screen": "Board",
+            "screenWidth": 432,
+            "screenHeight": 864,
+            "checkedTexts": 40,
+            "skippedTexts": 24,
+            "issues": []
+        },
+        {
+            "shot": "id_12_party",
+            "language": "id",
+            "screen": "Board",
+            "screenWidth": 432,
+            "screenHeight": 864,
+            "checkedTexts": 60,
+            "skippedTexts": 34,
+            "issues": []
+        },
+        {
+            "shot": "id_16_item",
+            "language": "id",
+            "screen": "Bag",
+            "screenWidth": 432,
+            "screenHeight": 864,
+            "checkedTexts": 68,
+            "skippedTexts": 4,
+            "issues": []
+        },
+        {
+            "shot": "id_25_settings",
+            "language": "id",
+            "screen": "Bag",
+            "screenWidth": 432,
+            "screenHeight": 864,
+            "checkedTexts": 61,
+            "skippedTexts": 4,
+            "issues": []
+        },
+        {
+            "shot": "id_01_title",
+            "language": "id",
+            "screen": "TitleScreen",
+            "screenWidth": 432,
+            "screenHeight": 864,
+            "checkedTexts": 10,
+            "skippedTexts": 0,
+            "issues": []
+        },
+        {
+            "shot": "id_02_onboard1",
+            "language": "id",
+            "screen": "OnboardingScreen",
+            "screenWidth": 432,
+            "screenHeight": 864,
+            "checkedTexts": 8,
+            "skippedTexts": 0,
+            "issues": []
+        },
+        {
+            "shot": "id_03_onboard2",
+            "language": "id",
+            "screen": "OnboardingScreen",
+            "screenWidth": 432,
+            "screenHeight": 864,
+            "checkedTexts": 8,
+            "skippedTexts": 0,
+            "issues": []
+        },
+        {
+            "shot": "id_04_onboard3",
+            "language": "id",
+            "screen": "OnboardingScreen",
+            "screenWidth": 432,
+            "screenHeight": 864,
+            "checkedTexts": 8,
+            "skippedTexts": 0,
+            "issues": []
+        },
+        {
+            "shot": "id_05_onboard4",
+            "language": "id",
+            "screen": "OnboardingScreen",
+            "screenWidth": 432,
+            "screenHeight": 864,
+            "checkedTexts": 12,
+            "skippedTexts": 0,
+            "issues": []
+        },
+        {
+            "shot": "id_06_onboard5",
+            "language": "id",
+            "screen": "OnboardingScreen",
+            "screenWidth": 432,
+            "screenHeight": 864,
+            "checkedTexts": 19,
+            "skippedTexts": 2,
+            "issues": []
+        }
+    ],
+    "flowChecks": [
+        {
+            "name": "v_default_english_entry",
+            "detail": "A verification install starts in English before the tour makes any language selection.",
+            "passed": true
+        },
+        {
+            "name": "onboarding_continue_1",
+            "detail": "Advance the onboarding through its actual footer button.",
+            "passed": true
+        },
+        {
+            "name": "onboarding_continue_2",
+            "detail": "Advance the onboarding through its actual footer button.",
+            "passed": true
+        },
+        {
+            "name": "onboarding_continue_3",
+            "detail": "Advance the onboarding through its actual footer button.",
+            "passed": true
+        },
+        {
+            "name": "onboarding_continue_4",
+            "detail": "Advance the onboarding through its actual footer button.",
+            "passed": true
+        },
+        {
+            "name": "charter_name_input",
+            "detail": "The charter must contain an editable guild name.",
+            "passed": true
+        },
+        {
+            "name": "starter_choice_click",
+            "detail": "Select Archer through the actual starter-card click handler.",
+            "passed": true
+        },
+        {
+            "name": "charter_begin_click",
+            "detail": "Start through the actual charter footer button.",
+            "passed": true
+        },
+        {
+            "name": "charter_values_applied",
+            "detail": "The game must create the named guild with exactly the selected Archer starter.",
+            "passed": true
+        },
+        {
+            "name": "open_starting_tavern",
+            "detail": "Open the Tavern from the hall's real building button.",
+            "passed": true
+        },
+        {
+            "name": "affordable_hire_click",
+            "detail": "Tap the game's enabled hire button, without adding gold or changing candidate prices.",
+            "passed": true
+        },
+        {
+            "name": "starting_hire_spends_gold",
+            "detail": "Heroes 1 → 2; gold 600 → 555.",
+            "passed": true
+        },
+        {
+            "name": "open_first_quest_reward",
+            "detail": "The first-steps guide opens the completed hire quest's reward.",
+            "passed": true
+        },
+        {
+            "name": "claim_first_quest",
+            "detail": "Claim the earned reward through its button.",
+            "passed": true
+        },
+        {
+            "name": "open_starting_board",
+            "detail": "Use the real Board navigation button.",
+            "passed": true
+        },
+        {
+            "name": "open_first_party",
+            "detail": "The first campaign mission's button must open party preparation.",
+            "passed": true
+        },
+        {
+            "name": "party_member_toggle",
+            "detail": "Tap a party hero row to remove its auto-selected member.",
+            "passed": true
+        },
+        {
+            "name": "party_selection_updates",
+            "detail": "Visible 'In party' labels 2 → 1.",
+            "passed": true
+        },
+        {
+            "name": "party_member_restore_click",
+            "detail": "Tap the actual hero row again to restore the first party.",
+            "passed": true
+        },
+        {
+            "name": "party_selection_restores",
+            "detail": "Selecting the hero again restores the ready party and enables FIGHT.",
+            "passed": true
+        },
+        {
+            "name": "first_fight_click",
+            "detail": "Start the first battle through the real FIGHT button, with the recruited party and original resources.",
+            "passed": true
+        },
+        {
+            "name": "first_battle_screen",
+            "detail": "FIGHT must navigate to the live battle screen.",
+            "passed": true
+        },
+        {
+            "name": "first_battle_finishes",
+            "detail": "The real starting battle must show its result within 60 seconds.",
+            "passed": true
+        },
+        {
+            "name": "first_battle_victory",
+            "detail": "The recruited starting party must win Slime Meadow and record the first clear.",
+            "passed": true
+        },
+        {
+            "name": "first_result_return_click",
+            "detail": "Use the actual result button that returns to the Board.",
+            "passed": true
+        },
+        {
+            "name": "first_result_returns_board",
+            "detail": "Leaving the result must restore the Board and its next-step guidance.",
+            "passed": true
+        },
+        {
+            "name": "q_m02_ready",
+            "detail": "The completed chapter must be current and ready before its reward can be claimed.",
+            "passed": true
+        },
+        {
+            "name": "q_m02_coach_reward_click",
+            "detail": "Use the visible guidance card's CLAIM REWARD action.",
+            "passed": true
+        },
+        {
+            "name": "q_m02_claim_click",
+            "detail": "Claim the earned chapter reward through the reward popup's actual button.",
+            "passed": true
+        },
+        {
+            "name": "first_bag_tab_click",
+            "detail": "Navigate to the Bag through its actual bottom-tab button.",
+            "passed": true
+        },
+        {
+            "name": "first_auto_equip_click",
+            "detail": "Use the Bag's actual auto-equip action to fit the best owned gear.",
+            "passed": true
+        },
+        {
+            "name": "first_equip_quest_ready",
+            "detail": "The equipment chapter must recognize the owned and equipped starting gear.",
+            "passed": true
+        },
+        {
+            "name": "q_m03_ready",
+            "detail": "The completed chapter must be current and ready before its reward can be claimed.",
+            "passed": true
+        },
+        {
+            "name": "q_m03_coach_reward_click",
+            "detail": "Use the visible guidance card's CLAIM REWARD action.",
+            "passed": true
+        },
+        {
+            "name": "q_m03_claim_click",
+            "detail": "Claim the earned chapter reward through the reward popup's actual button.",
+            "passed": true
+        },
+        {
+            "name": "first_fourth_chapter_unlocks",
+            "detail": "Claiming the equipment reward must unlock the fourth chapter with an actionable next mission.",
+            "passed": true
+        },
+        {
+            "name": "first_journal_open",
+            "detail": "The Journal tab opens from the quest page.",
+            "passed": true
+        },
+        {
+            "name": "first_journal_history",
+            "detail": "The journal preserves the completed opening chapter's authored story.",
+            "passed": true
+        },
+        {
+            "name": "first_journal_no_spoilers",
+            "detail": "Unreached story chapters remain hidden.",
+            "passed": true
+        },
+        {
+            "name": "first_journal_return_story",
+            "detail": "The Story tab returns to the current actionable quest.",
+            "passed": true
+        },
+        {
+            "name": "first_return_hall_tab",
+            "detail": "Return to the Hall using the actual navigation tab.",
+            "passed": true
+        },
+        {
+            "name": "v_menu_open",
+            "detail": "The HUD menu must open its actual menu panel.",
+            "passed": true
+        },
+        {
+            "name": "v_settings_open",
+            "detail": "Open Settings through the menu action.",
+            "passed": true
+        },
+        {
+            "name": "v_audio_sliders_present",
+            "detail": "Both music and sound effect sliders must be available.",
+            "passed": true
+        },
+        {
+            "name": "v_audio_sliders_apply",
+            "detail": "Slider value-change events must update both audio preferences.",
+            "passed": true
+        },
+        {
+            "name": "v_toggle_0",
+            "detail": "The Vibration switch must update its setting.",
+            "passed": true
+        },
+        {
+            "name": "v_toggle_restore_0",
+            "detail": "Restore the original switch setting through the same control.",
+            "passed": true
+        },
+        {
+            "name": "v_toggle_1",
+            "detail": "The Tutorial hints switch must update its setting.",
+            "passed": true
+        },
+        {
+            "name": "v_toggle_restore_1",
+            "detail": "Restore the original switch setting through the same control.",
+            "passed": true
+        },
+        {
+            "name": "v_toggle_2",
+            "detail": "The Battle effects switch must update its setting.",
+            "passed": true
+        },
+        {
+            "name": "v_toggle_restore_2",
+            "detail": "Restore the original switch setting through the same control.",
+            "passed": true
+        },
+        {
+            "name": "v_frame_rate_click",
+            "detail": "The 30 FPS control must apply the running frame rate.",
+            "passed": true
+        },
+        {
+            "name": "v_frame_rate_restore",
+            "detail": "Restore the original frame rate through its control.",
+            "passed": true
+        },
+        {
+            "name": "v_language_indonesian_click",
+            "detail": "Manual Indonesian selection must update the language and its persisted preference.",
+            "passed": true
+        },
+        {
+            "name": "v_language_keeps_screen",
+            "detail": "Changing language must preserve the open game page and translate the settings panel.",
+            "passed": true
+        },
+        {
+            "name": "v_language_english_click",
+            "detail": "Manual English selection must restore English and save the preference.",
+            "passed": true
+        },
+        {
+            "name": "v_hud_language_updates",
+            "detail": "Persistent navigation labels must follow the language change.",
+            "passed": true
+        },
+        {
+            "name": "v_reset_confirmation_open",
+            "detail": "Reset opens an explicit confirmation before changing progress.",
+            "passed": true
+        },
+        {
+            "name": "v_reset_cancel_preserves_guild",
+            "detail": "Cancel must preserve the test guild, roster, and current session.",
+            "passed": true
+        },
+        {
+            "name": "v_settings_close",
+            "detail": "The popup's close control must dismiss its own panel.",
+            "passed": true
+        },
+        {
+            "name": "v_about_menu_open",
+            "detail": "About must open through the actual menu action.",
+            "passed": true
+        },
+        {
+            "name": "v_about_close",
+            "detail": "The popup's close control must dismiss its own panel.",
+            "passed": true
+        },
+        {
+            "name": "v_later_game_fixture",
+            "detail": "After the real first loop, test-only Rank D and resources unlock later controls; the player's save and preferences use separate test slots.",
+            "passed": true
+        },
+        {
+            "name": "v_hall_navigation_blacksmith",
+            "detail": "Use the Hall navigation tab before opening a facility.",
+            "passed": true
+        },
+        {
+            "name": "v_facility_open_blacksmith",
+            "detail": "The hall building control must open the matching facility page.",
+            "passed": true
+        },
+        {
+            "name": "v_build_blacksmith",
+            "detail": "BUILD must charge the facility cost and create its pending construction timer.",
+            "passed": true
+        },
+        {
+            "name": "v_build_blacksmith_pending",
+            "detail": "The action must create a real pending timer before completion.",
+            "passed": true
+        },
+        {
+            "name": "v_build_blacksmith_finish_click",
+            "detail": "Complete the timer through its visible gem speed-up button.",
+            "passed": true
+        },
+        {
+            "name": "v_build_blacksmith_finished",
+            "detail": "The timer completed and gems were charged once (1, displayed cost 1).",
+            "passed": true
+        },
+        {
+            "name": "v_build_level_blacksmith",
+            "detail": "Completing construction unlocks the facility's tools and clears the build timer.",
+            "passed": true
+        },
+        {
+            "name": "v_facility_back_blacksmith",
+            "detail": "The facility's back arrow returns to the Hall.",
+            "passed": true
+        },
+        {
+            "name": "v_hall_navigation_training",
+            "detail": "Use the Hall navigation tab before opening a facility.",
+            "passed": true
+        },
+        {
+            "name": "v_facility_open_training",
+            "detail": "The hall building control must open the matching facility page.",
+            "passed": true
+        },
+        {
+            "name": "v_build_training",
+            "detail": "BUILD must charge the facility cost and create its pending construction timer.",
+            "passed": true
+        },
+        {
+            "name": "v_build_training_pending",
+            "detail": "The action must create a real pending timer before completion.",
+            "passed": true
+        },
+        {
+            "name": "v_build_training_finish_click",
+            "detail": "Complete the timer through its visible gem speed-up button.",
+            "passed": true
+        },
+        {
+            "name": "v_build_training_finished",
+            "detail": "The timer completed and gems were charged once (1, displayed cost 1).",
+            "passed": true
+        },
+        {
+            "name": "v_build_level_training",
+            "detail": "Completing construction unlocks the facility's tools and clears the build timer.",
+            "passed": true
+        },
+        {
+            "name": "v_facility_back_training",
+            "detail": "The facility's back arrow returns to the Hall.",
+            "passed": true
+        },
+        {
+            "name": "v_hall_navigation_infirmary",
+            "detail": "Use the Hall navigation tab before opening a facility.",
+            "passed": true
+        },
+        {
+            "name": "v_facility_open_infirmary",
+            "detail": "The hall building control must open the matching facility page.",
+            "passed": true
+        },
+        {
+            "name": "v_build_infirmary",
+            "detail": "BUILD must charge the facility cost and create its pending construction timer.",
+            "passed": true
+        },
+        {
+            "name": "v_build_infirmary_pending",
+            "detail": "The action must create a real pending timer before completion.",
+            "passed": true
+        },
+        {
+            "name": "v_build_infirmary_finish_click",
+            "detail": "Complete the timer through its visible gem speed-up button.",
+            "passed": true
+        },
+        {
+            "name": "v_build_infirmary_finished",
+            "detail": "The timer completed and gems were charged once (1, displayed cost 1).",
+            "passed": true
+        },
+        {
+            "name": "v_build_level_infirmary",
+            "detail": "Completing construction unlocks the facility's tools and clears the build timer.",
+            "passed": true
+        },
+        {
+            "name": "v_facility_back_infirmary",
+            "detail": "The facility's back arrow returns to the Hall.",
+            "passed": true
+        },
+        {
+            "name": "v_hall_navigation_barracks",
+            "detail": "Use the Hall navigation tab before opening a facility.",
+            "passed": true
+        },
+        {
+            "name": "v_facility_open_barracks",
+            "detail": "The hall building control must open the matching facility page.",
+            "passed": true
+        },
+        {
+            "name": "v_build_barracks",
+            "detail": "BUILD must charge the facility cost and create its pending construction timer.",
+            "passed": true
+        },
+        {
+            "name": "v_build_barracks_pending",
+            "detail": "The action must create a real pending timer before completion.",
+            "passed": true
+        },
+        {
+            "name": "v_build_barracks_finish_click",
+            "detail": "Complete the timer through its visible gem speed-up button.",
+            "passed": true
+        },
+        {
+            "name": "v_build_barracks_finished",
+            "detail": "The timer completed and gems were charged once (1, displayed cost 1).",
+            "passed": true
+        },
+        {
+            "name": "v_build_level_barracks",
+            "detail": "Completing construction unlocks the facility's tools and clears the build timer.",
+            "passed": true
+        },
+        {
+            "name": "v_facility_back_barracks",
+            "detail": "The facility's back arrow returns to the Hall.",
+            "passed": true
+        },
+        {
+            "name": "v_hall_navigation_treasury",
+            "detail": "Use the Hall navigation tab before opening a facility.",
+            "passed": true
+        },
+        {
+            "name": "v_facility_open_treasury",
+            "detail": "The hall building control must open the matching facility page.",
+            "passed": true
+        },
+        {
+            "name": "v_build_treasury",
+            "detail": "BUILD must charge the facility cost and create its pending construction timer.",
+            "passed": true
+        },
+        {
+            "name": "v_build_treasury_pending",
+            "detail": "The action must create a real pending timer before completion.",
+            "passed": true
+        },
+        {
+            "name": "v_build_treasury_finish_click",
+            "detail": "Complete the timer through its visible gem speed-up button.",
+            "passed": true
+        },
+        {
+            "name": "v_build_treasury_finished",
+            "detail": "The timer completed and gems were charged once (1, displayed cost 1).",
+            "passed": true
+        },
+        {
+            "name": "v_build_level_treasury",
+            "detail": "Completing construction unlocks the facility's tools and clears the build timer.",
+            "passed": true
+        },
+        {
+            "name": "v_facility_back_treasury",
+            "detail": "The facility's back arrow returns to the Hall.",
+            "passed": true
+        },
+        {
+            "name": "v_hall_navigation_library",
+            "detail": "Use the Hall navigation tab before opening a facility.",
+            "passed": true
+        },
+        {
+            "name": "v_facility_open_library",
+            "detail": "The hall building control must open the matching facility page.",
+            "passed": true
+        },
+        {
+            "name": "v_build_library",
+            "detail": "BUILD must charge the facility cost and create its pending construction timer.",
+            "passed": true
+        },
+        {
+            "name": "v_build_library_pending",
+            "detail": "The action must create a real pending timer before completion.",
+            "passed": true
+        },
+        {
+            "name": "v_build_library_finish_click",
+            "detail": "Complete the timer through its visible gem speed-up button.",
+            "passed": true
+        },
+        {
+            "name": "v_build_library_finished",
+            "detail": "The timer completed and gems were charged once (1, displayed cost 1).",
+            "passed": true
+        },
+        {
+            "name": "v_build_level_library",
+            "detail": "Completing construction unlocks the facility's tools and clears the build timer.",
+            "passed": true
+        },
+        {
+            "name": "v_facility_back_library",
+            "detail": "The facility's back arrow returns to the Hall.",
+            "passed": true
+        },
+        {
+            "name": "v_hall_navigation_tavern",
+            "detail": "Use the Hall navigation tab before opening a facility.",
+            "passed": true
+        },
+        {
+            "name": "v_facility_open_tavern",
+            "detail": "The hall building control must open the matching facility page.",
+            "passed": true
+        },
+        {
+            "name": "v_tavern_upgrade",
+            "detail": "UPGRADE starts the next Tavern level rather than rebuilding the existing level.",
+            "passed": true
+        },
+        {
+            "name": "v_tavern_upgrade_pending",
+            "detail": "The action must create a real pending timer before completion.",
+            "passed": true
+        },
+        {
+            "name": "v_tavern_upgrade_finish_click",
+            "detail": "Complete the timer through its visible gem speed-up button.",
+            "passed": true
+        },
+        {
+            "name": "v_tavern_upgrade_finished",
+            "detail": "The timer completed and gems were charged once (1, displayed cost 1).",
+            "passed": true
+        },
+        {
+            "name": "v_tavern_upgraded_level",
+            "detail": "The Tavern's upgrade must increase its level exactly once.",
+            "passed": true
+        },
+        {
+            "name": "v_tavern_refresh",
+            "detail": "The recruitment refresh control replaces the displayed candidate pool.",
+            "passed": true
+        },
+        {
+            "name": "v_tavern_refresh_cards",
+            "detail": "Every new recruit has a corresponding visible card after refresh.",
+            "passed": true
+        },
+        {
+            "name": "v_beast_den_tab",
+            "detail": "The unlocked Beast Den tab must respond.",
+            "passed": true
+        },
+        {
+            "name": "v_monster_tame",
+            "detail": "Taming adds exactly one unlocked monster to the roster.",
+            "passed": true
+        },
+        {
+            "name": "v_monster_tame_card",
+            "detail": "The tamed monster's card must show its completed state.",
+            "passed": true
+        },
+        {
+            "name": "v_hall_navigation_blacksmith",
+            "detail": "Use the Hall navigation tab before opening a facility.",
+            "passed": true
+        },
+        {
+            "name": "v_facility_open_blacksmith",
+            "detail": "The hall building control must open the matching facility page.",
+            "passed": true
+        },
+        {
+            "name": "v_forge_start",
+            "detail": "CRAFT must spend recipe resources and occupy a real forge slot.",
+            "passed": true
+        },
+        {
+            "name": "v_forge_pending",
+            "detail": "The action must create a real pending timer before completion.",
+            "passed": true
+        },
+        {
+            "name": "v_forge_finish_click",
+            "detail": "Complete the timer through its visible gem speed-up button.",
+            "passed": true
+        },
+        {
+            "name": "v_forge_finished",
+            "detail": "The timer completed and gems were charged once (1, displayed cost 1).",
+            "passed": true
+        },
+        {
+            "name": "v_forge_result",
+            "detail": "Finishing the forge adds the chosen recipe's gear and frees its slot.",
+            "passed": true
+        },
+        {
+            "name": "v_enhance_tab",
+            "detail": "The Blacksmith enhancement tab must respond.",
+            "passed": true
+        },
+        {
+            "name": "v_enhance_grid",
+            "detail": "The enhancement tab must display clickable owned gear.",
+            "passed": true
+        },
+        {
+            "name": "v_hall_navigation_training",
+            "detail": "Use the Hall navigation tab before opening a facility.",
+            "passed": true
+        },
+        {
+            "name": "v_facility_open_training",
+            "detail": "The hall building control must open the matching facility page.",
+            "passed": true
+        },
+        {
+            "name": "v_training_picker",
+            "detail": "An empty training slot opens the hero picker.",
+            "passed": true
+        },
+        {
+            "name": "v_training_start",
+            "detail": "Selecting the eligible hero occupies a slot and charges the training fee.",
+            "passed": true
+        },
+        {
+            "name": "v_training_busy_heroes",
+            "detail": "A training hero remains visible in the roster.",
+            "passed": true
+        },
+        {
+            "name": "v_training_busy_details",
+            "detail": "The busy hero's card still opens its status details.",
+            "passed": true
+        },
+        {
+            "name": "v_training_busy_dismiss_blocked",
+            "detail": "A hero with active training cannot be dismissed or orphan its timer.",
+            "passed": true
+        },
+        {
+            "name": "v_training_busy_details_close",
+            "detail": "The popup's close control must dismiss its own panel.",
+            "passed": true
+        },
+        {
+            "name": "v_hall_navigation_training",
+            "detail": "Use the Hall navigation tab before opening a facility.",
+            "passed": true
+        },
+        {
+            "name": "v_facility_open_training",
+            "detail": "The hall building control must open the matching facility page.",
+            "passed": true
+        },
+        {
+            "name": "v_training_pending",
+            "detail": "The action must create a real pending timer before completion.",
+            "passed": true
+        },
+        {
+            "name": "v_training_finish_click",
+            "detail": "Complete the timer through its visible gem speed-up button.",
+            "passed": true
+        },
+        {
+            "name": "v_training_finished",
+            "detail": "The timer completed and gems were charged once (1, displayed cost 1).",
+            "passed": true
+        },
+        {
+            "name": "v_training_result",
+            "detail": "Training completion grants experience and releases the hero.",
+            "passed": true
+        },
+        {
+            "name": "v_hall_navigation_infirmary",
+            "detail": "Use the Hall navigation tab before opening a facility.",
+            "passed": true
+        },
+        {
+            "name": "v_facility_open_infirmary",
+            "detail": "The hall building control must open the matching facility page.",
+            "passed": true
+        },
+        {
+            "name": "v_healing_picker",
+            "detail": "An empty Infirmary bed opens injured hero selection.",
+            "passed": true
+        },
+        {
+            "name": "v_healing_start",
+            "detail": "Choosing an injured hero starts the healing timer.",
+            "passed": true
+        },
+        {
+            "name": "v_healing_pending",
+            "detail": "The action must create a real pending timer before completion.",
+            "passed": true
+        },
+        {
+            "name": "v_healing_finish_click",
+            "detail": "Complete the timer through its visible gem speed-up button.",
+            "passed": true
+        },
+        {
+            "name": "v_healing_finished",
+            "detail": "The timer completed and gems were charged once (2, displayed cost 2).",
+            "passed": true
+        },
+        {
+            "name": "v_healing_result",
+            "detail": "Completed healing restores full health and makes the hero available.",
+            "passed": true
+        },
+        {
+            "name": "v_hall_navigation_library",
+            "detail": "Use the Hall navigation tab before opening a facility.",
+            "passed": true
+        },
+        {
+            "name": "v_facility_open_library",
+            "detail": "The hall building control must open the matching facility page.",
+            "passed": true
+        },
+        {
+            "name": "v_research_start",
+            "detail": "The Library's research action starts an unlocked research timer.",
+            "passed": true
+        },
+        {
+            "name": "v_research_pending",
+            "detail": "The action must create a real pending timer before completion.",
+            "passed": true
+        },
+        {
+            "name": "v_research_finish_click",
+            "detail": "Complete the timer through its visible gem speed-up button.",
+            "passed": true
+        },
+        {
+            "name": "v_research_finished",
+            "detail": "The timer completed and gems were charged once (1, displayed cost 1).",
+            "passed": true
+        },
+        {
+            "name": "v_research_result",
+            "detail": "Completing research applies its first level and clears the scholar slot.",
+            "passed": true
+        },
+        {
+            "name": "v_hall_navigation_treasury",
+            "detail": "Use the Hall navigation tab before opening a facility.",
+            "passed": true
+        },
+        {
+            "name": "v_facility_open_treasury",
+            "detail": "The hall building control must open the matching facility page.",
+            "passed": true
+        },
+        {
+            "name": "v_treasury_collect",
+            "detail": "The visible COLLECT control credits accumulated gold and resets the vault balance.",
+            "passed": true
+        },
+        {
+            "name": "v_gear_open_bag",
+            "detail": "Open Bag through the actual navigation tab.",
+            "passed": true
+        },
+        {
+            "name": "v_gear_open_item",
+            "detail": "The inventory cell must open the matching item detail panel.",
+            "passed": true
+        },
+        {
+            "name": "v_item_lock",
+            "detail": "Lock must protect the selected gear.",
+            "passed": true
+        },
+        {
+            "name": "v_locked_sell_blocked",
+            "detail": "A locked item's sale control must be disabled and its guarded click must leave the item and gold intact.",
+            "passed": true
+        },
+        {
+            "name": "v_item_unlock",
+            "detail": "Unlock must restore availability of the item actions.",
+            "passed": true
+        },
+        {
+            "name": "v_item_equip_picker",
+            "detail": "The item's Equip action must open hero selection.",
+            "passed": true
+        },
+        {
+            "name": "v_item_equip",
+            "detail": "Selecting the compatible Archer equips this exact item and updates both owner and weapon slot.",
+            "passed": true
+        },
+        {
+            "name": "v_heroes_navigation",
+            "detail": "Open the Heroes tab.",
+            "passed": true
+        },
+        {
+            "name": "v_hero_detail_open",
+            "detail": "The hero card must open its hero details.",
+            "passed": true
+        },
+        {
+            "name": "v_weapon_picker_open",
+            "detail": "The hero's weapon slot opens the compatible equipment picker.",
+            "passed": true
+        },
+        {
+            "name": "v_unequip_click",
+            "detail": "Unequip must clear the owner and hero weapon slot without destroying gear.",
+            "passed": true
+        },
+        {
+            "name": "v_hero_detail_refresh",
+            "detail": "The still-open hero details must redraw the empty equipment slot after unequipping.",
+            "passed": true
+        },
+        {
+            "name": "v_hero_close",
+            "detail": "The popup's close control must dismiss its own panel.",
+            "passed": true
+        },
+        {
+            "name": "v_enhance_open_bag",
+            "detail": "Open Bag through the actual navigation tab.",
+            "passed": true
+        },
+        {
+            "name": "v_enhance_open_item",
+            "detail": "The inventory cell must open the matching item detail panel.",
+            "passed": true
+        },
+        {
+            "name": "v_enhance_click",
+            "detail": "The guaranteed first enhancement must improve gear and charge both gold and ore once.",
+            "passed": true
+        },
+        {
+            "name": "v_salvage_confirmation",
+            "detail": "Salvage requires an explicit confirmation panel.",
+            "passed": true
+        },
+        {
+            "name": "v_salvage_cancel",
+            "detail": "Cancel preserves the enhanced item.",
+            "passed": true
+        },
+        {
+            "name": "v_salvage_confirm",
+            "detail": "Confirming salvage removes the item and adds the displayed salvage materials.",
+            "passed": true
+        },
+        {
+            "name": "v_sell_open_bag",
+            "detail": "Open Bag through the actual navigation tab.",
+            "passed": true
+        },
+        {
+            "name": "v_sell_open_item",
+            "detail": "The inventory cell must open the matching item detail panel.",
+            "passed": true
+        },
+        {
+            "name": "v_sell_item",
+            "detail": "Selling free gear removes the exact item and pays its displayed gold value once.",
+            "passed": true
+        },
+        {
+            "name": "v_sold_item_removed_from_bag",
+            "detail": "The redrawn Bag cell count must match the remaining inventory after the sale.",
+            "passed": true
+        },
+        {
+            "name": "v_items_tab",
+            "detail": "The Bag Items tab must switch to material and consumable stacks.",
+            "passed": true
+        },
+        {
+            "name": "v_potion_detail_open",
+            "detail": "The potion stack cell must open its stack details.",
+            "passed": true
+        },
+        {
+            "name": "v_potion_use_picker",
+            "detail": "Use must ask which hero receives the potion.",
+            "passed": true
+        },
+        {
+            "name": "v_potion_use",
+            "detail": "Using a potion must consume exactly one potion and heal the selected hero.",
+            "passed": true
+        },
+        {
+            "name": "v_material_detail_open",
+            "detail": "The actual ore stack cell must open its material details.",
+            "passed": true
+        },
+        {
+            "name": "v_stack_sell_one",
+            "detail": "Sell 1 must consume one material and credit its gold value.",
+            "passed": true
+        },
+        {
+            "name": "v_stack_close",
+            "detail": "The popup's close control must dismiss its own panel.",
+            "passed": true
+        },
+        {
+            "name": "v_market_tab",
+            "detail": "The Market tab must display merchant offers.",
+            "passed": true
+        },
+        {
+            "name": "v_market_purchase",
+            "detail": "Buying an offer must consume the displayed currency, add its full quantity, and mark it sold.",
+            "passed": true
+        },
+        {
+            "name": "v_contract_board_tab",
+            "detail": "Open Board from the actual navigation control.",
+            "passed": true
+        },
+        {
+            "name": "v_contracts_tab",
+            "detail": "The Contracts tab must display expedition controls.",
+            "passed": true
+        },
+        {
+            "name": "v_contract_refresh",
+            "detail": "Refresh spends the shown gems and replaces the contract board.",
+            "passed": true
+        },
+        {
+            "name": "v_contract_1_party_open",
+            "detail": "The current contract's SEND action opens party preparation.",
+            "passed": true
+        },
+        {
+            "name": "v_contract_1_auto",
+            "detail": "Auto must select an available party for the contract.",
+            "passed": true
+        },
+        {
+            "name": "v_contract_1_send",
+            "detail": "The real SEND button starts exactly one expedition.",
+            "passed": true
+        },
+        {
+            "name": "v_contract_1_heroes_busy",
+            "detail": "All departing party members are busy and their forecast is captured at departure.",
+            "passed": true
+        },
+        {
+            "name": "v_contract_1_speedup_open",
+            "detail": "The expedition's gem control opens speed-up details.",
+            "passed": true
+        },
+        {
+            "name": "v_contract_1_speedup_finish",
+            "detail": "Finishing an expedition charges gems and marks it returned without claiming its rewards.",
+            "passed": true
+        },
+        {
+            "name": "v_contract_1_claim",
+            "detail": "The returned expedition's CLAIM button grants its result once and removes the claimed timer, including the second consecutive expedition.",
+            "passed": true
+        },
+        {
+            "name": "v_contract_1_heroes_returned",
+            "detail": "Claiming releases every party member.",
+            "passed": true
+        },
+        {
+            "name": "v_contract_1_result_continue",
+            "detail": "The expedition result's Continue action closes the result panel.",
+            "passed": true
+        },
+        {
+            "name": "v_contract_2_party_open",
+            "detail": "The current contract's SEND action opens party preparation.",
+            "passed": true
+        },
+        {
+            "name": "v_contract_2_auto",
+            "detail": "Auto must select an available party for the contract.",
+            "passed": true
+        },
+        {
+            "name": "v_contract_2_send",
+            "detail": "The real SEND button starts exactly one expedition.",
+            "passed": true
+        },
+        {
+            "name": "v_contract_2_heroes_busy",
+            "detail": "All departing party members are busy and their forecast is captured at departure.",
+            "passed": true
+        },
+        {
+            "name": "v_contract_2_speedup_open",
+            "detail": "The expedition's gem control opens speed-up details.",
+            "passed": true
+        },
+        {
+            "name": "v_contract_2_speedup_finish",
+            "detail": "Finishing an expedition charges gems and marks it returned without claiming its rewards.",
+            "passed": true
+        },
+        {
+            "name": "v_contract_2_claim",
+            "detail": "The returned expedition's CLAIM button grants its result once and removes the claimed timer, including the second consecutive expedition.",
+            "passed": true
+        },
+        {
+            "name": "v_contract_2_heroes_returned",
+            "detail": "Claiming releases every party member.",
+            "passed": true
+        },
+        {
+            "name": "v_contract_2_result_continue",
+            "detail": "The expedition result's Continue action closes the result panel.",
+            "passed": true
+        },
+        {
+            "name": "v_daily_menu_open",
+            "detail": "Daily Reward opens from the menu.",
+            "passed": true
+        },
+        {
+            "name": "v_daily_claim",
+            "detail": "Claiming today's reward records the daily claim.",
+            "passed": true
+        },
+        {
+            "name": "v_daily_rewards_paid",
+            "detail": "Each advertised daily reward is paid in full.",
+            "passed": true
+        },
+        {
+            "name": "v_daily_duplicate_disabled",
+            "detail": "The claimed day must no longer offer a second claim button.",
+            "passed": true
+        },
+        {
+            "name": "v_daily_close",
+            "detail": "The popup's close control must dismiss its own panel.",
+            "passed": true
+        },
+        {
+            "name": "v_event_choice",
+            "detail": "The merchant choice charges 100 gold, grants two potions, and records the resolved event.",
+            "passed": true
+        },
+        {
+            "name": "v_event_continue",
+            "detail": "A resolved story event closes through Continue.",
+            "passed": true
+        },
+        {
+            "name": "v_promotion_heroes_tab",
+            "detail": "Open Heroes for promotion.",
+            "passed": true
+        },
+        {
+            "name": "v_promotion_details",
+            "detail": "The promoted hero's details open from the real roster card.",
+            "passed": true
+        },
+        {
+            "name": "v_promotion_panel",
+            "detail": "The eligible hero's Promote action opens its cost and effect panel.",
+            "passed": true
+        },
+        {
+            "name": "v_promotion_confirm",
+            "detail": "Promotion raises this hero's promotion and power, pays its cost, and returns to hero details.",
+            "passed": true
+        },
+        {
+            "name": "v_promotion_parent_refresh",
+            "detail": "The parent hero details must display its new promotion mark without reopening.",
+            "passed": true
+        },
+        {
+            "name": "v_promotion_hero_close",
+            "detail": "The popup's close control must dismiss its own panel.",
+            "passed": true
+        },
+        {
+            "name": "v_hall_navigation_infirmary",
+            "detail": "Use the Hall navigation tab before opening a facility.",
+            "passed": true
+        },
+        {
+            "name": "v_facility_open_infirmary",
+            "detail": "The hall building control must open the matching facility page.",
+            "passed": true
+        },
+        {
+            "name": "v_readiness_heal_picker",
+            "detail": "Prepare the live healing-readiness scenario through an actual Infirmary bed.",
+            "passed": true
+        },
+        {
+            "name": "v_readiness_heal_start",
+            "detail": "The wounded hero begins healing through selection.",
+            "passed": true
+        },
+        {
+            "name": "v_readiness_board",
+            "detail": "Navigate away while the healing timer runs.",
+            "passed": true
+        },
+        {
+            "name": "v_readiness_campaign",
+            "detail": "Switch back to campaign missions.",
+            "passed": true
+        },
+        {
+            "name": "v_readiness_party_open",
+            "detail": "Open an existing campaign mission while every hero is still unavailable.",
+            "passed": true
+        },
+        {
+            "name": "v_readiness_recovery_prompt",
+            "detail": "With no ready heroes, party preparation must show its recovery action.",
+            "passed": true
+        },
+        {
+            "name": "v_readiness_live_refresh",
+            "detail": "Natural healing completion must replace the recovery action with FIGHT while the same party dialog remains open.",
+            "passed": true
+        },
+        {
+            "name": "v_party_auto_after_heal",
+            "detail": "Auto must select the newly healed hero.",
+            "passed": true
+        },
+        {
+            "name": "v_party_assault_plan",
+            "detail": "The Assault battle plan is selectable.",
+            "passed": true
+        },
+        {
+            "name": "v_party_assault_description",
+            "detail": "Selecting Assault must update the real plan description.",
+            "passed": true
+        },
+        {
+            "name": "v_party_guard_plan",
+            "detail": "The Guard battle plan is selectable.",
+            "passed": true
+        },
+        {
+            "name": "v_live_battle_start",
+            "detail": "FIGHT starts a live battle using the prepared party and selected Guard doctrine.",
+            "passed": true
+        },
+        {
+            "name": "v_battle_hardware_back",
+            "detail": "The same hardware Back handler used by Escape/Android Back must keep the active battle and show the skip guidance.",
+            "passed": true
+        },
+        {
+            "name": "v_battle_speed_2",
+            "detail": "The battle speed control must update both preference and current animation timing.",
+            "passed": true
+        },
+        {
+            "name": "v_battle_speed_3",
+            "detail": "The battle speed control must update both preference and current animation timing.",
+            "passed": true
+        },
+        {
+            "name": "v_battle_speed_1",
+            "detail": "The battle speed control must update both preference and current animation timing.",
+            "passed": true
+        },
+        {
+            "name": "v_battle_pause",
+            "detail": "Pause freezes battle playback and animation timing.",
+            "passed": true
+        },
+        {
+            "name": "v_battle_paused_actions",
+            "detail": "No combat action advances while paused.",
+            "passed": true
+        },
+        {
+            "name": "v_battle_paused_speed",
+            "detail": "Changing the selected speed must keep a paused battle paused.",
+            "passed": true
+        },
+        {
+            "name": "v_battle_resume",
+            "detail": "Resume restores the selected battle speed.",
+            "passed": true
+        },
+        {
+            "name": "v_battle_pause_before_skip",
+            "detail": "Pause again to verify Skip can finish a paused battle.",
+            "passed": true
+        },
+        {
+            "name": "v_battle_skip",
+            "detail": "SKIP must finish the active battle through its actual button.",
+            "passed": true
+        },
+        {
+            "name": "v_battle_skip_result",
+            "detail": "Skipping awards the real simulation's victory exactly once and restores normal interface timing.",
+            "passed": true
+        },
+        {
+            "name": "v_result_retry",
+            "detail": "Retry returns to Board and opens a fresh preparation panel for the same mission.",
+            "passed": true
+        },
+        {
+            "name": "v_retry_fight",
+            "detail": "The retry preparation can start its next live battle.",
+            "passed": true
+        },
+        {
+            "name": "v_retry_skip",
+            "detail": "The retried battle retains its working skip control.",
+            "passed": true
+        },
+        {
+            "name": "v_retry_result_once",
+            "detail": "The retry result adds one further clear, with no duplicate completion.",
+            "passed": true
+        },
+        {
+            "name": "v_result_next",
+            "detail": "Next opens preparation for the unlocked next mission.",
+            "passed": true
+        },
+        {
+            "name": "v_result_next_target",
+            "detail": "The Next panel must show the next mission's actual name.",
+            "passed": true
+        },
+        {
+            "name": "v_next_party_close",
+            "detail": "The popup's close control must dismiss its own panel.",
+            "passed": true
+        },
+        {
+            "name": "v_spire_tab",
+            "detail": "Rank D unlocks the Endless Spire tab.",
+            "passed": true
+        },
+        {
+            "name": "v_spire_party",
+            "detail": "Climb opens the next floor's real party preparation.",
+            "passed": true
+        },
+        {
+            "name": "v_spire_fight",
+            "detail": "The prepared Spire party can start and finish its floor.",
+            "passed": true
+        },
+        {
+            "name": "v_spire_floor_recorded",
+            "detail": "Winning the first floor records the climb and offers the next floor.",
+            "passed": true
+        },
+        {
+            "name": "v_spire_next",
+            "detail": "Spire Next opens preparation for floor two.",
+            "passed": true
+        },
+        {
+            "name": "v_spire_next_close",
+            "detail": "The popup's close control must dismiss its own panel.",
+            "passed": true
+        },
+        {
+            "name": "v_rank_panel",
+            "detail": "The rank indicator opens the guild promotion ladder.",
+            "passed": true
+        },
+        {
+            "name": "v_rank_exam_party",
+            "detail": "An eligible guild can open its rank exam through the promotion panel.",
+            "passed": true
+        },
+        {
+            "name": "v_rank_exam_fight",
+            "detail": "Rank exams use the same working party and battle controls.",
+            "passed": true
+        },
+        {
+            "name": "v_rank_exam_passed",
+            "detail": "The won exam unlocks promotion and persists its clear.",
+            "passed": true
+        },
+        {
+            "name": "v_rank_exam_back",
+            "detail": "Return from the exam result.",
+            "passed": true
+        },
+        {
+            "name": "v_rank_promote_open",
+            "detail": "Reopen rank details after completing the exam.",
+            "passed": true
+        },
+        {
+            "name": "v_rank_promote",
+            "detail": "Promotion raises the guild rank once and displays its celebration.",
+            "passed": true
+        },
+        {
+            "name": "v_rank_celebration_close",
+            "detail": "The rank celebration closes through its actual action.",
+            "passed": true
+        },
+        {
+            "name": "v_dismiss_heroes_tab",
+            "detail": "Open the roster after completed tasks and battles.",
+            "passed": true
+        },
+        {
+            "name": "v_dismiss_auto_equip",
+            "detail": "Equip owned gear before checking its return on dismissal.",
+            "passed": true
+        },
+        {
+            "name": "v_dismiss_3_details",
+            "detail": "Open an available spare hero's details from the actual roster card.",
+            "passed": true
+        },
+        {
+            "name": "v_dismiss_3_confirmation",
+            "detail": "Dismiss hero must request confirmation before removing anyone.",
+            "passed": true
+        },
+        {
+            "name": "v_dismiss_3_cancel",
+            "detail": "Cancel keeps the exact hero and its equipped items.",
+            "passed": true
+        },
+        {
+            "name": "v_dismiss_3_confirm",
+            "detail": "Confirm removes exactly the selected available spare hero in the isolated test save.",
+            "passed": true
+        },
+        {
+            "name": "v_dismiss_3_gear_returned",
+            "detail": "Every previously equipped item remains in the Bag with its owner cleared.",
+            "passed": true
+        },
+        {
+            "name": "v_dismiss_3_roster_refresh",
+            "detail": "The roster removes the dismissed hero's card when the details close.",
+            "passed": true
+        },
+        {
+            "name": "v_dismiss_2_details",
+            "detail": "Open an available spare hero's details from the actual roster card.",
+            "passed": true
+        },
+        {
+            "name": "v_dismiss_2_confirmation",
+            "detail": "Dismiss hero must request confirmation before removing anyone.",
+            "passed": true
+        },
+        {
+            "name": "v_dismiss_2_cancel",
+            "detail": "Cancel keeps the exact hero and its equipped items.",
+            "passed": true
+        },
+        {
+            "name": "v_dismiss_2_confirm",
+            "detail": "Confirm removes exactly the selected available spare hero in the isolated test save.",
+            "passed": true
+        },
+        {
+            "name": "v_dismiss_2_gear_returned",
+            "detail": "Every previously equipped item remains in the Bag with its owner cleared.",
+            "passed": true
+        },
+        {
+            "name": "v_dismiss_2_roster_refresh",
+            "detail": "The roster removes the dismissed hero's card when the details close.",
+            "passed": true
+        },
+        {
+            "name": "v_last_hero_details",
+            "detail": "The final hero's details remain accessible.",
+            "passed": true
+        },
+        {
+            "name": "v_last_hero_dismiss_blocked",
+            "detail": "The final hero cannot be dismissed, so the guild always retains a playable hero.",
+            "passed": true
+        },
+        {
+            "name": "v_last_hero_close",
+            "detail": "The popup's close control must dismiss its own panel.",
+            "passed": true
+        },
+        {
+            "name": "v_save_menu_open",
+            "detail": "Open the save action through Hall and the real menu.",
+            "passed": true
+        },
+        {
+            "name": "v_save_exit_click",
+            "detail": "Save & exit must write the isolated verification save and return to the title.",
+            "passed": true
+        },
+        {
+            "name": "v_new_game_confirmation",
+            "detail": "NEW GAME must show a confirmation while a save exists.",
+            "passed": true
+        },
+        {
+            "name": "v_new_game_cancel",
+            "detail": "Cancel keeps the existing save and title screen.",
+            "passed": true
+        },
+        {
+            "name": "v_story_replay",
+            "detail": "The title's story action opens the cinematic replay.",
+            "passed": true
+        },
+        {
+            "name": "v_story_auto_toggle",
+            "detail": "The story playback toggle changes and restores automatic advance without restarting the scene.",
+            "passed": true
+        },
+        {
+            "name": "v_story_close",
+            "detail": "Closing the replay returns to title while preserving the guild save.",
+            "passed": true
+        },
+        {
+            "name": "v_continue_saved_guild",
+            "detail": "The real CONTINUE control loads the saved guild and returns to Hall.",
+            "passed": true
+        },
+        {
+            "name": "v_saved_wallet",
+            "detail": "Both gold and gems must restore exactly after save, title, and Continue.",
+            "passed": true
+        },
+        {
+            "name": "v_saved_guild_roster",
+            "detail": "The named guild, rank, exact hero identities and promotions must survive loading.",
+            "passed": true
+        },
+        {
+            "name": "v_saved_inventory_equipment",
+            "detail": "Owned gear, enhancement, locks, material stacks, and hero equipment must survive loading exactly.",
+            "passed": true
+        },
+        {
+            "name": "v_saved_facilities_market_daily",
+            "detail": "All built facilities and research, sold market offers, claimed daily reward and completed opening quests must remain recorded.",
+            "passed": true
+        },
+        {
+            "name": "v_saved_language_english",
+            "detail": "The explicitly selected English language must remain active after Continue.",
+            "passed": true
+        },
+        {
+            "name": "v_external_actions_present",
+            "detail": "Share and Rate controls are present; native external share/rating actions are intentionally excluded from unattended verification.",
+            "passed": true
+        },
+        {
+            "name": "v_external_panel_close",
+            "detail": "The popup's close control must dismiss its own panel.",
+            "passed": true
+        },
+        {
+            "name": "id_onboarding_continue_1",
+            "detail": "Advance the onboarding through its actual footer button.",
+            "passed": true
+        },
+        {
+            "name": "id_onboarding_continue_2",
+            "detail": "Advance the onboarding through its actual footer button.",
+            "passed": true
+        },
+        {
+            "name": "id_onboarding_continue_3",
+            "detail": "Advance the onboarding through its actual footer button.",
+            "passed": true
+        },
+        {
+            "name": "id_onboarding_continue_4",
+            "detail": "Advance the onboarding through its actual footer button.",
+            "passed": true
+        }
+    ]
+}

@@ -1,7 +1,7 @@
 # Emberhall: Guild Legends
 
 A portrait 2D **guild manager** for Android, built in Unity 6 (6000.6.1f1) on top of the reusable
-**Manager Simulator Template** (`ManagerKit`). Version 1.2.0 combines bright painted fantasy illustrations with animated
+**Manager Simulator Template** (`ManagerKit`). Version 1.2.1 combines bright painted fantasy illustrations with animated
 pixel characters, cream and sage panels, and sky-blue accents. Large illustrations use hooded or helmeted heroes and
 views from behind; front-facing pixel characters remain part of gameplay. Music and sound effects remain procedural.
 
@@ -24,12 +24,24 @@ Recruit heroes → form a party → pick a quest → auto-battle → earn loot &
 - Offline progress: absolute-time timers, idle Treasury vault, expedition returns, "Welcome back" report
 - Atomic save with backup, autosave, EN + Bahasa Indonesia, settings, about, share, rate, onboarding, tutorial pointer
 
+## Version 1.2.1 — Open Hall labels
+
+The Hall now displays building names and Market directly over the art. White name plaques, action boxes and construction
+timer boxes are removed. Locks, levels and action icons remain, with a fine ivory text edge and full transparent tap
+areas. Hire/Heal/Build/Upgrade and Treasury collection stay interactive.
+
+[Download the signed APK](Releases/README.md) — Android version code **6**. The final portrait tour passed **312 flow checks**
+and checked **3166 visible texts across 89 screenshots** with no layout issues.
+See [validation evidence](Store/Validation/1.2.1/README.md).
+
+<img src="Store/Validation/1.2.1/hall.png" width="240" alt="Hall building names and Hire without white boxes">
+
 ## Version 1.2.0 — The Lantern Road
 
 The interface now uses Lato with a 36-unit minimum and a 44-unit body size on the 1080-unit reference canvas.
 Previously small labels, resource numbers, status badges and rich-text annotations are larger. Buttons use their
 available height, and descriptions, portraits, reward cells and long names have dedicated room. The Hall retains
-compact building plaques; hero cards and stat panels use wider rows, and larger parties scroll horizontally.
+unframed building labels; hero cards and stat panels use wider rows, and larger parties scroll horizontally.
 
 Thin ivory frames and simple rounded buttons keep the painted environments visible. The first-steps guide replaces
 the duplicate Hall quest card, and routine upgrade badges no longer crowd every building. Prologue scenes use brief
@@ -47,7 +59,7 @@ synergies; its deterministic previews preserve the campaign's random sequence. C
 Battle now supports Pause/Resume, retains the chosen speed while paused, and can Skip from a paused state. Battle
 characters are larger, and their animation follows playback speed and pause. English remains the installation default.
 
-Android version code: **5**. The signed installable APK is delivered in [Releases](Releases/README.md).
+Android version code: **5**. The 1.2.0 APK is documented in [its release notes](Releases/1.2.0.md).
 
 Validation: **71 core tests passed**, no failures; the final narrow-screen run passed **312 interface flow checks**
 and checked **3182 visible texts across 89 screenshots** with no reported overflow or containment issues.

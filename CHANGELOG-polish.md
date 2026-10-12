@@ -1,5 +1,12 @@
 # Emberhall polish — 7 October 2026
 
+## Version 1.2.1 — 12 October 2026
+
+- Removed white Hall name plaques and their shadows, including Market. Kept readable names, locks and levels directly over the art.
+- Removed action and construction-time boxes; Hire, Heal, Build, Upgrade and Treasury collection retain transparent tap areas.
+- Added a fine ivory text edge and centered action icons with their labels.
+- Built signed Android version code **6** and verified the complete portrait interface tour. Evidence: `Store/Validation/1.2.1`.
+
 ## Version 1.2.0 — 12 October 2026
 
 - Replaced the thin pixel UI font with Lato; increased body, label, resource, badge and rich-text sizes. Raised the
