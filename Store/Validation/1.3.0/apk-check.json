@@ -1,0 +1,43 @@
+{
+  "version": "1.3.0",
+  "androidCode": 7,
+  "bytes": 75024418,
+  "sha256": "f94a9d2bc0bcd440cb37cf0ef8fc33204b21ffe157c9d3da6b19b4ef93fb49fe",
+  "sdkAndIdsPresent": {
+    "com/google/unity/ads/Banner;": true,
+    "com/google/unity/ads/Interstitial;": true,
+    "com/google/unity/ads/UnityRewardedAd;": true,
+    "com/google/android/gms/ads/MobileAds;": true,
+    "com/google/android/ump/ConsentInformation;": true,
+    "ca-app-pub-3940256099942544/9214589741": true,
+    "ca-app-pub-3940256099942544/1033173712": true,
+    "ca-app-pub-3940256099942544/5224354917": true
+  },
+  "nativeServingTested": false,
+  "manifest": [
+    "package: name='com.pixelgamemaster.emberhall' versionCode='7' versionName='1.3.0' platformBuildVersionName='16' platformBuildVersionCode='36' compileSdkVersion='36' compileSdkVersionCodename='16'",
+    "sdkVersion:'26'",
+    "targetSdkVersion:'36'",
+    "uses-permission: name='android.permission.INTERNET'",
+    "uses-permission: name='android.permission.VIBRATE'",
+    "uses-permission: name='android.permission.ACCESS_NETWORK_STATE'",
+    "uses-permission: name='com.google.android.gms.permission.AD_ID'",
+    "uses-permission: name='android.permission.ACCESS_ADSERVICES_AD_ID'",
+    "uses-permission: name='android.permission.ACCESS_ADSERVICES_ATTRIBUTION'",
+    "uses-permission: name='android.permission.ACCESS_ADSERVICES_TOPICS'",
+    "uses-permission: name='android.permission.WAKE_LOCK'",
+    "uses-permission: name='android.permission.FOREGROUND_SERVICE'",
+    "uses-permission: name='com.pixelgamemaster.emberhall.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION'",
+    "native-code: 'arm64-v8a'"
+  ],
+  "signature": [
+    "Verifies",
+    "Verified using v1 scheme (JAR signing): false",
+    "Verified using v2 scheme (APK Signature Scheme v2): true",
+    "Verified using v3 scheme (APK Signature Scheme v3): false",
+    "Verified using v3.1 scheme (APK Signature Scheme v3.1): false",
+    "Verified using v4 scheme (APK Signature Scheme v4): false",
+    "Verified for SourceStamp: false",
+    "Number of signers: 1"
+  ]
+}

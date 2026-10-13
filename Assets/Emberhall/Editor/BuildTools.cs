@@ -36,7 +36,8 @@ namespace Emberhall.EditorTools
             PlayerSettings.bundleVersion = App.Version;
             PlayerSettings.SetApplicationIdentifier(NamedBuildTarget.Android, Bundle);
             PlayerSettings.SetApplicationIdentifier(NamedBuildTarget.Standalone, Bundle);
-            PlayerSettings.Android.bundleVersionCode = 6;
+            PlayerSettings.Android.bundleVersionCode = 7;
+            AdMobBuild.Configure();
 
             // --- display ---
             PlayerSettings.defaultInterfaceOrientation = UIOrientation.Portrait;

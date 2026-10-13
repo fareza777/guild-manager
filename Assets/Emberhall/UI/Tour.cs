@@ -1085,6 +1085,89 @@ namespace Emberhall
             Check("v_external_actions_present", LabeledButton(Popups.Top.Root, "Share") != null && LabeledButton(Popups.Top.Root, "Rate us") != null,
                 "Share and Rate controls are present; native external share/rating actions are intentionally excluded from unattended verification.");
             CloseTop("v_external_panel_close");
+            yield return VerifyAds(app, dir);
+        }
+
+        static IEnumerator VerifyAds(App app, string dir)
+        {
+            Popups.CloseAll(); app.hud.GoTab(Hud.Tab.Hall, true);
+            var client = new TourAdsClient(); app.Ads.InstallVerificationClient(client);
+            Check("v_ads_tutorial_gate", !app.Ads.TutorialDone && !app.Ads.RewardReady && app.Ads.BannerInset == 0,
+                "No ads during the first four onboarding steps, independently of the tutorial-hints preference.");
+            // Only this explicit test fixture completes chapter four. The unmodified opening was verified above.
+            var fourth = app.ctx.Quests.Get("q_m04");
+            if (!Check("v_ads_tutorial_fixture", fourth != null, "The opening flow created chapter four.")) yield break;
+            fourth.state = QuestSystem.Done; app.ctx.Changed();
+            yield return new WaitForSecondsRealtime(.4f);
+            Check("v_ads_preload", app.Ads.RewardReady && client.InterstitialReady, "The injected flow double preloads both full-screen formats.");
+            Check("v_ads_banner_reserved", client.BannerVisible && app.Ads.BannerInset > 0 && app.host.screens.offsetMin.y >= 188 + app.Ads.BannerInset - .5f,
+                "The banner owns its own inset below navigation; it cannot overlap a game control.");
+            yield return Shot(dir, "verify_30_ad_banner_layout");
+            Popups.Show(new MenuPopup()); yield return new WaitForSecondsRealtime(.1f);
+            Check("v_ads_banner_modal_hide", !client.BannerVisible && app.Ads.BannerInset == 0, "Opening a modal removes the banner and its inset.");
+            if (!Check("v_ads_supply_open", Click(LabeledButton(Popups.Top.Root, "Guild supplies")) && Popups.Top is SuppliesPopup,
+                "The real Menu control opens the optional supplies offer.")) yield break;
+            yield return Shot(dir, "verify_31_ad_supplies");
+            double gold = app.ctx.Wallet.Get("gold"), gems = app.ctx.Wallet.Get("gems");
+            if (!Check("v_ads_supply_watch", Click(LabeledButton(Popups.Top.Root, "Watch video · claim supplies")) && app.Ads.Busy,
+                "An explicit player action starts the rewarded flow and pauses game audio.")) yield break;
+            Check("v_ads_no_click_reward", app.ctx.Wallet.Get("gold") == gold && AudioListener.pause, "Starting a video grants nothing and mutes game audio.");
+            yield return Shot(dir, "verify_32_ad_callback_preview");
+            if (!Check("v_ads_supply_earned", Click(LabeledButton(Popups.Top.Root, "Complete test video")), "Inject two earned callbacks through the preview control.")) yield break;
+            yield return new WaitForSecondsRealtime(.15f);
+            Check("v_ads_supply_once", app.ctx.Wallet.Get("gold") == gold + 150 && app.ctx.Wallet.Get("gems") == gems + 2 && !app.Ads.Busy && !AudioListener.pause,
+                "Duplicate callbacks award exactly 150 gold and 2 gems, restore audio and unblock play.");
+            yield return Shot(dir, "verify_33_ad_supplies_claimed");
+            Popups.CloseAll();
+            var ledger = app.ctx.Get<AdRewards>();
+            gold = app.ctx.Wallet.Get("gold");
+            app.Ads.Watch(ledger.VictoryTicket("verification-dismiss", 100));
+            Check("v_ads_dismiss_control", Click(LabeledButton(Popups.Top.Root, "Close without reward")), "Dismiss the next rewarded flow without earning it.");
+            Check("v_ads_dismiss_no_reward", app.ctx.Wallet.Get("gold") == gold && !app.Ads.Busy, "Dismissing a video grants no bonus and immediately restores play.");
+            yield return new WaitForSecondsRealtime(.15f);
+            app.Ads.Watch(ledger.VictoryTicket("verification-fail", 100));
+            Check("v_ads_failure_control", Click(LabeledButton(Popups.Top.Root, "Simulate failure")), "Inject a full-screen presentation failure.");
+            Check("v_ads_failure_no_reward", app.ctx.Wallet.Get("gold") == gold && !app.Ads.Busy && app.Ads.BannerInset == 0,
+                "A failed show leaves currency unchanged and does not trap the screen or audio.");
+            client = new TourAdsClient(); app.Ads.InstallVerificationClient(client);
+            yield return new WaitForSecondsRealtime(.2f);
+            Popups.Show(new AdsPrivacyPopup()); yield return Shot(dir, "verify_34_ad_privacy");
+            Check("v_ads_preview_interstitial", Click(LabeledButton(Popups.Top.Root, "Preview interstitial")) && app.Ads.Busy,
+                "Test-mode settings can explicitly preview an interstitial without bypassing natural-break limits in normal play.");
+            Check("v_ads_preview_close", Click(LabeledButton(Popups.Top.Root, "Close test interstitial")) && !app.Ads.Busy,
+                "Closing the simulated interstitial restores the settings dialog.");
+            Popups.CloseAll();
+            app.hud.GoTab(Hud.Tab.Board, true);
+            var hero = app.ctx.Roster.All.First(app.ctx.Roster.Ready);
+            hero.hp = -1; hero.level = 50; app.ctx.Roster.Dirty();
+            app.nav.Push(new BattleScreen(app.ctx.Content.Mission("m_r1_1"), new List<UnitInstance> { hero }));
+            yield return new WaitForSecondsRealtime(.25f);
+            Check("v_ads_banner_battle_hide", !client.BannerVisible && app.Ads.BannerInset == 0, "A live battle has no banner or reserved ad space.");
+            if (!Check("v_ads_battle_skip", Click(TargetButton("btn_skip")), "Finish the real battle to verify its actual rewarded placement.")) yield break;
+            float guard = 0;
+            while (!(Popups.Top is ResultPopup) && guard < 8) { guard += Time.unscaledDeltaTime; yield return null; }
+            if (!Check("v_ads_real_victory", Popups.Top is ResultPopup, "The actual battle opens its result.")) yield break;
+            yield return Shot(dir, "verify_35_ad_victory_offer");
+            var bonus = Popups.Top.Root.GetComponentsInChildren<UButton>(false).FirstOrDefault(b => b.label != null && b.label.text.StartsWith("Watch video · +"));
+            gold = app.ctx.Wallet.Get("gold");
+            if (!Check("v_ads_victory_watch", Click(bonus) && app.Ads.Busy, "The result's actual bonus button works while the completed battle remains behind it.")) yield break;
+            Check("v_ads_victory_earned", Click(LabeledButton(Popups.Top.Root, "Complete test video")), "Complete the optional victory video.");
+            yield return new WaitForSecondsRealtime(.2f);
+            Check("v_ads_victory_credit", app.ctx.Wallet.Get("gold") > gold && Popups.Top is ResultPopup &&
+                Popups.Top.Body.GetComponentsInChildren<UnityEngine.UI.Text>(false).Any(t => t.text == "Video bonus claimed"),
+                "The earned callback adds the bonus and replaces the result offer with its claimed state.");
+            yield return Shot(dir, "verify_36_ad_victory_claimed");
+            Check("v_ads_victory_return", Click(LabeledButton(Popups.Top.Root, "Back")) && !app.Ads.Busy && app.nav.Current is BoardScreen,
+                "Returning after a rewarded video never immediately chains an interstitial.");
+            var noFill = new TourAdsClient { FailLoads = true }; app.Ads.InstallVerificationClient(noFill);
+            yield return new WaitForSecondsRealtime(.25f);
+            Check("v_ads_no_fill_fallback", !app.Ads.RewardReady && !noFill.BannerVisible && app.Ads.BannerInset == 0 && !app.Ads.Busy,
+                "All formats can fail to load without leaving blank banner space or blocking play.");
+            app.SaveNow(); Check("v_ads_reward_persisted", app.save.Load(app.ctx) && app.ctx.Get<AdRewards>().SuppliesToday == 1,
+                "The earned supply receipt and daily count survive a real save reload.");
+            // Remove the injected client before the remaining screenshots and language tour.
+            app.Ads.InstallVerificationClient(new NoAdsClient());
+            Check("v_ads_no_native_claim", !app.Ads.Supported, "Verification finishes with ads disabled. Native serving still requires a physical device or emulator.");
         }
 
         public static IEnumerator Run(App app)

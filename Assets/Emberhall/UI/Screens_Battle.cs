@@ -535,6 +535,8 @@ namespace Emberhall
     public class ResultPopup : Popup
     {
         readonly MissionOutcome o; readonly MissionDef m; readonly List<UnitInstance> party; readonly Action onBack; bool starsDone;
+        readonly string battleKey = Guid.NewGuid().ToString("N");
+        bool adBattleRecorded, lastAdReady, leaving;
         public ResultPopup(MissionOutcome outcome, MissionDef mission, List<UnitInstance> p, Action back) { o = outcome; m = mission; party = p; onBack = back; }
         GameContext C => App.Ctx;
         public override string Title => o.win ? L.T("VICTORY!") : L.T("DEFEAT");
@@ -547,6 +549,7 @@ namespace Emberhall
 
         public override void OnShown()
         {
+            if (!adBattleRecorded) { adBattleRecorded = true; App.I.Ads.BattleFinished(battleKey, o.win && m.kind == "battle" && m.region != "tower"); }
             TitleText.color = o.win ? Theme.Gold : Theme.Bad;
             if (o.win) Fx.Rays(Panel, new Vector2(0, 600), 1100, Theme.Gold);
         }
@@ -582,6 +585,23 @@ namespace Emberhall
                 }
             }
             // xp & level ups
+            if (o.win && m.kind == "battle" && m.region != "tower" && App.I.Ads.TutorialDone)
+            {
+                double gold = o.res.Where(r => r.id == "gold").Sum(r => r.n);
+                var ledger = C.Get<AdRewards>();
+                if (gold >= 2)
+                {
+                    if (ledger.Claimed(battleKey)) W.Info(body, StoryScript.Pick("Video bonus claimed", "Bonus video sudah diambil"), 38, Theme.Good);
+                    else
+                    {
+                        var bonus = U.Btn(body, StoryScript.Pick($"Watch video · +{Util.Num(Math.Floor(gold * .5))} gold", $"Tonton video · +{Util.Num(Math.Floor(gold * .5))} gold"), Theme.Green,
+                            () => App.I.Ads.Watch(ledger.VictoryTicket(battleKey, gold), Redraw, Redraw), 800, 112, 40, Icons.Get("coin"));
+                        bonus.Le(-1, 112); bonus.interactable = App.I.Ads.RewardReady;
+                        W.Info(body, StoryScript.Pick(App.I.Ads.RewardReady ? "Optional bonus · your loot is already saved" : "Optional bonus · no video ready yet", App.I.Ads.RewardReady ? "Bonus opsional · hadiahmu sudah disimpan" : "Bonus opsional · video belum siap"), 36, Theme.TextDim);
+                    }
+                }
+                lastAdReady = App.I.Ads.RewardReady;
+            }
             W.Header(body, L.T("Heroes"), Icons.Get("heroes"));
             W.Info(body, L.T("+{0} XP each", Util.Num(o.xp)), 32, Theme.Blue);
             foreach (var u in party)
@@ -614,7 +634,13 @@ namespace Emberhall
             if (next != null) { var nb = U.Btn(f, L.T("Next"), Theme.Green, () => Again(next), 200, 100, 38, Icons.Get("arrow_r")); nb.Le(-1, 100, 1); Tw.Pulse(nb.transform, 0.04f, 0.7f); }
         }
 
-        void Leave() { Close(); onBack?.Invoke(); }
+        public override void Tick() { if (lastAdReady != App.I.Ads.RewardReady) { lastAdReady = App.I.Ads.RewardReady; Redraw(); } }
+        void Leave()
+        {
+            if (leaving || App.I.Ads.Busy) return;
+            leaving = true; Close(); onBack?.Invoke(); App.I.SaveNow();
+            if (o.win && m.kind == "battle" && m.region != "tower") App.I.Ads.TryInterstitialAtBreak();
+        }
         void Again(MissionDef target)
         {
             var ready = party.Where(C.Roster.Ready).ToList();

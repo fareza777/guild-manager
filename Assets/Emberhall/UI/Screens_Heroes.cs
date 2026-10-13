@@ -87,7 +87,8 @@ namespace Emberhall
             var hprow = U.Rt(body, "hp"); hprow.Le(-1, 70); U.HBox(hprow, 14, null, TextAnchor.MiddleCenter, true, true, false, false);
             U.Icon(hprow, Icons.Get("hp"), 52).Le(52, 52);
             var hb = U.ProgressBar(hprow, C.Roster.HpFrac(u) < 0.3 ? Theme.Red : Theme.Green, 600, 40, $"{Util.Num(C.Roster.Hp(u))} / {Util.Num(C.Roster.MaxHp(u))}", 28); hb.Value = (float)C.Roster.HpFrac(u); hb.back.Le(600, 40, 1);
-            var (stx, scol) = W.UnitStatus(u); var stt = U.Txt(hprow, stx, 34, scol, TextAnchor.MiddleRight, true); stt.Le(190, 50);
+            var (stx, scol) = W.UnitStatus(u); var stt = U.Txt(hprow, stx, 34, scol, TextAnchor.MiddleRight, true);
+            stt.Le(Mathf.Clamp(stt.preferredWidth + 16, 190, 360), 60);
 
             // --- stats ---
             W.Header(body, L.T("Stats"), Icons.Get("atk"));

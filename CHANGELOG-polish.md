@@ -1,5 +1,23 @@
 # Emberhall polish — 7 October 2026
 
+## Version 1.3.0 — 13 October 2026
+
+- Integrated Google Mobile Ads Unity 11.5.0, native Android ads 25.4.0, UMP 4.0.0 and pinned EDM4U dependencies.
+  Google sample app/ad unit IDs are enabled; publisher mode validates all three unit IDs before a build.
+- Added anchored adaptive banners with a dedicated inset below navigation. Banner space disappears on no-fill,
+  modals, battle, backgrounding and full-screen presentations. Initial onboarding and four tutorial chapters stay ad free.
+- Added interstitials only on Back from campaign victories, after three distinct eligible wins, with 120-second
+  session warm-up, 180-second spacing and a five-per-session cap. Defeats, exams, Spire, Retry and Next never trigger one.
+- Added optional rewarded victory gold (+50%, rounded down) and Menu → Guild supplies (150 gold + 2 gems,
+  three per UTC day, ten-minute cooldown). An earned callback grants each receipt once and saves immediately.
+  Cancelled, failed, duplicate, stale-guild and stale-save callbacks cannot duplicate a reward.
+- Added UMP consent gating, privacy choices, app/Google privacy links, test-only preview controls, load backoff,
+  stale-inventory replacement and audio restoration. Consent/network initialization leaves gameplay responsive.
+- Widened the hero health-status label to fit larger text, including Needs rest.
+- Added reward/frequency regression tests and an isolated interface verification flow. Its simulated previews are
+  clearly labelled; they verify callbacks/layout, not native serving. Native on-device serving still needs a phone.
+- Built Android version code **7**. Setup: `Store/AdMob-setup.md`; evidence: `Store/Validation/1.3.0`.
+
 ## Version 1.2.1 — 12 October 2026
 
 - Removed white Hall name plaques and their shadows, including Market. Kept readable names, locks and levels directly over the art.

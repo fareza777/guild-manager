@@ -13,6 +13,7 @@ namespace Emberhall
         {
             db = db ?? ContentDb.FromResources(ContentFolder);
             var c = new GameContext(db);
+            c.Add(new AdRewards());
             c.Start();
             return c;
         }

@@ -44,12 +44,13 @@ namespace Emberhall
     /// <summary>Game entry point. Creates the UI host, owns the GameContext and drives the whole flow.</summary>
     public class App : MonoBehaviour
     {
-        public const string Version = "1.2.1";
+        public const string Version = "1.3.0";
         public static App I;
         public static GameContext Ctx => I != null ? I.ctx : null;
         public static bool Suppress;                      // tests can set before boot to take over
         public GameContext ctx; public SaveSystem save; public UiHost host; public Nav nav; public Hud hud;
         public bool InGame { get; private set; }
+        public AdService Ads { get; private set; }
         double lastSave;
         public string PendingMusic;
 
@@ -78,6 +79,7 @@ namespace Emberhall
             ctx = GuildGame.Create();
             save = new SaveSystem(Tour.Requested ? "emberhall_visualcheck" : "emberhall");
             ctx.OnNote += OnNote;
+            Ads = gameObject.AddComponent<AdService>(); Ads.Bind(this);
             ctx.Quests.OnReady += q => { };
             yield return null;
             Audio.PlayMusic("title");
@@ -111,6 +113,7 @@ namespace Emberhall
 
         public void GoTitle()
         {
+            Ads?.HideBanner();
             InGame = false; Popups.CloseAll();
             if (hud != null) hud.SetVisible(false);
             nav.Root(new TitleScreen());
@@ -159,6 +162,7 @@ namespace Emberhall
         void Update()
         {
             if (ctx == null || nav == null) return;
+            if (Ads != null && Ads.Busy) return;
             nav.Update();
             Popups.Update();
             if (InGame)
@@ -171,6 +175,7 @@ namespace Emberhall
 
         void HandleBack()
         {
+            if (Ads != null && Ads.Busy) return;
             if (Popups.Back()) return;
             if (InGame && hud != null && hud.Back()) return;
             if (nav.Back()) return;

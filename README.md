@@ -1,7 +1,7 @@
 # Emberhall: Guild Legends
 
 A portrait 2D **guild manager** for Android, built in Unity 6 (6000.6.1f1) on top of the reusable
-**Manager Simulator Template** (`ManagerKit`). Version 1.2.1 combines bright painted fantasy illustrations with animated
+**Manager Simulator Template** (`ManagerKit`). Version 1.3.0 combines bright painted fantasy illustrations with animated
 pixel characters, cream and sage panels, and sky-blue accents. Large illustrations use hooded or helmeted heroes and
 views from behind; front-facing pixel characters remain part of gameplay. Music and sound effects remain procedural.
 
@@ -23,6 +23,18 @@ Recruit heroes → form a party → pick a quest → auto-battle → earn loot &
 - The Lantern Road: 25 connected story chapters, a spoiler-free Journal, 33 side quests, daily quests, a login calendar, and guild events
 - Offline progress: absolute-time timers, idle Treasury vault, expedition returns, "Welcome back" report
 - Atomic save with backup, autosave, EN + Bahasa Indonesia, settings, about, share, rate, onboarding, tutorial pointer
+- Google AdMob test integration: adaptive banner, limited battle-break interstitials, optional rewarded gold/supplies, UMP privacy choices
+
+## Version 1.3.0 — Optional video bonuses
+
+The official Google Mobile Ads Unity SDK is integrated with Google sample IDs. Adaptive banners have their own
+space below navigation. Interstitials are limited to returns from campaign victories, with warm-up, frequency and
+session limits. Rewarded videos offer optional victory gold or guild supplies; only an earned callback grants the
+bonus, and duplicate callbacks cannot double it. The first four tutorial chapters remain free of automatic ads.
+
+[Download the signed APK](Releases/README.md) — Android version code **7**.
+See [AdMob setup](Store/AdMob-setup.md), [privacy policy](Store/Privacy-policy.md) and
+[validation evidence](Store/Validation/1.3.0/README.md). This release uses test ads and earns no ad revenue.
 
 ## Version 1.2.1 — Open Hall labels
 
@@ -30,7 +42,7 @@ The Hall now displays building names and Market directly over the art. White nam
 timer boxes are removed. Locks, levels and action icons remain, with a fine ivory text edge and full transparent tap
 areas. Hire/Heal/Build/Upgrade and Treasury collection stay interactive.
 
-[Download the signed APK](Releases/README.md) — Android version code **6**. The final portrait tour passed **312 flow checks**
+[Download the 1.2.1 APK](Releases/1.2.1.md) — Android version code **6**. The final portrait tour passed **312 flow checks**
 and checked **3166 visible texts across 89 screenshots** with no layout issues.
 See [validation evidence](Store/Validation/1.2.1/README.md).
 
@@ -268,4 +280,6 @@ ARM64, minimum API **26**, and target API **36**. See `CHANGELOG-polish.md` for 
 
 - Package: `com.pixelgamemaster.emberhall`, minimum Android 8.0 (API 26), target API 36, ARM64, IL2CPP.
 - Release signing key: `Keystore/emberhall.keystore` (password in `Keystore/PASSWORDS.txt`). **Back it up and never commit it.**
-- Store icon: `Store/icon_512.png`. Add a privacy-policy URL in the Play Console (the game collects no data and has no ads/IAP).
+- Store icon: `Store/icon_512.png`. The game includes AdMob test ads, with no IAP. Publish the privacy policy and
+  complete advertising/data disclosures for the final SDK configuration before a store release; see
+  [AdMob setup](Store/AdMob-setup.md).

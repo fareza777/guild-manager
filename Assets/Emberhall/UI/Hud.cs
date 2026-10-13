@@ -25,6 +25,13 @@ namespace Emberhall
         double showGold, showGems; int lastQuestReady = -1;
         public Tab Current { get; private set; } = Tab.Hall;
         bool visible, coachReserved; float popupCooldown; bool dailyShown;
+        float adInset;
+        public void SetAdInset(float value)
+        {
+            adInset = value;
+            SetChrome(visible && !(app.nav.Current is IFullScreenPage));
+            app.nav.Current?.Redraw();
+        }
         public bool FullScreenPage; // battle etc. hides chrome
 
         public Hud(App a)
@@ -70,7 +77,8 @@ namespace Emberhall
             if (pointer && !v) pointer.gameObject.SetActive(false);
             if (coach && !v) coach.gameObject.SetActive(false);
             coachReserved = v && FirstStepsActive();
-            host.screens.offsetMin = new Vector2(0, v ? NavH : 0);
+            if (navBar) navBar.anchoredPosition = new Vector2(0, v ? adInset : 0);
+            host.screens.offsetMin = new Vector2(0, v ? NavH + adInset : 0);
             host.screens.offsetMax = new Vector2(0, v ? -TopH - (coachReserved ? CoachSpace : 0) : 0);
         }
 

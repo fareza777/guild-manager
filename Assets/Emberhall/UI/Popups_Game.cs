@@ -36,6 +36,7 @@ namespace Emberhall
                 }, 250, 132, 30); b.Le(250, 132); }
             });
             U.Spacer(body, 6);
+            U.Btn(body, StoryScript.Pick("Ads & privacy", "Iklan & privasi"), Theme.PanelLight, () => Popups.Show(new AdsPrivacyPopup()), 800, 108, 40, Icons.Get("info")).Le(-1, 108);
             if (App.I.HasSave || App.I.InGame)
             {
                 var b = U.Btn(body, L.T("Reset all progress"), Theme.RedDark, () => Popups.Confirm(L.T("Reset everything?"), L.T("This deletes your guild, heroes and items. This cannot be undone."), L.T("Delete"), () => { Close(); App.I.ResetProgress(); }, L.T("Cancel"), true), 600, 100, 40, Icons.Get("trash"));
@@ -97,6 +98,8 @@ namespace Emberhall
             var C = App.Ctx;
             Item(body, "Guild Rank", "flame", Theme.AccentDark, () => { Close(); Popups.Show(new RankPopup()); });
             Item(body, "Daily Reward", "star", Theme.PurpleDark, () => { Close(); Popups.Show(new DailyPopup()); });
+            if (App.I.Ads.TutorialDone)
+                Item(body, StoryScript.Pick("Guild supplies", "Bekal guild"), "bag", Theme.Green, () => { Close(); Popups.Show(new SuppliesPopup()); });
             Item(body, "Settings", "gear", Theme.PanelLight, () => { Close(); Popups.Show(new SettingsPopup()); });
             Item(body, "About", "info", Theme.PanelLight, () => { Close(); Popups.Show(new AboutPopup()); });
             Item(body, "Share with friends", "share", Theme.BlueDark, () => Native.Share(Brand.Title, Brand.ShareText));
