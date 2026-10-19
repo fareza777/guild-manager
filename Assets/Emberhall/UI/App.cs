@@ -51,6 +51,7 @@ namespace Emberhall
         public GameContext ctx; public SaveSystem save; public UiHost host; public Nav nav; public Hud hud;
         public bool InGame { get; private set; }
         public AdService Ads { get; private set; }
+        public RemoveAdsService RemoveAds { get; private set; }
         double lastSave;
         public string PendingMusic;
 
@@ -79,6 +80,7 @@ namespace Emberhall
             ctx = GuildGame.Create();
             save = new SaveSystem(NativeAdCheck.Requested ? "emberhall_nativecheck" : Tour.Requested ? "emberhall_visualcheck" : "emberhall");
             ctx.OnNote += OnNote;
+            RemoveAds = gameObject.AddComponent<RemoveAdsService>(); RemoveAds.Bind(this);
             Ads = gameObject.AddComponent<AdService>(); Ads.Bind(this);
             ctx.Quests.OnReady += q => { };
             yield return null;

@@ -1,7 +1,7 @@
 {
   "name": "Emberhall",
   "rootNamespace": "Emberhall",
-  "references": [ "ManagerKit.Core", "ManagerKit.UI", "UnityEngine.UI" ],
+  "references": [ "ManagerKit.Core", "ManagerKit.UI", "UnityEngine.UI", "Unity.Purchasing" ],
   "includePlatforms": [],
   "excludePlatforms": [],
   "allowUnsafeCode": false,

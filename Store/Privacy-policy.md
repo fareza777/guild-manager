@@ -2,10 +2,10 @@
 
 Effective date: October 13, 2026. Developer: Pixel Game Master.
 
-Emberhall stores your guild name, heroes, inventory, progress, settings and video-bonus receipts on your device.
-The game has no sign-in, cloud save, purchases or developer-operated analytics backend. We do not send your guild
-name or save file to an advertising service. Reset Progress removes the active guild save; uninstalling the app
-removes its local app data, subject to your device's backup settings.
+Emberhall stores your guild name, heroes, inventory, progress, settings, remove-ads entitlement cache and
+video-bonus receipts on your device. The game has no sign-in, cloud save or developer-operated analytics backend.
+We do not send your guild name or save file to an advertising service. Reset Progress removes the active guild
+save; uninstalling the app removes its local app data, subject to your device's backup settings.
 
 ## Advertising and consent
 
@@ -26,6 +26,14 @@ not reset Google's consent choices.
 
 Video rewards are optional. Base battle rewards do not require an ad. A completed video earns the bonus described
 on its button; closing a video early or failing to load one does not consume game currency.
+
+## In-app purchase
+
+The optional **Remove ads** non-consumable purchase is offered through Google Play Billing for USD 4.99 (the
+final localized price is set by Google Play). A successful purchase removes the game's banner, interstitial and
+rewarded advertisements on the Google Play account. Google Play processes the payment, order, tax and refund
+information under its own privacy policy. The game receives only the purchase result needed to grant the
+entitlement; it does not store payment details. Restore purchase uses Google Play's account-level purchase history.
 
 ## External links and support
 

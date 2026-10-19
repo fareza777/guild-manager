@@ -4,6 +4,28 @@ using UnityEngine;
 
 namespace Emberhall
 {
+    public sealed class RemoveAdsPopup : Popup
+    {
+        RemoveAdsService Store => App.I.RemoveAds;
+        public override string Title => StoryScript.Pick("Remove ads", "Hapus iklan");
+        public override float Height => 760;
+        public override void Build(RectTransform body)
+        {
+            if (Store == null) return;
+            if (Store.Owned)
+            {
+                W.Info(body, StoryScript.Pick("Ads are removed on this account.", "Iklan sudah dihapus di perangkat ini."), 44, Theme.Green);
+                return;
+            }
+            W.Info(body, StoryScript.Pick("Keep every battle uninterrupted. Remove banner, interstitial and rewarded ads with one permanent purchase.", "Nikmati battle tanpa gangguan. Hapus banner, interstitial, dan rewarded ads dengan satu pembelian permanen."), 40, Theme.Text);
+            W.Info(body, Store.DisplayPrice, 44, Theme.Gold);
+            var buy = U.Btn(body, StoryScript.Pick("Remove ads", "Hapus iklan"), Theme.Accent, Store.Buy, 800, 128, 44, Icons.Get("star"));
+            buy.Le(-1, 128); buy.interactable = Store.CanBuy;
+            if (!Store.CanBuy) W.Info(body, StoryScript.Pick("Connecting to Google Play…", "Menghubungkan ke Google Play…"), 34, Theme.TextDim);
+            U.Btn(body, StoryScript.Pick("Restore purchase", "Pulihkan pembelian"), Theme.PanelLight, Store.Restore, 800, 104, 38).Le(-1, 104);
+        }
+    }
+
     public sealed class SuppliesPopup : Popup
     {
         AdService Ads => App.I.Ads;

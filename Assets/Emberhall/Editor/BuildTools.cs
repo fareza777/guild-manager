@@ -32,7 +32,7 @@ namespace Emberhall.EditorTools
 
             // --- identity ---
             PlayerSettings.companyName = "Pixel Game Master";
-            PlayerSettings.productName = "Emberhall: Guild Legends";
+            PlayerSettings.productName = "Emberhall: Guild Manager";
             PlayerSettings.bundleVersion = App.Version;
             PlayerSettings.SetApplicationIdentifier(NamedBuildTarget.Android, Bundle);
             PlayerSettings.SetApplicationIdentifier(NamedBuildTarget.Standalone, Bundle);

@@ -41,6 +41,8 @@ namespace Emberhall
             });
             U.Spacer(body, 6);
             U.Btn(body, StoryScript.Pick("Ads & privacy", "Iklan & privasi"), Theme.PanelLight, () => Popups.Show(new AdsPrivacyPopup()), 800, 108, 40, Icons.Get("info")).Le(-1, 108);
+            if (App.I.RemoveAds != null && App.I.RemoveAds.CanShowPurchase)
+                U.Btn(body, StoryScript.Pick("Remove ads · $4.99", "Hapus iklan · $4.99"), Theme.Gold, () => Popups.Show(new RemoveAdsPopup()), 800, 108, 40, Icons.Get("star")).Le(-1, 108);
             if (App.I.HasSave || App.I.InGame)
             {
                 var b = U.Btn(body, L.T("Reset all progress"), Theme.RedDark, () => Popups.Confirm(L.T("Reset everything?"), L.T("This deletes your guild, heroes and items. This cannot be undone."), L.T("Delete"), () => { Close(); App.I.ResetProgress(); }, L.T("Cancel"), true), 600, 100, 40, Icons.Get("trash"));

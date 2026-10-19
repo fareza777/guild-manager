@@ -32,7 +32,7 @@ namespace Emberhall
         int bannerWidth;
         Rect bannerSafe;
         public bool Busy { get; private set; }
-        public bool Supported => client != null && client.Supported && config.enableAds;
+        public bool Supported => client != null && client.Supported && config.enableAds && !(app?.RemoveAds?.Owned ?? false);
         public bool TutorialDone => app?.ctx?.Quests.State("q_m04") == QuestSystem.Done;
         public bool RewardReady => initialized && !Busy && client.RewardedReady;
         public bool PrivacyRequired => Supported && client.PrivacyRequired;
@@ -56,7 +56,9 @@ namespace Emberhall
             client.OverlayChanged += SetBusy;
             app.nav.Changed += NavigationChanged;
             Popups.Opened += PopupOpened;
+            if (app.RemoveAds != null) app.RemoveAds.Changed += OnRemoveAdsChanged;
         }
+        void OnRemoveAdsChanged() { HideBanner(); bannerLoaded = false; Changed?.Invoke(); }
         void NavigationChanged(UiScreen screen) { HideBanner(); }
         void PopupOpened(Popup popup) { HideBanner(); }
         void Update()
@@ -217,6 +219,7 @@ namespace Emberhall
             disposed = true;
             if (app != null) app.nav.Changed -= NavigationChanged;
             Popups.Opened -= PopupOpened;
+            if (app?.RemoveAds != null) app.RemoveAds.Changed -= OnRemoveAdsChanged;
             if (client != null) { client.OverlayChanged -= SetBusy; client.Dispose(); }
             if (Busy) AudioListener.pause = audioWasPaused;
         }
