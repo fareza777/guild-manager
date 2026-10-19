@@ -34,6 +34,10 @@ namespace Emberhall
             for (int i = 0; i < 3; i++) { int k = i; var b = U.Btn(tabs, L.T(names[i]) , BoardState.Tab == i ? Theme.Accent : Theme.PanelLight, () => { if (lockd[k]) { Toasts.Show(L.T("Reach Rank D to unlock")); return; } BoardState.Tab = k; Redraw(); }, 300, 132, 34, lockd[i] ? Icons.Get("lock") : null); b.Le(-1, 132, 1); }
             var content = U.Rt(col, "content"); content.Le(-1, -1, 1, 1);
             var sc = MakeScroll(content, 14, new RectOffset(18, 18, 14, 40));
+            var journey = C.Get<Journey>();
+            var stamina = W.TextButton(sc.content, "", () => Popups.Show(new JourneyPopup()), 36, Theme.GreenDark); stamina.Le(-1, 86);
+            Func<string> energyLine = () => StoryScript.Pick($"Stamina  {journey.Energy}/{Journey.Capacity}  ·  Journey guide", $"Stamina  {journey.Energy}/{Journey.Capacity}  ·  Panduan");
+            stamina.label.text = energyLine(); live.Add((stamina.label, energyLine)); Hud.Reg("btn_journey", stamina);
             BuildRankCard(sc.content);
             if (BoardState.Tab == 0) BuildCampaign(sc.content); else if (BoardState.Tab == 1) BuildContracts(sc.content); else BuildTower(sc.content);
         }
@@ -68,7 +72,7 @@ namespace Emberhall
             foreach (var r in regions)
             {
                 var rr = r; bool open = C.MeetsAll(r.req); bool sel = BoardState.Region == r.id;
-                var b = U.Btn(hs.content, L.T(r.name), sel ? Theme.Hex(r.color) * 0.8f : Theme.PanelLight, () => { if (!open) { Toasts.Show(L.T("Reach Rank {0} to unlock", C.Content.Rank(r.req.Count > 0 ? (int)r.req[0].min : 0).id)); return; } BoardState.Region = rr.id; Redraw(); }, 320, 92, 32, open ? null : Icons.Get("lock"));
+                var b = U.Btn(hs.content, L.T(r.name), sel ? Theme.Hex(r.color) * 0.8f : Theme.PanelLight, () => { if (!open) { Toasts.Show(StoryScript.Pick("Defeat the previous region's boss and pass your guild exam to open this road.", "Kalahkan boss wilayah sebelumnya dan lulus ujian guild untuk membuka jalan ini.")); return; } BoardState.Region = rr.id; Redraw(); }, 320, 92, 32, open ? null : Icons.Get("lock"));
                 b.Le(420, 132);
             }
             var reg = C.Content.RegionMap[BoardState.Region];
@@ -78,7 +82,7 @@ namespace Emberhall
             GeneratedArt.Cover(banner.R(), "story_frontier");
             var caption = U.Solid(banner.transform, Theme.PanelLight, "caption"); caption.StretchX(0, 0, 166);
             var nm = U.Txt(caption.transform, L.T(reg.name), 44, Theme.TextDark, TextAnchor.MiddleCenter, true); nm.StretchX(1, -12, 66, 24, 220);
-            var ds = U.Txt(caption.transform, L.T(reg.desc), 30, Theme.TextDim, TextAnchor.MiddleCenter); ds.StretchX(0, 12, 64, 24, 24);
+            var ds = U.Txt(caption.transform, StoryScript.Pick($"Boss mastery: {C.Get<Journey>().RegionStars(reg.id)}/{Journey.BossStars} trail stars", $"Penguasaan boss: {C.Get<Journey>().RegionStars(reg.id)}/{Journey.BossStars} bintang jalur"), 30, Theme.TextDim, TextAnchor.MiddleCenter); ds.StretchX(0, 12, 64, 24, 24);
             var stars = C.Missions.InRegion(reg.id).Sum(m => C.Missions.Stars(m.id)); int maxStars = C.Missions.InRegion(reg.id).Count() * 3;
             var sc = U.Txt(caption.transform, $"{stars}/{maxStars}", 36, Theme.BlueDark, TextAnchor.MiddleRight, true); sc.At(1, 1, -70, -20, 140, 54, 1, 1);
             U.Icon(caption.transform, Icons.Get("star"), 46).At(1, 1, -18, -24, 46, 46, 1, 1);

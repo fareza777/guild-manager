@@ -1,0 +1,23 @@
+{
+  "version": "1.4.0",
+  "androidCode": 8,
+  "sha256": "573d38d8fa9b3745dea32ed6f2946641aa22e3777c8b6a9c5152b576fcd3ad9f",
+  "installation": "success; adb install -r",
+  "device": "Google sdk_gphone64_x86_64",
+  "androidApi": 35,
+  "systemImage": "Google APIs x86_64 with ARM64 native translation",
+  "emulator": "Emberhall_AdMob; port 5580; GPU swangle",
+  "launch": "UnityPlayerGameActivity with emberhall-adcheck=true",
+  "startup": "failed before C# game/SDK initialization",
+  "dialog": "Unable to initialize the Unity Engine Graphics API.",
+  "physicalPhoneConnected": false,
+  "nativeServingVerified": false,
+  "remaining": [
+    "physical-device startup",
+    "banner serving and safe area",
+    "interstitial presentation and close",
+    "rewarded earned callback and exact payout",
+    "UMP regional forms",
+    "background/return and network failures"
+  ]
+}

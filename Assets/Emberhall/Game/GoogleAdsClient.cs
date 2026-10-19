@@ -27,6 +27,7 @@ namespace Emberhall
     public sealed class GoogleAdsClient : IAdsClient
     {
         readonly AdMobConfig config;
+        readonly Func<bool> canPresentConsent;
         BannerView banner;
         InterstitialAd interstitial;
         RewardedAd rewarded;
@@ -37,7 +38,8 @@ namespace Emberhall
         int bannerGeneration, interstitialGeneration, rewardedGeneration;
         double interstitialLoaded, rewardedLoaded;
         public event Action<bool> OverlayChanged;
-        public GoogleAdsClient(AdMobConfig settings) { config = settings; }
+        public int InterstitialOpens { get; private set; }
+        public GoogleAdsClient(AdMobConfig settings, Func<bool> canPresentConsent = null) { config = settings; this.canPresentConsent = canPresentConsent; }
         public bool Supported => Application.isMobilePlatform || Application.isEditor;
         public bool PrivacyRequired => Supported && ConsentInformation.PrivacyOptionsRequirementStatus == PrivacyOptionsRequirementStatus.Required;
         public bool InterstitialReady => !disposed && interstitial != null && interstitial.CanShowAd() && Time.realtimeSinceStartupAsDouble - interstitialLoaded < 3000;
@@ -53,14 +55,21 @@ namespace Emberhall
             // Ask UMP on every launch; never infer consent from a locally stored flag.
             ConsentInformation.Update(new ConsentRequestParameters(), error => Main(() =>
             {
-                if (error != null) { InitializeIfAllowed(done); return; }
+                if (error != null) { Debug.LogWarning("[Ads] Privacy update: " + error.Message); InitializeIfAllowed(done); return; }
                 bool formRequired = ConsentInformation.ConsentStatus == ConsentStatus.Required;
-                if (formRequired) OverlayChanged?.Invoke(true);
-                ConsentForm.LoadAndShowConsentFormIfRequired(formError => Main(() =>
+                void PresentWhenSafe()
                 {
-                    if (formRequired) OverlayChanged?.Invoke(false);
-                    InitializeIfAllowed(done);
-                }));
+                    if (disposed) return;
+                    if (formRequired && canPresentConsent != null && !canPresentConsent())
+                    { MobileAdsEventExecutor.ExecuteInUpdate(PresentWhenSafe); return; }
+                    if (formRequired) OverlayChanged?.Invoke(true);
+                    ConsentForm.LoadAndShowConsentFormIfRequired(formError => Main(() =>
+                    {
+                        if (formRequired) OverlayChanged?.Invoke(false);
+                        InitializeIfAllowed(done);
+                    }));
+                }
+                PresentWhenSafe();
             }));
         }
         void InitializeIfAllowed(Action<bool> done)
@@ -112,6 +121,7 @@ namespace Emberhall
                 interstitial = error == null ? ad : null;
                 if (error != null) ad?.Destroy();
                 interstitialLoaded = Time.realtimeSinceStartupAsDouble;
+                Debug.Log("[Ads] Interstitial load: " + (error == null ? "ready" : error.GetMessage()));
                 done(InterstitialReady);
             }));
         }
@@ -125,6 +135,7 @@ namespace Emberhall
                 rewarded = error == null ? ad : null;
                 if (error != null) ad?.Destroy();
                 rewardedLoaded = Time.realtimeSinceStartupAsDouble;
+                Debug.Log("[Ads] Rewarded load: " + (error == null ? "ready" : error.GetMessage()));
                 done(RewardedReady);
             }));
         }
@@ -132,6 +143,7 @@ namespace Emberhall
         {
             if (!InterstitialReady) { closed(false); return; }
             var ad = interstitial; activeInterstitial = ad; interstitial = null; bool ended = false;
+            ad.OnAdFullScreenContentOpened += () => Main(() => { InterstitialOpens++; Debug.Log("[Ads] Interstitial opened"); });
             Action<bool> finish = ok => Main(() => { if (ended) return; ended = true; ad.Destroy(); activeInterstitial = null; closed(ok); });
             ad.OnAdFullScreenContentClosed += () => finish(true);
             ad.OnAdFullScreenContentFailed += error => finish(false);
@@ -141,6 +153,7 @@ namespace Emberhall
         {
             if (!RewardedReady) { closed(false); return; }
             var ad = rewarded; activeRewarded = ad; rewarded = null; bool ended = false;
+            ad.OnAdFullScreenContentOpened += () => Main(() => Debug.Log("[Ads] Rewarded opened"));
             Action<bool> finish = ok => Main(() => { if (ended) return; ended = true; ad.Destroy(); activeRewarded = null; closed(ok); });
             ad.OnAdFullScreenContentClosed += () => finish(true);
             ad.OnAdFullScreenContentFailed += error => finish(false);

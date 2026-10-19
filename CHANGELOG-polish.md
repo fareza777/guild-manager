@@ -1,5 +1,24 @@
 # Emberhall polish — 7 October 2026
 
+## Version 1.4.0 — 19 October 2026
+
+- Removed the title menu's large white backing and the opening illustration frames. Secondary actions remain readable
+  text links over the bright art. Rebuilt hero rows with large dark names, clear levels and quieter rarity accents.
+- Removed battle nameplates, duplicate hero names/classes and the combat-log panel; enlarged sprites and arena space.
+  Clear old notifications on battle entry and keep reward notifications within the result page.
+- Fixed shared tween delta mutation that could stall delayed battle effects. Guard playback so an animation failure
+  cannot trap an already resolved battle. Pause also holds projectile timing. Verified natural multi-wave completion.
+- Clarified Auto team versus Start auto battle; cache encounter-aware recommendations without consuming battle RNG.
+- Routed Hall walkers around the fountain with bounded, feet-sorted movement instead of paths through the basin.
+- Added a 30-point stamina reserve, five-minute offline recovery, free first three trail clears, 2-point trails,
+  3-point bosses/Spire and a maximum 1-point cost on defeat/interruption. Added a free daily +10 camp ration.
+- Require eight trail stars for each uncleared regional boss and the previous boss for each next region. Preserve
+  earlier clears and saves. Exams and contracts remain stamina-free; no automatic chain of campaign stages.
+- Added a concise Journey & stamina guide, live reserve/countdown, cost previews and clear entry blockers.
+- Defer required UMP forms until a safe menu, improve native ad diagnostics and add an explicit, isolated Android QA
+  launch mode using Google's real test units. Desktop layout previews remain clearly labelled simulations.
+- Built signed Android version code **8**. Evidence and native-device limitations: `Store/Validation/1.4.0`.
+
 ## Version 1.3.0 — 13 October 2026
 
 - Integrated Google Mobile Ads Unity 11.5.0, native Android ads 25.4.0, UMP 4.0.0 and pinned EDM4U dependencies.

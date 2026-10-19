@@ -44,6 +44,8 @@ All SDK callbacks enter Unity's main thread. Used or expired full-screen invento
 Load failures retry with backoff (5–300 seconds), stalled loads can recover, and banner sizes refresh after a
 safe-area/width change. Game audio pauses only for actual full-screen presentations, then restores its prior state.
 Consent/network initialization itself does not freeze gameplay.
+If an asynchronous UMP refresh requires a form after the player has entered battle, presentation waits for a safe
+menu. Consent is still checked through UMP before requesting ads.
 
 ## Consent and test controls
 
@@ -83,7 +85,32 @@ insets, no-fill fallback and reward persistence. Its preview screenshots are not
 
 Build with `Tools/unity.ps1 -Method Emberhall.EditorTools.BuildTools.BuildApk -Extra @('-buildTarget','Android')`.
 The pinned SDK, tracked Gradle templates and SDK settings make the native dependencies reproducible.
-See [release evidence](Validation/1.3.0/README.md) for the exact checks completed and the remaining device checks.
+See [current release evidence](Validation/1.4.0/README.md) for the exact checks completed and the remaining device checks.
+
+### Native Android check
+
+An explicit QA launch mode uses the real `GoogleAdsClient`, official sample ad units and an isolated guild. It is
+enabled only while `useTestIds` is true. Install the signed APK on a connected compatible Android device, force-stop
+the app, then launch:
+
+```powershell
+adb shell am start -n com.pixelgamemaster.emberhall/com.unity3d.player.UnityPlayerGameActivity --ez emberhall-adcheck true
+```
+
+This mode uses its own save slot and preference prefix; it does not reset the player's guild. It completes only the
+ad-free tutorial fixtures in that isolated guild and writes `native-ad-report.json` to the app's external files
+directory. Check that `client` is `GoogleAdsClient`, initialization succeeds, and real banner/interstitial/rewarded
+inventory loads. Write one command to `native-ad-command.txt` in that directory:
+
+- `banner`: show the Hall, allowing the native banner to appear below navigation.
+- `interstitial`: present a loaded test interstitial. Check actual opened and closed counts after closing it.
+- `rewarded`: request a real test rewarded video and a supplies ticket. Complete the video; check the earned callback
+  and wallet increase of exactly 150 gold and 2 gems. Closing before earning must grant nothing.
+- `retry`: retry initialization or loading; `finish`: save the isolated guild and exit.
+
+The directory is normally `/sdcard/Android/data/com.pixelgamemaster.emberhall/files`. Native reports distinguish a
+request from an SDK presentation; a requested ad alone is not evidence of an impression. This mode never injects
+the desktop flow double. Force-stop and launch without the extra to return to the player's normal save.
 
 Official references: [setup](https://developers.google.com/admob/unity/quick-start),
 [adaptive banners](https://developers.google.com/admob/unity/banner/anchored-adaptive),

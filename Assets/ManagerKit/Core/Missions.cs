@@ -5,6 +5,12 @@ using UnityEngine;
 
 namespace ManagerKit
 {
+    public interface IBattleRules
+    {
+        bool CanEnter(MissionDef mission, out string why);
+        bool Enter(MissionDef mission, out string why);
+        void Result(MissionDef mission, bool won);
+    }
     [Serializable] public class MissionProgress { public string id; public int clears, stars, bestRounds; }
 
     public class MissionOutcome
@@ -32,6 +38,8 @@ namespace ManagerKit
         readonly Dictionary<string, MissionProgress> prog = new Dictionary<string, MissionProgress>();
         [Serializable] class Data { public List<MissionProgress> p = new List<MissionProgress>(); public List<MissionDef> board = new List<MissionDef>(); public double boardAt; public int seq; public int tower; public List<string> activeExp = new List<string>(); }
         Data d = new Data();
+        string recommendedKey;
+        readonly List<string> recommendedIds = new List<string>();
         public string SaveKey => "missions";
         public IReadOnlyList<MissionDef> Board => d.board;
         public double BoardRefreshAt => d.boardAt;
@@ -39,8 +47,8 @@ namespace ManagerKit
         public void Init(GameContext ctx) { c = ctx; }
 
         public string Save() { d.p = prog.Values.ToList(); return JsonUtility.ToJson(d); }
-        public void Load(string json) { prog.Clear(); d = JsonUtility.FromJson<Data>(json) ?? new Data(); foreach (var p in d.p) prog[p.id] = p; }
-        public void Reset() { prog.Clear(); d = new Data(); }
+        public void Load(string json) { recommendedKey = null; prog.Clear(); d = JsonUtility.FromJson<Data>(json) ?? new Data(); foreach (var p in d.p) prog[p.id] = p; }
+        public void Reset() { recommendedKey = null; prog.Clear(); d = new Data(); }
         public void OnNewGame() { RefreshBoard(); }
 
         public void PostInit()
@@ -194,7 +202,14 @@ namespace ManagerKit
             if (!ValidParty(party, out why)) return false;
             if (m == null || m.waves.Count == 0) { why = "This battle is unavailable. Return to Board > Campaign and choose an unlocked mission."; return false; }
             if (!Unlocked(m)) { why = "This mission is locked. Clear the previous stage or raise your Guild Rank on the Board."; return false; }
+            if (c.Get<IBattleRules>() is IBattleRules rules && !rules.CanEnter(m, out why)) return false;
             return true;
+        }
+
+        public bool TryStartBattle(MissionDef m, IList<UnitInstance> party, out string why)
+        {
+            if (!CanStartBattle(m, party, out why)) return false;
+            return c.Get<IBattleRules>() is IBattleRules rules ? rules.Enter(m, out why) : true;
         }
 
         public int PartySize => Math.Max(1, (int)(c.Content.Bal("party.size", 3) + c.Mods.Add("party.size")));
@@ -205,6 +220,9 @@ namespace ManagerKit
             var ready = c.Roster.All.Where(c.Roster.Ready).OrderByDescending(c.Roster.Power).ThenBy(u => u.uid).ToList();
             var party = ready.Take(PartySize).ToList();
             if (mission == null || party.Count == 0) return party;
+            string key = mission.id + ":" + mission.level + ":" + mission.power + ":" + doctrine + ":" + PartySize + ":" + c.Mods.Revision + ":" + c.Roster.Version + ":"
+                + string.Join(",", ready.Select(u => u.uid + ":" + u.level + ":" + Math.Round(c.Roster.HpFrac(u) * 1000)));
+            if (key == recommendedKey) return recommendedIds.Select(c.Roster.Get).Where(u => u != null && c.Roster.Ready(u)).ToList();
             // Keep the search bounded while retaining the strongest candidate of every class.
             var candidates = ready.Take(12).Concat(ready.GroupBy(u => u.classId).Select(g => g.First())).Distinct().ToList();
             bool expedition = mission.kind == "expedition" || mission.kind == "contract";
@@ -237,7 +255,9 @@ namespace ManagerKit
                     }
                 if (!improved) break;
             }
-            return party.OrderBy(u => c.Content.Class(u.classId)?.ranged ?? false).ThenByDescending(c.Roster.Power).ToList();
+            party = party.OrderBy(u => c.Content.Class(u.classId)?.ranged ?? false).ThenByDescending(c.Roster.Power).ToList();
+            recommendedKey = key; recommendedIds.Clear(); recommendedIds.AddRange(party.Select(u => u.uid));
+            return party;
         }
 
         bool ValidParty(IList<UnitInstance> party, out string why)
@@ -309,6 +329,7 @@ namespace ManagerKit
                 else if (r.win) c.Roster.SetHp(u, c.Roster.Hp(u) + maxHp * c.Content.Bal("battle.recovery_hp", 0.1));
             }
             o.rankReady = c.Ranks.FameReached;
+            c.Get<IBattleRules>()?.Result(m, r.win);
             c.Roster.Dirty(); c.Changed();
             return o;
         }

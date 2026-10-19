@@ -11,7 +11,7 @@ namespace Emberhall
 {
     public static class Prefs
     {
-        static string Key(string name) => Tour.Requested ? "visualcheck_" + name : name;
+        static string Key(string name) => NativeAdCheck.Requested ? "nativecheck_" + name : Tour.Requested ? "visualcheck_" + name : name;
         public static float Sfx { get => PlayerPrefs.GetFloat(Key("sfx"), 0.9f); set => PlayerPrefs.SetFloat(Key("sfx"), value); }
         public static float Music { get => PlayerPrefs.GetFloat(Key("music"), 0.5f); set => PlayerPrefs.SetFloat(Key("music"), value); }
         public static bool Vibrate { get => PlayerPrefs.GetInt(Key("vib"), 1) == 1; set => PlayerPrefs.SetInt(Key("vib"), value ? 1 : 0); }
@@ -44,7 +44,7 @@ namespace Emberhall
     /// <summary>Game entry point. Creates the UI host, owns the GameContext and drives the whole flow.</summary>
     public class App : MonoBehaviour
     {
-        public const string Version = "1.3.0";
+        public const string Version = "1.4.0";
         public static App I;
         public static GameContext Ctx => I != null ? I.ctx : null;
         public static bool Suppress;                      // tests can set before boot to take over
@@ -77,7 +77,7 @@ namespace Emberhall
             if (Tour.Requested) StartCoroutine(Tour.Run(this));
             yield return null;
             ctx = GuildGame.Create();
-            save = new SaveSystem(Tour.Requested ? "emberhall_visualcheck" : "emberhall");
+            save = new SaveSystem(NativeAdCheck.Requested ? "emberhall_nativecheck" : Tour.Requested ? "emberhall_visualcheck" : "emberhall");
             ctx.OnNote += OnNote;
             Ads = gameObject.AddComponent<AdService>(); Ads.Bind(this);
             ctx.Quests.OnReady += q => { };
@@ -86,10 +86,12 @@ namespace Emberhall
             yield return new WaitForSecondsRealtime(0.1f);
             while (!splash.Done) yield return null;
             GoTitle();
+            if (NativeAdCheck.Requested) StartCoroutine(NativeAdCheck.Run(this));
         }
 
         void OnNote(Note n)
         {
+            if (nav?.Current is BattleScreen) return; // The result screen already summarizes loot, levels and unlocks.
             Sprite ic = !string.IsNullOrEmpty(n.icon) ? Art.Get(n.icon) : null;
             switch (n.kind)
             {
@@ -113,6 +115,7 @@ namespace Emberhall
 
         public void GoTitle()
         {
+            Toasts.Clear();
             Ads?.HideBanner();
             InGame = false; Popups.CloseAll();
             if (hud != null) hud.SetVisible(false);

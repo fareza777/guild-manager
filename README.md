@@ -1,7 +1,7 @@
 # Emberhall: Guild Legends
 
 A portrait 2D **guild manager** for Android, built in Unity 6 (6000.6.1f1) on top of the reusable
-**Manager Simulator Template** (`ManagerKit`). Version 1.3.0 combines bright painted fantasy illustrations with animated
+**Manager Simulator Template** (`ManagerKit`). Version 1.4.0 combines bright painted fantasy illustrations with animated
 pixel characters, cream and sage panels, and sky-blue accents. Large illustrations use hooded or helmeted heroes and
 views from behind; front-facing pixel characters remain part of gameplay. Music and sound effects remain procedural.
 
@@ -24,6 +24,24 @@ Recruit heroes → form a party → pick a quest → auto-battle → earn loot &
 - Offline progress: absolute-time timers, idle Treasury vault, expedition returns, "Welcome back" report
 - Atomic save with backup, autosave, EN + Bahasa Indonesia, settings, about, share, rate, onboarding, tutorial pointer
 - Google AdMob test integration: adaptive banner, limited battle-break interstitials, optional rewarded gold/supplies, UMP privacy choices
+- Renewable stamina, free opening trails, daily camp supplies, regional boss mastery and connected region progression
+
+## Version 1.4.0 — A clearer journey
+
+The title menu sits directly over the bright illustration. Hero rows use larger, dark names and clear level labels.
+Hall residents walk around the fountain. Battle removes floating names and duplicate roster labels, enlarges the
+characters and gives the arena more room. Auto team selects a party; **Start auto battle** runs that encounter to its
+result. Playback timing and multi-wave completion are repaired, with pause, speed and skip retained.
+
+Campaign trails use 2 stamina; bosses and Spire floors use 3. The reserve holds 30, recovers one every five minutes
+including offline, and offers a free daily camp ration of 10. The first three trail clears are free and a defeat or
+interrupted encounter costs at most one. Eight trail stars open a regional boss; its clear and the guild rank open
+the next region. Training, crafting, contracts and guild exams remain available without stamina.
+See [gameplay design](Store/Gameplay-design.md) for the rules and progression loop.
+
+[Download the signed APK](Releases/README.md) — Android version code **8**.
+See [validation evidence](Store/Validation/1.4.0/README.md) and [AdMob setup](Store/AdMob-setup.md).
+Google sample ad IDs remain enabled; they earn no revenue. Native ad serving still requires a compatible phone.
 
 ## Version 1.3.0 — Optional video bonuses
 
@@ -32,7 +50,7 @@ space below navigation. Interstitials are limited to returns from campaign victo
 session limits. Rewarded videos offer optional victory gold or guild supplies; only an earned callback grants the
 bonus, and duplicate callbacks cannot double it. The first four tutorial chapters remain free of automatic ads.
 
-[Download the signed APK](Releases/README.md) — Android version code **7**.
+[Download the 1.3.0 APK](Releases/1.3.0.md) — Android version code **7**.
 See [AdMob setup](Store/AdMob-setup.md), [privacy policy](Store/Privacy-policy.md) and
 [validation evidence](Store/Validation/1.3.0/README.md). This release uses test ads and earns no ad revenue.
 

@@ -37,6 +37,11 @@ namespace Emberhall
         public bool RewardReady => initialized && !Busy && client.RewardedReady;
         public bool PrivacyRequired => Supported && client.PrivacyRequired;
         public bool TestMode => config.useTestIds;
+        public bool Initialized => initialized;
+        public bool BannerReady => initialized && bannerLoaded;
+        public bool InterstitialReady => initialized && client.InterstitialReady;
+        public string ClientName => client?.GetType().Name ?? "None";
+        public int NativeInterstitialOpens => (client as GoogleAdsClient)?.InterstitialOpens ?? 0;
         public AdMobConfig Config => config;
         public float BannerInset { get; private set; }
         public event Action Changed;
@@ -47,7 +52,7 @@ namespace Emberhall
         {
             app = owner; config = AdMobConfig.Load(); breaks = new AdBreakPolicy(Now);
             // Automated desktop verification must never contact an ad network or display consent.
-            client = Tour.Requested ? new NoAdsClient() : new GoogleAdsClient(config);
+            client = Tour.Requested ? new NoAdsClient() : new GoogleAdsClient(config, () => SafePage && !paused);
             client.OverlayChanged += SetBusy;
             app.nav.Changed += NavigationChanged;
             Popups.Opened += PopupOpened;
@@ -184,7 +189,7 @@ namespace Emberhall
             {
                 SetBusy(false); initialized = false; initNext = Now + 1;
                 // Discard cached inventory after a privacy choice; UMP gates all subsequent requests.
-                client.Dispose(); client = new GoogleAdsClient(config); client.OverlayChanged += SetBusy;
+                client.Dispose(); client = new GoogleAdsClient(config, () => SafePage && !paused); client.OverlayChanged += SetBusy;
                 bannerLoaded = false; banner = new Slot(); interstitial = new Slot(); rewarded = new Slot(); Changed?.Invoke();
             }); }
             catch (Exception) { SetBusy(false); Toasts.Show(StoryScript.Pick("Privacy choices are unavailable. Please try again.", "Pilihan privasi belum tersedia. Silakan coba lagi.")); }

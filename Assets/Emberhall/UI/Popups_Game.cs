@@ -98,6 +98,7 @@ namespace Emberhall
             var C = App.Ctx;
             Item(body, "Guild Rank", "flame", Theme.AccentDark, () => { Close(); Popups.Show(new RankPopup()); });
             Item(body, "Daily Reward", "star", Theme.PurpleDark, () => { Close(); Popups.Show(new DailyPopup()); });
+            Item(body, StoryScript.Pick("Journey & stamina", "Perjalanan & stamina"), "clock", Theme.PanelLight, () => { Close(); Popups.Show(new JourneyPopup()); });
             if (App.I.Ads.TutorialDone)
                 Item(body, StoryScript.Pick("Guild supplies", "Bekal guild"), "bag", Theme.Green, () => { Close(); Popups.Show(new SuppliesPopup()); });
             Item(body, "Settings", "gear", Theme.PanelLight, () => { Close(); Popups.Show(new SettingsPopup()); });

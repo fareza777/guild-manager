@@ -13,10 +13,10 @@ namespace Emberhall
             U.Clear(UiHost.I.back); GeneratedArt.Cover(UiHost.I.back, "splash", true);
             var logo = Brand.Logo(root, .86f); logo.StretchX(1, -42, 310, 48, 48);
             var cg = logo.gameObject.AddComponent<CanvasGroup>(); Tw.Fade(cg, 0, 1, .8f);
-            var paper = U.Box(root, Theme.PanelLight, Theme.Gold, "loading_card", false, .08f); paper.StretchX(0, 72, 156, 130, 130);
-            U.Txt(paper.transform, StoryScript.Pick("A NEW ADVENTURE IS WAKING", "PETUALANGAN BARU MENANTI"), 30, Theme.Gold).StretchX(1, -18, 42, 22, 22);
+            var paper = U.Rt(root, "loading"); paper.StretchX(0, 72, 156, 110, 110);
+            W.AirText(paper, StoryScript.Pick("A NEW ADVENTURE IS WAKING", "PETUALANGAN BARU MENANTI"), 30, Theme.TextDark, true).StretchX(1, -18, 48, 8, 8);
             var bar = U.ProgressBar(paper.transform, Theme.Accent, 600, 16); bar.back.StretchX(.5f, -2, 16, 40, 40);
-            U.Txt(paper.transform, StoryScript.Pick("Opening the guild doors…", "Membuka pintu guild…"), 24, Theme.TextDim).StretchX(0, 18, 36, 20, 20);
+            W.AirText(paper, StoryScript.Pick("Opening the guild doors…", "Membuka pintu guild…"), 28, Theme.TextDark).StretchX(0, 12, 44, 8, 8);
             Tw.To(3.3f, k => { if (bar.fill) bar.Value = k; }, Ease.InOutSine, 0, () => Done = true, bar.back);
         }
         public override void OnExit() { U.Clear(UiHost.I.back); }
@@ -30,10 +30,9 @@ namespace Emberhall
         {
             U.Clear(UiHost.I.back); GeneratedArt.Cover(UiHost.I.back, "splash", true);
             Brand.Logo(root, .86f).StretchX(1, -34, 310, 42, 42);
-            U.Btn(root, L.Lang == "id" ? "ID / EN" : "EN / ID", Theme.PanelLight, () => { Prefs.Lang = L.Lang == "id" ? "en" : "id"; L.Load(Prefs.Lang); Redraw(); }, 210, 80, 28).At(1, 1, -24, -20, 210, 80, 1, 1);
-            var tag = U.Box(root, Theme.PanelLight, Theme.Gold, "tagline", false, .06f); tag.StretchX(1, -350, 132, 100, 100);
-            U.Txt(tag.transform, StoryScript.Tagline, 30, Theme.Text).Fill(18, 18, 8, 8);
-            var menu = U.Box(root, Theme.PanelLight, Theme.Gold, "menu_card", false, .08f); menu.StretchX(0, 56, App.I.HasSave ? 554 : 430, 120, 120);
+            W.TextButton(root, L.Lang == "id" ? "ID / EN" : "EN / ID", () => { Prefs.Lang = L.Lang == "id" ? "en" : "id"; L.Load(Prefs.Lang); Redraw(); }, 28).At(1, 1, -24, -20, 210, 80, 1, 1);
+            W.AirText(root, StoryScript.Tagline, 32, Theme.TextDark, true).StretchX(1, -340, 122, 86, 86);
+            var menu = U.Rt(root, "menu_actions"); menu.StretchX(0, 56, App.I.HasSave ? 554 : 430, 120, 120);
             var col = U.Rt(menu.transform, "actions").Fill(28, 28, 28, 28); U.VBox(col, 14, null, TextAnchor.MiddleCenter, true, true, true, false);
             if (App.I.HasSave) U.Btn(col, L.T("CONTINUE"), Theme.Green, App.I.ContinueGame, 700, 100, 40, null, Color.white).Le(-1, 100);
             U.Btn(col, App.I.HasSave ? L.T("NEW GAME") : StoryScript.Pick("BEGIN YOUR ADVENTURE", "MULAI PETUALANGAN"), Theme.Accent, () =>
@@ -41,11 +40,11 @@ namespace Emberhall
                 if (App.I.HasSave) Popups.Confirm(L.T("Start a new game?"), L.T("This will erase your current guild forever."), L.T("Erase & Start"), App.I.StartOnboarding, L.T("Cancel"), true);
                 else App.I.StartOnboarding();
             }, 700, 108, 40, null, Theme.TextDark).Le(-1, 108);
-            U.Btn(col, StoryScript.Pick("THE STORY OF EMBERHALL", "KISAH EMBERHALL"), Theme.Panel, () => App.I.nav.Root(new OnboardingScreen(true)), 700, 94, 30, GeneratedArt.Item(5)).Le(-1, 94);
+            W.TextButton(col, StoryScript.Pick("THE STORY OF EMBERHALL", "KISAH EMBERHALL"), () => App.I.nav.Root(new OnboardingScreen(true)), 30).Le(-1, 94);
             var row = U.Rt(col, "utility"); row.Le(-1, 78); U.HBox(row, 14, null, TextAnchor.MiddleCenter, true, true, true, false);
-            U.Btn(row, L.T("Settings"), Theme.Panel, () => Popups.Show(new SettingsPopup()), 300, 78, 30, Icons.Get("gear")).Le(-1, 78, 1);
-            U.Btn(row, L.T("About"), Theme.Panel, () => Popups.Show(new AboutPopup()), 300, 78, 30, Icons.Get("info")).Le(-1, 78, 1);
-            U.Txt(root, Brand.Studio + "  ·  v" + App.Version, 22, Theme.TextDark).StretchX(0, 12, 32, 30, 30);
+            W.TextButton(row, L.T("Settings"), () => Popups.Show(new SettingsPopup()), 32).Le(-1, 78, 1);
+            W.TextButton(row, L.T("About"), () => Popups.Show(new AboutPopup()), 32).Le(-1, 78, 1);
+            W.AirText(root, Brand.Studio + "  ·  v" + App.Version, 24, Theme.TextDark).StretchX(0, 12, 42, 30, 30);
         }
     }
 
@@ -93,10 +92,10 @@ namespace Emberhall
         {
             narration = null; fullNarration = null; sceneTime = 0;
             U.Clear(UiHost.I.back); U.Img(UiHost.I.back, Boxes.Gradient(Theme.Hex("#d3eef4"), Theme.Hex("#fbf0d7")), Color.white).Fill();
-            var top = U.Box(root, Theme.PanelLight, Theme.Gold, "chapter_header", false, .06f); top.StretchX(1, -18, 78, 28, 28);
+            var top = U.Rt(root, "chapter_header"); top.StretchX(1, -18, 78, 28, 28);
             var title = page < 3 ? StoryScript.Pick("THE EMBERHALL STORY", "KISAH EMBERHALL") : StoryScript.Pick("YOUR FIRST CHAPTER", "BAB PERTAMAMU");
             U.Txt(top.transform, title, 30, Theme.Gold, TextAnchor.MiddleCenter).StretchX(.5f, 0, 52, 184, 184);
-            U.Btn(top.transform, storyOnly ? L.T("Close") : L.T("Skip"), Theme.Panel, () => { if (storyOnly) App.I.GoTitle(); else ChangePage(Pages - 1); }, 154, 70, 28).At(1, .5f, -14, 0, 154, 70, 1, .5f);
+            W.TextButton(top, storyOnly ? L.T("Close") : L.T("Skip"), () => { if (storyOnly) App.I.GoTitle(); else ChangePage(Pages - 1); }, 28).At(1, .5f, -14, 0, 154, 70, 1, .5f);
             var stage = U.Rt(root, "stage").Fill(28, 28, 116, Foot + 24); stage.gameObject.AddComponent<RectMask2D>();
             stageRt = stage;
             if (page < 3) StoryPage(stage); else if (page == 3) LoopPage(stage); else CreatePage(stage);
@@ -126,7 +125,7 @@ namespace Emberhall
             const float cardH = 560;
             float topSpace = Mathf.Max(16, (h - artH - cardH - 24) * .5f);
             var wash = GeneratedArt.Cover(UiHost.I.back, beat.ArtKey); wash.color = new Color(1, 1, 1, .18f);
-            var art = U.Box(stage, Theme.PanelLight, Theme.Gold, "illustration_frame", false, .06f); art.StretchX(1, -topSpace, artH);
+            var art = U.Rt(stage, "illustration"); art.StretchX(1, -topSpace, artH);
             GeneratedArt.Cover(U.Rt(art.transform, "illustration").Fill(10, 10, 10, 10), beat.ArtKey, true);
             UButton playback = null;
             playback = U.Btn(art.transform, auto ? StoryScript.Pick("AUTO ON", "OTOMATIS") : StoryScript.Pick("AUTO OFF", "MANUAL"), Theme.PanelLight, () => { auto = !auto; playback.label.text = auto ? StoryScript.Pick("AUTO ON", "OTOMATIS") : StoryScript.Pick("AUTO OFF", "MANUAL"); }, 190, 58, 24);
@@ -151,7 +150,7 @@ namespace Emberhall
             string[] names = { StoryScript.Pick("Hire one companion", "Rekrut satu teman"), StoryScript.Pick("Win your first mission", "Menangkan misi pertama"), StoryScript.Pick("Equip your rewards", "Pasang perlengkapan") };
             string[] desc = {
                 L.T("Hall") + " → " + L.T("Tavern") + " → " + L.T("Hire") + ". " + StoryScript.Pick("You have 600 gold and one equipped hero. Hire one affordable companion, then claim the guide reward.", "Ada 600 emas dan satu pahlawan bergear. Rekrut satu teman terjangkau, lalu klaim hadiah panduan."),
-                L.T("Board") + " → " + L.T("Campaign") + " → " + L.T("Sunmeadow") + " → " + L.T("Slime Meadow") + ". " + StoryScript.Pick("Select both heroes, choose Balanced, then tap ", "Pilih kedua pahlawan, pakai Seimbang, lalu tekan ") + L.T("FIGHT!") + StoryScript.Pick(" Heroes attack automatically.", " Tim menyerang otomatis."),
+                L.T("Board") + " → " + L.T("Campaign") + " → " + L.T("Sunmeadow") + " → " + L.T("Slime Meadow") + ". " + StoryScript.Pick("Select both heroes, choose Balanced, then tap ", "Pilih kedua pahlawan, pakai Seimbang, lalu tekan ") + PartyPopup.FightLabel + ".",
                 L.T("Bag") + " → " + L.T("Gear") + " → " + L.T("Auto equip") + ". " + StoryScript.Pick("Equip the mission rewards. Better gear raises your power. Maren's guide shows the next button.", "Pasang hadiah misi. Gear lebih baik meningkatkan kekuatan. Panduan Maren menunjukkan tombol berikutnya.") };
             for (int i = 0; i < 3; i++)
             {

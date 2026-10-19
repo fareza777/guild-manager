@@ -190,6 +190,12 @@ namespace ManagerKit.UI
         static readonly Queue<(string, Sprite, Color)> q = new Queue<(string, Sprite, Color)>();
         static bool busy;
         public static float TopOffset = 220;
+        static int generation;
+        public static void Clear()
+        {
+            generation++; q.Clear(); busy = false;
+            if (UiHost.I != null) U.Clear(UiHost.I.toasts);
+        }
         public static void Show(string text, Sprite icon = null, Color? c = null)
         {
             q.Enqueue((text, icon, c ?? Theme.Panel)); if (!busy) Next();
@@ -198,6 +204,7 @@ namespace ManagerKit.UI
         {
             if (q.Count == 0 || UiHost.I == null) { busy = false; return; }
             busy = true; var (text, icon, col) = q.Dequeue();
+            int token = generation;
             var box = U.Box(UiHost.I.toasts, col, Theme.Black, "toast"); var r = box.R();
             var t = U.Txt(box.transform, text, 38, col.grayscale > 0.64f ? Theme.TextDark : new Color(1f, 0.98f, 0.9f), TextAnchor.MiddleCenter, true);
             float w = Mathf.Min(UiHost.I.safe.rect.width - 48f, t.preferredWidth + 90 + (icon ? 70 : 0));
@@ -211,7 +218,7 @@ namespace ManagerKit.UI
             var cg = box.gameObject.AddComponent<CanvasGroup>();
             float dur = q.Count > 2 ? 1.0f : 1.9f;
             Tw.To(0.25f, k => { if (r) { cg.alpha = k; r.anchoredPosition = new Vector2(0, -TopOffset + 40 * (1 - k)); } }, Ease.OutCubic, 0, null, r);
-            Tw.To(0.3f, k => { if (cg) cg.alpha = 1 - k; }, Ease.Linear, dur, () => { if (box) UnityEngine.Object.Destroy(box.gameObject); Next(); }, r);
+            Tw.To(0.3f, k => { if (cg) cg.alpha = 1 - k; }, Ease.Linear, dur, () => { if (box) UnityEngine.Object.Destroy(box.gameObject); if (token == generation) Next(); }, r);
         }
     }
 

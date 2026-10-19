@@ -11,6 +11,8 @@ namespace Emberhall
     /// <summary>Choose heroes for a battle / exam / tower floor / expedition. Shows live win-chance from the real simulator.</summary>
     public class PartyPopup : Popup
     {
+        public static string AutoTeamLabel => StoryScript.Pick("Auto team", "Tim otomatis");
+        public static string FightLabel => StoryScript.Pick("Start auto battle", "Mulai battle otomatis");
         readonly MissionDef m; readonly List<string> sel = new List<string>();
         static BattleDoctrine lastDoctrine;
         BattleDoctrine doctrine = lastDoctrine;
@@ -51,6 +53,20 @@ namespace Emberhall
         {
             shownRosterState = RosterState();
             var party = Party;
+            if (!expedition)
+            {
+                var journey = C.Get<Journey>();
+                W.Info(body, StoryScript.Pick("Heroes fight and use skills automatically. Choose your team and plan, then start.", "Pahlawan bertarung dan memakai skill otomatis. Pilih tim dan strategi, lalu mulai."), 36, Theme.TextDim);
+                string cost = journey.Cost(m) == 0 ? StoryScript.Pick("Free entry", "Masuk gratis") : StoryScript.Pick($"Stamina {journey.Cost(m)} · reserve {journey.Energy}/{Journey.Capacity}", $"Stamina {journey.Cost(m)} · tersisa {journey.Energy}/{Journey.Capacity}");
+                W.Info(body, cost, 38, Theme.GreenDark);
+                if (journey.MasteryBlocker(m) != null)
+                {
+                    W.Info(body, StoryScript.Pick($"Boss mastery: {journey.RegionStars(m.region)}/{Journey.BossStars} stars. Improve stars on earlier trails.", $"Penguasaan boss: {journey.RegionStars(m.region)}/{Journey.BossStars} bintang. Tingkatkan bintang jalur sebelumnya."), 38, Theme.Warn);
+                    W.TextButton(body, StoryScript.Pick("How progression works", "Panduan progres"), () => Popups.Show(new JourneyPopup()), 36).Le(-1, 86);
+                }
+                else if (journey.Energy < journey.Cost(m))
+                    W.TextButton(body, StoryScript.Pick("Recover stamina at camp", "Pulihkan stamina di kamp"), () => Popups.Show(new JourneyPopup()), 36).Le(-1, 86);
+            }
             // --- mission summary ---
             var head = U.Box(body, Theme.PanelDark, m.boss ? Theme.Red : Theme.Black, "head"); head.Le(-1, expedition ? 234 : 330, 1);
             var nm = U.Txt(head.transform, W.MissionName(m.name), 44, Theme.Text, TextAnchor.MiddleCenter, true); nm.StretchX(1, -18, 56, 22, 22);
@@ -141,7 +157,7 @@ namespace Emberhall
             }
         }
 
-        string RosterState() => C.Roster.Version + ":" + C.Mods.Revision + ":" + string.Join(",", C.Roster.All.Select(u => u.uid + ":" + C.Roster.Ready(u) + ":" + Math.Round(C.Roster.HpFrac(u) * 1000)));
+        string RosterState() => C.Get<Journey>().Energy + ":" + C.Roster.Version + ":" + C.Mods.Revision + ":" + string.Join(",", C.Roster.All.Select(u => u.uid + ":" + C.Roster.Ready(u) + ":" + Math.Round(C.Roster.HpFrac(u) * 1000)));
 
         public override void Tick()
         {
@@ -155,15 +171,15 @@ namespace Emberhall
 
         public override void BuildFooter(RectTransform f)
         {
-            var auto = U.Btn(f, L.T("Auto"), Theme.BlueDark, () => { Auto(); Redraw(); }, 240, 100, 38, Icons.Get("star")); auto.Le(240, 100);
+            var auto = U.Btn(f, AutoTeamLabel, Theme.GreenDark, () => { Auto(); Redraw(); Toasts.Show(StoryScript.Pick("Team selected. Start the battle when ready.", "Tim dipilih. Mulai battle saat siap.")); }, 310, 112, 36); auto.Le(310, 112);
             if (!C.Roster.All.Any(C.Roster.Ready))
             {
                 var heal = U.Btn(f, L.T("OPEN HEROES"), Theme.Green, () => { Close(); App.I.hud.GoTab(Hud.Tab.Heroes); }, 500, 100, 34);
                 heal.Le(-1, 100, 1); return;
             }
-            string label = expedition ? L.T("SEND") : L.T("FIGHT!");
-            var go = U.Btn(f, label, expedition ? Theme.Green : (m.boss ? Theme.Red : Theme.Accent), Go, 500, 100, 52, Icons.Get(expedition ? "arrow_r" : "sword")); go.Le(-1, 100, 1);
-            go.Interactable = Party.Count > 0; Hud.Reg("btn_party_go", go);
+            string label = expedition ? L.T("SEND") : FightLabel;
+            var go = U.Btn(f, label, expedition ? Theme.Green : (m.boss ? Theme.Red : Theme.Accent), Go, 500, 112, 40, expedition ? Icons.Get("arrow_r") : null); go.Le(-1, 112, 1);
+            go.Interactable = Party.Count > 0 && (expedition || C.Get<Journey>().CanEnter(m, out _)); Hud.Reg("btn_party_go", go);
         }
 
         void Go()

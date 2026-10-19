@@ -27,10 +27,11 @@ namespace ManagerKit.UI
         void Update()
         {
             if (add.Count > 0) { items.AddRange(add); add.Clear(); }
-            float dt = Time.unscaledDeltaTime * TimeScale;
+            float frameDelta = Time.unscaledDeltaTime * TimeScale;
             for (int i = items.Count - 1; i >= 0; i--)
             {
                 var it = items[i];
+                float dt = frameDelta;
                 if (it.h.dead || IsDead(it.owner)) { items.RemoveAt(i); continue; }
                 if (it.delay > 0) { it.delay -= dt; if (it.delay > 0) continue; dt = Mathf.Max(0, -it.delay); it.delay = 0; }
                 it.t += dt;

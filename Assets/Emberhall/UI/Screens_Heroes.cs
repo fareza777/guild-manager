@@ -35,8 +35,8 @@ namespace Emberhall
                 case 2: list = list.OrderByDescending(u => C.Content.Rarities.FindIndex(r => r.id == u.rarity)).ThenByDescending(u => u.level).ToList(); break;
                 default: list = list.OrderBy(u => u.classId).ThenByDescending(u => u.level).ToList(); break;
             }
-            var grid = U.Rt(sc.content, "grid"); U.Grid(grid, new Vector2(1000, 250), new Vector2(14, 14), 1, null, TextAnchor.UpperCenter); grid.Fit();
-            foreach (var u in list) { var uu = u; var card = W.HeroCard(grid, uu, 1000, 250, () => Popups.Show(new HeroPopup(uu.uid))); }
+            var grid = U.Rt(sc.content, "grid"); U.Grid(grid, new Vector2(1000, 276), new Vector2(14, 14), 1, null, TextAnchor.UpperCenter); grid.Fit();
+            foreach (var u in list) { var uu = u; var card = W.HeroCard(grid, uu, 1000, 276, () => Popups.Show(new HeroPopup(uu.uid))); }
             if (!C.Roster.Full)
             {
                 var add = U.Box(grid, Theme.PanelDark, Theme.Grey, "add", true); var ab = add.gameObject.AddComponent<UButton>(); ab.bg = add; ab.noTint = true; ab.onClick = () => App.I.nav.Push(new FacilityScreen("tavern"));
@@ -71,16 +71,16 @@ namespace Emberhall
             var cls = C.Content.Class(u.classId); var rar = C.Content.Rarity(u.rarity); var rc = Theme.Hex(rar.color);
             var st = C.Roster.Stats(u);
             // --- banner ---
-            var banner = U.Box(body, Color.Lerp(Theme.Inset, rc, 0.25f), rc, "banner"); banner.Le(-1, 460, 1);
-            var sky = U.Img(banner.transform, Art.Bg(u.monster ? "DungeonA" : "PlainA"), new Color(1, 1, 1, 0.5f), "bgart"); sky.Fill(6, 6, 6, 6);
+            var banner = U.Solid(body, Theme.Hex("#f3eddc"), "banner"); banner.Le(-1, 380, 1);
+            var artArea = U.Rt(banner.transform, "portrait_scene"); artArea.anchorMax = new Vector2(.43f, 1); artArea.Fill(0, 0, 0, 0); artArea.anchorMax = new Vector2(.43f, 1);
+            var sky = U.Img(artArea, Art.Bg(u.monster ? "DungeonA" : "PlainA"), new Color(1, 1, 1, .26f), "bgart"); sky.Fill();
             var pic = W.Portrait(banner.transform, u.sprite, u.monster ? 300 : 280); pic.transform.parent.GetComponent<RectTransform>().At(0.28f, 0, 0, 24, 300, 300, 0.5f, 0); Tw.Bob(pic.transform.parent.GetComponent<RectTransform>(), 5, 1.3f);
-            var info = U.Rt(banner.transform, "info"); info.At(1, 0.5f, -20, 0, 470, 440, 1, 0.5f); U.VBox(info, 8, null, TextAnchor.MiddleLeft, true, true, true, false);
-            var nm = U.Txt(info, u.name, 48, Theme.Text, TextAnchor.MiddleCenter, true); nm.Le(-1, 144);
+            var info = U.Rt(banner.transform, "info"); info.At(1, 0.5f, -20, 0, 470, 350, 1, 0.5f); U.VBox(info, 14, null, TextAnchor.MiddleLeft, true, true, true, false);
             var row1 = U.Rt(info, "r1"); row1.Le(-1, 52); U.HBox(row1, 10, null, TextAnchor.MiddleCenter, false, false); W.ClassBadge(row1, u.classId, 48); var cl = U.Txt(row1, L.T(cls.name), 38, Theme.Text, TextAnchor.MiddleCenter, true); cl.Le(cl.preferredWidth + 6, 48);
             var row2 = U.Rt(info, "r2"); row2.Le(-1, 48); U.HBox(row2, 10, null, TextAnchor.MiddleCenter, false, false);
-            var rch = U.Chip(row2, L.T(rar.name), Color.Lerp(Theme.Inset, rc, 0.55f), 28, Color.white, 14, 42);
+            var rch = U.Txt(row2, L.T(rar.name), 32, Theme.Gold, TextAnchor.MiddleCenter, true); rch.Le(-1, 52, 1);
             if (u.monster) U.Chip(row2, L.T("Monster"), Theme.PurpleDark, 28, Color.white, 14, 42);
-            var lv = U.Txt(info, $"Lv {u.level}/{C.Roster.LevelCap(u)}  {(u.promo > 0 ? W.Col(Theme.Gold, new string('*', u.promo)) : "")}", 40, Theme.Gold, TextAnchor.MiddleCenter, true); lv.Le(-1, 48);
+            var lv = U.Txt(info, $"{L.T("Level")} {u.level}/{C.Roster.LevelCap(u)}  {(u.promo > 0 ? W.Col(Theme.Gold, new string('*', u.promo)) : "")}", 44, Theme.TextDark, TextAnchor.MiddleCenter, true); lv.Le(-1, 72);
             var xpbar = U.ProgressBar(info, Theme.Blue, 460, 30, u.level >= C.Roster.LevelCap(u) ? "MAX" : $"XP {Util.Num(u.xp)}/{Util.Num(C.Roster.XpToNext(u.level))}", 22);
             xpbar.Value = u.level >= C.Roster.LevelCap(u) ? 1 : (float)(u.xp / C.Roster.XpToNext(u.level));
             // --- hp & status ---

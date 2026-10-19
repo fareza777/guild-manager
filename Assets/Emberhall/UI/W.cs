@@ -11,6 +11,19 @@ namespace Emberhall
     /// <summary>Game-specific reusable widgets (cards, chips, rows).</summary>
     public static class W
     {
+        public static Text AirText(Transform parent, string text, int size, Color color, bool bold = false)
+        {
+            var label = U.Txt(parent, text, size, color, TextAnchor.MiddleCenter, bold);
+            var edge = label.gameObject.AddComponent<Outline>(); edge.effectColor = new Color(1f, .98f, .88f, .9f); edge.effectDistance = new Vector2(1.4f, -1.4f);
+            return label;
+        }
+        public static UButton TextButton(Transform parent, string text, Action action, int size = 34, Color? color = null)
+        {
+            var tap = U.Solid(parent, new Color(1, 1, 1, .001f), "text_action", true);
+            var button = tap.gameObject.AddComponent<UButton>(); button.bg = tap; button.noTint = true; button.onClick = action;
+            button.label = AirText(tap.transform, text, size, color ?? Theme.TextDark, true); button.label.Fill(12, 12, 6, 6);
+            return button;
+        }
         public static GameContext C => App.Ctx;
 
         // ---------- text helpers ----------
@@ -160,25 +173,25 @@ namespace Emberhall
 
         public static UButton HeroCard(Transform parent, UnitInstance u, float w, float h, Action onClick, bool compact = false)
         {
-            h = Mathf.Max(h, 250);
+            h = Mathf.Max(h, 276);
             var rc = Art.RarityColor(C, u.rarity);
             Color body = Color.Lerp(Theme.PanelDark, rc, 0.4f);
-            var plate = LuxArt.Button(body);
-            var box = plate != null ? U.Img(parent, plate, Color.white, "hero", true) : U.Box(parent, Theme.PanelDark, Color.Lerp(Theme.Black, rc, 0.55f), "hero", true);
+            var box = U.Solid(parent, Theme.Hex("#f3eddc"), "hero", true);
             box.Sz(w, h); box.Le(w, h);
-            var b = box.gameObject.AddComponent<UButton>(); b.bg = box; b.noTint = plate == null; b.baseColor = body; b.ornate = plate != null; b.plateW = w; b.plateH = h; b.onClick = onClick;
-            LuxArt.Raise(box, 8f, 0.4f);
-            var back = U.Box(box.transform, Color.Lerp(Theme.Inset, rc, 0.2f), null, "pback"); back.At(0, 0.5f, 10, 0, h - 20, h - 20);
-            var pic = Portrait(back.transform, u.sprite, (h - 20) * 0.7f); pic.transform.parent.GetComponent<RectTransform>().At(0.5f, 0, 0, 8, (h - 20) * 0.63f, (h - 20) * 0.7f, 0.5f, 0);
-            float x0 = h - 6;
-            var name = U.Txt(box.transform, u.name, compact ? 32 : 36, Theme.Text, TextAnchor.MiddleCenter, true); name.StretchX(1, -14, 48, x0 + 6, 18);
-            var cls = ClassBadge(box.transform, u.classId, 44); cls.At(0, 1, x0 + 6, -86, 44, 44, 0, 1);
-            var lv = U.Txt(box.transform, $"Lv {u.level}" + (u.promo > 0 ? " " + W.Col(Theme.Gold, new string('*', u.promo)) : ""), 30, Theme.Gold, TextAnchor.MiddleLeft, true); lv.StretchX(1, -86, 52, x0 + 58, 18);
-            var bar = U.ProgressBar(box.transform, Theme.Green, w - x0 - 24, 26);
+            var b = box.gameObject.AddComponent<UButton>(); b.bg = box; b.noTint = true; b.onClick = onClick;
+            U.Solid(box.transform, Color.Lerp(Theme.Gold, rc, .55f), "rarity_rule").At(0, .5f, 0, 0, 6, h - 20, 0, .5f);
+            U.Solid(box.transform, Theme.ParchmentDark, "divider").StretchX(0, 0, 2, 12, 12);
+            var pic = Portrait(box.transform, u.sprite, 180); pic.transform.parent.GetComponent<RectTransform>().At(0, .5f, 20, 0, 170, 190, 0, .5f);
+            const float x0 = 218;
+            var name = U.Txt(box.transform, u.name, compact ? 38 : 44, Theme.TextDark, TextAnchor.MiddleLeft, true); name.StretchX(1, -18, 86, x0, 20);
+            var lv = U.Txt(box.transform, $"{L.T("Level")} {u.level}" + (u.promo > 0 ? " " + new string('*', u.promo) : ""), 36, Theme.GreenDark, TextAnchor.MiddleLeft, true); lv.At(0, 1, x0, -112, 270, 58, 0, 1);
+            var cls = ClassBadge(box.transform, u.classId, 44); cls.At(1, 1, -378, -119, 44, 44, 0, 1);
+            var role = U.Txt(box.transform, L.T(C.Content.Class(u.classId)?.name ?? u.classId), 32, Theme.TextDim, TextAnchor.MiddleLeft); role.At(1, 1, -326, -112, 306, 58, 0, 1);
+            var bar = U.ProgressBar(box.transform, Theme.Green, w - x0 - 24, 20);
             bar.Value = (float)C.Roster.HpFrac(u); bar.fill.sprite = Boxes.Get(bar.Value < 0.3f ? Theme.Red : bar.Value < 0.65f ? Theme.Warn : Theme.Green, null, 0.35f);
-            bar.back.R().At(0, 0, x0 + 6, 54, w - x0 - 24, 26, 0, 0);
+            bar.back.R().StretchX(0, 60, 20, x0, 24);
             var (st, sc) = UnitStatus(u);
-            var stt = U.Txt(box.transform, st, 28, sc, TextAnchor.MiddleCenter, true); stt.StretchX(0, 14, 38, x0 + 6, 18);
+            var stt = U.Txt(box.transform, st, 28, sc, TextAnchor.MiddleLeft, true); stt.StretchX(0, 8, 44, x0, 18);
             return b;
         }
 

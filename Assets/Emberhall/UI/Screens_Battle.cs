@@ -38,7 +38,7 @@ namespace Emberhall
     {
         class BUnit
         {
-            public Combatant c; public RectTransform root; public Image body; public SpriteAnim anim; public U.Bar hp; public Image shadow; public Text label; public RectTransform status;
+            public Combatant c; public RectTransform root; public Image body; public SpriteAnim anim; public U.Bar hp; public Image shadow; public RectTransform status;
             public Vector2 home; public bool hero, dead; public float height = 120; public Sprite[] idle, atk; public bool flip; public double curHp; public int dir => hero ? 1 : -1; public Tw.H bob;
         }
 
@@ -48,7 +48,7 @@ namespace Emberhall
         readonly List<UButton> speedBtns = new List<UButton>(); readonly List<Text> heroRoleT = new List<Text>(); int displayedWave;
         readonly List<Image> heroCards = new List<Image>(); int heroActions;
         static readonly Dictionary<Sprite, float> visibleSpriteTops = new Dictionary<Sprite, float>();
-        U.Bar[] heroBars; Text[] heroHpT; Coroutine co; bool skip, finished, paused; int speed;
+        U.Bar[] heroBars; Text[] heroHpT; Coroutine co; bool skip, finished, paused, started; int speed;
         UButton pauseButton;
         public bool IsPaused => paused;
         public int DisplayedActions => heroActions;
@@ -67,7 +67,7 @@ namespace Emberhall
         public void RefreshLanguage()
         {
             if (missionT) missionT.text = W.MissionName(m.name);
-            if (planT) planT.text = L.T("Battle plan") + ": " + L.T(doctrine.ToString());
+            if (planT) planT.text = StoryScript.Pick(paused ? "PAUSED" : "AUTO COMBAT", paused ? "JEDA" : "BERTARUNG OTOMATIS");
             if (waveT && displayedWave > 0) waveT.text = L.T("Wave {0}/{1}", displayedWave, setup.waves.Count);
             if (roundT) roundT.text = L.T("Round {0}", Mathf.Max(1, Mathf.CeilToInt(heroActions / (float)Mathf.Max(1, party.Count))));
             if (speedLabel) speedLabel.text = L.T("Speed");
@@ -78,18 +78,22 @@ namespace Emberhall
                 var u = party[i]; var cls = C.Content.Class(u.classId);
                 if (heroRoleT[i]) heroRoleT[i].text = L.T(cls?.name ?? u.classId);
             }
-            foreach (var unit in units.Values) if (unit.label) FitUnitName(unit);
         }
 
         public override void OnEnter()
         {
+            if (started) return;
+            if (!C.Missions.TryStartBattle(m, party, out var why))
+            { Toasts.Show(L.T(why)); App.I.nav.Pop(); return; }
+            started = true; Toasts.Clear(); App.I.SaveNow();
             Audio.PlayMusic("battle"); Screen.sleepTimeout = SleepTimeout.NeverSleep;
             speed = Mathf.Clamp(Prefs.BattleSpeed, 1, 3); Tw.TimeScale = speed;
-            co = App.I.StartCoroutine(Play());
+            co = App.I.StartCoroutine(RunPlayback());
         }
         public override void OnExit()
         {
             if (co != null && App.I) App.I.StopCoroutine(co);
+            if (started && !finished) { C.Get<Journey>().Result(m, false); App.I.SaveNow(); }
             Tw.TimeScale = 1; Screen.sleepTimeout = SleepTimeout.SystemSetting; Audio.PlayMusic("town"); U.Clear(UiHost.I.back);
         }
 
@@ -99,17 +103,17 @@ namespace Emberhall
             Canvas.ForceUpdateCanvases(); LayoutRebuilder.ForceRebuildLayoutImmediate(root);
             var size = root.rect.size; if (size.y < 100) size = new Vector2(1080, 1920);
             var back = UiHost.I.back; U.Clear(back); U.Solid(back, Theme.Bg0, "bg").Fill();
-            float topH = 146, botH = 424;
+            float topH = 116, botH = 242;
             asz = new Vector2(size.x, size.y - topH - botH);
             // A compact mission header leaves the painted arena as the main stage.
-            var top = U.Solid(root, Theme.PanelLight, "top"); top.At(0.5f, 1, 0, 0, size.x, topH, 0.5f, 1);
+            var top = U.Solid(root, Theme.Hex("#f1ebd7"), "top"); top.At(0.5f, 1, 0, 0, size.x, topH, 0.5f, 1);
             U.Solid(top.transform, Color.Lerp(Theme.PanelLight, Theme.Gold, .35f), "rule").StretchX(0, 0, 2);
             var nm = U.Txt(top.transform, W.MissionName(m.name), 40, Theme.TextDark, TextAnchor.MiddleLeft); nm.StretchX(1, -12, 48, 28, 284);
             missionT = nm;
-            var waveChip = U.Box(top.transform, Color.Lerp(Theme.PanelLight, Theme.Blue, .12f), null, "wave_chip", false, .04f);
+            var waveChip = U.Rt(top.transform, "wave");
             waveChip.At(1, 1, -24, -12, 232, 64, 1, 1);
             waveT = U.Txt(waveChip.transform, "", 30, Theme.BlueDark, TextAnchor.MiddleCenter); waveT.Fill(12, 12, 4, 4);
-            planT = U.Txt(top.transform, L.T("Battle plan") + ": " + L.T(doctrine.ToString()), 28, Theme.TextDim, TextAnchor.MiddleLeft); planT.StretchX(0, 12, 38, 28, 284);
+            planT = U.Txt(top.transform, StoryScript.Pick("AUTO COMBAT", "BERTARUNG OTOMATIS"), 28, Theme.GreenDark, TextAnchor.MiddleLeft, true); planT.StretchX(0, 8, 42, 28, 284);
             roundT = U.Txt(top.transform, L.T("Round {0}", 1), 28, Theme.TextDim, TextAnchor.MiddleRight); roundT.At(1, 0, -28, 12, 232, 38, 1, 0);
             // arena
             arena = U.Rt(root, "arena"); arena.At(0.5f, 1, 0, -topH, asz.x, asz.y, 0.5f, 1); arena.gameObject.AddComponent<RectMask2D>();
@@ -128,9 +132,9 @@ namespace Emberhall
             // banner texts
             skillT = U.Txt(arena, "", 46, Theme.TextDark, TextAnchor.MiddleCenter); skillT.StretchX(1, -34, 72, 36, 36); skillT.gameObject.SetActive(false);
             var skillOutline = skillT.gameObject.AddComponent<Outline>(); skillOutline.effectColor = new Color(1f, .98f, .88f, .9f); skillOutline.effectDistance = new Vector2(2, -2);
-            var logPlate = U.Box(arena, Theme.PanelLight, Color.Lerp(Theme.PanelLight, Theme.Gold, .25f), "combat_log", false, .04f);
-            logPlate.At(.5f, 0, 0, 16, Mathf.Min(920, asz.x - 72), 80, .5f, 0);
-            logT = U.Txt(logPlate.transform, "", 30, Theme.TextDark, TextAnchor.MiddleCenter); logT.Fill(20, 20, 7, 7);
+            var logPlate = U.Rt(arena, "combat_feedback");
+            logPlate.At(.5f, 0, 0, 16, Mathf.Min(920, asz.x - 72), 64, .5f, 0);
+            logT = W.AirText(logPlate, "", 30, Theme.TextDark); logT.Fill(20, 20, 5, 5);
         }
 
         void BuildBottom(float w, float h)
@@ -144,32 +148,27 @@ namespace Emberhall
             var sk = U.Btn(ctl, L.T("SKIP"), Theme.BlueDark, () => { skip = true; paused = false; Tw.TimeScale = speed; }, 220, 96, 32, Icons.Get("arrow_r")); sk.Le(220, 96);
             skipButton = sk;
             Hud.Reg("btn_skip", sk);
-            // Sideways scrolling keeps longer names and roles readable in larger parties.
+            // Portraits and health alone keep the arena free of repeated character names.
             RectTransform row;
             float cardW = Mathf.Min(440, (w - 48 - 12 * Mathf.Max(0, party.Count - 1)) / Mathf.Max(1, party.Count));
             if (party.Count <= 3)
             {
-                row = U.Rt(bottom, "party"); row.At(.5f, 1, 0, -14, w - 48, 280, .5f, 1);
+                row = U.Rt(bottom, "party"); row.At(.5f, 1, 0, -4, w - 48, 112, .5f, 1);
                 U.HBox(row, 12, null, TextAnchor.MiddleCenter, true, true, false, true);
             }
             else
             {
                 var roster = U.ScrollH(bottom, 12, new RectOffset(0, 0, 0, 0), "party_strip");
-                roster.sr.R().At(.5f, 1, 0, -14, w - 48, 280, .5f, 1); row = roster.content; cardW = 344;
+                roster.sr.R().At(.5f, 1, 0, -4, w - 48, 112, .5f, 1); row = roster.content; cardW = 300;
                 roster.sr.movementType = ScrollRect.MovementType.Clamped;
             }
             heroBars = new U.Bar[party.Count]; heroHpT = new Text[party.Count];
             for (int i = 0; i < party.Count; i++)
             {
-                var u = party[i]; var card = U.Img(row, HeroPlate(i, false), Color.white, "hero_status"); card.Le(cardW, 280); heroCards.Add(card);
-                var pic = W.Portrait(card.transform, u.sprite, 70); pic.transform.parent.GetComponent<RectTransform>().At(0, 0, 10, 36, 66, 70, 0, 0);
-                U.Txt(card.transform, $"Lv{u.level}", 28, Theme.Gold, TextAnchor.MiddleCenter).At(0, 0, 8, 112, 82, 46, 0, 0);
-                var n = U.Txt(card.transform, u.name, 32, Theme.TextDark, TextAnchor.MiddleCenter); n.StretchX(1, -10, 112, 12, 12);
-                var cls = C.Content.Class(u.classId);
-                var role = U.Txt(card.transform, L.T(cls?.name ?? u.classId), 28, Theme.TextDim, TextAnchor.MiddleCenter); role.StretchX(1, -136, 48, 98, 12);
-                heroRoleT.Add(role);
-                var hb = U.ProgressBar(card.transform, Theme.Green, 200, 16); hb.back.R().StretchX(0, 16, 16, 18, 18); heroBars[i] = hb;
-                var ht = U.Txt(card.transform, "", 28, Theme.TextDim, TextAnchor.MiddleCenter); ht.StretchX(0, 48, 46, 98, 12); heroHpT[i] = ht;
+                var u = party[i]; var card = U.Img(row, HeroPlate(i, false), Color.white, "hero_status"); card.Le(cardW, 112); heroCards.Add(card);
+                var pic = W.Portrait(card.transform, u.sprite, 68); pic.transform.parent.GetComponent<RectTransform>().At(0, .5f, 10, 0, 62, 72, 0, .5f);
+                var hb = U.ProgressBar(card.transform, Theme.Green, 200, 18); hb.back.R().StretchX(0, 16, 18, 86, 16); heroBars[i] = hb;
+                var ht = U.Txt(card.transform, "", 28, Theme.TextDark, TextAnchor.MiddleCenter, true); ht.StretchX(1, -12, 46, 86, 16); heroHpT[i] = ht;
                 SetHeroBar(i, startHp[i], setup.heroes[i].maxHp);
             }
         }
@@ -187,6 +186,7 @@ namespace Emberhall
             if (finished || skip) return;
             paused = !paused; Tw.TimeScale = paused ? 0 : speed;
             if (pauseButton && pauseButton.label) pauseButton.label.text = L.T(paused ? "Resume" : "Pause");
+            if (planT) planT.text = StoryScript.Pick(paused ? "PAUSED" : "AUTO COMBAT", paused ? "JEDA" : "BERTARUNG OTOMATIS");
         }
         void SetHeroBar(int i, double hp, double max)
         {
@@ -230,7 +230,7 @@ namespace Emberhall
                 int skin = Art.SkinIndex(key);
                 u.idle = new[] { Art.Chara(skin, 2, 0), Art.Chara(skin, 2, 1), Art.Chara(skin, 2, 2), Art.Chara(skin, 2, 1) };
                 u.atk = new[] { Art.Arpg(c.anim, skin, 2, 0), Art.Arpg(c.anim, skin, 2, 1), Art.Arpg(c.anim, skin, 2, 2), Art.Arpg(c.anim, skin, 2, 1) };
-                u.anim = SpriteAnim.On(u.body, u.idle, 3, true, 6.5f); u.height = 144;
+                u.anim = SpriteAnim.On(u.body, u.idle, 3, true, 8f); u.height = 174;
             }
             else if (key.StartsWith("bat:"))
             {
@@ -242,14 +242,13 @@ namespace Emberhall
             {
                 var sh = key.Substring(4); int row = sh.StartsWith("ADD") ? 0 : 1;
                 u.idle = new[] { Art.Monster(sh, row, 0), Art.Monster(sh, row, 1), Art.Monster(sh, row, 2), Art.Monster(sh, row, 1) };
-                float sc = 4.4f * c.scale * (c.boss ? 1.1f : 1f);
+                float sc = 5.6f * c.scale * (c.boss ? 1.1f : 1f);
                 u.anim = SpriteAnim.On(u.body, u.idle, 4.5f, true, sc); u.height = 48 * sc * 0.68f;
             }
             u.anim.battleTime = true;
             u.anim.Show(u.idle[0]);
             u.height = VisibleHeight(u.idle, u.anim.scale, u.height);
-            // Leave space above large bosses for their labels and rising combat feedback.
-            pos.y = Mathf.Clamp(pos.y, 140, Mathf.Max(140, asz.y - u.height - 310));
+            pos.y = Mathf.Clamp(pos.y, 140, Mathf.Max(140, asz.y - u.height - 200));
             u.home = pos; u.root.anchoredPosition = pos;
             u.root.sizeDelta = new Vector2(312f, u.height + 120f);
             if (u.flip) u.body.rectTransform.localScale = new Vector3(-1, 1, 1);
@@ -258,14 +257,6 @@ namespace Emberhall
             u.hp = U.ProgressBar(u.root, hero ? Theme.Green : Theme.Red, 120, 16); u.hp.back.R().At(0.5f, 0, 0, u.height + 8, 120, 16, 0.5f, 0);
             u.hp.Value = (float)(u.curHp / c.maxHp);
             if (!hero && c.boss) { u.hp.back.R().sizeDelta = new Vector2(180, 20); }
-            var nameTint = hero ? Theme.GreenDark : Theme.RedDark;
-            var nameFill = Color.Lerp(Theme.PanelLight, hero ? Theme.Green : Theme.Red, .09f);
-            var nameplate = U.Box(u.root, nameFill, Color.Lerp(nameFill, nameTint, .24f), "nameplate", false, .04f);
-            nameplate.At(.5f, 0, 0, u.height + 26f, 220f, 64f, .5f, 0);
-            nameplate.gameObject.AddComponent<RectMask2D>();
-            U.Solid(nameplate.transform, nameTint, "team_mark").At(0, .5f, 0, 0, 3, 28, 0, .5f);
-            u.label = U.Txt(nameplate.transform, c.name, hero ? 30 : 28, Theme.TextDark, TextAnchor.MiddleCenter); u.label.Fill(12, 12, 4, 4);
-            FitUnitName(u);
             units[c.id] = u; return u;
         }
 
@@ -292,14 +283,23 @@ namespace Emberhall
             return height > 0 ? height : fallback;
         }
 
-        void FitUnitName(BUnit u)
-        {
-            u.label.text = u.hero ? u.c.name.Split(' ')[0] : L.T(u.c.name);
-            float width = Mathf.Clamp(u.label.preferredWidth + 28, 124, 360);
-            u.label.transform.parent.R().sizeDelta = new Vector2(width, 64);
-        }
-
         // =============================== playback ===============================
+        IEnumerator RunPlayback()
+        {
+            var frames = new Stack<IEnumerator>(); frames.Push(Play());
+            while (frames.Count > 0 && !finished)
+            {
+                object current = null; bool advanced = false; Exception failure = null;
+                try { advanced = frames.Peek().MoveNext(); if (advanced) current = frames.Peek().Current; }
+                catch (Exception e) { failure = e; }
+                if (failure != null)
+                {
+                    Debug.LogException(failure); Finish(); yield break;
+                }
+                if (!advanced) { frames.Pop(); continue; }
+                if (current is IEnumerator nested) frames.Push(nested); else yield return current;
+            }
+        }
         IEnumerator Wait(float s) { float t = 0; while (t < s || paused) { if (skip) yield break; if (!paused) t += Time.unscaledDeltaTime * speed; yield return null; } }
 
         IEnumerator Play()
@@ -348,7 +348,7 @@ namespace Emberhall
                 u.root.anchoredPosition = pos + new Vector2(0, 280); var cg = u.root.gameObject.AddComponent<CanvasGroup>(); Tw.Fade(cg, 0, 1, 0.25f, i * 0.08f);
                 Tw.Move(u.root, pos + new Vector2(0, 280), pos, 0.38f, Ease.OutCubic, i * 0.08f);
             }
-            var banner = U.Txt(arena, foes.Any(f => f.boss) ? L.T("BOSS: {0}", foes.First(f => f.boss).name) : L.T("Wave {0}", ev.wave + 1), foes.Any(f => f.boss) ? 48 : 44, foes.Any(f => f.boss) ? Theme.Bad : Theme.TextDark, TextAnchor.MiddleCenter, true);
+            var banner = W.AirText(arena, foes.Any(f => f.boss) ? L.T("BOSS") : L.T("Wave {0}", ev.wave + 1), foes.Any(f => f.boss) ? 48 : 44, foes.Any(f => f.boss) ? Theme.Bad : Theme.TextDark, true);
             banner.StretchX(0.78f, 0, 100, 32, 32); Tw.Pop(banner.transform, 0.35f); Tw.FadeG(banner, 1, 0, 0.4f, 1.0f, () => { if (banner) UnityEngine.Object.Destroy(banner.gameObject); });
             if (foes.Any(f => f.boss)) Audio.Play("alert");
             yield return Wait(1.2f);
@@ -371,7 +371,7 @@ namespace Emberhall
             if (ev.skill == "stunned") { Fx.FloatText(arena, a.root.anchoredPosition + new Vector2(0, a.height + 70), L.T("Stunned!"), Theme.Warn, 44, bottomOrigin: true); yield return Wait(0.4f); yield break; }
             var skill = a.c.skills.Find(s => s.id == ev.skill) ?? a.c.skills[0];
             if (skill.cd > 0) { skillT.text = L.T(skill.name); skillT.gameObject.SetActive(true); Tw.Pop(skillT.transform, 0.25f); }
-            logT.text = $"{a.c.name}: {L.T(skill.name)}";
+            logT.text = L.T(skill.name);
             var targets = ev.hits.Select(h => (h, units.TryGetValue(h.target, out var tu) ? tu : null)).Where(x => x.Item2 != null).ToList();
             bool support = skill.type == "heal" || skill.type == "buff";
             bool ranged = skill.vfx == "arrow" || skill.vfx == "bolt" || skill.vfx == "fire" || skill.vfx == "dark" || (support);
@@ -412,7 +412,7 @@ namespace Emberhall
                     var th = tu; var hh = h;
                     Projectile(a, th, skill.vfx, col, () => { SlashFx(th, skill.vfx == "arrow" ? "slash" : skill.vfx); Apply(th, hh, skill.status); landed++; });
                 }
-                float guard = 0; while (landed < targets.Count && guard < 2f && !skip) { guard += Time.unscaledDeltaTime * speed; yield return null; }
+                float guard = 0; while (landed < targets.Count && guard < 2f && !skip) { if (!paused) guard += Time.unscaledDeltaTime * speed; yield return null; }
                 yield return Wait(0.2f);
             }
             skillT.gameObject.SetActive(false);
@@ -511,7 +511,7 @@ namespace Emberhall
         {
             if (t.dead) return; t.dead = true; t.curHp = 0;
             Audio.Play("death", 0.7f);
-            t.hp.back.gameObject.SetActive(false); t.label.transform.parent.gameObject.SetActive(false);
+            t.hp.back.gameObject.SetActive(false);
             if (t.anim) t.anim.playing = false;
             var r = t.root; var body = t.body; var cg = r.gameObject.GetComponent<CanvasGroup>() ?? r.gameObject.AddComponent<CanvasGroup>();
             Fx.Burst(arena, r.anchoredPosition + new Vector2(0, t.height * 0.4f), Boxes.White, t.hero ? 8 : 14, 320, t.hero ? new Color(0.8f, 0.8f, 1f) : new Color(1f, 0.8f, 0.5f), 14, 0.6f, 500, bottomOrigin: true);

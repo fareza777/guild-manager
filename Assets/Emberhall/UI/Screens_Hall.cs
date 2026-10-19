@@ -16,7 +16,7 @@ namespace Emberhall
             public string id; public RectTransform root; public Image house; public RectTransform label; public Text plate, status; public RectTransform bubble; public Image bubbleIcon; public Text bubbleText;
             public U.Bar bar; public Text timer; public Image lockIcon; public Image hammer; public float ground; public UButton btn; public Tw.H bounce, bubbleBob;
         }
-        class Walker { public RectTransform rt; public Image img; public SpriteAnim anim; public Vector2 target; public float speed, wait; public int dir = 0; public UnitInstance u; public int skin; public Tw.H bob; }
+        class Walker { public RectTransform rt; public Image img; public SpriteAnim anim; public Vector2 target; public float speed, wait; public int dir = 0, node, direction; public UnitInstance u; public int skin; public Tw.H bob; }
 
         static readonly Dictionary<string, string> Sprites = new Dictionary<string, string>
         { {"tavern","house_20"}, {"blacksmith","house_05"}, {"training","house_08"}, {"infirmary","house_13"}, {"barracks","house_19"}, {"treasury","house_23"}, {"library","house_25"} };
@@ -28,6 +28,7 @@ namespace Emberhall
         RectTransform scene, world; Vector2 size; float nextSlow, nextSort;
         Text trackTitle, trackDesc; U.Bar trackBar; UButton trackBtn; Image dailyDot; Text eventCount; RectTransform eventBtn;
         float yardBottom, rowSpan, houseHeight;
+        Vector2 pathCenter, pathRadius;
         GameContext C => App.Ctx;
 
         public override string Id => "Hall";
@@ -90,6 +91,8 @@ namespace Emberhall
             BuildBuilding("blacksmith", .18f, middle, 1f);
             BuildBuilding("training", .82f, middle, 1f);
             BuildFountain(middle + 32f);
+            pathCenter = new Vector2(size.x * .5f, middle + 75f);
+            pathRadius = new Vector2(Mathf.Min(190f, size.x * .18f), Mathf.Min(116f, rowSpan * .42f));
             BuildBuilding("infirmary", .165f, yardBottom, .92f);
             BuildBuilding("tavern", .5f, yardBottom, 1.06f);
             BuildMarket(yardBottom);
@@ -151,16 +154,17 @@ namespace Emberhall
             float w = Mathf.Min(220f, houseHeight * .78f);
             var fountain = U.Img(world, sp, Color.white, "fountain"); fountain.preserveAspect = true;
             fountain.At(0, 0, size.x * .5f, feet, w, w, .5f, 0);
-            tag(fountain.R(), feet);
+            tag(fountain.R(), feet + w * .16f);
         }
 
         void SpawnWalker(UnitInstance u)
         {
             if (u.monster) return;
             var w = new Walker { u = u, skin = Art.SkinIndex(u.sprite) };
+            w.node = walkers.Count * HallPath.Nodes / 9; w.direction = walkers.Count % 2 == 0 ? 1 : -1;
             var img = U.Img(world, null, Color.white, "walker", true);
             w.img = img; w.rt = img.R(); w.rt.anchorMin = w.rt.anchorMax = Vector2.zero;
-            w.rt.anchoredPosition = new Vector2(UnityEngine.Random.Range(.34f, .66f) * size.x, yardBottom + rowSpan + UnityEngine.Random.Range(10f, 110f));
+            w.rt.anchoredPosition = HallPath.Point(pathCenter, pathRadius, w.node);
             w.anim = SpriteAnim.On(img, Walk(w.skin, 0), 6, true, 4.6f);
             w.speed = UnityEngine.Random.Range(55f, 90f); w.wait = UnityEngine.Random.Range(0.2f, 2.5f); w.target = w.rt.anchoredPosition;
             var ub = img.gameObject.AddComponent<UButton>(); ub.bg = img; ub.noTint = true; ub.sfx = "pop"; ub.onClick = () => Popups.Show(new HeroPopup(u.uid));
@@ -321,14 +325,16 @@ namespace Emberhall
             if (w.wait > 0) { w.wait -= dt; if (w.wait <= 0) PickTarget(w); return; }
             var d = w.target - pos; float dist = d.magnitude;
             if (dist < 6f) { w.wait = UnityEngine.Random.Range(1f, 4f); w.dir = 0; w.anim.playing = false; w.anim.Show(Art.Chara(w.skin, 0, 1)); return; }
-            pos += d / dist * w.speed * dt; w.rt.anchoredPosition = pos; ground[w.rt] = pos.y;
+            pos = Vector2.MoveTowards(pos, w.target, w.speed * dt); w.rt.anchoredPosition = pos; ground[w.rt] = pos.y;
             int dir = Mathf.Abs(d.x) > Mathf.Abs(d.y) ? (d.x > 0 ? 2 : 1) : 0;
             if (dir != w.dir || !w.anim.playing) { w.dir = dir; w.anim.Play(Walk(w.skin, dir), 6, true); }
         }
         void PickTarget(Walker w)
         {
-            // stay on the open ground: central lane and the open yards between buildings
-            w.target = new Vector2(UnityEngine.Random.Range(.34f, .66f) * size.x, yardBottom + rowSpan + UnityEngine.Random.Range(10f, 110f));
+            // Walking to random points crossed the basin. Only adjacent ring nodes are connected.
+            if (UnityEngine.Random.value < .12f) w.direction *= -1;
+            w.node = HallPath.Next(w.node, w.direction);
+            w.target = HallPath.Point(pathCenter, pathRadius, w.node);
         }
 
         readonly List<KeyValuePair<RectTransform, float>> sortBuf = new List<KeyValuePair<RectTransform, float>>();

@@ -788,7 +788,7 @@ namespace Emberhall
                 int before = C.Missions.Expeditions.Count();
                 if (!Check(key + "_party_open", Click(LabeledButton(app.nav.Current.Root, "SEND")) && Popups.Top is PartyPopup,
                     "The current contract's SEND action opens party preparation.")) yield break;
-                if (!Check(key + "_auto", Click(LabeledButton(Popups.Top.Root, "Auto")) && PartyLabels((PartyPopup)Popups.Top) > 0,
+                if (!Check(key + "_auto", Click(LabeledButton(Popups.Top.Root, PartyPopup.AutoTeamLabel)) && PartyLabels((PartyPopup)Popups.Top) > 0,
                     "Auto must select an available party for the contract.")) yield break;
                 yield return null;
                 if (!Check(key + "_send", Click(TargetButton("btn_party_go")) && C.Missions.Expeditions.Count() == before + 1,
@@ -879,9 +879,9 @@ namespace Emberhall
                 "With no ready heroes, party preparation must show its recovery action.")) yield break;
             yield return new WaitForSecondsRealtime(3.3f);
             if (!Check("v_readiness_live_refresh", Popups.Top == party && C.Roster.Ready(hero) &&
-                LabeledButton(party.Root, "OPEN HEROES") == null && party.Footer.GetComponentsInChildren<UButton>(false).Any(b => b.label != null && b.label.text == L.T("FIGHT!")),
+                LabeledButton(party.Root, "OPEN HEROES") == null && party.Footer.GetComponentsInChildren<UButton>(false).Any(b => b.label != null && b.label.text == PartyPopup.FightLabel),
                 "Natural healing completion must replace the recovery action with FIGHT while the same party dialog remains open.")) yield break;
-            if (!Check("v_party_auto_after_heal", Click(LabeledButton(party.Root, "Auto")), "Auto must select the newly healed hero.")) yield break;
+            if (!Check("v_party_auto_after_heal", Click(LabeledButton(party.Root, PartyPopup.AutoTeamLabel)), "Auto team must select the newly healed hero.")) yield break;
             yield return null;
             if (!Check("v_party_assault_plan", Click(LabeledButton(party.Root, "Assault")), "The Assault battle plan is selectable.")) yield break;
             yield return null;
@@ -1085,7 +1085,47 @@ namespace Emberhall
             Check("v_external_actions_present", LabeledButton(Popups.Top.Root, "Share") != null && LabeledButton(Popups.Top.Root, "Rate us") != null,
                 "Share and Rate controls are present; native external share/rating actions are intentionally excluded from unattended verification.");
             CloseTop("v_external_panel_close");
+            yield return VerifyJourney(app, dir);
             yield return VerifyAds(app, dir);
+        }
+
+        static IEnumerator VerifyJourney(App app, string dir)
+        {
+            var c = app.ctx; string original = c.SaveBlobs(out _);
+            Popups.CloseAll(); app.hud.GoTab(Hud.Tab.Board, true);
+            var journey = c.Get<Journey>(); journey.Load("{\"energy\":0,\"rationDay\":-1}");
+            foreach (var hero in c.Roster.All) hero.hp = -1;
+            c.Roster.Dirty(); c.Changed();
+            Popups.Show(new PartyPopup(c.Content.Mission("m_r1_1"))); yield return new WaitForSecondsRealtime(.15f);
+            Check("v_stamina_empty_blocks_paid_entry", !TargetButton("btn_party_go").Interactable,
+                "An exhausted guild sees the paid replay offer but cannot accidentally start it.");
+            yield return Shot(dir, "verify_40_stamina_empty"); Popups.CloseAll();
+            if (!Check("v_journey_guide_open", Click(TargetButton("btn_journey")) && Popups.Top is JourneyPopup, "The Board's stamina line opens the progression guide.")) yield break;
+            yield return Shot(dir, "verify_41_journey_guide");
+            Check("v_camp_free_ration", Click(LabeledButton(Popups.Top.Root, "Rest at camp · +10 stamina")) && journey.Energy == 10 && journey.CampUsed,
+                "The real camp action restores ten stamina once, without ads or a currency payment.");
+            Popups.CloseAll();
+            var strong = c.Roster.All.First(c.Roster.Ready); strong.hp = -1; strong.level = 50; c.Roster.Dirty();
+            c.Missions.Load("{\"p\":[{\"id\":\"m_r1_1\",\"clears\":1,\"stars\":3},{\"id\":\"m_r1_2\",\"clears\":1,\"stars\":3},{\"id\":\"m_r1_3\",\"clears\":1,\"stars\":3}]}");
+            var mission = c.Content.Mission("m_r1_4");
+            Popups.Show(new PartyPopup(mission));
+            if (!Check("v_auto_team_selects", Click(LabeledButton(Popups.Top.Root, PartyPopup.AutoTeamLabel)), "Auto team selects ready heroes, separately from the Start auto battle action.")) yield break;
+            yield return new WaitForSecondsRealtime(.2f);
+            if (!Check("v_auto_start", Click(TargetButton("btn_party_go")) && app.nav.Current is BattleScreen, "Start the multi-wave encounter through its actual primary button.")) yield break;
+            Check("v_stamina_entry_charged_once", journey.Energy == 8 && journey.InBattle, "One paid trail deducts exactly two stamina at entry.");
+            yield return new WaitForSecondsRealtime(.8f);
+            Check("v_battle_no_nameplates", !app.nav.Current.Root.GetComponentsInChildren<RectTransform>(true).Any(r => r.name == "nameplate"), "Live units have health bars and no name plaques.");
+            yield return Shot(dir, "verify_42_clean_auto_battle");
+            float guard = 0;
+            while (!(Popups.Top is ResultPopup) && guard < 50) { guard += Time.unscaledDeltaTime; yield return null; }
+            Check("v_auto_finishes_without_skip", Popups.Top is ResultPopup && c.Missions.Clears(mission.id) == 1 && !journey.InBattle && journey.Energy == 8,
+                "A multi-wave automatic battle reaches its victory and settles stamina without Skip or manual action input.");
+            if (!(Popups.Top is ResultPopup)) yield break;
+            Click(LabeledButton(Popups.Top.Root, "Back"));
+            strong.hp = c.Roster.MaxHp(strong) * .12; c.Roster.Dirty();
+            Popups.Show(new HeroPopup(strong.uid)); yield return Shot(dir, "verify_43_readable_hero_status"); Popups.CloseAll();
+            Check("v_journey_fixture_restored", c.LoadBlobs(original), "Restore the pre-check guild, timers, mission history and stamina from its isolated snapshot.");
+            app.hud.GoTab(Hud.Tab.Hall, true); app.SaveNow();
         }
 
         static IEnumerator VerifyAds(App app, string dir)
