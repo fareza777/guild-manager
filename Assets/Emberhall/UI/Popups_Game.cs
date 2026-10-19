@@ -18,7 +18,11 @@ namespace Emberhall
             Row(body, "Music", Icons.Get("note"), r => { U.Slide(r, Prefs.Music, v => { Prefs.Music = v; Audio.SetVolumes(Prefs.Sfx, v); }, 440, 56).track.Le(440, 56); });
             Row(body, "Sound effects", Icons.Get("speaker"), r => { U.Slide(r, Prefs.Sfx, v => { Prefs.Sfx = v; Audio.SetVolumes(v, Prefs.Music); }, 440, 56).track.Le(440, 56); });
             Row(body, "Vibration", Icons.Get("clock"), r => U.Switch(r, Prefs.Vibrate, v => { Prefs.Vibrate = v; Native.Vibration = v; if (v) Native.Haptic(); }));
-            Row(body, "Tutorial hints", Icons.Get("info"), r => U.Switch(r, Prefs.Hints, v => Prefs.Hints = v));
+            Row(body, "Quick guide", Icons.Get("info"), r => U.Switch(r, Prefs.Hints, v =>
+            {
+                Prefs.Hints = v;
+                if (v && App.Ctx != null) App.Ctx.Counters.SetFlag("guide.dismissed", false);
+            }));
             Row(body, "Battle effects", Icons.Get("star"), r => U.Switch(r, Prefs.BattleFx, v => Prefs.BattleFx = v));
             Row(body, "Frame rate", Icons.Get("spd"), r =>
             {

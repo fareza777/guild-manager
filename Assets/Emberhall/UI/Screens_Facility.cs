@@ -324,7 +324,7 @@ namespace Emberhall
             var ct = U.Txt(card.transform, "", 30, Theme.TextDim, TextAnchor.MiddleCenter); ct.At(0.5f, 0, 0, 56, 900, 36, 0.5f, 0); live.Add((ct, () => L.T("Capacity: {0} gold ({1}h)", Util.Num(C.Vault.Capacity), C.Vault.CapHours.ToString("0.#"))));
             var cb = U.Btn(card.transform, L.T("COLLECT"), Theme.Green, () => { double g = C.Vault.Collect(); if (g >= 1) { Audio.Play("coin"); Fx.Burst(Root, new Vector2(0, 100), Icons.Get("coin"), 16, 600, null, 36); Redraw(); } }, 360, 76, 40); cb.At(0.5f, 0, 0, 8, 360, 76, 0.5f, 0);
             cb.gameObject.SetActive(false); cb.Interactable = true; vaultBtn = cb; Hud.Reg("btn_collect", cb);
-            Stat(p, "coin", L.T("Income"), L.T("{0} gold / hour", Util.Num(C.Vault.RatePerHour)));
+            Stat(p, "coin", L.T("Gold / hour"), Util.Num(C.Vault.RatePerHour));
             Stat(p, "clock", L.T("Offline limit"), (C.Mods.Apply("offline.cap_hours", C.Content.Bal("offline.cap", 8))).ToString("0.#") + "h");
             W.Info(p, L.T("Gold accumulates even while the game is closed, up to the vault's capacity. Visit often!"), 30, Theme.TextDim);
         }

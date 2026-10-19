@@ -1,4 +1,4 @@
-# Journey and progression — 1.4.0
+# Journey and progression — 1.4.2
 
 Emberhall is a guild-building game with automatic combat. The player's decisions are who to recruit, how to equip
 and develop them, which doctrine suits an encounter, and when the party is ready for a boss. Auto team recommends
@@ -16,6 +16,15 @@ a formation from available heroes using the actual encounter simulator; it does 
 Stars reward performance, not simply entering a stage. The boss requires 8 of the 12 available trail stars, so the
 player can progress without perfecting every trail. Previously cleared bosses keep their clear after an update.
 Region unlocks require both their existing rank and the preceding region's boss; rank alone no longer skips the story.
+
+## Opening guide
+
+The quick guide covers three immediate actions: recruit one companion, win Slime Meadow and auto-equip the party.
+Claiming the third reward ends guidance. The next trails, facilities and guild-rank objectives remain normal quests;
+they do not display an automatic pointer or reserve tutorial space. The player can skip guidance at any time.
+That choice is saved per guild and does not complete quests, spend resources, give rewards or unlock advertisements.
+The first four story quests remain ad-free. Starting another guild restores the opening guide; Settings can also
+re-enable it while the first three quests are unfinished.
 
 ## Stamina
 

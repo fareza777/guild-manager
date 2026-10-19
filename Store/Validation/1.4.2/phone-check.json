@@ -1,0 +1,31 @@
+{
+  "version": "1.4.2",
+  "device": "Xiaomi 2201117TY",
+  "androidApi": 33,
+  "resolution": "1080x2400",
+  "realNativeSdk": true,
+  "officialSampleIds": true,
+  "protectedNativeHosts": 1,
+  "menuAndPopupTransitions": 80,
+  "visiblePreDrawChecks": 823,
+  "unsafeDraws": 0,
+  "navigationInsetPixels": 130,
+  "bannerBottomPixels": 2248,
+  "screenBottomPixels": 2400,
+  "navigationGapPixels": 22,
+  "nativeHomeAndReturnVerified": true,
+  "nativeRecentsAndBackVerified": true,
+  "interstitialOpenedAndClosed": true,
+  "rewardedEarlyDismissalNoPayout": true,
+  "rewardedEarnedGold": 150,
+  "rewardedEarnedGems": 2,
+  "primarySaveUnchanged": true,
+  "backupSaveUnchanged": true,
+  "runtimeErrorAfterInit": "",
+  "remaining": [
+    "other Android devices and gesture navigation",
+    "publisher UMP regional forms",
+    "production inventory",
+    "iOS"
+  ]
+}

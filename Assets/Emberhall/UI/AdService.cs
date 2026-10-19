@@ -74,7 +74,9 @@ namespace Emberhall
             if (banner.loading && Now - banner.started > 60) banner.Complete(false, Now);
             if (interstitial.loading && Now - interstitial.started > 60) interstitial.Complete(false, Now);
             if (rewarded.loading && Now - rewarded.started > 60) rewarded.Complete(false, Now);
-            if (bannerWidth != Screen.width || bannerSafe != Screen.safeArea)
+            // Bar reveals change the bottom inset, not the adaptive ad width. The native
+            // safe host handles those changes without destroying/reloading the creative.
+            if (bannerWidth != Screen.width || bannerSafe.x != Screen.safeArea.x || bannerSafe.width != Screen.safeArea.width)
             {
                 HideBanner(); bannerLoaded = false; banner.loading = false; banner.next = Now;
                 bannerWidth = Screen.width; bannerSafe = Screen.safeArea;

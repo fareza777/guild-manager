@@ -487,7 +487,7 @@ namespace Emberhall
             Check("v_audio_sliders_apply", Mathf.Abs(Prefs.Music - .27f) < .001f && Mathf.Abs(Prefs.Sfx - .41f) < .001f,
                 "Slider value-change events must update both audio preferences.");
             sliders[0].value = music; sliders[1].value = sfx;
-            var keys = new[] { "Vibration", "Tutorial hints", "Battle effects" };
+            var keys = new[] { "Vibration", "Quick guide", "Battle effects" };
             Func<bool>[] getters = { () => Prefs.Vibrate, () => Prefs.Hints, () => Prefs.BattleFx };
             for (int i = 0; i < keys.Length; i++)
             {
@@ -1073,6 +1073,7 @@ namespace Emberhall
         {
             Debug.Log("[GM] Comprehensive UI verification started.");
             int failures = audit.failedFlowChecks;
+            yield return VerifyShortGuide(app, dir); if (audit.failedFlowChecks > failures) yield break;
             yield return VerifySettings(app, dir); if (audit.failedFlowChecks > failures) yield break;
             yield return VerifyFacilities(app, dir); if (audit.failedFlowChecks > failures) yield break;
             yield return VerifyInventory(app, dir); if (audit.failedFlowChecks > failures) yield break;
@@ -1087,6 +1088,44 @@ namespace Emberhall
             CloseTop("v_external_panel_close");
             yield return VerifyJourney(app, dir);
             yield return VerifyAds(app, dir);
+        }
+
+        static bool GuideHidden() => !App.I.hud.GuideActive && !UiHost.I.top.GetComponentsInChildren<RectTransform>(false)
+            .Any(r => r.name == "coach" || r.name == "pointer");
+
+        static IEnumerator VerifyShortGuide(App app, string dir)
+        {
+            var c = app.ctx; string original = c.SaveBlobs(out _), language = L.Lang;
+            bool hints = Prefs.Hints;
+            Popups.CloseAll(); app.hud.GoTab(Hud.Tab.Hall, true);
+            yield return Shot(dir, "verify_guide_finished");
+            Check("v_guide_ends_after_gear", c.Quests.CurrentMain?.id == "q_m04" && GuideHidden(),
+                "After the first recruit, victory and equipment reward, later trails use ordinary quests without a guide overlay or arrow.");
+            string completed = string.Join(",", c.Content.Quests.Where(q => q.type == "main" && q.order < 9)
+                .Select(q => "{\"id\":\"" + q.id + "\",\"state\":3,\"b\":[]}"));
+            c.Quests.Load("{\"q\":[" + completed + "]}"); c.Quests.Tick(Util.Now); c.Changed();
+            app.hud.GoTab(Hud.Tab.Board, true); yield return Shot(dir, "verify_guild_rank_no_guide");
+            Check("v_guild_rank_has_no_persistent_hint", c.Quests.CurrentMain?.id == "q_m09" && GuideHidden(),
+                "An older guild at the 100-Fame objective has no automatic arrow or reserved guide space.");
+
+            Prefs.Hints = true; L.Load("en"); GuildGame.StartNew(c, "Optional guide", 0, "warrior");
+            app.hud.GoTab(Hud.Tab.Hall, true); yield return Shot(dir, "verify_guide_optional");
+            double gold = c.Wallet.Get("gold"), gems = c.Wallet.Get("gems"); int heroes = c.Roster.Count;
+            Check("v_guide_skip_click", app.hud.GuideActive && Click(LabeledButton(UiHost.I.top, "SKIP GUIDE")),
+                "The fresh guide has a visible, working SKIP GUIDE button.");
+            yield return Shot(dir, "verify_guide_skipped");
+            Check("v_skip_preserves_gameplay", GuideHidden() && c.Quests.CurrentMain?.id == "q_m01" && !app.Ads.TutorialDone &&
+                c.Wallet.Get("gold") == gold && c.Wallet.Get("gems") == gems && c.Roster.Count == heroes,
+                "Skipping removes only guidance. It does not claim rewards, complete quests or bypass the advertising grace period.");
+            app.SaveNow();
+            Check("v_guide_skip_survives_reload", app.save.Load(c) && c.Counters.Flag("guide.dismissed") && !app.hud.GuideActive,
+                "The guild's skip choice survives a real save reload.");
+            GuildGame.StartNew(c, "New guild guide", 0, "warrior"); app.hud.GoTab(Hud.Tab.Hall, true); yield return null;
+            Check("v_new_guild_gets_guide", app.hud.GuideActive && !c.Counters.Flag("guide.dismissed"),
+                "Starting another guild restores the three basic guide steps.");
+            L.Load("id"); yield return Shot(dir, "id_verify_short_guide");
+            Check("v_guide_restore_fixture", c.LoadBlobs(original), "Restore the real completed opening before continuing gameplay verification.");
+            Prefs.Hints = hints; L.Load(language); app.hud.GoTab(Hud.Tab.Hall, true); app.SaveNow();
         }
 
         static IEnumerator VerifyJourney(App app, string dir)
@@ -1281,7 +1320,7 @@ namespace Emberhall
             for (int i = 0; i < hires; i++) { var cand = C.Recruiter.Pool[0]; cand.price = 0; C.Recruiter.Hire(cand); }
             C.Inventory.AddItem("w_sword_2", 3, C.Rng); C.Inventory.AddItem("a_plate_2", 2, C.Rng); C.Inventory.AddItem("x_ring_2", 2, C.Rng); C.Inventory.AddItem("iron_ore", 20, C.Rng); C.Inventory.AddItem("potion_m", 3, C.Rng);
             C.Inventory.AddItem("w_staff_3", 1, C.Rng, "epic"); C.Inventory.AutoEquipAll(); C.Changed();
-            yield return Shot(dir, "08_hall_rich", 1.2f);
+            app.hud.GoTab(Hud.Tab.Hall, true); yield return Shot(dir, "08_hall_rich", 1.2f);
             app.hud.GoTab(Hud.Tab.Heroes); yield return Shot(dir, "09_heroes");
             Popups.Show(new HeroPopup(C.Roster.All[0].uid)); yield return Shot(dir, "10_hero_popup"); Popups.CloseAll();
             app.hud.GoTab(Hud.Tab.Board); yield return Shot(dir, "11_board");

@@ -75,7 +75,7 @@ namespace Emberhall
         }
 
         // --------------------------------------------------------------------------------
-        bool Guided => Prefs.Hints && C.Quests.CurrentMain != null && C.Quests.CurrentMain.order <= 4;
+        bool Guided => App.I.hud.GuideActive;
 
         void PlaceVillage()
         {

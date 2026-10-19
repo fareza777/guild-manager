@@ -27,8 +27,10 @@ implementation; a phone is needed to check native serving, safe-area behavior, e
 - **Banner:** anchored adaptive, below the bottom navigation with a separate inset and tap gap. Its height comes
   from the native SDK and is converted to canvas units. Android placement reserves the native system navigation
   inset even while the bar is hidden, plus 8 dp beneath the ad. The game reserves that same space above it; visible
-  system bars are not counted twice. Placement refreshes after window changes and when showing the banner.
-  No banner during the first four tutorial chapters, title,
+  system bars are not counted twice. An app-owned native parent contains the SDK view so Show/window callbacks
+  cannot overwrite that reserve. A pre-draw guard hides any intermediate unsafe layout. Placement follows native
+  bar changes; only a safe-width change requires a new creative.
+  No banner during the first four story quests, title,
   onboarding, battle, modal dialogs, consent/full-screen ads or backgrounding. A failed load leaves no empty inset.
 - **Interstitial:** only when the player taps Back from battle results and returns to a menu. Requires three distinct
   campaign victories after the previous full-screen ad, 120 seconds of session warm-up and at least 180 seconds since
@@ -45,15 +47,15 @@ game with local rewards; the ledger is not a server-side anti-cheat system.
 
 All SDK callbacks enter Unity's main thread. Used or expired full-screen inventory is disposed and replaced.
 Load failures retry with backoff (5–300 seconds), stalled loads can recover, and banner sizes refresh after a
-safe-area/width change. Game audio pauses only for actual full-screen presentations, then restores its prior state.
+safe-width change. Game audio pauses only for actual full-screen presentations, then restores its prior state.
 Consent/network initialization itself does not freeze gameplay.
 If an asynchronous UMP refresh requires a form after the player has entered battle, presentation waits for a safe
 menu. Consent is still checked through UMP before requesting ads.
 
 ## Consent and test controls
 
-UMP refreshes consent information each launch before the first ad request. The first four tutorial chapters are ad
-free; automatic initialization starts after them. `CanRequestAds()` gates SDK initialization and every new client
+UMP refreshes consent information each launch before the first ad request. The first four story quests are ad
+free even if the three-step quick guide is skipped; automatic initialization starts after them. `CanRequestAds()` gates SDK initialization and every new client
 after privacy changes. No locally invented consent flag is used. Privacy changes discard cached ads. The SDK
 content rating is capped at PG and publisher first-party ID is disabled. These settings do not classify the app's
 target audience. Since 1.4.1, publisher first-party ID is disabled after the SDK initialization callback and before
@@ -90,7 +92,7 @@ insets, no-fill fallback and reward persistence. Its preview screenshots are not
 
 Build with `Tools/unity.ps1 -Method Emberhall.EditorTools.BuildTools.BuildApk -Extra @('-buildTarget','Android')`.
 The pinned SDK, tracked Gradle templates and SDK settings make the native dependencies reproducible.
-See [current physical-device evidence](Validation/1.4.1/README.md) for the exact checks completed and remaining limits.
+See [current physical-device evidence](Validation/1.4.2/README.md) for the exact checks completed and remaining limits.
 
 ### Native Android check
 
@@ -103,11 +105,15 @@ adb shell am start -n com.pixelgamemaster.emberhall/com.unity3d.player.UnityPlay
 ```
 
 This mode uses its own save slot and preference prefix; it does not reset the player's guild. It completes only the
-ad-free tutorial fixtures in that isolated guild and writes `native-ad-report.json` to the app's external files
+ad-free story quest fixtures in that isolated guild and writes `native-ad-report.json` to the app's external files
 directory. Check that `client` is `GoogleAdsClient`, initialization succeeds, and real banner/interstitial/rewarded
 inventory loads. Write one command to `native-ad-command.txt` in that directory:
 
 - `banner`: show the Hall, allowing the native banner to appear below navigation.
+- `stress`: run 80 transitions through Hall, Bag and a supplies popup, repeatedly hiding/showing the real SDK ad and
+  replacing its child LayoutParams as SDK repositioning does. Reports include protected native hosts, visible
+  pre-draw checks, guarded intermediate layouts and unsafe draws. Reveal Android navigation and test Home/return
+  during and after this run; a settled banner must retain the native navigation inset and the additional 8 dp gap.
 - `interstitial`: present a loaded test interstitial. Check actual opened and closed counts after closing it.
 - `rewarded`: request a real test rewarded video and a supplies ticket. Complete the video; check the earned callback
   and wallet increase of exactly 150 gold and 2 gems. Closing before earning must grant nothing.

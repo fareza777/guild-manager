@@ -36,6 +36,7 @@ namespace Emberhall
             public bool initialized, bannerLoaded, bannerVisible, interstitialReady, rewardedReady, busy, rewardedEarned;
             public int interstitialsClosed, interstitialsOpened;
             public int navigationPixels, bannerTop, bannerBottom, windowBottom;
+            public int protectedHosts, visibleFrames, unsafeDraws, guardedFrames, stressSteps;
             public float extraBottomPixels;
             public bool navigationVisible, audioPaused;
             public double gold, gems, expectedGold, expectedGems;
@@ -68,6 +69,20 @@ namespace Emberhall
                 report.navigationPixels = AndroidBannerArea.NavigationPixels; report.extraBottomPixels = AndroidBannerArea.ExtraPixels;
                 report.navigationVisible = AndroidBannerArea.NavigationVisible; report.bannerTop = AndroidBannerArea.BannerTop;
                 report.bannerBottom = AndroidBannerArea.BannerBottom; report.windowBottom = AndroidBannerArea.WindowBottom; report.audioPaused = AudioListener.pause;
+                report.protectedHosts = AndroidBannerArea.ProtectedHosts; report.visibleFrames = AndroidBannerArea.VisibleFrames;
+                report.unsafeDraws = AndroidBannerArea.UnsafeDraws; report.guardedFrames = AndroidBannerArea.GuardedFrames;
+                if (report.phase == "stress")
+                {
+                    switch (report.stressSteps % 4)
+                    {
+                        case 0: app.hud.GoTab(Hud.Tab.Bag, true); break;
+                        case 1: Popups.Show(new SuppliesPopup()); break;
+                        case 2: Popups.CloseAll(); break;
+                        case 3: app.hud.GoTab(Hud.Tab.Hall, true); break;
+                    }
+                    AndroidBannerArea.CheckSdkRelayout();
+                    if (++report.stressSteps >= 80) report.phase = "stress_complete";
+                }
                 if (awaitingInterstitial && !report.busy) { report.interstitialsClosed++; awaitingInterstitial = false; report.phase = "interstitial_closed"; }
                 if (report.phase == "loading" && report.bannerLoaded && report.interstitialReady && report.rewardedReady) report.phase = "ready";
                 if (!report.busy && (report.phase == "loading" || report.phase == "ready" || report.phase == "banner")) Popups.CloseAll();
@@ -77,6 +92,7 @@ namespace Emberhall
                     switch (command)
                     {
                         case "banner": Popups.CloseAll(); app.hud.GoTab(Hud.Tab.Hall, true); report.phase = "banner"; break;
+                        case "stress": Popups.CloseAll(); report.stressSteps = 0; report.phase = "stress"; break;
                         case "interstitial":
                             if (report.interstitialReady)
                             {

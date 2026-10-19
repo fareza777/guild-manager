@@ -1,7 +1,7 @@
 # Emberhall: Guild Legends
 
 A portrait 2D **guild manager** for Android, built in Unity 6 (6000.6.1f1) on top of the reusable
-**Manager Simulator Template** (`ManagerKit`). Version 1.4.1 combines bright painted fantasy illustrations with animated
+**Manager Simulator Template** (`ManagerKit`). Version 1.4.2 combines bright painted fantasy illustrations with animated
 pixel characters, cream and sage panels, and sky-blue accents. Large illustrations use hooded or helmeted heroes and
 views from behind; front-facing pixel characters remain part of gameplay. Music and sound effects remain procedural.
 
@@ -22,9 +22,23 @@ Recruit heroes → form a party → pick a quest → auto-battle → earn loot &
 - Gear with 5 rarities, affixes, enhancement, crafting, salvage; daily Market; Soul Seals; consumables
 - The Lantern Road: 25 connected story chapters, a spoiler-free Journal, 33 side quests, daily quests, a login calendar, and guild events
 - Offline progress: absolute-time timers, idle Treasury vault, expedition returns, "Welcome back" report
-- Atomic save with backup, autosave, EN + Bahasa Indonesia, settings, about, share, rate, onboarding, tutorial pointer
+- Atomic save with backup, autosave, EN + Bahasa Indonesia, settings, about, share, rate, and an optional three-step guide
 - Google AdMob test integration: adaptive banner, limited battle-break interstitials, optional rewarded gold/supplies, UMP privacy choices
 - Renewable stamina, free opening trails, daily camp supplies, regional boss mastery and connected region progression
+
+## Version 1.4.2 — Shorter guide and stable banner placement
+
+The optional quick guide covers one recruit, the first victory and equipping the party. It ends after the third
+reward; later trails, construction and guild-rank goals use ordinary quests without automatic arrows. SKIP GUIDE
+removes guidance immediately and persists for that guild. Quests, rewards and the advertising grace period still
+follow actual progress. Quick guide in Settings can restore guidance while those first steps are unfinished.
+
+Android banners now live in an app-owned safe parent. SDK Show and window resizing can replace the ad's position
+without changing its navigation reserve. A native check before each draw hides intermediate unsafe layouts until
+measurement completes. Bottom system-bar changes update placement without reloading an otherwise unchanged ad.
+
+[Download the signed APK](Releases/README.md) — Android version code **10**.
+See [validation evidence](Store/Validation/1.4.2/README.md) and [AdMob setup](Store/AdMob-setup.md).
 
 ## Version 1.4.1 — Native Android ads
 
@@ -33,7 +47,7 @@ above the Back/Home/Recent area with an additional 8 dp gap, including when the 
 Interstitials open and close back to the game. Early rewarded dismissal grants nothing; completing a video credits
 exactly 150 gold and 2 gems. The original guild save and backup stayed unchanged during the isolated check.
 
-[Download the signed APK](Releases/README.md) — Android version code **9**.
+[Download the 1.4.1 APK](Releases/1.4.1.md) — Android version code **9**.
 See [physical-device evidence](Store/Validation/1.4.1/README.md) and [AdMob setup](Store/AdMob-setup.md).
 Google sample ad IDs remain enabled and generate no revenue. Publisher UMP regional forms still require the
 publisher's app ID and configured messages; iOS remains unverified.
@@ -54,14 +68,15 @@ See [gameplay design](Store/Gameplay-design.md) for the rules and progression lo
 [Download the 1.4.0 APK](Releases/1.4.0.md) — Android version code **8**.
 See [validation evidence](Store/Validation/1.4.0/README.md) and [AdMob setup](Store/AdMob-setup.md).
 Google sample ad IDs remain enabled; they earn no revenue. Native initialization was subsequently fixed and
-verified in 1.4.1; use that release for ads.
+verified in 1.4.1; the current signed release includes that repair.
 
 ## Version 1.3.0 — Optional video bonuses
 
 The official Google Mobile Ads Unity SDK is integrated with Google sample IDs. Adaptive banners have their own
 space below navigation. Interstitials are limited to returns from campaign victories, with warm-up, frequency and
 session limits. Rewarded videos offer optional victory gold or guild supplies; only an earned callback grants the
-bonus, and duplicate callbacks cannot double it. The first four tutorial chapters remain free of automatic ads.
+bonus, and duplicate callbacks cannot double it. The first four story quests remain free of automatic ads, including
+when the shorter guide is skipped.
 
 [Download the 1.3.0 APK](Releases/1.3.0.md) — Android version code **7**.
 See [AdMob setup](Store/AdMob-setup.md), [privacy policy](Store/Privacy-policy.md) and
@@ -169,7 +184,8 @@ Scene art gently moves while the narration appears. This is an illustrated, text
 recorded voiceover or a prerendered video. The title screen can replay the three scenes without resetting a guild.
 The selected starter arrives with the same portrait shown on the charter, fully healthy and equipped, with 600 starting
 gold and five healing potions. Maren's guide gives explicit destinations and usable actions for hiring, Campaign battles,
-claiming chapter rewards and equipping gear. It occupies a dedicated strip below the HUD; actions performed early still count.
+claiming chapter rewards and equipping gear. It occupies a dedicated strip below the HUD for three steps; actions
+performed early still count. Completing or skipping it restores the full scene, without following long-term quests.
 
 New art lives in `Assets/Resources/Art/Generated`: `splash.png`, `story_fall.png`, `story_oath.png`, `story_dawn.png`,
 `guild_icon.png`, and three inventory atlases: `item_relics.png`, `item_arms.png`, and `item_misc.png`. Their 18 cells cover

@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 namespace Emberhall
 {
-    /// <summary>Persistent chrome: top status bar, bottom tab bar, tutorial pointer. Tabs swap the root screen.</summary>
+    /// <summary>Persistent chrome and a short, optional guide to the first recruit, battle and gear.</summary>
     public class Hud
     {
         public enum Tab { Hall, Heroes, Board, Bag, Quests }
@@ -17,8 +17,8 @@ namespace Emberhall
         const float TopH = 224, NavH = 188, CoachH = 288, CoachSpace = 312;
 
         readonly App app; readonly GameContext C; readonly UiHost host;
-        RectTransform topBar, navBar, pointer; Image pointerImg;
-        RectTransform coach, coachCard; Image[] ring; Text coachStep, coachTitle, coachLine; UButton coachAction;
+        RectTransform topBar, navBar;
+        RectTransform coach, coachCard; Image[] ring; Text coachStep, coachTitle, coachLine; UButton coachAction, coachSkip;
         Text nameT, rankT, goldT, gemsT, fameT; U.Bar fameBar; Image emblem;
         readonly Image[] tabBg = new Image[5]; readonly Image[] tabIcon = new Image[5]; readonly Text[] tabLabel = new Text[5];
         readonly Image[] tabBadge = new Image[5]; readonly Text[] tabBadgeT = new Text[5];
@@ -37,7 +37,7 @@ namespace Emberhall
         public Hud(App a)
         {
             app = a; C = a.ctx; host = a.host;
-            BuildTop(); BuildNav(); BuildPointer(); BuildCoach();
+            BuildTop(); BuildNav(); BuildCoach();
             C.OnChanged += () => dirty = true;
             L.Changed += RefreshLanguage;
             Popups.Closed += PopupClosed;
@@ -74,18 +74,20 @@ namespace Emberhall
         {
             if (topBar) topBar.gameObject.SetActive(v);
             if (navBar) navBar.gameObject.SetActive(v);
-            if (pointer && !v) pointer.gameObject.SetActive(false);
             if (coach && !v) coach.gameObject.SetActive(false);
-            coachReserved = v && FirstStepsActive();
+            coachReserved = v && GuideActive;
             if (navBar) navBar.anchoredPosition = new Vector2(0, v ? adInset : 0);
             host.screens.offsetMin = new Vector2(0, v ? NavH + adInset : 0);
             host.screens.offsetMax = new Vector2(0, v ? -TopH - (coachReserved ? CoachSpace : 0) : 0);
         }
 
-        bool FirstStepsActive()
+        public bool GuideActive
         {
-            var q = C.Quests.CurrentMain;
-            return Prefs.Hints && q != null && q.type == "main" && q.order > 0 && q.order <= 4;
+            get
+            {
+                var q = C.Quests.CurrentMain;
+                return Prefs.Hints && !C.Counters.Flag("guide.dismissed") && q != null && q.type == "main" && q.order > 0 && q.order <= 3;
+            }
         }
 
         // ============================ top bar ============================
@@ -170,15 +172,7 @@ namespace Emberhall
             return false;
         }
 
-        // ============================ pointer ============================
-        void BuildPointer()
-        {
-            pointerImg = U.Img(host.top, Icons.Get("arrow_d", new Color32(255, 211, 78, 255)), new Color(1, 0.85f, 0.3f), "pointer"); pointerImg.Sz(120, 120);
-            pointerImg.sprite = Icons.Get("arrow_d"); pointer = pointerImg.R(); pointer.gameObject.SetActive(false);
-            var glow = U.Img(pointer, Boxes.Glow, new Color(1, 0.8f, 0.2f, 0.5f), "g"); glow.Sz(260, 260); glow.transform.SetAsFirstSibling();
-            Tw.To(0.6f, k => { if (pointerImg) pointerImg.R().pivot = new Vector2(0.5f, 0.5f + 0.18f * k); }, Ease.InOutSine, 0, null, pointer, true, true);
-        }
-
+        // ============================ quick guide ============================
         void BuildCoach()
         {
             coach = U.Rt(host.top, "coach"); coach.Fill(); coach.gameObject.SetActive(false);
@@ -186,10 +180,19 @@ namespace Emberhall
             var gold = new Color(1f, 0.86f, 0.35f, 1f);
             for (int i = 0; i < 4; i++) { ring[i] = U.Solid(coach, gold, "ring" + i); ring[i].raycastTarget = false; }
             coachCard = U.Box(coach, Theme.Panel, Theme.Gold, "card", true, .06f).R();
-            coachStep = U.Txt(coachCard, "", 28, Theme.Gold, TextAnchor.MiddleCenter, true); coachStep.StretchX(1, -12, 44, 24, 350);
-            coachTitle = U.Txt(coachCard, "", 36, Theme.Text, TextAnchor.MiddleCenter, true); coachTitle.StretchX(1, -62, 96, 24, 350);
-            coachLine = U.Txt(coachCard, "", 30, Theme.Text, TextAnchor.MiddleCenter, false, true); coachLine.StretchX(1, -168, 112, 24, 24);
-            coachAction = U.Btn(coachCard, "", Theme.Accent, null, 304, 108, 28); coachAction.At(1, 1, -24, -38, 304, 108, 1, 1);
+            coachStep = U.Txt(coachCard, "", 28, Theme.Gold, TextAnchor.MiddleCenter, true); coachStep.StretchX(1, -12, 44, 24, 280);
+            coachTitle = U.Txt(coachCard, "", 36, Theme.Text, TextAnchor.MiddleCenter, true); coachTitle.StretchX(1, -70, 60, 24, 24);
+            coachLine = U.Txt(coachCard, "", 30, Theme.Text, TextAnchor.MiddleCenter, false, true); coachLine.StretchX(1, -152, 112, 24, 350);
+            coachAction = U.Btn(coachCard, "", Theme.Accent, null, 304, 108, 28); coachAction.At(1, 1, -24, -152, 304, 108, 1, 1);
+            var skip = coachSkip = U.Btn(coachCard, L.T("SKIP GUIDE"), Color.clear, () =>
+            {
+                C.Counters.SetFlag("guide.dismissed"); C.Changed();
+                HideCoach(); SetChrome(visible && !(app.nav.Current is IFullScreenPage));
+                app.nav.Current?.Redraw(); app.SaveNow();
+                Toasts.Show(L.T("Guide skipped. Your quests are still in Quests."));
+            }, 244, 64, 28);
+            skip.noTint = true; skip.bg.color = Color.clear; skip.label.color = Theme.TextDim;
+            skip.At(1, 1, -24, -4, 244, 64, 1, 1);
         }
 
         void HideCoach() { if (coach && coach.gameObject.activeSelf) coach.gameObject.SetActive(false); }
@@ -208,7 +211,7 @@ namespace Emberhall
             scroll.StopMovement(); scroll.content.anchoredPosition = pos;
         }
 
-        void UpdateCoach(QuestDef q, string hint, RectTransform target)
+        void UpdateCoach(QuestDef q, RectTransform target)
         {
             coach.anchorMin = host.safe.anchorMin; coach.anchorMax = host.safe.anchorMax;
             coach.offsetMin = coach.offsetMax = Vector2.zero;
@@ -241,22 +244,25 @@ namespace Emberhall
             coachCard.anchorMin = coachCard.anchorMax = new Vector2(0.5f, 0.5f); coachCard.pivot = new Vector2(0.5f, 0.5f);
             coachCard.sizeDelta = new Vector2(Mathf.Min(1000f, coach.rect.width - 48f), CoachH);
             coachCard.anchoredPosition = new Vector2(0f, halfH - TopH - CoachSpace * 0.5f);
-            ConfigureCoach(q, hint);
+            ConfigureCoach(q);
+            coachSkip.label.text = L.T("SKIP GUIDE");
         }
 
-        void ConfigureCoach(QuestDef q, string hint)
+        void ConfigureCoach(QuestDef q)
         {
-            coachStep.text = L.T("FIRST STEPS · {0}/4", q.order);
+            coachStep.text = L.T("QUICK GUIDE · {0}/3", q.order);
             if (C.Quests.State(q.id) == QuestSystem.Ready)
             {
-                Coach(StoryScript.Pick("Reward ready", "Hadiah siap"), L.T("Claim this reward to unlock your next step."), L.T("CLAIM REWARD"), () => Popups.Show(new QuestRewardPopup(q)));
+                Coach(q.order == 3 ? L.T("Ready to explore") : StoryScript.Pick("Reward ready", "Hadiah siap"),
+                    L.T(q.order == 3 ? "Claim your reward. Then explore freely." : "Claim your reward to continue."),
+                    L.T("CLAIM REWARD"), () => Popups.Show(new QuestRewardPopup(q)));
                 return;
             }
             if (q.order == 1)
             {
-                if (C.Roster.Full) { Coach(L.T("Make room for a new hero"), L.T("Upgrade the Barracks to make room for another hero."), L.T("BARRACKS"), () => app.nav.Push(new FacilityScreen("barracks"))); return; }
+                if (C.Roster.Full) { Coach(L.T("Make room for a new hero"), L.T("Upgrade Barracks for another hero."), L.T("BARRACKS"), () => app.nav.Push(new FacilityScreen("barracks"))); return; }
                 bool inTavern = app.nav.Current is FacilityScreen fs && fs.FacilityId == "tavern";
-                Coach(L.T("Recruit your second hero"), inTavern ? L.T("Tap HIRE on an affordable candidate, then claim your guide reward.") : L.T("Open the Tavern. Hire one companion using your starting gold."), L.T(inTavern ? "SHOW RECRUITS" : "OPEN TAVERN"), () =>
+                Coach(L.T("Recruit your second hero"), inTavern ? L.T("Choose a companion and tap HIRE.") : L.T("Open Tavern. Hire one affordable hero."), L.T(inTavern ? "SHOW RECRUITS" : "OPEN TAVERN"), () =>
                 {
                     if (app.nav.Current is FacilityScreen tavern && tavern.FacilityId == "tavern") tavern.ShowRecruitment();
                     else app.nav.Push(new FacilityScreen("tavern"));
@@ -264,14 +270,14 @@ namespace Emberhall
                 });
                 return;
             }
-            if ((q.order == 2 || q.order == 4) && !C.Roster.All.Any(C.Roster.Ready))
+            if (q.order == 2 && !C.Roster.All.Any(C.Roster.Ready))
             {
-                Coach(L.T("Recover your heroes first"), L.T("Use a healing potion, or recover at the Infirmary."), L.T("OPEN HEROES"), () => GoTab(Tab.Heroes)); return;
+                Coach(L.T("Recover your heroes first"), L.T("Use a potion or visit the Infirmary."), L.T("OPEN HEROES"), () => GoTab(Tab.Heroes)); return;
             }
-            if (q.order == 2 || q.order == 4)
+            if (q.order == 2)
             {
                 bool onBoard = app.nav.Current is BoardScreen && BoardState.Tab == 0 && BoardState.Region == "r1";
-                Coach(q.order == 2 ? L.T("Win your first battle") : L.T("Clear Mushroom Grove"), q.order == 2 ? L.T("Open Campaign, start Slime Meadow, and tap FIGHT.") : L.T(q.desc), L.T(onBoard ? "NEXT BATTLE" : "OPEN BOARD"), () =>
+                Coach(L.T("Win your first battle"), L.T("Start Slime Meadow. Pick a party and FIGHT."), L.T(onBoard ? "NEXT BATTLE" : "OPEN BOARD"), () =>
                 {
                     BoardState.Tab = 0; BoardState.Region = "r1";
                     if (!(app.nav.Current is BoardScreen)) { GoTab(Tab.Board, true); return; }
@@ -282,7 +288,7 @@ namespace Emberhall
             if (q.order == 3)
             {
                 bool inBag = app.nav.Current is BagScreen && Bag.OpenTab == 0;
-                Coach(L.T("Equip your party"), L.T("Open Bag → Gear and tap AUTO-EQUIP."), L.T(inBag ? "AUTO-EQUIP" : "OPEN BAG"), () =>
+                Coach(L.T("Equip your party"), L.T("Open Bag → Gear. Tap AUTO-EQUIP."), L.T(inBag ? "AUTO-EQUIP" : "OPEN BAG"), () =>
                 {
                     if (app.nav.Current is BagScreen && Bag.OpenTab == 0) { BagScreen.EquipBest(); return; }
                     Bag.OpenTab = 0; Bag.Filter = 0; GoTab(Tab.Bag, true);
@@ -318,29 +324,16 @@ namespace Emberhall
             return hint;
         }
 
-        void UpdatePointer()
+        void UpdateGuide()
         {
+            if (!visible || !GuideActive || Popups.Count > 0 || app.nav.Current is IFullScreenPage) { HideCoach(); return; }
             string hint = null;
             var q = C.Quests.CurrentMain;
-            if (q != null && C.Quests.State(q.id) == QuestSystem.Active && Prefs.Hints && !string.IsNullOrEmpty(q.hint)) hint = ResolveHint(q.hint);
+            if (C.Quests.State(q.id) == QuestSystem.Active && !string.IsNullOrEmpty(q.hint)) hint = ResolveHint(q.hint);
             RectTransform target = null;
-            bool show = visible && hint != null && Popups.Count == 0 && Targets.TryGetValue(hint, out target) && target != null && target.gameObject.activeInHierarchy;
-            bool guided = visible && Prefs.Hints && Popups.Count == 0 && !(app.nav.Current is IFullScreenPage) && q != null && q.type == "main" && q.order > 0 && q.order <= 4;
-            if (guided)
-            {
-                if (pointer.gameObject.activeSelf) pointer.gameObject.SetActive(false);
-                if (C.Quests.State(q.id) == QuestSystem.Ready) target = null;
-                UpdateCoach(q, hint, target); return;
-            }
-            if (!show) { HideCoach(); if (pointer.gameObject.activeSelf) pointer.gameObject.SetActive(false); return; }
-            HideCoach();
-            var corners = new Vector3[4]; target.GetWorldCorners(corners);
-            var topCenter = (corners[1] + corners[2]) * 0.5f;
-            var sp = RectTransformUtility.WorldToScreenPoint(host.cam, topCenter);
-            RectTransformUtility.ScreenPointToLocalPointInRectangle(host.top, sp, host.cam, out var lp);
-            pointer.anchoredPosition = lp + new Vector2(0, 70);
-            if (!pointer.gameObject.activeSelf) pointer.gameObject.SetActive(true);
-            pointer.SetAsLastSibling();
+            if (hint != null) Targets.TryGetValue(hint, out target);
+            if (target != null && !target.gameObject.activeInHierarchy) target = null;
+            UpdateCoach(q, target);
         }
         // ============================ per-frame ============================
         double nextBadge;
@@ -348,7 +341,7 @@ namespace Emberhall
         {
             if (!visible) return;
             bool chrome = !(app.nav.Current is IFullScreenPage);
-            if (coachReserved != (chrome && FirstStepsActive()))
+            if (coachReserved != (chrome && GuideActive))
             {
                 SetChrome(chrome);
                 app.nav.Current?.Redraw();
@@ -358,7 +351,7 @@ namespace Emberhall
             showGems = gm;
             goldT.text = Util.Num(showGold); gemsT.text = Util.Num(showGems);
             if (dirty || Util.Now > nextBadge) { dirty = false; nextBadge = Util.Now + 1; Refresh(); }
-            UpdatePointer();
+            UpdateGuide();
             popupCooldown -= Time.unscaledDeltaTime;
             if (popupCooldown <= 0 && Popups.Count == 0 && app.nav.Depth == 1 && !(app.nav.Current is IFullScreenPage)) { popupCooldown = 2.0f; CheckPopups(); }
         }

@@ -1,0 +1,47 @@
+{
+  "version": "1.4.2",
+  "androidCode": 10,
+  "bytes": 75056854,
+  "sha256": "1245ba2a8f4e2222c87c4faafdf9e697bb68252f529ae8534a537252c97b53dc",
+  "sdkAndIdsPresent": {
+    "com/google/unity/ads/Banner;": true,
+    "com/google/unity/ads/Interstitial;": true,
+    "com/google/unity/ads/UnityRewardedAd;": true,
+    "com/google/android/gms/ads/MobileAds;": true,
+    "com/google/android/ump/ConsentInformation;": true,
+    "com/pixelgamemaster/emberhall/EmberhallNavigation;": true,
+    "com/pixelgamemaster/emberhall/EmberhallNavigation$BannerHost;": true,
+    "com/pixelgamemaster/emberhall/EmberhallNavigation$Controller;": true,
+    "ca-app-pub-3940256099942544/9214589741": true,
+    "ca-app-pub-3940256099942544/1033173712": true,
+    "ca-app-pub-3940256099942544/5224354917": true
+  },
+  "nativeServingTested": true,
+  "manifest": [
+    "package: name='com.pixelgamemaster.emberhall' versionCode='10' versionName='1.4.2' platformBuildVersionName='16' platformBuildVersionCode='36' compileSdkVersion='36' compileSdkVersionCodename='16'",
+    "sdkVersion:'26'",
+    "targetSdkVersion:'36'",
+    "uses-permission: name='android.permission.INTERNET'",
+    "uses-permission: name='android.permission.VIBRATE'",
+    "uses-permission: name='android.permission.ACCESS_NETWORK_STATE'",
+    "uses-permission: name='com.google.android.gms.permission.AD_ID'",
+    "uses-permission: name='android.permission.ACCESS_ADSERVICES_AD_ID'",
+    "uses-permission: name='android.permission.ACCESS_ADSERVICES_ATTRIBUTION'",
+    "uses-permission: name='android.permission.ACCESS_ADSERVICES_TOPICS'",
+    "uses-permission: name='android.permission.WAKE_LOCK'",
+    "uses-permission: name='android.permission.FOREGROUND_SERVICE'",
+    "uses-permission: name='com.pixelgamemaster.emberhall.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION'",
+    "native-code: 'arm64-v8a'"
+  ],
+  "signature": [
+    "Verifies",
+    "Verified using v1 scheme (JAR signing): false",
+    "Verified using v2 scheme (APK Signature Scheme v2): true",
+    "Verified using v3 scheme (APK Signature Scheme v3): false",
+    "Verified using v3.1 scheme (APK Signature Scheme v3.1): false",
+    "Verified using v4 scheme (APK Signature Scheme v4): false",
+    "Verified for SourceStamp: false",
+    "Number of signers: 1"
+  ],
+  "nativeEvidence": "phone-check.json"
+}
