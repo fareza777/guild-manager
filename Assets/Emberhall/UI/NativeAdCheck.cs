@@ -35,6 +35,9 @@ namespace Emberhall
             public string mode = "Google native SDK; official sample IDs; isolated QA guild", phase = "boot", version, client;
             public bool initialized, bannerLoaded, bannerVisible, interstitialReady, rewardedReady, busy, rewardedEarned;
             public int interstitialsClosed, interstitialsOpened;
+            public int navigationPixels, bannerTop, bannerBottom, windowBottom;
+            public float extraBottomPixels;
+            public bool navigationVisible, audioPaused;
             public double gold, gems, expectedGold, expectedGems;
             public string lastError;
         }
@@ -62,6 +65,9 @@ namespace Emberhall
                 report.bannerLoaded = app.Ads.BannerReady; report.bannerVisible = app.Ads.BannerInset > 0;
                 report.interstitialReady = app.Ads.InterstitialReady; report.rewardedReady = app.Ads.RewardReady; report.busy = app.Ads.Busy;
                 report.gold = app.ctx.Wallet.Get("gold"); report.gems = app.ctx.Wallet.Get("gems");
+                report.navigationPixels = AndroidBannerArea.NavigationPixels; report.extraBottomPixels = AndroidBannerArea.ExtraPixels;
+                report.navigationVisible = AndroidBannerArea.NavigationVisible; report.bannerTop = AndroidBannerArea.BannerTop;
+                report.bannerBottom = AndroidBannerArea.BannerBottom; report.windowBottom = AndroidBannerArea.WindowBottom; report.audioPaused = AudioListener.pause;
                 if (awaitingInterstitial && !report.busy) { report.interstitialsClosed++; awaitingInterstitial = false; report.phase = "interstitial_closed"; }
                 if (report.phase == "loading" && report.bannerLoaded && report.interstitialReady && report.rewardedReady) report.phase = "ready";
                 if (!report.busy && (report.phase == "loading" || report.phase == "ready" || report.phase == "banner")) Popups.CloseAll();

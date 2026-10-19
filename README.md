@@ -1,7 +1,7 @@
 # Emberhall: Guild Legends
 
 A portrait 2D **guild manager** for Android, built in Unity 6 (6000.6.1f1) on top of the reusable
-**Manager Simulator Template** (`ManagerKit`). Version 1.4.0 combines bright painted fantasy illustrations with animated
+**Manager Simulator Template** (`ManagerKit`). Version 1.4.1 combines bright painted fantasy illustrations with animated
 pixel characters, cream and sage panels, and sky-blue accents. Large illustrations use hooded or helmeted heroes and
 views from behind; front-facing pixel characters remain part of gameplay. Music and sound effects remain procedural.
 
@@ -26,6 +26,18 @@ Recruit heroes → form a party → pick a quest → auto-battle → earn loot &
 - Google AdMob test integration: adaptive banner, limited battle-break interstitials, optional rewarded gold/supplies, UMP privacy choices
 - Renewable stamina, free opening trails, daily camp supplies, regional boss mastery and connected region progression
 
+## Version 1.4.1 — Native Android ads
+
+The AdMob initialization order is repaired and verified on a physical Android 13 phone. Native test banners sit
+above the Back/Home/Recent area with an additional 8 dp gap, including when the system bar is temporarily hidden.
+Interstitials open and close back to the game. Early rewarded dismissal grants nothing; completing a video credits
+exactly 150 gold and 2 gems. The original guild save and backup stayed unchanged during the isolated check.
+
+[Download the signed APK](Releases/README.md) — Android version code **9**.
+See [physical-device evidence](Store/Validation/1.4.1/README.md) and [AdMob setup](Store/AdMob-setup.md).
+Google sample ad IDs remain enabled and generate no revenue. Publisher UMP regional forms still require the
+publisher's app ID and configured messages; iOS remains unverified.
+
 ## Version 1.4.0 — A clearer journey
 
 The title menu sits directly over the bright illustration. Hero rows use larger, dark names and clear level labels.
@@ -39,9 +51,10 @@ interrupted encounter costs at most one. Eight trail stars open a regional boss;
 the next region. Training, crafting, contracts and guild exams remain available without stamina.
 See [gameplay design](Store/Gameplay-design.md) for the rules and progression loop.
 
-[Download the signed APK](Releases/README.md) — Android version code **8**.
+[Download the 1.4.0 APK](Releases/1.4.0.md) — Android version code **8**.
 See [validation evidence](Store/Validation/1.4.0/README.md) and [AdMob setup](Store/AdMob-setup.md).
-Google sample ad IDs remain enabled; they earn no revenue. Native ad serving still requires a compatible phone.
+Google sample ad IDs remain enabled; they earn no revenue. Native initialization was subsequently fixed and
+verified in 1.4.1; use that release for ads.
 
 ## Version 1.3.0 — Optional video bonuses
 

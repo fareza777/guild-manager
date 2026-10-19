@@ -25,7 +25,10 @@ implementation; a phone is needed to check native serving, safe-area behavior, e
 ## Placements
 
 - **Banner:** anchored adaptive, below the bottom navigation with a separate inset and tap gap. Its height comes
-  from the native SDK and is converted to canvas units. No banner during the first four tutorial chapters, title,
+  from the native SDK and is converted to canvas units. Android placement reserves the native system navigation
+  inset even while the bar is hidden, plus 8 dp beneath the ad. The game reserves that same space above it; visible
+  system bars are not counted twice. Placement refreshes after window changes and when showing the banner.
+  No banner during the first four tutorial chapters, title,
   onboarding, battle, modal dialogs, consent/full-screen ads or backgrounding. A failed load leaves no empty inset.
 - **Interstitial:** only when the player taps Back from battle results and returns to a menu. Requires three distinct
   campaign victories after the previous full-screen ad, 120 seconds of session warm-up and at least 180 seconds since
@@ -53,7 +56,9 @@ UMP refreshes consent information each launch before the first ad request. The f
 free; automatic initialization starts after them. `CanRequestAds()` gates SDK initialization and every new client
 after privacy changes. No locally invented consent flag is used. Privacy changes discard cached ads. The SDK
 content rating is capped at PG and publisher first-party ID is disabled. These settings do not classify the app's
-target audience.
+target audience. Since 1.4.1, publisher first-party ID is disabled after the SDK initialization callback and before
+any ad request: the [native Android API](https://developers.google.com/admob/android/reference/com/google/android/gms/ads/MobileAds#putPublisherFirstPartyIdEnabled(boolean))
+requires that order. A failed initialization releases the pending state so loading can retry.
 
 Settings → Ads & privacy links the app policy and Google advertising privacy. When UMP requires it, **Manage privacy
 choices** opens Google's form. While test IDs are enabled, the same page provides **Reload test ads**,
@@ -85,7 +90,7 @@ insets, no-fill fallback and reward persistence. Its preview screenshots are not
 
 Build with `Tools/unity.ps1 -Method Emberhall.EditorTools.BuildTools.BuildApk -Extra @('-buildTarget','Android')`.
 The pinned SDK, tracked Gradle templates and SDK settings make the native dependencies reproducible.
-See [current release evidence](Validation/1.4.0/README.md) for the exact checks completed and the remaining device checks.
+See [current physical-device evidence](Validation/1.4.1/README.md) for the exact checks completed and remaining limits.
 
 ### Native Android check
 

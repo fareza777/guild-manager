@@ -1,5 +1,15 @@
 # Emberhall polish — 7 October 2026
 
+## Version 1.4.1 — 19 October 2026
+
+- Fixed a native Android startup failure found on a physical phone: the publisher first-party ID setting requires
+  Mobile Ads initialization. Apply it after the SDK callback and before exposing any ad inventory.
+- Release failed initialization attempts for retry instead of leaving the ad client permanently waiting.
+- Keep native banners above Android navigation/gesture insets with an extra 8 dp gap, and reserve the same space
+  in the game. Keep the reserve while system bars are temporarily hidden and refresh it after window changes.
+- Include Unity's web-request module required by the SDK diagnostics client, avoiding repeated native runtime errors.
+- Android version code **9** retains the 1.4.0 gameplay and visual improvements.
+
 ## Version 1.4.0 — 19 October 2026
 
 - Removed the title menu's large white backing and the opening illustration frames. Secondary actions remain readable

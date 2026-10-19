@@ -62,6 +62,8 @@ namespace Emberhall
         void Update()
         {
             if (disposed || app == null || !Supported || paused) return;
+            bool nativeAndroid = client is GoogleAdsClient && Application.platform == RuntimePlatform.Android;
+            if (nativeAndroid) AndroidBannerArea.Refresh();
             if (!initialized)
             {
                 if (!initializing && Now >= initNext && SafePage && TutorialDone && Popups.Count == 0) Initialize();
@@ -93,8 +95,8 @@ namespace Emberhall
             {
                 rewarded.Begin(Now); TryLoad(() => client.LoadRewarded(ok => { rewarded.Complete(ok, Now); Changed?.Invoke(); }), rewarded);
             }
-            bool show = bannerLoaded && TutorialDone && SafePage && Popups.Count == 0 && !Busy;
-            float inset = show ? bannerPixels / Mathf.Max(.01f, app.host.canvas.scaleFactor) + 28f : 0;
+            bool show = bannerLoaded && TutorialDone && SafePage && Popups.Count == 0 && !Busy && (!nativeAndroid || AndroidBannerArea.Ready);
+            float inset = show ? (bannerPixels + (nativeAndroid ? AndroidBannerArea.ExtraPixels : 0)) / Mathf.Max(.01f, app.host.canvas.scaleFactor) + 28f : 0;
             SetInset(inset);
             if (bannerVisible != show) { bannerVisible = show; client.SetBannerVisible(show); }
         }

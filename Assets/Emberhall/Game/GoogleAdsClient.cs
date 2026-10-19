@@ -74,13 +74,36 @@ namespace Emberhall
         }
         void InitializeIfAllowed(Action<bool> done)
         {
-            if (!ConsentInformation.CanRequestAds()) { initializing = false; done(false); return; }
-            if (sdkInitialized) { initializing = false; initialized = true; done(true); return; }
-            MobileAds.SetRequestConfiguration(new RequestConfiguration { MaxAdContentRating = MaxAdContentRating.PG, PublisherFirstPartyIdEnabled = false });
-            MobileAds.Initialize(status => Main(() =>
+            try
             {
-                initializing = false; initialized = status != null; sdkInitialized = initialized; done(initialized);
-            }));
+                if (!ConsentInformation.CanRequestAds()) { initializing = false; done(false); return; }
+                if (sdkInitialized) { initializing = false; initialized = true; done(true); return; }
+                MobileAds.SetRequestConfiguration(new RequestConfiguration { MaxAdContentRating = MaxAdContentRating.PG });
+                MobileAds.Initialize(status => Main(() =>
+                {
+                    try
+                    {
+                        if (status != null)
+                        {
+                            // Android requires SDK initialization before changing publisher first-party ID.
+                            // Apply this before reporting ready, so no ad request precedes the privacy setting.
+                            var request = MobileAds.GetRequestConfiguration();
+                            request.MaxAdContentRating = MaxAdContentRating.PG;
+                            request.PublisherFirstPartyIdEnabled = false;
+                            MobileAds.SetRequestConfiguration(request);
+                        }
+                        initializing = false; initialized = status != null; sdkInitialized = initialized; done(initialized);
+                    }
+                    catch (Exception e) { InitializationFailed(done, e); }
+                }));
+            }
+            catch (Exception e) { InitializationFailed(done, e); }
+        }
+        void InitializationFailed(Action<bool> done, Exception error)
+        {
+            initializing = false; initialized = false;
+            Debug.LogWarning("[Ads] Initialization unavailable: " + error.Message);
+            done(false);
         }
         public void LoadBanner(Action<bool, float> done)
         {
@@ -89,6 +112,7 @@ namespace Emberhall
             var size = AdSize.GetCurrentOrientationAnchoredAdaptiveBannerAdSizeWithWidth(MobileAds.Utils.GetDeviceSafeWidth());
             var ad = new BannerView(config.BannerId, size, AdPosition.Bottom);
             banner = ad; bannerVisible = false; ad.Hide();
+            AndroidBannerArea.Refresh(true);
             ad.OnBannerAdLoaded += () => Main(() =>
             {
                 if (generation != bannerGeneration) return;
@@ -109,7 +133,7 @@ namespace Emberhall
         {
             bannerVisible = visible;
             if (banner == null) return;
-            if (visible) banner.Show(); else banner.Hide();
+            if (visible) { banner.Show(); AndroidBannerArea.Refresh(true); } else banner.Hide();
         }
         public void LoadInterstitial(Action<bool> done)
         {

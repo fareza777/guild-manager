@@ -1,0 +1,29 @@
+{
+  "version": "1.4.1",
+  "androidCode": 9,
+  "sha256": "546875392e0918e0a6e84f71f716a03e074c3066c3e8790081cd87ab077df952",
+  "device": "Xiaomi 2201117TY",
+  "androidApi": 33,
+  "resolution": "1080x2400",
+  "client": "GoogleAdsClient; real native SDK; official sample units",
+  "bannerVerified": true,
+  "androidNavigationUnobstructed": true,
+  "bannerBottom": 2248,
+  "navigationTop": 2270,
+  "gapPixels": 22,
+  "gapDp": 8,
+  "nativeHomeAndReturnVerified": true,
+  "interstitialOpenedAndClosed": true,
+  "rewardedEarlyDismissalNoPayout": true,
+  "rewardedEarnedGold": 150,
+  "rewardedEarnedGems": 2,
+  "primarySaveUnchanged": true,
+  "backupSaveUnchanged": true,
+  "runtimeErrorAfterInit": "",
+  "remaining": [
+    "publisher UMP regional forms",
+    "production inventory",
+    "other devices and iOS",
+    "native network-loss checks"
+  ]
+}

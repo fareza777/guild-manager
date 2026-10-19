@@ -36,7 +36,7 @@ namespace Emberhall.EditorTools
             PlayerSettings.bundleVersion = App.Version;
             PlayerSettings.SetApplicationIdentifier(NamedBuildTarget.Android, Bundle);
             PlayerSettings.SetApplicationIdentifier(NamedBuildTarget.Standalone, Bundle);
-            PlayerSettings.Android.bundleVersionCode = 8;
+            PlayerSettings.Android.bundleVersionCode = 9;
             AdMobBuild.Configure();
 
             // --- display ---
